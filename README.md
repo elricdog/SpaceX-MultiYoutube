@@ -5,7 +5,7 @@ Also FlightRadar and Weather information.
 
 [Click here to enter](https://elricdog.github.io/SpaceX-MultiYoutube/view.html)
 
-![Image of 4 feeds](https://github.com/elricdog/SpaceX-MultiYoutube/sample1.png)
+![Image of 4 feeds](https://github.com/elricdog/SpaceX-MultiYoutube/blob/main/sample1.png)
 
 NASASpaceFlight
 (https://www.youtube.com/channel/UCSUu1lih2RifWkKtDOJdsBA)
