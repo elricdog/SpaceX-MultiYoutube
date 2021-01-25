@@ -121,33 +121,12 @@
 </head>
 <body>
 
-<?php
-
-$channels = [
- "Select one channel" => "",
- "SpaceFlight" => "lPRfJxz-ECE?autoplay=1&mute=0",
- "NSF Fleet Cam" => "gnt2wZBg89g?autoplay=1&mute=1",
- "Lab Padre - Nerdle Cam 4K" => "Ky5l9ZxsG9M?autoplay=1&mute=1",
- "Lab Padre - Sapphire Cam" => "dROdPn9Tpxg?autoplay=1&mute=1",
- "Lab Padre - South Padre Island Pearl Beach Cam" => "agmFDeP5u_w?autoplay=1&mute=1",
- "Lab Padre - Predator Cam" => "lTJ9OgcIMSs?autoplay=1&mute=1",
- "Lab Padre - Lab Cam" => "hpqoqJxbNpw?autoplay=1&mute=1",
- "Lab Padre - Launch Pad Cam" => "Z72Au8Px7mM?autoplay=1&mute=1",
- "Lab Padre - Sentinel Cam" => "n5ozYnVQahE?autoplay=1&mute=1", 
- "Every Day Astronaut" => "NtGutb1R5cQ?autoplay=1&mute=0",
- "SpaceX Storm (Spanish)" => "aFEnSXUqXdE?autoplay=1&mute=0",
- "SpaceX Feed" => "_qwLHlVjRyw?autoplay=1&mute=0",
-];
-
-?>
-
 <table style="width:100%;height:100%;">
 <tr class="row">
 <td>
 	<div class="floating-form">
 		<div class="floating-label">
 		  <select id="ch1" class="floating-select" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH1').src = this.options[this.selectedIndex].value" value="">
-		  <?php foreach ($channels as $key => $value) echo "<option value='https://www.youtube.com/embed/" . $value . "'>" . $key . "</option>"; ?>
 		  </select>		  
 		</div>
 	<div>
@@ -156,7 +135,6 @@ $channels = [
 	<div class="floating-form">
 		<div class="floating-label">
 		  <select id="ch2" class="floating-select" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH2').src = this.options[this.selectedIndex].value" value="">
-			<?php foreach ($channels as $key => $value) echo "<option value='https://www.youtube.com/embed/" . $value . "'>" . $key . "</option>"; ?>
 		  </select>		  
 		</div>
 	<div>
@@ -177,7 +155,6 @@ $channels = [
 	<div class="floating-form">
 		<div class="floating-label">
 		  <select id="ch3" class="floating-select" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH3').src = this.options[this.selectedIndex].value" value="">
-			<?php foreach ($channels as $key => $value) echo "<option value='https://www.youtube.com/embed/" . $value . "'>" . $key . "</option>"; ?>
 		  </select>		  
 		</div>
 	<div>
@@ -185,8 +162,7 @@ $channels = [
 <td>
 	<div class="floating-form">
 		<div class="floating-label">
-		  <select name="ch4" class="floating-select" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH4').src = this.options[this.selectedIndex].value" value="">
-			<?php foreach ($channels as $key => $value) echo "<option value='https://www.youtube.com/embed/" . $value . "'>" . $key . "</option>"; ?>
+		  <select id="ch4" class="floating-select" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH4').src = this.options[this.selectedIndex].value" value="">
 		  </select>		  
 		</div>
 	<div>
@@ -204,5 +180,41 @@ $channels = [
 </table>
 
 </div>
+
+<script>
+
+var select1 = document.getElementById("ch1"); 
+var select2 = document.getElementById("ch2"); 
+var select3 = document.getElementById("ch3"); 
+var select4 = document.getElementById("ch4"); 
+
+var channels = {
+ "Select one channel":"",
+ "SpaceFlight":"lPRfJxz-ECE?autoplay=1&mute=0",
+ "NSF Fleet Cam":"gnt2wZBg89g?autoplay=1&mute=1",
+ "Lab Padre - Nerdle Cam 4K":"Ky5l9ZxsG9M?autoplay=1&mute=1",
+ "Lab Padre - Sapphire Cam":"dROdPn9Tpxg?autoplay=1&mute=1",
+ "Lab Padre - South Padre Island Pearl Beach Cam":"agmFDeP5u_w?autoplay=1&mute=1",
+ "Lab Padre - Predator Cam":"lTJ9OgcIMSs?autoplay=1&mute=1",
+ "Lab Padre - Lab Cam":"hpqoqJxbNpw?autoplay=1&mute=1",
+ "Lab Padre - Launch Pad Cam":"Z72Au8Px7mM?autoplay=1&mute=1",
+ "Lab Padre - Sentinel Cam":"n5ozYnVQahE?autoplay=1&mute=1", 
+ "Every Day Astronaut":"NtGutb1R5cQ?autoplay=1&mute=0",
+ "SpaceX Storm (Spanish)":"aFEnSXUqXdE?autoplay=1&mute=0",
+ "SpaceX Feed":"_qwLHlVjRyw?autoplay=1&mute=0",
+};
+
+for (var key in channels) {
+    var el = document.createElement("option");
+    el.textContent = key;
+    el.value = "https://www.youtube.com/embed/" + channels[key];
+    select1.appendChild(el);
+	select2.appendChild(el.cloneNode(true));
+	select3.appendChild(el.cloneNode(true));
+	select4.appendChild(el.cloneNode(true));
+}
+
+</script>
+
 </body>
 </html>
