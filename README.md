@@ -1,7 +1,10 @@
 # SpaceX-MultiYoutube
 
 View 4 feeds at same time of common famous SpaceX related channels.
-Also FlightRadar, Weather and Road closures information.
+- FlightRadar.
+- Weather.
+- Road closures information...
+- Some Twitter channels like SpaceX, Elon Musk...
 
 [Click here to enter](https://elricdog.github.io/SpaceX-MultiYoutube/view.html)
 
@@ -10,6 +13,8 @@ Sample Screenshots:
 ![Image of 4 feeds](https://github.com/elricdog/SpaceX-MultiYoutube/blob/main/sample1.png)
 
 ![Image of information webs](https://github.com/elricdog/SpaceX-MultiYoutube/blob/main/sample2.png)
+
+![Image of twitter feeds](https://github.com/elricdog/SpaceX-MultiYoutube/blob/main/sample3.png)
 
 Other Links:
 
