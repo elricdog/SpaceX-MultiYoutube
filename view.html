@@ -7,21 +7,21 @@
 	<link rel="icon" href="./favicon.ico" type="image/x-icon"/>
 	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
 	<link type="text/css" rel="stylesheet" href="main.css">
-</head>	
+</head>
 
 <body>
 
 
 <table style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;">
 
-<tr style="width: 50%; height: 30px;">	
+<tr style="width: 50%; height: 30px;">
 	<td style="width: 50%; height: 30px;">
 		<div class="floating-form">
-			<select id="selectCH1" class="floating-select" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH1').src = this.options[this.selectedIndex].value" value=""/>		
+			<select id="selectCH1" class="floating-select" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH1').src = this.options[this.selectedIndex].value" value=""/>
 		</div>
 	</td>
 	<td style="width: 50%; height: 30px;">
-		<table><tr>		
+		<table><tr>
 			<td>
 				<div class="floating-form">
 					<select id="selectCH2" class="floating-select" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH2').src = this.options[this.selectedIndex].value" value=""/>
@@ -44,7 +44,7 @@
 			</td>
 			<td>
 				<div class="icon"><img src=""/></div>
-			</td>	
+			</td>
 	</tr></table>
 	</td>
 </tr>
@@ -84,14 +84,14 @@
 
 <script>
 
-var select1 = document.getElementById("selectCH1"); 
-var select2 = document.getElementById("selectCH2"); 
-var select3 = document.getElementById("selectCH3"); 
-var select4 = document.getElementById("selectCH4"); 
+var select1 = document.getElementById("selectCH1");
+var select2 = document.getElementById("selectCH2");
+var select3 = document.getElementById("selectCH3");
+var select4 = document.getElementById("selectCH4");
 
-var timeLOCAL = document.getElementById("timeLOCAL"); 
-var timeUTC = document.getElementById("timeUTC"); 
-var timeTIME = document.getElementById("timeTIME"); 
+var timeLOCAL = document.getElementById("timeLOCAL");
+var timeUTC = document.getElementById("timeUTC");
+var timeTIME = document.getElementById("timeTIME");
 
 var channels = {
  "Select one channel":"",
@@ -105,7 +105,7 @@ var channels = {
  "Lab Padre - Predator Cam":"https://www.youtube.com/embed/lTJ9OgcIMSs?autoplay=1&mute=1",
  "Lab Padre - Lab Cam":"https://www.youtube.com/embed/hpqoqJxbNpw?autoplay=1&mute=1",
  "Lab Padre - Launch Pad Cam":"https://www.youtube.com/embed/Z72Au8Px7mM?autoplay=1&mute=1",
- "Lab Padre - Sentinel Cam":"https://www.youtube.com/embed/n5ozYnVQahE?autoplay=1&mute=1", 
+ "Lab Padre - Sentinel Cam":"https://www.youtube.com/embed/n5ozYnVQahE?autoplay=1&mute=1",
  "Every Day Astronaut":"https://www.youtube.com/embed/NtGutb1R5cQ?autoplay=1&mute=0",
  "SpaceX Storm (Spanish)":"https://www.youtube.com/embed/aFEnSXUqXdE?autoplay=1&mute=0",
  "Marcus House":"https://www.youtube.com/embed/8uVEHzAjMDs?autoplay=1&mute=0",
@@ -114,10 +114,10 @@ var channels = {
  "INFORMATION - Flight Radar 24":"https://www.flightradar24.com/simple_index.php?lat=25.99&lon=-97.16&z=11&airports=1&label1=callsign&label2=altspeed&label3=tofrom&size=auto",
  "INFORMATION - Road Closures":"https://tfr.faa.gov/tfr2/list.jsp",
  "INFORMATION - Flight Restrictions Zone":"https://tfr.faa.gov/tfr_map_ims/html/ew/scale7/tile_33_61.html",
- "TWITTER - SpaceX":"twitter.html?people=spacex", 
- "TWITTER - Elon Musk":"twitter.html?people=elonmusk", 
- "TWITTER - Mary (@BocaChicaGal)":"twitter.html?people=BocaChicaGal", 
- "3D / VR Model of StarShip":"https://elricdog.github.io/SpaceX-StarShip/VRStarShip/",  
+ "TWITTER - SpaceX":"twitter.html?people=spacex",
+ "TWITTER - Elon Musk":"twitter.html?people=elonmusk",
+ "TWITTER - Mary (@BocaChicaGal)":"twitter.html?people=BocaChicaGal",
+ "3D / VR Model of StarShip":"https://elricdog.github.io/SpaceX-StarShip/VRStarShip/",
 };
 
 for (var key in channels) {
@@ -131,13 +131,13 @@ for (var key in channels) {
 }
 
 function updateDateTime()
-{	
+{
 	let d = new Date();
-	let currentTimeZoneOffsetInHours = d.getTimezoneOffset() / 60;	
-	
+	let currentTimeZoneOffsetInHours = d.getTimezoneOffset() / 60;
+
 	let utc = new Date();
 	utc.setHours( utc.getHours() + currentTimeZoneOffsetInHours );
-	let local = new Date();	
+	let local = new Date();
 	local.setHours( local.getHours() + currentTimeZoneOffsetInHours - 6 );
 	timeLOCAL.innerHTML = local.toLocaleTimeString();
 	timeUTC.innerHTML = utc.toLocaleTimeString();
