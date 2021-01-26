@@ -1,123 +1,6 @@
 <html>
 <head>
-<style>
-
-.floating-form {
-  width: 320px;
-}
-
-.floating-label {
-  position: relative;
-  margin-bottom: 1px;
-}
-
-.floating-input,
-.floating-select {
-  font-size: 12px;
-  padding: 0px 0px;
-  display: block;
-  width: 100%;
-  height: 30px;
-  background-color: transparent;
-  border: none;
-  border-bottom: 1px solid #757575;
-}
-
-.floating-input:focus,
-.floating-select:focus {
-  outline: none;
-  border-bottom: 2px solid #5264AE;
-}
-
-/* active state */
-
-.floating-input:focus~.bar:before,
-.floating-input:focus~.bar:after,
-.floating-select:focus~.bar:before,
-.floating-select:focus~.bar:after {
-  width: 50%;
-}
-
-*,
-*:before,
-*:after {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-.floating-textarea {
-  min-height: 30px;
-  max-height: 260px;
-  overflow: hidden;
-  overflow-x: hidden;
-}
-
-
-/* highlighter */
-
-.highlight {
-  position: absolute;
-  height: 50%;
-  width: 100%;
-  top: 15%;
-  left: 0;
-  pointer-events: none;
-  opacity: 0.5;
-}
-
-
-/* active state */
-
-.floating-input:focus~.highlight,
-.floating-select:focus~.highlight {
-  -webkit-animation: inputHighlighter 0.3s ease;
-  -moz-animation: inputHighlighter 0.3s ease;
-  animation: inputHighlighter 0.3s ease;
-}
-
-
-/* animation */
-
-@-webkit-keyframes inputHighlighter {
-  from {
-    background: #5264AE;
-  }
-  to {
-    width: 0;
-    background: transparent;
-  }
-}
-
-@-moz-keyframes inputHighlighter {
-  from {
-    background: #5264AE;
-  }
-  to {
-    width: 0;
-    background: transparent;
-  }
-}
-
-@keyframes inputHighlighter {
-  from {
-    background: #5264AE;
-  }
-  to {
-    width: 0;
-    background: transparent;
-  }
-}
-
-.row {
-    display: table-row;
-    border: 0px;
-}
-.last
-{
-    height: 50%;
-}
-</style>
+  <link rel="stylesheet" href="res/style.css">
 </head>
 <body>
 
@@ -127,7 +10,7 @@
 	<div class="floating-form">
 		<div class="floating-label">
 		  <select id="ch1" class="floating-select" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH1').src = this.options[this.selectedIndex].value" value="">
-		  </select>		  
+		  </select>
 		</div>
 	<div>
 </td>
@@ -135,7 +18,7 @@
 	<div class="floating-form">
 		<div class="floating-label">
 		  <select id="ch2" class="floating-select" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH2').src = this.options[this.selectedIndex].value" value="">
-		  </select>		  
+		  </select>
 		</div>
 	<div>
 </td>
@@ -155,7 +38,7 @@
 	<div class="floating-form">
 		<div class="floating-label">
 		  <select id="ch3" class="floating-select" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH3').src = this.options[this.selectedIndex].value" value="">
-		  </select>		  
+		  </select>
 		</div>
 	<div>
 </td>
@@ -163,7 +46,7 @@
 	<div class="floating-form">
 		<div class="floating-label">
 		  <select id="ch4" class="floating-select" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH4').src = this.options[this.selectedIndex].value" value="">
-		  </select>		  
+		  </select>
 		</div>
 	<div>
 </td>
@@ -183,10 +66,10 @@
 
 <script>
 
-var select1 = document.getElementById("ch1"); 
-var select2 = document.getElementById("ch2"); 
-var select3 = document.getElementById("ch3"); 
-var select4 = document.getElementById("ch4"); 
+var select1 = document.getElementById("ch1");
+var select2 = document.getElementById("ch2");
+var select3 = document.getElementById("ch3");
+var select4 = document.getElementById("ch4");
 
 var channels = {
  "Select one channel":"",
@@ -198,7 +81,7 @@ var channels = {
  "Lab Padre - Predator Cam":"https://www.youtube.com/embed/lTJ9OgcIMSs?autoplay=1&mute=1",
  "Lab Padre - Lab Cam":"https://www.youtube.com/embed/hpqoqJxbNpw?autoplay=1&mute=1",
  "Lab Padre - Launch Pad Cam":"https://www.youtube.com/embed/Z72Au8Px7mM?autoplay=1&mute=1",
- "Lab Padre - Sentinel Cam":"https://www.youtube.com/embed/n5ozYnVQahE?autoplay=1&mute=1", 
+ "Lab Padre - Sentinel Cam":"https://www.youtube.com/embed/n5ozYnVQahE?autoplay=1&mute=1",
  "Every Day Astronaut":"https://www.youtube.com/embed/NtGutb1R5cQ?autoplay=1&mute=0",
  "SpaceX Storm (Spanish)":"https://www.youtube.com/embed/aFEnSXUqXdE?autoplay=1&mute=0",
  "Marcus House":"https://www.youtube.com/embed/8uVEHzAjMDs?autoplay=1&mute=0",
@@ -208,10 +91,10 @@ var channels = {
  "INFORMATION - Flight Radar 24":"https://www.flightradar24.com/simple_index.php?lat=25.99&lon=-97.16&z=11&airports=1&label1=callsign&label2=altspeed&label3=tofrom&size=auto",
  "INFORMATION - Road Closures":"https://tfr.faa.gov/tfr2/list.jsp",
  "INFORMATION - Flight Restrictions Zone":"https://tfr.faa.gov/tfr_map_ims/html/ew/scale7/tile_33_61.html",
- "TWITTER - SpaceX":"twitter.html?people=spacex", 
- "TWITTER - Elon Musk":"twitter.html?people=elonmusk", 
- "TWITTER - Mary (@BocaChicaGal)":"twitter.html?people=BocaChicaGal", 
- "3D / VR Model of StarShip":"https://elricdog.github.io/SpaceX-StarShip/VRStarShip/",  
+ "TWITTER - SpaceX":"twitter.html?people=spacex",
+ "TWITTER - Elon Musk":"twitter.html?people=elonmusk",
+ "TWITTER - Mary (@BocaChicaGal)":"twitter.html?people=BocaChicaGal",
+ "3D / VR Model of StarShip":"https://elricdog.github.io/SpaceX-StarShip/VRStarShip/",
 };
 
 for (var key in channels) {
