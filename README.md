@@ -13,13 +13,13 @@ Also:
 
 Sample Screenshots:
 
-![Image of 4 feeds](https://github.com/elricdog/SpaceX-MultiYoutube/blob/main/sample1.png)
+![Image of 4 feeds](https://github.com/elricdog/SpaceX-MultiYoutube/blob/main/Images/sample1.png)
 
-![Image of information webs](https://github.com/elricdog/SpaceX-MultiYoutube/blob/main/sample2.png)
+![Image of information webs](https://github.com/elricdog/SpaceX-MultiYoutube/blob/main/Images/sample2.png)
 
-![Image of twitter feeds](https://github.com/elricdog/SpaceX-MultiYoutube/blob/main/sample3.png)
+![Image of twitter feeds](https://github.com/elricdog/SpaceX-MultiYoutube/blob/main/Images/sample3.png)
 
-![Image of 3D / VR](https://github.com/elricdog/SpaceX-MultiYoutube/blob/main/sample4.png)
+![Image of 3D / VR](https://github.com/elricdog/SpaceX-MultiYoutube/blob/main/Images/sample4.png)
 
 Other Links:
 
