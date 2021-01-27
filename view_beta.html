@@ -294,7 +294,7 @@
 
 <tr style="width: 50%; height: 50%;">
 	<td>
-		<iframe id="iframeCH1" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>		
+		<iframe id="iframeCH1" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 	</td>
 	<td>
 		<iframe id="iframeCH2" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -364,16 +364,9 @@ const channels = {
  "SPACEX Web":"https://www.spacex.com",
  "SEARCH - Google":"https://www.google.com/search?igu=1&q=SpaceX",
  "SEARCH - Bing":"https://www.bing.com/search?q=SpaceX",
- "3D / VR Model of StarShip":"https://elricdog.github.io/SpaceX-StarShip/VRStarShip/", 
+ "3D / VR Model of StarShip":"https://elricdog.github.io/SpaceX-StarShip/VRStarShip/",
 };
 
-const chatChannels = {
- "CHAT - SpaceFlight":"https://www.youtube.com/live_chat?v=lPRfJxz-ECE&embed_domain=elricdog.github.io&app=desktop&persist_app=1",
- "CHAT - Every Day Astronaut":"https://www.youtube.com/live_chat?v=NtGutb1R5cQ&embed_domain=elricdog.github.io&app=desktop&persist_app=1",
- "CHAT - SpaceX Storm (Spanish)":"https://www.youtube.com/live_chat?v=aFEnSXUqXdE&embed_domain=elricdog.github.io&app=desktop&persist_app=1",
- "CHAT - Marcus House":"https://www.youtube.com/live_chat?v=8uVEHzAjMDs&embed_domain=elricdog.github.io&app=desktop&persist_app=1",
- "CHAT - What about it":"https://www.youtube.com/live_chat?v=EHnSzXPZpuc&embed_domain=elricdog.github.io&app=desktop&persist_app=1",
-};
 
 // Populate selection channels
 for (var key in channels) {
@@ -384,13 +377,6 @@ for (var key in channels) {
 	select2.appendChild(el.cloneNode(true));
 	select3.appendChild(el.cloneNode(true));
 	select4.appendChild(el.cloneNode(true));
-}
-
-for (var key in chatChannels) {
-    var el = document.createElement("option");
-    el.textContent = key;
-    el.value = chatChannels[key];
-    select1.appendChild(el);
 }
 
 // Update Time
