@@ -2,8 +2,7 @@
 <head>
 </head>
 <body>
-<a id="item" class="twitter-timeline" href="https://twitter.com/elonmusk">Tweets by Elon Musk</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
+<a id="item" class="twitter-timeline" href="">Updating Tweets</a>
 <script>
 function findGetParameter(parameterName) {
     var result = null;
@@ -16,10 +15,16 @@ function findGetParameter(parameterName) {
           if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
         });
     return result;
-}
+};
 
-var people = findGetParameter("people");
+let people = findGetParameter("people");
 document.getElementById("item").href="https://twitter.com/" + people; 
+
+var intervalId = window.setInterval(function(){
+	window.location.reload(true)	
+}, 300000);
+
 </script>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </body>
 </html>

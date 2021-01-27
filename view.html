@@ -7,6 +7,7 @@
 	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
 	<link type="text/css" rel="stylesheet" href="main.css">
 </head>
+
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JPZ7LEND3T"></script>
 <script>
@@ -16,9 +17,238 @@
 
   gtag('config', 'G-JPZ7LEND3T');
 </script>
+
+<!-- Contact form (emailjs.com) -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"/>
+<script>
+	(function(){
+		emailjs.init("user_BjUMLZEqKE9VdA5391rv8");
+	})();
+</script>	
+
 <body>
 
+<!-- Contact -->
+<div id="contact" style="visibility:hidden">
+	<center>
+	<h1>Contact</h1>
+	Please, feel free to send any idea to improve this website. We will take in consideration as soon as posible, or later or never.
+	</center>
+	<br>
+	<form id="contact-form">	
+        <input type="hidden" name="contact_number">
+		<p>
+        <label>Name</label>
+        <input type="text" name="user_name" size="32" maxlength="32">
+		<br>
+        <label>Email</label>
+        <input type="email" name="user_email" size="64" maxlength="128">
+		</p>
+        <label>Message</label>
+		<div class="contactMessage">
+        <textarea class="contactMessageText" name="message" rows="10"></textarea>
+		</div>
+		<br>
+		<center>		
+        <input class="myButton" type="submit" value="Send"></input>
+		<button id="buttonContactClose" class="myButton">Close</button>
+		<br>
+		<br>
+		<label id="lblContactError" style="color:red;"></label>
+	</form>	
+	<br>
+	<label style="color:yellow;">(Still not work, under development)</label>
+	</center>		
+</div>
 
+<!-- About Us -->
+<div id="aboutus" style="visibility:hidden">
+	<center>
+	<h1>About Us</h1>
+	<p>
+	One day we see that browser tabs was not enough to follow Starship evolution...then...
+	<br>
+	<br>
+	Elric and Sworied
+	</p>
+	<button id="buttonAboutUsClose" class="myButton">Close</button>
+	</center>
+</div>
+
+<!-- To read local disk files -->
+<div id="load" style="visibility:hidden">
+	<center>
+	<h1>Select a Configuration File</h1>
+	<p>
+	<input type="file" id="load-file-input"/>
+	</p>
+	<button id="buttonLoad" class="myButton">Select</button>
+	<button id="buttonLoadClose" class="myButton">Close</button>
+	</center>
+</div>
+
+<!-- OnLoad and Icons -->
+<script>
+	window.onload = function() {
+		document.getElementById('contact-form').addEventListener('submit', function(event) {
+			event.preventDefault();			
+			// generate a five digit number for the contact_number variable
+			this.contact_number.value = Math.random() * 100000 | 0;
+			// these IDs from the previous steps
+			emailjs.sendForm('contact_service', 'contact_form', this)
+				.then(function() {
+					console.log('SUCCESS!');
+					toggleContact();
+				}, function(error) {
+					console.log('FAILED...', error);
+					document.getElementById('lblContactError').innerHTML = 'FAILED(' + error.status +')...' + error.text;
+				});
+		});
+		
+		document.getElementById("iconTime").addEventListener ("click", toggleTimeGroups, false);
+		document.getElementById("iconContact").addEventListener ("click", toggleContact, false);
+		document.getElementById("buttonContactClose").addEventListener ("click", toggleContact, false);				
+		document.getElementById("iconAboutUs").addEventListener ("click", toggleAboutUs, false);		
+		document.getElementById("buttonAboutUsClose").addEventListener ("click", toggleAboutUs, false);				
+		document.getElementById("iconSave").addEventListener ("click", configurationSave, false);		
+		document.getElementById("iconLoad").addEventListener ("click", toggleLoad, false);
+		document.getElementById("buttonLoadClose").addEventListener ("click", toggleLoad, false);				
+		document.getElementById("buttonLoad").addEventListener ("click", configurationLoad, false);
+
+		const select1 = document.getElementById("selectCH1");
+		const select2 = document.getElementById("selectCH2");
+		const select3 = document.getElementById("selectCH3");
+		const select4 = document.getElementById("selectCH4");
+		var event = new Event('change');
+		select1.selectedIndex = 3;
+		select2.selectedIndex = 9;
+		select3.selectedIndex = 10;
+		select4.selectedIndex = 11;			
+		select1.dispatchEvent(event);
+		select2.dispatchEvent(event);
+		select3.dispatchEvent(event);
+		select4.dispatchEvent(event);
+	};
+		
+	function toggleContact() {		
+		const contactScreen = document.getElementById('contact');					
+		if (contactScreen.style.visibility == "hidden") {
+			document.getElementById('lblContactError').innerHTML = "";
+			contactScreen.style.visibility = "visible";
+		} else {
+			contactScreen.style.visibility = "hidden";
+		}
+	};	
+	
+	function toggleAboutUs() {		
+		const aboutUsScreen = document.getElementById('aboutus');					
+		if (aboutUsScreen.style.visibility == "hidden") {
+			aboutUsScreen.style.visibility = "visible";
+		} else {
+			aboutUsScreen.style.visibility = "hidden";
+		}
+	};	
+		
+	function toggleTimeGroups() {		
+		const groupLOCAL = document.getElementById('groupLOCAL');
+		const groupUTC = document.getElementById('groupUTC');
+		const groupTIME = document.getElementById('groupTIME');
+		if (groupLOCAL.style.visibility == "hidden") {
+			groupLOCAL.style.visibility = "visible";
+			groupUTC.style.visibility = "visible";
+			groupTIME.style.visibility = "visible";
+		} else {
+			groupLOCAL.style.visibility = "hidden";
+			groupUTC.style.visibility = "hidden";
+			groupTIME.style.visibility = "hidden";
+		}
+	};
+	
+	function toggleLoad() {		
+		const loadScreen = document.getElementById('load');					
+		if (loadScreen.style.visibility == "hidden") {
+			loadScreen.style.visibility = "visible";
+		} else {
+			loadScreen.style.visibility = "hidden";
+		}
+	};	
+	
+	function upload(file, fun) {		
+		let reader = new FileReader();
+		reader.addEventListener('load', function(e) {
+	    	let text = e.target.result;	    	
+			fun(text);
+		});
+		reader.readAsText(file);	
+	}
+	
+	function indexMatchingText(ele, text) {
+		for (var i=0; i<ele.length;i++) {
+			if (ele[i].childNodes[0].nodeValue === text){
+				return i;
+			}
+		}
+		return undefined;
+	}	
+	function configurationLoad() {
+		let file = document.getElementById("load-file-input").files[0];
+		if (file === null) return;
+		upload(file, function(text) {
+			var data = JSON.parse(text);			
+			console.log(data);
+			
+			const select1 = document.getElementById("selectCH1");
+			const select2 = document.getElementById("selectCH2");
+			const select3 = document.getElementById("selectCH3");
+			const select4 = document.getElementById("selectCH4");
+
+			var event = new Event('change');
+			select1.selectedIndex = indexMatchingText(select1, data["ch1"]);
+			select2.selectedIndex = indexMatchingText(select2, data["ch2"]);
+			select3.selectedIndex = indexMatchingText(select3, data["ch3"]);
+			select4.selectedIndex = indexMatchingText(select4, data["ch4"]);			
+			select1.dispatchEvent(event);
+			select2.dispatchEvent(event);
+			select3.dispatchEvent(event);
+			select4.dispatchEvent(event);
+			
+			toggleLoad();
+		});		
+	};
+	
+	function download(data, filename, type) {
+		var file = new Blob([data], {type: type});
+		if (window.navigator.msSaveOrOpenBlob) // IE10+
+			window.navigator.msSaveOrOpenBlob(file, filename);
+		else { // Others
+			var a = document.createElement("a"), url = URL.createObjectURL(file);
+			a.href = url;
+			a.download = filename;
+			document.body.appendChild(a);
+			a.click();
+			setTimeout(function() {
+				document.body.removeChild(a);
+				window.URL.revokeObjectURL(url);  
+			}, 0); 
+		}
+	}	
+	function configurationSave() {
+		const select1 = document.getElementById("selectCH1");
+		const select2 = document.getElementById("selectCH2");
+		const select3 = document.getElementById("selectCH3");
+		const select4 = document.getElementById("selectCH4");
+	
+		var data = { 
+			"ch1":select1.options[select1.selectedIndex].text, 
+			"ch2":select2.options[select2.selectedIndex].text, 
+			"ch3":select3.options[select3.selectedIndex].text, 
+			"ch4":select4.options[select4.selectedIndex].text, 
+		};
+		download(JSON.stringify(data), "configuration", "text/plain;charset=utf-8");
+	};
+</script>
+
+<!-- 4 views -->
 <table style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;">
 
 <tr style="width: 50%; height: 30px;">
@@ -35,22 +265,28 @@
 				</div>
 			</td>
 			<td>
-				<div class="iconLabel">LOCAL<div id="timeLOCAL">00:00:00</div></div>
+				<div title="LOCAL TIME AT BOCACHICA" class="iconLabel" id="groupLOCAL">LOCAL<div id="timeLOCAL">00:00:00</div></div>
 			</td>
 			<td>
-				<div class="iconLabel">UTC<div id="timeUTC">00:00:00</div></div>
+				<div title="UTC TIME" class="iconLabel" id="groupUTC">UTC<div id="timeUTC">00:00:00</div></div>
 			</td>
 			<td>
-				<div class="iconLabel">TIME<div id="timeTIME">00:00:00</div></div>
+				<div title="YOUR CURRENT LOCAL TIME" class="iconLabel" id="groupTIME">TIME<div id="timeTIME">00:00:00</div></div>
 			</td>
 			<td>
-				<div class="icon"><img src=""/></div>
+				<div title="Show/Hide the clocks (LOCAL/UTC/YOUR CURRENT TIME)" class="icon" id="iconTime"><img src="Icons/time.png"/></div>
 			</td>
 			<td>
-				<div class="icon"><img src=""/></div>
+				<div title="Load saved configuration" class="icon" id="iconLoad"><img src="Icons/load.png"/></div>
 			</td>
 			<td>
-				<div class="icon"><img src=""/></div>
+				<div title="Save current configuration" class="icon" id="iconSave"><img src="Icons/save.png"/></div>
+			</td>
+			<td>
+				<div title="You have any comment or idea?" class="icon" id="iconContact"><img src="Icons/contact.png"/></div>
+			</td>
+			<td>
+				<div title="Information about Us and this web site" class="icon" id="iconAboutUs"><img src="Icons/aboutus.png"/></div>
 			</td>
 	</tr></table>
 	</td>
@@ -58,10 +294,10 @@
 
 <tr style="width: 50%; height: 50%;">
 	<td>
-		<iframe id="iframeCH1" style="position: relative; height: 100%; width: 100%;" src="https://www.youtube.com/embed/lPRfJxz-ECE?autoplay=1&mute=0" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		<iframe id="iframeCH1" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 	</td>
 	<td>
-		<iframe id="iframeCH2" style="position: relative; height: 100%; width: 100%;" src="https://www.youtube.com/embed/hpqoqJxbNpw?autoplay=1&mute=1" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		<iframe id="iframeCH2" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 	</td>
 </tr>
 
@@ -80,27 +316,27 @@
 
 <tr style="width: 50%; height: 50%;">
 	<td>
-		<iframe id="iframeCH3" style="position: relative; height: 100%; width: 100%;" src="https://www.youtube.com/embed/Z72Au8Px7mM?autoplay=1&mute=1" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		<iframe id="iframeCH3" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 	</td>
 	<td>
-		<iframe id="iframeCH4" style="position: relative; height: 100%; width: 100%;" src="https://www.youtube.com/embed/n5ozYnVQahE?autoplay=1&mute=1" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		<iframe id="iframeCH4" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 	</td>
 </tr>
 
 </table>
 
+<!-- Main Entry Point -->
 <script>
+const select1 = document.getElementById("selectCH1");
+const select2 = document.getElementById("selectCH2");
+const select3 = document.getElementById("selectCH3");
+const select4 = document.getElementById("selectCH4");
 
-var select1 = document.getElementById("selectCH1");
-var select2 = document.getElementById("selectCH2");
-var select3 = document.getElementById("selectCH3");
-var select4 = document.getElementById("selectCH4");
+const timeLOCAL = document.getElementById("timeLOCAL");
+const timeUTC = document.getElementById("timeUTC");
+const timeTIME = document.getElementById("timeTIME");
 
-var timeLOCAL = document.getElementById("timeLOCAL");
-var timeUTC = document.getElementById("timeUTC");
-var timeTIME = document.getElementById("timeTIME");
-
-var channels = {
+const channels = {
  "Select one channel":"",
  "SPACEX":"https://www.youtube.com/embed/_qwLHlVjRyw?autoplay=1&mute=0",
  "SPACEX Web":"https://www.spacex.com",
@@ -127,6 +363,7 @@ var channels = {
  "3D / VR Model of StarShip":"https://elricdog.github.io/SpaceX-StarShip/VRStarShip/",
 };
 
+// Populate selection channels
 for (var key in channels) {
     var el = document.createElement("option");
     el.textContent = key;
@@ -137,8 +374,8 @@ for (var key in channels) {
 	select4.appendChild(el.cloneNode(true));
 }
 
-function updateDateTime()
-{
+// Update Time
+function updateDateTime() {
 	let d = new Date();
 	let currentTimeZoneOffsetInHours = d.getTimezoneOffset() / 60;
 
@@ -150,11 +387,9 @@ function updateDateTime()
 	timeUTC.innerHTML = utc.toLocaleTimeString();
 	timeTIME.innerHTML = d.toLocaleTimeString();
 }
-
 var intervalId = window.setInterval(function(){
 	updateDateTime();
 }, 1000);
-
 updateDateTime();
 
 </script>

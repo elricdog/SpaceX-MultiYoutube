@@ -11,7 +11,7 @@ table {
 }
 
 .floating-form {
-  width: 320px;  
+  width: 250px;
 }
 
 .floating-select {
@@ -41,6 +41,7 @@ table {
 	margin: 0px;
 	border-spacing: 0px;
 	border: 1px solid black;
+	cursor: pointer;
 }
 .iconLabel {
 	padding: 0px;
@@ -60,3 +61,80 @@ table {
 	line-height: 14px;
 	border: 1px solid black;
 }
+
+#contact { 
+	padding: 10px;
+	margin: 10px;
+    position:absolute;
+	left: 15%;
+	top: 15%;
+    width: 70%;
+    height: 55%;
+    background-color: gray;
+	z-index: 300000;	
+	visibility: hidden;
+	border: 1px solid black;
+}
+.contactMessage {
+  padding: 10px;
+  border: 0px
+}
+.contactMessage .contactMessageText {
+  resize: none;
+  outline: none;
+  width: 100%;
+  padding: 10px;
+  height: 100%;
+  margin: -10px;
+}
+
+#aboutus { 
+	padding: 10px;
+	margin: 10px;
+    position:absolute;
+	left: 15%;
+	top: 15%;
+    width: 50%;
+    height: 25%;
+    background-color: gray;
+	z-index: 300000;	
+	visibility: hidden;
+	border: 1px solid black;
+}
+
+#load { 
+	padding: 10px;
+	margin: 10px;
+    position:absolute;
+	left: 15%;
+	top: 15%;
+    width: 50%;
+    height: 25%;
+    background-color: gray;
+	z-index: 300000;	
+	visibility: hidden;
+	border: 1px solid black;
+}
+
+.myButton {
+	background-color:gray;
+	border-radius:18px;
+	border: 2px solid #black;
+	display:inline-block;
+	cursor:pointer;
+	color:white;
+	font-family:Arial;
+	font-size:22px;
+	font-weight:bold;
+	padding:10px 18px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px black;
+}
+.myButton:hover {
+	background-color:silver;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
