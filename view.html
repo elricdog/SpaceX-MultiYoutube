@@ -159,11 +159,17 @@
 		if (groupLOCAL.style.visibility == "hidden") {
 			groupLOCAL.style.visibility = "visible";
 			groupUTC.style.visibility = "visible";
-			groupTIME.style.visibility = "visible";
+			groupTIME.style.visibility = "visible";			
+			groupLOCAL.style.width = "auto";
+			groupUTC.style.width = "auto";
+			groupTIME.style.width = "auto";
 		} else {
 			groupLOCAL.style.visibility = "hidden";
 			groupUTC.style.visibility = "hidden";
 			groupTIME.style.visibility = "hidden";
+			groupLOCAL.style.width = "0px";
+			groupUTC.style.width = "0px";
+			groupTIME.style.width = "0px";
 		}
 	};
 	
