@@ -3,9 +3,11 @@
 <head>
 	<title>SpaceX Board</title>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">	
 	<link rel="icon" href="./favicon.ico" type="image/x-icon"/>
 	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
 	<link type="text/css" rel="stylesheet" href="main.css">
+	<link rel="manifest" href="./manifest.webmanifest">
 </head>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -114,6 +116,7 @@
 		document.getElementById("iconLoad").addEventListener ("click", toggleLoad, false);
 		document.getElementById("buttonLoadClose").addEventListener ("click", toggleLoad, false);				
 		document.getElementById("buttonLoad").addEventListener ("click", configurationLoad, false);
+		document.getElementById("iconFullScreen").addEventListener ("click", toggleFullScreen, false);
 
 		const select1 = document.getElementById("selectCH1");
 		const select2 = document.getElementById("selectCH2");
@@ -180,7 +183,7 @@
 			fun(text);
 		});
 		reader.readAsText(file);	
-	}
+	};
 	
 	function indexMatchingText(ele, text) {
 		for (var i=0; i<ele.length;i++) {
@@ -189,7 +192,8 @@
 			}
 		}
 		return undefined;
-	}	
+	};
+	
 	function configurationLoad() {
 		let file = document.getElementById("load-file-input").files[0];
 		if (file === null) return;
@@ -231,7 +235,8 @@
 				window.URL.revokeObjectURL(url);  
 			}, 0); 
 		}
-	}	
+	};
+	
 	function configurationSave() {
 		const select1 = document.getElementById("selectCH1");
 		const select2 = document.getElementById("selectCH2");
@@ -246,12 +251,42 @@
 		};
 		download(JSON.stringify(data), "configuration", "text/plain;charset=utf-8");
 	};
+	
+	function toggleFullScreen() {
+	
+		const middleBar = document.getElementById("Middle-Select-Bar");	
+		const select3 = document.getElementById("selectCH3");
+		const select4 = document.getElementById("selectCH4");
+		
+		var doc = window.document;
+		var docEl = doc.documentElement;
+
+		var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+		var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+
+		if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {		
+			middleBar.style.visibility = "hidden";			
+			middleBar.style.height = "0px";
+			select3.style.height = "0px";
+			select4.style.height = "0px";
+		
+			requestFullScreen.call(docEl);
+		} else {
+			middleBar.style.visibility = "visible";
+			middleBar.style.width = "50%";
+			middleBar.style.height = "30px";
+			select3.style.height = "30px";
+			select4.style.height = "30px";
+			
+			cancelFullScreen.call(doc);
+		}
+	};
 </script>
 
 <!-- 4 views -->
 <table style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;">
 
-<tr style="width: 50%; height: 30px;">
+<tr id="Top-Select-Bar" style="width: 50%; height: 30px;">
 	<td style="width: 50%; height: 30px;">
 		<div class="floating-form">
 			<select id="selectCH1" class="floating-select" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH1').src = this.options[this.selectedIndex].value" value=""/>
@@ -288,6 +323,9 @@
 			<td>
 				<div title="Information about Us and this web site" class="icon" id="iconAboutUs"><img src="Icons/aboutus.png"/></div>
 			</td>
+			<td>
+				<div title="Go to FullScreen" class="icon" id="iconFullScreen"><img src="Icons/fullscreen.png"/></div>
+			</td>
 	</tr></table>
 	</td>
 </tr>
@@ -301,7 +339,7 @@
 	</td>
 </tr>
 
-<tr style="width: 50%; height: 30px;">
+<tr id="Middle-Select-Bar" style="width: 50%; height: 30px;">
 	<td>
 		<div class="floating-form">
 			<select id="selectCH3" class="floating-select" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH3').src = this.options[this.selectedIndex].value" value=""/>
