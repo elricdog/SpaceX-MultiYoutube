@@ -133,6 +133,7 @@
 		document.getElementById("buttonLoadClose").addEventListener ("click", toggleLoad, false);				
 		document.getElementById("buttonLoad").addEventListener ("click", configurationLoad, false);
 		document.getElementById("iconFullScreen").addEventListener ("click", toggleFullScreen, false);
+		document.getElementById("iconRSS").addEventListener ("click", toggleRSSScroll, false);
 
 		const select1 = document.getElementById("selectCH1");
 		const select2 = document.getElementById("selectCH2");
@@ -180,6 +181,17 @@
 		}
 	};	
 		
+	function toggleRSSScroll() {		
+		const rssTextScroll = document.getElementById('rssTextScroll');
+		if (rssTextScroll.style.visibility == "hidden") {
+			rssTextScroll.style.visibility = "visible";
+			rssTextScroll.style.width = "auto";
+		} else {
+			rssTextScroll.style.visibility = "hidden";
+			rssTextScroll.style.width = "0px";
+		}
+	}
+	
 	function toggleTimeGroups() {		
 		const groupLOCAL = document.getElementById('groupLOCAL');
 		const groupUTC = document.getElementById('groupUTC');
@@ -331,6 +343,9 @@
 			<td>
 				<div class="rssTextScroll" id="rssTextScroll"></div>
 			</td>				
+			<td>
+				<div title="Show/Hide the RSS scroll" class="icon" id="iconRSS"><img src="Icons/rss.png"/></div>
+			</td>
 			<td>
 				<div title="Last update date & time" class="iconLabel" id="groupLastUpdate">Last Update:<div id="lastUpdate"></div></div>
 			</td>
