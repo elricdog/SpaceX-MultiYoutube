@@ -231,7 +231,7 @@ class RSSMarquee {
         return new Promise((resolve, reject) => {
             console.info(`Start fetching ${feedURL}...`);
 
-            fetch(feedURL+"?ver=' + Math.random()", { mode: 'cors', redirect: 'follow' })
+            fetch(feedURL+"?ver=" + Math.random(), { mode: 'cors', redirect: 'follow' })
                 .then((response) => {
                     return response.text();
                 })
