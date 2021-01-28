@@ -151,9 +151,9 @@
 				
 		const feedTextScrollUrl = ['https://elricdog.github.io/SpaceX-MultiYoutube/rss.xml'];
         const rssTextScroll = document.getElementById('rssTextScroll');
-		var intervalRSSId = window.setInterval(function(){
-			new RSSMarquee(feedTextScrollUrl, rssTextScroll, { speed: 1000 } );
-		}, 120000);
+		//var intervalRSSId = window.setInterval(function(){
+		//	new RSSMarquee(feedTextScrollUrl, rssTextScroll, { speed: 1000 } );
+		//}, 120000);
         new RSSMarquee(feedTextScrollUrl, rssTextScroll, { speed: 1000 } );
 			
 		var lastModifiedDate = fetchHeader(location.href,'Last-Modified');
