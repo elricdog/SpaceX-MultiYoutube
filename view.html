@@ -123,10 +123,11 @@
 		const select3 = document.getElementById("selectCH3");
 		const select4 = document.getElementById("selectCH4");
 		var event = new Event('change');
-		select1.selectedIndex = 3;
-		select2.selectedIndex = 9;
-		select3.selectedIndex = 10;
-		select4.selectedIndex = 11;			
+		//{"ch1":"SpaceFlight","ch2":"Lab Padre - Nerdle Cam 4K","ch3":"Lab Padre - Sentinel Cam","ch4":"Every Day Astronaut"}
+		select1.selectedIndex = indexMatchingText(select1, "SpaceFlight");
+		select2.selectedIndex = indexMatchingText(select2, "Lab Padre - Nerdle Cam 4K");
+		select3.selectedIndex = indexMatchingText(select3, "Lab Padre - Sentinel Cam");
+		select4.selectedIndex = indexMatchingText(select4, "Every Day Astronaut");			
 		select1.dispatchEvent(event);
 		select2.dispatchEvent(event);
 		select3.dispatchEvent(event);
