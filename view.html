@@ -137,11 +137,11 @@
 		const select3 = document.getElementById("selectCH3");
 		const select4 = document.getElementById("selectCH4");
 		var event = new Event('change');
-		//{"ch1":"SpaceFlight","ch2":"Lab Padre - Nerdle Cam 4K","ch3":"Lab Padre - Sentinel Cam","ch4":"Every Day Astronaut"}
+		//{"ch1":"SpaceFlight","ch2":"Lab Padre - Nerdle Cam 4K","ch3":"Lab Padre - Sentinel Cam","ch4":"Everyday Astronaut"}
 		select1.selectedIndex = indexMatchingText(select1, "SpaceFlight");
 		select2.selectedIndex = indexMatchingText(select2, "Lab Padre - Nerdle Cam 4K");
 		select3.selectedIndex = indexMatchingText(select3, "Lab Padre - Sentinel Cam");
-		select4.selectedIndex = indexMatchingText(select4, "Every Day Astronaut");			
+		select4.selectedIndex = indexMatchingText(select4, "Everyday Astronaut");			
 		select1.dispatchEvent(event);
 		select2.dispatchEvent(event);
 		select3.dispatchEvent(event);
@@ -418,13 +418,12 @@ const channels = {
  "Lab Padre - Lab Cam":"https://www.youtube.com/embed/hpqoqJxbNpw?autoplay=1&mute=1",
  "Lab Padre - Launch Pad Cam":"https://www.youtube.com/embed/Z72Au8Px7mM?autoplay=1&mute=1",
  "Lab Padre - Sentinel Cam":"https://www.youtube.com/embed/n5ozYnVQahE?autoplay=1&mute=1",
- "Every Day Astronaut":"https://www.youtube.com/embed/rnmNAlNvr8o?autoplay=1&mute=0",
+ "Everyday Astronaut":"https://www.youtube.com/embed/rnmNAlNvr8o?autoplay=1&mute=0",
  "SpaceX Storm (Spanish)":"https://www.youtube.com/embed/39T-NWgFtME?autoplay=1&mute=0",
  "Marcus House":"https://www.youtube.com/embed/v5IV8Jem8Pc?autoplay=1&mute=0",
  "What about it":"https://www.youtube.com/embed/PRqrxqvOItE?autoplay=1&mute=0",
  "NASA Live":"https://www.youtube.com/embed/21X5lGlDOfg?autoplay=1&mute=0",
  "INFORMATION - Boca Chica, TX Weather":"weather.html",
- "INFORMATION - Boca Chica":"http://bocachica.com",
  "INFORMATION - Flight Radar 24":"https://www.flightradar24.com/simple_index.php?lat=25.99&lon=-97.16&z=11&airports=1&label1=callsign&label2=altspeed&label3=tofrom&size=auto",
  "INFORMATION - Road Closures":"https://tfr.faa.gov/tfr2/list.jsp",
  "INFORMATION - Flight Restrictions Zone":"https://tfr.faa.gov/tfr_map_ims/html/ew/scale7/tile_33_61.html",
@@ -432,6 +431,7 @@ const channels = {
  "TWITTER - Elon Musk":"twitter.html?people=elonmusk",
  "TWITTER - Mary (@BocaChicaGal)":"twitter.html?people=BocaChicaGal",
  "TWITTER - Spaceflight Now (@SpaceflightNow)":"twitter.html?people=SpaceflightNow",
+ "TWITTER - Everyday Astronaut (@Erdayastronaut)":"twitter.html?people=Erdayastronaut",
  "SPACEX Web":"https://www.spacex.com",
  "SEARCH - Google":"https://www.google.com/search?igu=1&q=SpaceX",
  "SEARCH - Bing":"https://www.bing.com/search?q=SpaceX",
