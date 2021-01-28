@@ -6,7 +6,10 @@ Also:
 - FlightRadar.
 - Weather.
 - Road closures information...
-- Some Twitter channels like SpaceX, Elon Musk...
+- Twitter channels like SpaceX, Elon Musk...
+- Local, UTC and Personal local time.
+- RSS scroll with info & news.
+- Tools to customize your visualization.
 - Included my 3D / VR project of StarShip in WebXR. Play with it during this long long long streamings.
 
 [Click here to enter](https://elricdog.github.io/SpaceX-MultiYoutube/view.html)
