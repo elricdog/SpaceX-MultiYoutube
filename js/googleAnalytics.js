@@ -20,5 +20,5 @@ function execute() {
             function(err) { console.error("Execute error", err); });
 }
 gapi.load("client:auth2", function() {
-  gapi.auth2.init({client_id: "YOUR_CLIENT_ID"});
+  gapi.auth2.init({client_id: "310812025808-vim8if9rm12k4js0rki4p8bfneval8hc.apps.googleusercontent.com"});
 });
