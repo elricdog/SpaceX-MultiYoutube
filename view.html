@@ -91,6 +91,20 @@
 
 <!-- OnLoad and Icons -->
 <script>
+	function fetchHeader(url, wch) {
+		try {
+			var req=new XMLHttpRequest();
+			req.open("HEAD", url, false);
+			req.send(null);
+			if(req.status== 200){
+				return req.getResponseHeader(wch);
+			}
+			else return false;
+		} catch(er) {
+			return er.message;
+		}
+	}
+	
 	window.onload = function() {
 		document.getElementById('contact-form').addEventListener('submit', function(event) {
 			event.preventDefault();			
@@ -132,6 +146,10 @@
 		select2.dispatchEvent(event);
 		select3.dispatchEvent(event);
 		select4.dispatchEvent(event);
+				
+		var lastModifiedDate = fetchHeader(location.href,'Last-Modified');
+		const lastUpdate = document.getElementById("lastUpdate");
+		lastUpdate.innerHTML = lastModifiedDate;
 	};
 		
 	function toggleContact() {		
@@ -295,9 +313,16 @@
 
 <tr id="Top-Select-Bar" style="width: 50%; height: 30px;">
 	<td style="width: 50%; height: 30px;">
-		<div class="floating-form">
-			<select id="selectCH1" class="floating-select" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH1').src = this.options[this.selectedIndex].value" value=""/>
-		</div>
+		<table><tr>
+			<td>
+				<div class="floating-form">
+					<select id="selectCH1" class="floating-select" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH1').src = this.options[this.selectedIndex].value" value=""/>
+				</div>
+			</td>
+			<td>
+				<div title="Last update date & time" class="iconLabel" id="groupLastUpdate">Last Update:<div id="lastUpdate"></div></div>
+			</td>
+		</tr></table>
 	</td>
 	<td style="width: 50%; height: 30px;">
 		<table><tr>
