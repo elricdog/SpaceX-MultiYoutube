@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<rss version="2.0">
+  <channel>
+    <title>SpaceX Board RSS</title>
+    <description>SpaceX Board RSS</description>
+    <link>https://elricdog.github.io/SpaceX-MultiYoutube/view.html</link>
+    <item>
+      <title>Welcome to SpaceX Board</title>
+    </item>
+    <item>
+      <title>Added channel: TWITTER - Everyday Astronaut (@Erdayastronaut)</title>
+    </item>
+    <item>
+      <title>Updated live channels</title>
+    </item>
+    <item>
+      <title>Still under construction, be patient</title>
+    </item>
+    <item>
+      <title>NEWS: Looks like SN9 will fly today, maybe. Waiting FAA aproval</title>
+    </item>
+  </channel>
+</rss>

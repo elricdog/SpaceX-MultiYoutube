@@ -53,11 +53,24 @@ table {
     display: inline;
     background-color: #F6F5D7;
     float: right;
-	height: 28px;
-	line-height: 28px;
+	height: 28px;	
 	text-align: center;	
 	font-size: 10px;
 	line-height: 14px;
+	border: 1px solid black;
+}
+
+.rssTextScroll {
+	padding: 0px;
+	margin: 0px;
+	border-spacing: 0px;
+    display: inline;
+    background-color: #D7F5F6;
+	max-width: 500px;
+    float: right;
+	height: 28px;
+	line-height: 28px;
+	font-size: 18px;	
 	border: 1px solid black;
 }
 

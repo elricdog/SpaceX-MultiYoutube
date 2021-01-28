@@ -30,6 +30,8 @@
 
 <body>
 
+<script src="./js/rss-marquee.js"></script>
+
 <!-- Contact -->
 <div id="contact" style="visibility:hidden">
 	<center>
@@ -147,6 +149,10 @@
 		select3.dispatchEvent(event);
 		select4.dispatchEvent(event);
 				
+		const feedTextScrollUrl = ['https://elricdog.github.io/SpaceX-MultiYoutube/rss.xml', 'https://127.0.0.1:3080/SpaceX-MultiYoutube/rss.xml'];
+        const rssTextScroll = document.getElementById('rssTextScroll');
+        new RSSMarquee(feedTextScrollUrl, rssTextScroll, { speed: 1000 } );
+			
 		var lastModifiedDate = fetchHeader(location.href,'Last-Modified');
 		const lastUpdate = document.getElementById("lastUpdate");
 		lastUpdate.innerHTML = lastModifiedDate;
@@ -319,6 +325,9 @@
 					<select id="selectCH1" class="floating-select" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH1').src = this.options[this.selectedIndex].value" value=""/>
 				</div>
 			</td>
+			<td>
+				<div class="rssTextScroll" id="rssTextScroll"></div>
+			</td>				
 			<td>
 				<div title="Last update date & time" class="iconLabel" id="groupLastUpdate">Last Update:<div id="lastUpdate"></div></div>
 			</td>
