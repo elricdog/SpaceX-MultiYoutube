@@ -3,7 +3,7 @@
 <head>
 	<title>SpaceX Board</title>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">	
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 	<link rel="icon" href="./favicon.ico" type="image/x-icon"/>
 	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
 	<link type="text/css" rel="stylesheet" href="main.css">
@@ -26,10 +26,43 @@
 	(function(){
 		emailjs.init("user_BjUMLZEqKE9VdA5391rv8");
 	})();
-</script>	
+</script>
+<script src="https://apis.google.com/js/api.js"></script>
+<script>
+  /**
+   * Sample JavaScript code for analytics.data.realtime.get
+   * See instructions for running APIs Explorer code samples locally:
+   * https://developers.google.com/explorer-help/guides/code_samples#javascript
+   */
 
+  function authenticate() {
+    return gapi.auth2.getAuthInstance()
+        .signIn({scope: "https://www.googleapis.com/auth/analytics https://www.googleapis.com/auth/analytics.readonly"})
+        .then(function() { console.log("Sign-in successful"); },
+              function(err) { console.error("Error signing in", err); });
+  }
+  function loadClient() {
+    gapi.client.setApiKey("AIzaSyB1V1k4-VDbsR4Wi87EsSZOs83j3pjc-gg");
+    return gapi.client.load("https://content.googleapis.com/discovery/v1/apis/analytics/v3/rest")
+        .then(function() { console.log("GAPI client loaded for API"); },
+              function(err) { console.error("Error loading GAPI client for API", err); });
+  }
+  // Make sure the client is loaded and sign-in is complete before calling this method.
+  function execute() {
+    return gapi.client.analytics.data.realtime.get({})
+        .then(function(response) {
+                // Handle the results here (response.result has the parsed body).
+                console.log("Response", response);
+              },
+              function(err) { console.error("Execute error", err); });
+  }
+  gapi.load("client:auth2", function() {
+    gapi.auth2.init({client_id: "YOUR_CLIENT_ID"});
+  });
+</script>
 <body>
-
+	<button onclick="authenticate().then(loadClient)">authorize and load</button>
+	<button onclick="execute()">execute</button>
 <!-- Contact -->
 <div id="contact" style="visibility:hidden">
 	<center>
@@ -37,7 +70,7 @@
 	Please, feel free to send any idea to improve this website. We will take in consideration as soon as posible, or later or never.
 	</center>
 	<br>
-	<form id="contact-form">	
+	<form id="contact-form">
         <input type="hidden" name="contact_number">
 		<p>
         <label>Name</label>
@@ -51,16 +84,16 @@
         <textarea class="contactMessageText" name="message" rows="10"></textarea>
 		</div>
 		<br>
-		<center>		
+		<center>
         <input class="myButton" type="submit" value="Send"></input>
 		<button id="buttonContactClose" class="myButton">Close</button>
 		<br>
 		<br>
 		<label id="lblContactError" style="color:red;"></label>
-	</form>	
+	</form>
 	<br>
 	<label style="color:yellow;">(Still not work, under development)</label>
-	</center>		
+	</center>
 </div>
 
 <!-- About Us -->
@@ -93,7 +126,7 @@
 <script>
 	window.onload = function() {
 		document.getElementById('contact-form').addEventListener('submit', function(event) {
-			event.preventDefault();			
+			event.preventDefault();
 			// generate a five digit number for the contact_number variable
 			this.contact_number.value = Math.random() * 100000 | 0;
 			// these IDs from the previous steps
@@ -106,15 +139,15 @@
 					document.getElementById('lblContactError').innerHTML = 'FAILED(' + error.status +')...' + error.text;
 				});
 		});
-		
+
 		document.getElementById("iconTime").addEventListener ("click", toggleTimeGroups, false);
 		document.getElementById("iconContact").addEventListener ("click", toggleContact, false);
-		document.getElementById("buttonContactClose").addEventListener ("click", toggleContact, false);				
-		document.getElementById("iconAboutUs").addEventListener ("click", toggleAboutUs, false);		
-		document.getElementById("buttonAboutUsClose").addEventListener ("click", toggleAboutUs, false);				
-		document.getElementById("iconSave").addEventListener ("click", configurationSave, false);		
+		document.getElementById("buttonContactClose").addEventListener ("click", toggleContact, false);
+		document.getElementById("iconAboutUs").addEventListener ("click", toggleAboutUs, false);
+		document.getElementById("buttonAboutUsClose").addEventListener ("click", toggleAboutUs, false);
+		document.getElementById("iconSave").addEventListener ("click", configurationSave, false);
 		document.getElementById("iconLoad").addEventListener ("click", toggleLoad, false);
-		document.getElementById("buttonLoadClose").addEventListener ("click", toggleLoad, false);				
+		document.getElementById("buttonLoadClose").addEventListener ("click", toggleLoad, false);
 		document.getElementById("buttonLoad").addEventListener ("click", configurationLoad, false);
 		document.getElementById("iconFullScreen").addEventListener ("click", toggleFullScreen, false);
 
@@ -126,40 +159,40 @@
 		select1.selectedIndex = 3;
 		select2.selectedIndex = 9;
 		select3.selectedIndex = 10;
-		select4.selectedIndex = 11;			
+		select4.selectedIndex = 11;
 		select1.dispatchEvent(event);
 		select2.dispatchEvent(event);
 		select3.dispatchEvent(event);
 		select4.dispatchEvent(event);
 	};
-		
-	function toggleContact() {		
-		const contactScreen = document.getElementById('contact');					
+
+	function toggleContact() {
+		const contactScreen = document.getElementById('contact');
 		if (contactScreen.style.visibility == "hidden") {
 			document.getElementById('lblContactError').innerHTML = "";
 			contactScreen.style.visibility = "visible";
 		} else {
 			contactScreen.style.visibility = "hidden";
 		}
-	};	
-	
-	function toggleAboutUs() {		
-		const aboutUsScreen = document.getElementById('aboutus');					
+	};
+
+	function toggleAboutUs() {
+		const aboutUsScreen = document.getElementById('aboutus');
 		if (aboutUsScreen.style.visibility == "hidden") {
 			aboutUsScreen.style.visibility = "visible";
 		} else {
 			aboutUsScreen.style.visibility = "hidden";
 		}
-	};	
-		
-	function toggleTimeGroups() {		
+	};
+
+	function toggleTimeGroups() {
 		const groupLOCAL = document.getElementById('groupLOCAL');
 		const groupUTC = document.getElementById('groupUTC');
 		const groupTIME = document.getElementById('groupTIME');
 		if (groupLOCAL.style.visibility == "hidden") {
 			groupLOCAL.style.visibility = "visible";
 			groupUTC.style.visibility = "visible";
-			groupTIME.style.visibility = "visible";			
+			groupTIME.style.visibility = "visible";
 			groupLOCAL.style.width = "auto";
 			groupUTC.style.width = "auto";
 			groupTIME.style.width = "auto";
@@ -172,25 +205,25 @@
 			groupTIME.style.width = "0px";
 		}
 	};
-	
-	function toggleLoad() {		
-		const loadScreen = document.getElementById('load');					
+
+	function toggleLoad() {
+		const loadScreen = document.getElementById('load');
 		if (loadScreen.style.visibility == "hidden") {
 			loadScreen.style.visibility = "visible";
 		} else {
 			loadScreen.style.visibility = "hidden";
 		}
-	};	
-	
-	function upload(file, fun) {		
+	};
+
+	function upload(file, fun) {
 		let reader = new FileReader();
 		reader.addEventListener('load', function(e) {
-	    	let text = e.target.result;	    	
+	    	let text = e.target.result;
 			fun(text);
 		});
-		reader.readAsText(file);	
+		reader.readAsText(file);
 	};
-	
+
 	function indexMatchingText(ele, text) {
 		for (var i=0; i<ele.length;i++) {
 			if (ele[i].childNodes[0].nodeValue === text){
@@ -199,14 +232,14 @@
 		}
 		return undefined;
 	};
-	
+
 	function configurationLoad() {
 		let file = document.getElementById("load-file-input").files[0];
 		if (file === null) return;
 		upload(file, function(text) {
-			var data = JSON.parse(text);			
+			var data = JSON.parse(text);
 			console.log(data);
-			
+
 			const select1 = document.getElementById("selectCH1");
 			const select2 = document.getElementById("selectCH2");
 			const select3 = document.getElementById("selectCH3");
@@ -216,16 +249,16 @@
 			select1.selectedIndex = indexMatchingText(select1, data["ch1"]);
 			select2.selectedIndex = indexMatchingText(select2, data["ch2"]);
 			select3.selectedIndex = indexMatchingText(select3, data["ch3"]);
-			select4.selectedIndex = indexMatchingText(select4, data["ch4"]);			
+			select4.selectedIndex = indexMatchingText(select4, data["ch4"]);
 			select1.dispatchEvent(event);
 			select2.dispatchEvent(event);
 			select3.dispatchEvent(event);
 			select4.dispatchEvent(event);
-			
+
 			toggleLoad();
-		});		
+		});
 	};
-	
+
 	function download(data, filename, type) {
 		var file = new Blob([data], {type: type});
 		if (window.navigator.msSaveOrOpenBlob) // IE10+
@@ -238,44 +271,44 @@
 			a.click();
 			setTimeout(function() {
 				document.body.removeChild(a);
-				window.URL.revokeObjectURL(url);  
-			}, 0); 
+				window.URL.revokeObjectURL(url);
+			}, 0);
 		}
 	};
-	
+
 	function configurationSave() {
 		const select1 = document.getElementById("selectCH1");
 		const select2 = document.getElementById("selectCH2");
 		const select3 = document.getElementById("selectCH3");
 		const select4 = document.getElementById("selectCH4");
-	
-		var data = { 
-			"ch1":select1.options[select1.selectedIndex].text, 
-			"ch2":select2.options[select2.selectedIndex].text, 
-			"ch3":select3.options[select3.selectedIndex].text, 
-			"ch4":select4.options[select4.selectedIndex].text, 
+
+		var data = {
+			"ch1":select1.options[select1.selectedIndex].text,
+			"ch2":select2.options[select2.selectedIndex].text,
+			"ch3":select3.options[select3.selectedIndex].text,
+			"ch4":select4.options[select4.selectedIndex].text,
 		};
 		download(JSON.stringify(data), "configuration", "text/plain;charset=utf-8");
 	};
-	
+
 	function toggleFullScreen() {
-	
-		const middleBar = document.getElementById("Middle-Select-Bar");	
+
+		const middleBar = document.getElementById("Middle-Select-Bar");
 		const select3 = document.getElementById("selectCH3");
 		const select4 = document.getElementById("selectCH4");
-		
+
 		var doc = window.document;
 		var docEl = doc.documentElement;
 
 		var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
 		var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
 
-		if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {		
-			middleBar.style.visibility = "hidden";			
+		if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+			middleBar.style.visibility = "hidden";
 			middleBar.style.height = "0px";
 			select3.style.height = "0px";
 			select4.style.height = "0px";
-		
+
 			requestFullScreen.call(docEl);
 		} else {
 			middleBar.style.visibility = "visible";
@@ -283,7 +316,7 @@
 			middleBar.style.height = "30px";
 			select3.style.height = "30px";
 			select4.style.height = "30px";
-			
+
 			cancelFullScreen.call(doc);
 		}
 	};
