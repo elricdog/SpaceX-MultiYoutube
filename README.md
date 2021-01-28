@@ -18,11 +18,19 @@ Sample Screenshots:
 
 ![Image of 4 feeds](https://github.com/elricdog/SpaceX-MultiYoutube/blob/main/Images/sample1.png)
 
+Webs of information:
+
 ![Image of information webs](https://github.com/elricdog/SpaceX-MultiYoutube/blob/main/Images/sample2.png)
+
+Best Twitter timelines:
 
 ![Image of twitter feeds](https://github.com/elricdog/SpaceX-MultiYoutube/blob/main/Images/sample3.png)
 
+My WebXR 3D/VR StarShip project:
+
 ![Image of 3D / VR](https://github.com/elricdog/SpaceX-MultiYoutube/blob/main/Images/sample4.png)
+
+Mobile visualization:
 
 ![Mobile visualization](https://github.com/elricdog/SpaceX-MultiYoutube/blob/main/Images/sample5.jpg)
 
