@@ -16,11 +16,33 @@ firebase.analytics();
 var database = firebase.database();
 
 function addView(){
-  firebase.database().ref('views').set({
-    counter: 1
+  firebase.database().ref('views/counter').once('value', (snapshot) =>{
+      firebase.database().ref('views').set({
+        counter: snapshot.val()+1
+      });
   });
 }
 
+function getRealtimeNumViews(view){
+    firebase.database().ref('views/counter')
+    .on('value', (snapshot)=>{
+      view.innerHTML = snapshot.val();
+    });
+}
 
+function getRealtimeRss(view){
+    firebase.database().ref('rss')
+    .on('value', (snapshot)=>{
+      snapshot.forEach((child)=>{
+      console.log("test: "+child.val().title)
+      })
+    });
+}
 // Add one view more
 addView();
+
+//Get number of views from database
+getRealtimeNumViews(document.getElementById("visitors"));
+
+//get rss from firebase database
+//getRealtimeRss(document.getElementById("visitors"));
