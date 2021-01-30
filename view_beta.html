@@ -3,23 +3,21 @@
 <head>
 	<title>SpaceX Board</title>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">	
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 	<link rel="icon" href="./favicon.ico" type="image/x-icon"/>
 	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
-	<link rel="manifest" href="./manifest.webmanifest">	
+	<link rel="manifest" href="./manifest.webmanifest">
 	<link type="text/css" rel="stylesheet" href="main_beta.css">
 	<link rel="stylesheet" href="https://cdn.metroui.org.ua/v4.4.3/css/metro-all.min.css">
 	<script src="https://cdn.metroui.org.ua/v4.4.3/js/metro.min.js"></script>
 </head>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-JPZ7LEND3T"></script>
+<script async src="https://www.googletagmanager.com/gtag/js"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
-  gtag('config', 'G-JPZ7LEND3T');
 </script>
 
 <!-- Contact form (emailjs.com) -->
@@ -28,20 +26,20 @@
 	(function(){
 		emailjs.init("user_BjUMLZEqKE9VdA5391rv8");
 	})();
-</script>	
+</script>
 
 <body>
 
 <script src="./js/rss-marquee.js"></script>
 
-<!-- Contact --> 
+<!-- Contact -->
 <div id="contact" style="visibility:hidden; width: fit-content; height: fit-content;">
 	<center>
 	<h1>Contact</h1>
 	Please, feel free to send any idea to improve this website. We will take in consideration as soon as posible, or later or never.
 	</center>
 	<br>
-	<form id="contact-form">	
+	<form id="contact-form">
         <input type="hidden" name="contact_number">
 		<p>
         <label>Name</label>
@@ -55,16 +53,16 @@
         <textarea class="contactMessageText" name="message" rows="5"></textarea>
 		</div>
 		<br>
-		<center>		
+		<center>
 		<button id="buttonContactSend" class="myButton">Send</button>
 		<button id="buttonContactClose" class="myButton">Close</button>
 		<br>
 		<br>
 		<label id="lblContactError" style="color:red;"></label>
-	</form>	
+	</form>
 	<br>
 	<label style="color:yellow;">(Still not work, under development)</label>
-	</center>		
+	</center>
 </div>
 
 <!-- About Us -->
@@ -72,7 +70,7 @@
 	<center>
 	<h1>About Us</h1>
 	<p>
-	One day we see that browser tabs was not enough to follow Starship evolution...then...	
+	One day we see that browser tabs was not enough to follow Starship evolution...then...
 	<br>
 	<br>
 	Elric and Sworied
@@ -85,7 +83,7 @@
 	<br>Link to BETA version (bugs and not stable):<br>
 	<a href="https://elricdog.github.io/SpaceX-MultiYoutube/view_beta.html">https://elricdog.github.io/SpaceX-MultiYoutube/view_beta.html</a>
 	<br>Source Code at GitHub:<br>
-	<a href="https://github.com/elricdog/SpaceX-MultiYoutube">https://github.com/elricdog/SpaceX-MultiYoutube</a>	
+	<a href="https://github.com/elricdog/SpaceX-MultiYoutube">https://github.com/elricdog/SpaceX-MultiYoutube</a>
 	</center>
 </div>
 
@@ -111,7 +109,7 @@
             return false;
 		}
     }
-	
+
 	function fetchHeader(url, wch) {
 		try {
 			var req=new XMLHttpRequest();
@@ -124,8 +122,8 @@
 		} catch(er) {
 			return er.message;
 		}
-	}	
-	
+	}
+
 	function indexMatchingText(ele, text) {
 		for (var i=0; i<ele.length;i++) {
 			if (ele[i].childNodes[0].nodeValue === text){
@@ -135,12 +133,12 @@
 		return undefined;
 	}
 </script>
-	
+
 <!-- OnLoad and Icons -->
-<script>	
+<script>
 	window.onload = function() {
 		document.getElementById('contact-form').addEventListener('submit', function(event) {
-			event.preventDefault();			
+			event.preventDefault();
 			// generate a five digit number for the contact_number variable
 			this.contact_number.value = Math.random() * 100000 | 0;
 			// these IDs from the previous steps
@@ -153,21 +151,21 @@
 					document.getElementById('lblContactError').innerHTML = 'FAILED(' + error.status +')...' + error.text;
 				});
 		});
-		
+
 		document.getElementById("iconOptions").addEventListener ("click", toggleIconGroups, false);
 		document.getElementById("iconLastUpdate").addEventListener ("click", toggleLastUpdate, false);
 		document.getElementById("iconTime").addEventListener ("click", toggleTimeGroups, false);
 		document.getElementById("iconContact").addEventListener ("click", toggleContact, false);
-		document.getElementById("buttonContactClose").addEventListener ("click", toggleContact, false);				
-		document.getElementById("iconAboutUs").addEventListener ("click", toggleAboutUs, false);		
-		document.getElementById("buttonAboutUsClose").addEventListener ("click", toggleAboutUs, false);				
-		document.getElementById("iconSave").addEventListener ("click", configurationSave, false);		
+		document.getElementById("buttonContactClose").addEventListener ("click", toggleContact, false);
+		document.getElementById("iconAboutUs").addEventListener ("click", toggleAboutUs, false);
+		document.getElementById("buttonAboutUsClose").addEventListener ("click", toggleAboutUs, false);
+		document.getElementById("iconSave").addEventListener ("click", configurationSave, false);
 		document.getElementById("iconLoad").addEventListener ("click", toggleLoad, false);
-		document.getElementById("buttonLoadClose").addEventListener ("click", toggleLoad, false);				
+		document.getElementById("buttonLoadClose").addEventListener ("click", toggleLoad, false);
 		document.getElementById("buttonLoad").addEventListener ("click", configurationLoad, false);
 		document.getElementById("iconFullScreen").addEventListener ("click", toggleFullScreen, false);
 		document.getElementById("iconRSS").addEventListener ("click", toggleRSSScroll, false);
-						
+
 		const select1 = document.getElementById("selectCH1");
 		const select2 = document.getElementById("selectCH2");
 		const select3 = document.getElementById("selectCH3");
@@ -176,7 +174,7 @@
 		select1.selectedIndex = indexMatchingText(select1, "SpaceFlight");
 		select2.selectedIndex = indexMatchingText(select2, "Lab Padre - Nerdle Cam 4K");
 		select3.selectedIndex = indexMatchingText(select3, "Lab Padre - Sentinel Cam");
-		select4.selectedIndex = indexMatchingText(select4, "Everyday Astronaut");			
+		select4.selectedIndex = indexMatchingText(select4, "Everyday Astronaut");
 		select1.dispatchEvent(event);
 		select2.dispatchEvent(event);
 		select3.dispatchEvent(event);
@@ -184,20 +182,20 @@
 
 		const feedTextScrollUrl = ['https://elricdog.github.io/SpaceX-MultiYoutube/rss.xml'];
         const rssTextScroll = document.getElementById('rssTextScroll');
-        new RSSMarquee(feedTextScrollUrl, rssTextScroll, { speed: 150 } );		
+        new RSSMarquee(feedTextScrollUrl, rssTextScroll, { speed: 150 } );
 		window.addEventListener('resize', () => {
 			updateRSSTextScrollWidth();
-		});		
+		});
 		updateRSSTextScrollWidth();
 
 		toggleIconGroups();
 		if (isMobile())
 		{
-			//toggleLastUpdate();			
+			//toggleLastUpdate();
 			toggleTimeGroups();
 			//toggleRSSScroll();
 		}
-											
+
 		const lastUpdate = document.getElementById("lastUpdate");
 
 		var lastModifiedDateString = fetchHeader(location.href,'Last-Modified');
@@ -212,21 +210,21 @@
 		} else {
 			lastUpdate.innerHTML = lastModifiedRSSDate.toLocaleString();
 			console.log("LastUpdate: "+lastUpdate.innerHTML);
-		}		
+		}
 	};
 
     function updateRSSTextScrollWidth()
-	{		
+	{
 		var w = document.getElementById('rowOfTopLeft').getBoundingClientRect().width;
 		const rssTextScroll = document.getElementById('rssTextScroll');
 		w2 = document.getElementById('selectCH1').getBoundingClientRect().width;
 		var fw = (w-w2)-28; // Note: Button
 		if (fw<50) fw=50;
-		rssTextScroll.style.width = fw+"px";		
+		rssTextScroll.style.width = fw+"px";
 	}
-	
-	function toggleContact() {		
-		const contactScreen = document.getElementById('contact');					
+
+	function toggleContact() {
+		const contactScreen = document.getElementById('contact');
 		if (contactScreen.style.visibility == "hidden") {
 			document.getElementById('lblContactError').innerHTML = "";
 			contactScreen.style.visibility = "visible";
@@ -235,10 +233,10 @@
 			contactScreen.style.visibility = "hidden";
 			contactScreen.style.height = "0px";
 		}
-	};	
-	
-	function toggleAboutUs() {		
-		const aboutUsScreen = document.getElementById('aboutus');					
+	};
+
+	function toggleAboutUs() {
+		const aboutUsScreen = document.getElementById('aboutus');
 		if (aboutUsScreen.style.visibility == "hidden") {
 			aboutUsScreen.style.visibility = "visible";
 			aboutUsScreen.style.height = "fit-content";
@@ -246,24 +244,24 @@
 			aboutUsScreen.style.visibility = "hidden";
 			aboutUsScreen.style.height = "0px";
 		}
-	};	
-	
+	};
+
 	function setRSSScroll(visible) {
 		const rssTextScroll = document.getElementById('rssTextScroll');
-		if (visible) {			
+		if (visible) {
 			rssTextScroll.style.visibility = "visible";
 			updateRSSTextScrollWidth();
 		} else {
 			rssTextScroll.style.visibility = "hidden";
 			rssTextScroll.style.width = "0px";
 		}
-	}	
-	function toggleRSSScroll() {		
+	}
+	function toggleRSSScroll() {
 		const rssTextScroll = document.getElementById('rssTextScroll');
 		setRSSScroll(rssTextScroll.style.visibility == "hidden");
 	}
-		
-	function setLastUpdate(visible) {		
+
+	function setLastUpdate(visible) {
 		const lastUpdateLabel = document.getElementById('groupLastUpdate');
 		if (visible) {
 			lastUpdateLabel.style.visibility = "visible";
@@ -272,13 +270,13 @@
 			lastUpdateLabel.style.visibility = "hidden";
 			lastUpdateLabel.style.width = "0px";
 		}
-	};	
-	function toggleLastUpdate() {		
+	};
+	function toggleLastUpdate() {
 		const lastUpdateLabel = document.getElementById('groupLastUpdate');
 		setLastUpdate(lastUpdateLabel.style.visibility == "hidden");
 	};
-	
-	function setTimeGroups(visible) {		
+
+	function setTimeGroups(visible) {
 		const timersIconLabels = document.getElementById('timersIconLabels');
 		if (visible) {
 			timersIconLabels.style.visibility = "visible";
@@ -288,12 +286,12 @@
 			timersIconLabels.style.width = "0px";
 		}
 	};
-	function toggleTimeGroups() {		
+	function toggleTimeGroups() {
 		const timersIconLabels = document.getElementById('timersIconLabels');
 		setTimeGroups(timersIconLabels.style.visibility == "hidden");
 	};
-	
-	function toggleIconGroups() {		
+
+	function toggleIconGroups() {
 		const optionsIcons = document.getElementById('optionsIcons');
 		if (optionsIcons.style.visibility == "hidden") {
 			optionsIcons.style.visibility = "visible";
@@ -303,9 +301,9 @@
 			optionsIcons.style.width = "0px";
 		}
 	}
-	
-	function toggleLoad() {		
-		const loadScreen = document.getElementById('load');					
+
+	function toggleLoad() {
+		const loadScreen = document.getElementById('load');
 		if (loadScreen.style.visibility == "hidden") {
 			loadScreen.style.visibility = "visible";
 			loadScreen.style.height = "fit-content";
@@ -313,24 +311,24 @@
 			loadScreen.style.visibility = "hidden";
 			loadScreen.style.height = "0px";
 		}
-	};	
-	
-	function upload(file, fun) {		
+	};
+
+	function upload(file, fun) {
 		let reader = new FileReader();
 		reader.addEventListener('load', function(e) {
-	    	let text = e.target.result;	    	
+	    	let text = e.target.result;
 			fun(text);
 		});
-		reader.readAsText(file);	
+		reader.readAsText(file);
 	};
-		
+
 	function configurationLoad() {
 		let file = document.getElementById("load-file-input").files[0];
 		if (file === null) return;
 		upload(file, function(text) {
-			var data = JSON.parse(text);			
+			var data = JSON.parse(text);
 			console.log(data);
-			
+
 			const select1 = document.getElementById("selectCH1");
 			const select2 = document.getElementById("selectCH2");
 			const select3 = document.getElementById("selectCH3");
@@ -340,25 +338,25 @@
 			select1.selectedIndex = indexMatchingText(select1, data["ch1"]);
 			select2.selectedIndex = indexMatchingText(select2, data["ch2"]);
 			select3.selectedIndex = indexMatchingText(select3, data["ch3"]);
-			select4.selectedIndex = indexMatchingText(select4, data["ch4"]);			
+			select4.selectedIndex = indexMatchingText(select4, data["ch4"]);
 			select1.dispatchEvent(event);
 			select2.dispatchEvent(event);
 			select3.dispatchEvent(event);
 			select4.dispatchEvent(event);
-			
+
 			var rssTextScrollVisible = data["rssTextScrollVisible"];
 			var lastUpdateLabelVisible = data["lastUpdateLabelVisible"];
 			var timersIconLabelsVisible = data["timersIconLabelsVisible"];
-			
+
 			setRSSScroll(rssTextScrollVisible);
 			setLastUpdate(lastUpdateLabelVisible);
 			setTimeGroups(timersIconLabelsVisible);
-			
+
 			toggleLoad();
 			console.log("Loaded OK");
 		});
 	};
-	
+
 	function download(data, filename, type) {
 		var file = new Blob([data], {type: type});
 		if (window.navigator.msSaveOrOpenBlob) // IE10+
@@ -371,12 +369,12 @@
 			a.click();
 			setTimeout(function() {
 				document.body.removeChild(a);
-				window.URL.revokeObjectURL(url);  
-			}, 0); 
+				window.URL.revokeObjectURL(url);
+			}, 0);
 		}
 		console.log("Saved OK");
 	};
-	
+
 	function configurationSave() {
 		const select1 = document.getElementById("selectCH1");
 		const select2 = document.getElementById("selectCH2");
@@ -389,39 +387,39 @@
 		const lastUpdateLabelVisible = (lastUpdateLabel.style.visibility == "visible");
 		const timersIconLabels = document.getElementById('timersIconLabels');
 		const timersIconLabelsVisible = (timersIconLabels.style.visibility == "visible");
-	
-		var data = { 
-			"ch1":select1.options[select1.selectedIndex].text, 
-			"ch2":select2.options[select2.selectedIndex].text, 
-			"ch3":select3.options[select3.selectedIndex].text, 
-			"ch4":select4.options[select4.selectedIndex].text, 
+
+		var data = {
+			"ch1":select1.options[select1.selectedIndex].text,
+			"ch2":select2.options[select2.selectedIndex].text,
+			"ch3":select3.options[select3.selectedIndex].text,
+			"ch4":select4.options[select4.selectedIndex].text,
 			"rssTextScrollVisible":rssTextScrollVisible,
 			"lastUpdateLabelVisible":lastUpdateLabelVisible,
 			"timersIconLabelsVisible":timersIconLabelsVisible,
 		};
 		download(JSON.stringify(data), "configuration", "text/plain;charset=utf-8");
 	};
-	
+
 	function toggleFullScreen() {
-	
-		const middleBar3 = document.getElementById("middleBarfBottomLeft");	
-		const middleBar4 = document.getElementById("middleBarfBottomRight");		
+
+		const middleBar3 = document.getElementById("middleBarfBottomLeft");
+		const middleBar4 = document.getElementById("middleBarfBottomRight");
 		var doc = window.document;
 		var docEl = doc.documentElement;
-		
+
 		var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
 		var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
-		if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {		
-			middleBar3.style.visibility = "hidden";			
+		if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+			middleBar3.style.visibility = "hidden";
 			middleBar3.style.height = "0px";
-			middleBar4.style.visibility = "hidden";			
-			middleBar4.style.height = "0px";		
+			middleBar4.style.visibility = "hidden";
+			middleBar4.style.height = "0px";
 			requestFullScreen.call(docEl);
 		} else {
 			middleBar3.style.visibility = "visible";
 			middleBar3.style.height = "28px";
 			middleBar4.style.visibility = "visible";
-			middleBar4.style.height = "28px";			
+			middleBar4.style.height = "28px";
 			cancelFullScreen.call(doc);
 		}
 	};
@@ -433,7 +431,7 @@
 <div data-role="splitter" data-split-mode="vertical" data-gutter-size="5" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
     <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5">
 		<!-- Top-Left -->
-        <div class="d-flex flex-column flex-justify-left" id="rowOfTopLeft">		
+        <div class="d-flex flex-column flex-justify-left" id="rowOfTopLeft">
 			<div class="container" style="height:28px; max-height:28px; padding:0px;">
 				<div class="grid">
 					<div class="row no-gap">
@@ -452,11 +450,11 @@
 			</div>
 			<div class="container" style="height:100%; padding:0px;">
 				<iframe id="iframeCH1" class="channels" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-			</div>					
+			</div>
 		</div>
 		<!-- Top-Right -->
-        <div class="d-flex flex-column flex-justify-left" id="rowOfTopRight">		
-			<div class="container" style="height:28px; max-height:28px; padding:0px;">			
+        <div class="d-flex flex-column flex-justify-left" id="rowOfTopRight">
+			<div class="container" style="height:28px; max-height:28px; padding:0px;">
 				<div class="grid">
 					<div class="row no-gap">
 						<div class="stub">
@@ -477,7 +475,7 @@
 						</div>
 						<div class="cell flex-justify-between">
 						</div>
-						<div class="stub flex-justify-end" id="optionsIcons">		
+						<div class="stub flex-justify-end" id="optionsIcons">
 							<div class="iconPopUp">
 								<div title="Go to FullScreen" class="icon" id="iconFullScreen"><img src="Icons/fullscreen.png"/></div>
 								<div title="Information about Us and this web site" class="icon" id="iconAboutUs"><img src="Icons/aboutus.png"/></div>
@@ -496,13 +494,13 @@
 			</div>
 			<div class="container" style="height:100%; padding:0px;">
 				<iframe id="iframeCH2" class="channels" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-			</div>		
-		</div>		
+			</div>
+		</div>
     </div>
     <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5">
 		<!-- Bottom-Left -->
-        <div class="d-flex flex-column flex-justify-left" id="rowOfBottomLeft">		
-			<div class="container" style="height:28px; max-height:28px; padding:0px;" id="middleBarfBottomLeft">		
+        <div class="d-flex flex-column flex-justify-left" id="rowOfBottomLeft">
+			<div class="container" style="height:28px; max-height:28px; padding:0px;" id="middleBarfBottomLeft">
 				<div class="grid">
 					<div class="row no-gap">
 						<div class="stub">
@@ -514,11 +512,11 @@
 			</div>
 			<div class="container" style="height:100%; padding:0px;">
 				<iframe id="iframeCH3" class="channels" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-			</div>		
-		</div>		
+			</div>
+		</div>
 		<!-- Bottom-Right -->
-        <div class="d-flex flex-column flex-justify-left" id="rowOfBottomRight">		
-			<div class="container" style="height:28px; max-height:28px; padding:0px;" id="middleBarfBottomRight">		
+        <div class="d-flex flex-column flex-justify-left" id="rowOfBottomRight">
+			<div class="container" style="height:28px; max-height:28px; padding:0px;" id="middleBarfBottomRight">
 				<div class="grid">
 					<div class="row no-gap">
 						<div class="stub">
@@ -530,7 +528,7 @@
 			</div>
 			<div class="container" style="height:100%; padding:0px;">
 				<iframe id="iframeCH4" class="channels" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-			</div>		
+			</div>
 		</div>
     </div>
 </div>
@@ -566,7 +564,7 @@ const channels = {
  "Marcus House":"https://www.youtube.com/embed/MkLpg5Rs8mI?autoplay=1&mute=0",
  "What about it":"https://www.youtube.com/embed/QRRSvq5s0oE?autoplay=1&mute=0",
  "NASA Live":"https://www.youtube.com/embed/21X5lGlDOfg?autoplay=1&mute=0",
- 
+
  "INFORMATION - Boca Chica, TX Weather":"weather.html",
  "INFORMATION - Flight Radar 24":"https://www.flightradar24.com/simple_index.php?lat=25.99&lon=-97.16&z=11&airports=1&label1=callsign&label2=altspeed&label3=tofrom&size=auto",
  "INFORMATION - Road Closures":"https://tfr.faa.gov/tfr2/list.jsp",
@@ -612,6 +610,28 @@ var intervalId = window.setInterval(function(){
 updateDateTime();
 
 </script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>
 
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyDF-bCz0fuvpWEBFYN9l6uqtunG-gN_lRI",
+    authDomain: "spacexboard.firebaseapp.com",
+    projectId: "spacexboard",
+    storageBucket: "spacexboard.appspot.com",
+    messagingSenderId: "310812025808",
+    appId: "1:310812025808:web:f9ad53c435580ce6f0cfd5",
+    measurementId: "G-740F453PWR"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
 </body>
 </html>
