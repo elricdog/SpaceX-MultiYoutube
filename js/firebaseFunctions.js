@@ -44,7 +44,7 @@ function addView(){
   });
   
   var intervalAddVisitor = window.setInterval(function(){
-    addVisitor();
+    updateVisitor();
   }, 600000);
   
   addVisitor();
@@ -68,6 +68,17 @@ function addVisitor(){
           firebase.database().ref('visitors').child(child.key).remove();
         }
       });
+  });
+}
+
+function updateVisitor(){	
+  let d = new Date();
+  let currentTimeZoneOffsetInHours = d.getTimezoneOffset() / 60;
+  let utc = new Date();
+  utc.setHours( utc.getHours() + currentTimeZoneOffsetInHours );
+	
+  firebase.database().ref('visitors/'+getGUID()).set({
+    value: utc.valueOf()
   });
 }
 
