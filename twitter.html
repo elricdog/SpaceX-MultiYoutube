@@ -24,13 +24,26 @@ function findGetParameter(parameterName) {
 };
 
 let people = findGetParameter("people");
-document.getElementById("item").href="https://twitter.com/" + people; 
+if (people!==null) {
+	console.log ("Tweets from people: "+people);
+	document.getElementById("item").href="https://twitter.com/" + people; 
+	document.getElementById("item").dataset.theme="light";
+} else {
+	let list = findGetParameter("list");
+	if (list!==null) {
+		console.log ("Tweets from list: "+list);		
+		document.getElementById("item").href="https://twitter.com/elricdog/lists/spacex-10061?ref_src=twsrc%5Etfw";
+		document.getElementById("item").dataset.theme="dark";
+	}
+}
 
 var intervalId = window.setInterval(function(){
 	window.location.reload(true)	
 }, 300000);
 
 </script>
+
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 </body>
 </html>
