@@ -55,7 +55,7 @@ function addVisitor(){
   //Clean old visitors
   firebase.database().ref('visitors/').once('value', (visitors) =>{
       visitors.forEach((child)=>{
-        if(child.val().value < new Date().valueOf()-1200000){
+        if(child.val().value < new Date().valueOf()-1800000){
           firebase.database().ref('visitors').child(child.key).remove();
         }
       });
@@ -90,7 +90,7 @@ addView();
 getRealtimeNumViews(document.getElementById("visitors"));
 
 //get visitors in the last 20min
-//getRealTimeVisitors(document.getElementById("visitors"));
+getRealTimeVisitors(document.getElementById("visitorsNow"));
 
 //get rss from firebase database
 //getRealtimeRss(document.getElementById("visitors"));
