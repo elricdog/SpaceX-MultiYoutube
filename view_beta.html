@@ -82,6 +82,8 @@
 	<a href="https://elricdog.github.io/SpaceX-MultiYoutube/view.html">https://elricdog.github.io/SpaceX-MultiYoutube/view.html</a>
 	<br>Link to BETA version (bugs and not stable):<br>
 	<a href="https://elricdog.github.io/SpaceX-MultiYoutube/view_beta.html">https://elricdog.github.io/SpaceX-MultiYoutube/view_beta.html</a>
+	<br>Link to OLD version (more simple):<br>
+	<a href="https://elricdog.github.io/SpaceX-MultiYoutube/view_old.html">https://elricdog.github.io/SpaceX-MultiYoutube/view_old.html</a>
 	<br>Source Code at GitHub:<br>
 	<a href="https://github.com/elricdog/SpaceX-MultiYoutube">https://github.com/elricdog/SpaceX-MultiYoutube</a>
 	</center>
@@ -165,20 +167,25 @@
 		document.getElementById("buttonLoad").addEventListener ("click", configurationLoad, false);
 		document.getElementById("iconFullScreen").addEventListener ("click", toggleFullScreen, false);
 		document.getElementById("iconRSS").addEventListener ("click", toggleRSSScroll, false);
+		document.getElementById("icon5thColumn").addEventListener ("click", toggle5thColumn, false);
+		document.getElementById("icon5thColumnB").addEventListener ("click", toggle5thColumn, false);
 
 		const select1 = document.getElementById("selectCH1");
 		const select2 = document.getElementById("selectCH2");
 		const select3 = document.getElementById("selectCH3");
 		const select4 = document.getElementById("selectCH4");
+		const select5 = document.getElementById("selectCH5");
 		var event = new Event('change');
 		select1.selectedIndex = indexMatchingText(select1, "SpaceFlight");
 		select2.selectedIndex = indexMatchingText(select2, "Lab Padre - Nerdle Cam 4K");
 		select3.selectedIndex = indexMatchingText(select3, "Lab Padre - Sentinel Cam");
 		select4.selectedIndex = indexMatchingText(select4, "Everyday Astronaut");
+		select5.selectedIndex = indexMatchingText(select5, "TWITTER - Elon Musk");
 		select1.dispatchEvent(event);
 		select2.dispatchEvent(event);
 		select3.dispatchEvent(event);
 		select4.dispatchEvent(event);
+		select5.dispatchEvent(event);
 
 		const feedTextScrollUrl = ['https://elricdog.github.io/SpaceX-MultiYoutube/rss.xml'];
         const rssTextScroll = document.getElementById('rssTextScroll');
@@ -194,6 +201,7 @@
 			//toggleLastUpdate();
 			toggleTimeGroups();
 			//toggleRSSScroll();
+			toggle5thColumn();
 		}
 
 		const lastUpdate = document.getElementById("lastUpdate");
@@ -302,6 +310,18 @@
 		}
 	}
 
+	function toggle5thColumn() {
+		const rootView = document.getElementById('rootView');
+		const column5thView = document.getElementById('column5thView');
+		if (column5thView.style.visibility == "hidden") {
+			column5thView.style.visibility = "visible";
+			rootView.dataset.splitSizes = "80, 20";
+		} else {
+			column5thView.style.visibility = "hidden";
+			rootView.dataset.splitSizes = "100, 0";
+		}
+	}
+
 	function toggleLoad() {
 		const loadScreen = document.getElementById('load');
 		if (loadScreen.style.visibility == "hidden") {
@@ -333,16 +353,19 @@
 			const select2 = document.getElementById("selectCH2");
 			const select3 = document.getElementById("selectCH3");
 			const select4 = document.getElementById("selectCH4");
+			const select5 = document.getElementById("selectCH5");
 
 			var event = new Event('change');
 			select1.selectedIndex = indexMatchingText(select1, data["ch1"]);
 			select2.selectedIndex = indexMatchingText(select2, data["ch2"]);
 			select3.selectedIndex = indexMatchingText(select3, data["ch3"]);
 			select4.selectedIndex = indexMatchingText(select4, data["ch4"]);
+			select5.selectedIndex = indexMatchingText(select5, data["ch5"]);
 			select1.dispatchEvent(event);
 			select2.dispatchEvent(event);
 			select3.dispatchEvent(event);
 			select4.dispatchEvent(event);
+			select5.dispatchEvent(event);
 
 			var rssTextScrollVisible = data["rssTextScrollVisible"];
 			var lastUpdateLabelVisible = data["lastUpdateLabelVisible"];
@@ -380,6 +403,7 @@
 		const select2 = document.getElementById("selectCH2");
 		const select3 = document.getElementById("selectCH3");
 		const select4 = document.getElementById("selectCH4");
+		const select5 = document.getElementById("selectCH5");
 
 		const rssTextScroll = document.getElementById('rssTextScroll');
 		const rssTextScrollVisible = (rssTextScroll.style.visibility == "visible");
@@ -393,6 +417,7 @@
 			"ch2":select2.options[select2.selectedIndex].text,
 			"ch3":select3.options[select3.selectedIndex].text,
 			"ch4":select4.options[select4.selectedIndex].text,
+			"ch5":select5.options[select5.selectedIndex].text,
 			"rssTextScrollVisible":rssTextScrollVisible,
 			"lastUpdateLabelVisible":lastUpdateLabelVisible,
 			"timersIconLabelsVisible":timersIconLabelsVisible,
@@ -428,7 +453,9 @@
 <div class="allViews">
 
 <!-- 4 views -->
-<div data-role="splitter" data-split-mode="vertical" data-gutter-size="5" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
+<div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="80, 20" id="rootView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
+
+<div data-role="splitter" data-split-mode="vertical" data-gutter-size="5" id="mainView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
     <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5">
 		<!-- Top-Left -->
         <div class="d-flex flex-column flex-justify-left" id="rowOfTopLeft">
@@ -478,6 +505,7 @@
 						<div class="stub flex-justify-end" id="optionsIcons">
 							<div class="iconPopUp">
 								<div title="Go to FullScreen" class="icon" id="iconFullScreen"><img src="Icons/fullscreen.png"/></div>
+								<div title="Show/Hide 5th column" class="icon" id="icon5thColumn"><img src="Icons/column5th.png"/></div>
 								<div title="Information about Us and this web site" class="icon" id="iconAboutUs"><img src="Icons/aboutus.png"/></div>
 								<div title="You have any comment or idea?" class="icon" id="iconContact"><img src="Icons/contact.png"/></div>
 								<div title="Save current configuration" class="icon" id="iconSave"><img src="Icons/save.png"/></div>
@@ -533,6 +561,29 @@
     </div>
 </div>
 
+<div class="d-flex flex-column flex-justify-left" id="column5thView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
+	<div class="container" style="height:28px; max-height:28px; padding:0px;">
+		<div class="grid">
+			<div class="row no-gap">
+				<div class="stub">
+					<select id="selectCH5" class="channelSelect5th" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH5').src = this.options[this.selectedIndex].value" value="">
+					</select>
+				</div>
+				<div class="cell flex-justify-between">
+				</div>
+				<div class="stub flex-justify-end">
+					<div title="Show/Hide 5th column" class="icon" id="icon5thColumnB"><img src="Icons/column5th.png"/></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container" style="height:100%; padding:0px;">
+		<iframe id="iframeCH5" class="channels" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="clipboard-write; encrypted-media;" allowfullscreen></iframe>
+	</div>
+</div>
+
+</div>
+
 </div>
 
 <!-- Main Entry Point -->
@@ -541,6 +592,7 @@ const select1 = document.getElementById("selectCH1");
 const select2 = document.getElementById("selectCH2");
 const select3 = document.getElementById("selectCH3");
 const select4 = document.getElementById("selectCH4");
+const select5 = document.getElementById("selectCH5");
 
 const timeLOCAL = document.getElementById("timeLOCAL");
 const timeUTC = document.getElementById("timeUTC");
@@ -569,16 +621,36 @@ const channels = {
  "INFORMATION - Flight Radar 24":"https://www.flightradar24.com/simple_index.php?lat=25.99&lon=-97.16&z=11&airports=1&label1=callsign&label2=altspeed&label3=tofrom&size=auto",
  "INFORMATION - Road Closures":"https://tfr.faa.gov/tfr2/list.jsp",
  "INFORMATION - Flight Restrictions Zone":"https://tfr.faa.gov/tfr_map_ims/html/ew/scale7/tile_33_61.html",
- "TWITTER - SpaceX":"twitter.html?people=spacex",
- "TWITTER - Elon Musk":"twitter.html?people=elonmusk",
- "TWITTER - Mary (@BocaChicaGal)":"twitter.html?people=BocaChicaGal",
- "TWITTER - Spaceflight Now (@SpaceflightNow)":"twitter.html?people=SpaceflightNow",
- "TWITTER - Everyday Astronaut (@Erdayastronaut)":"twitter.html?people=Erdayastronaut",
  "SPACEX Web":"https://www.spacex.com",
  "SEARCH - Google":"https://www.google.com/search?igu=1&q=SpaceX",
  "SEARCH - Bing":"https://www.bing.com/search?q=SpaceX",
  "3D / VR Model of StarShip":"https://elricdog.github.io/SpaceX-StarShip/VRStarShip/",
 };
+
+const channelsVertical = {
+ "TWITTER - SpaceX":"twitter.html?people=spacex",
+ "TWITTER - Elon Musk":"twitter.html?people=elonmusk",
+ "TWITTER - Jessie Anderson":"twitter.html?people=whoisheartbreak",
+ "TWITTER - Mary":"twitter.html?people=BocaChicaGal",
+ "TWITTER - Spaceflight Now":"twitter.html?people=SpaceflightNow",
+ "TWITTER - Everyday Astronaut":"twitter.html?people=Erdayastronaut",
+ "TWITTER - Austin Barnard":"twitter.html?people=austinbarnard45",
+ "TWITTER - Chris B - NSF":"twitter.html?people=NASASpaceflight",
+ "TWITTER - Jack Beyer":"twitter.html?people=thejackbeyer",
+ "TWITTER - John Kraus":"twitter.html?people=johnkrausphotos",
+ "TWITTER - Brendan (Diagram Creator)":"twitter.html?people=brendan2908",
+ "TWITTER - RGVAerialPhotography":"twitter.html?people=RGVaerialphotos",
+ "TWITTER - SpaceX Català":"twitter.html?people=spacexcatala",
+ "TWITTER - Ismael Flores (SpaceXStorm)":"twitter.html?people=ifcampoy",
+
+ "SPACEX Web":"https://www.spacex.com",
+ "SEARCH - Google":"https://www.google.com/search?igu=1&q=SpaceX",
+ "SEARCH - Bing":"https://www.bing.com/search?q=SpaceX",
+ "ChangeLog":"changelog.html",
+ "RoadMap":"roadmap.html",
+ "Help":"help.html",
+};
+
 
 // Populate selection channels
 for (var key in channels) {
@@ -589,6 +661,12 @@ for (var key in channels) {
 	if (select2!=null) select2.appendChild(el.cloneNode(true));
 	if (select3!=null) select3.appendChild(el.cloneNode(true));
 	if (select4!=null) select4.appendChild(el.cloneNode(true));
+}
+for (var key in channelsVertical) {
+    var el = document.createElement("option");
+    el.textContent = key;
+    el.value = channelsVertical[key];
+    if (select5!=null) select5.appendChild(el);
 }
 
 // Update Time

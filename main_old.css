@@ -7,168 +7,175 @@ html, body {
 	height: 100%;
 }
 
-.allViews {
+table {
 	width: 100%;
-	height: 100%;
-	min-width: 100%;
-	min-height: 100%;
-}
-
-.channels {
 	border-spacing: 0px;
 	padding: 0px;
 	margin: 0px;
 }
 
-.channelSelect {
+.channels {
   border-spacing: 0px;
   padding: 0px;
-  margin: 0px;  
-  background-color: silver;
-  width: 220px;
-  height: 28px;  
-  border: 1px solid black;
+  margin: 0px;
 }
-.channelSelect5th {
+
+.floating-form {
+  width: 200px;
   border-spacing: 0px;
   padding: 0px;
-  margin: 0px;  
+  margin: 0px;
+}
+
+.floating-select {
+  font-size: 14px;
+  padding: 0px;
+  margin: 0px;
+  display: block;
   background-color: silver;
-  width: 250px;
-  height: 28px;  
+  width: 100%;
+  height: 30px;  
   border: 1px solid black;
 }
-.channelSelect:focus {
-  outline: none;
-  border: 2px solid black;
-}
-.channelSelect5th:focus {
+
+.floating-select:focus {
   outline: none;
   border: 2px solid black;
 }
 
-.iconPopUp {
-    min-width: 28px;
-    max-width: 56px;
-	float: right;
-	z-index: 10000;
+.iconRow {    
+  white-space:nowrap;
+  margin: 0px -2px;
+  padding: -1px;
+  min-height: 28px;
+  max-height: 28px;
+  float: right;
+  position:absolute;    
+  width:inherit;
+  pointer-events: none;
 }
 
-.iconGroup {
-	float: right;
+.iconGroup {    
+  white-space:nowrap;
+  padding: 0px;
+  margin: 0px;
+  min-height: 28px;
+  max-height: 28px;
+  float: right;  
 }
 
 .icon {
-	white-space:nowrap;
+	pointer-events: auto;
 	cursor: pointer;
-	border-spacing: 0px;
 	padding: 0px;
 	margin: 0px;
     min-height: 28px;
 	max-height: 28px;
     min-width: 28px;
     max-width: 28px;
-	border: 0px;
-	float: right;
-	z-index: 10000;
+    background-color: silver;
+    float: right;
+	border-spacing: 0px;
+	border: 1px solid black;
 }
 
 .iconLabel {
-	white-space:nowrap;
-	border-spacing: 0px;
+	pointer-events: auto;
 	padding: 0px 1px 0px 1px;
 	margin: 0px 1px 0px 0px;
+	border-spacing: 0px;
     min-height: 28px;
 	max-height: 28px;    
-	height: 28px;	
     max-width: auto;
     background-color: #F6F5D7;
+    float: right;
+	height: 28px;	
 	text-align: center;	
-	line-height: 14px;
 	font-size: 10px;
+	line-height: 14px;
 	border: 1px solid black;
-	float: right;
-	z-index: 10000;
 }
 
 .rssTextScroll {
-	border-spacing: 0px;
+	pointer-events: auto;
 	padding: 0px;
 	margin: 0px;
+	border-spacing: 0px;
     min-height: 28px;
 	max-height: 28px;    
-	width: inherit;
-	height: 28px;
+	width:inherit;
     background-color: #D7F5F6;
-	line-height: 26px;
-	font-size: 16px;	
+	height: 28px;
+	line-height: 28px;
+	font-size: 18px;	
 	border: 1px solid black;	
-	z-index: 10000;
 }
 
 #contact { 
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);  
-	padding: 10px;    
+	padding: 10px;
+	margin: 10px;
+    position:absolute;
+	left: 15%;
+	top: 15%;
+    width: 70%;
+    height: 55%;
+    background-color: gray;
 	z-index: 300000;	
 	visibility: hidden;
 	border: 1px solid black;
-	background-color: #AAA;
-	overflow: auto;
 }
 .contactMessage {
-  padding: 0px;
-  margin: 0px;
-  border: 0px  
+  padding: 10px;
+  border: 0px
 }
 .contactMessage .contactMessageText {
   resize: none;
   outline: none;
   width: 100%;
+  padding: 10px;
   height: 100%;
-  padding: 0px;
-  margin: 0px;
+  margin: -10px;
 }
 
 #aboutus { 
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);  
-	padding: 10px;    
+	padding: 10px;
+	margin: 10px;
+    position:absolute;
+	left: 15%;
+	top: 15%;
+    width: 50%;
+    height: 25%;
+    background-color: gray;
 	z-index: 300000;	
 	visibility: hidden;
 	border: 1px solid black;
-	background-color: #AAA;
-	overflow: auto;
 }
 
 #load { 
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);  
-	padding: 10px;    
+	padding: 10px;
+	margin: 10px;
+    position:absolute;
+	left: 15%;
+	top: 15%;
+    width: 50%;
+    height: 25%;
+    background-color: gray;
 	z-index: 300000;	
 	visibility: hidden;
 	border: 1px solid black;
-	background-color: #AAA;
-	overflow: auto;
 }
 
 .myButton {
 	background-color:gray;
-	border-radius:15px;
+	border-radius:18px;
 	border: 2px solid #black;
 	display:inline-block;
 	cursor:pointer;
 	color:white;
 	font-family:Arial;
-	font-size:20px;
+	font-size:22px;
 	font-weight:bold;
-	padding:8px 14px;
+	padding:10px 18px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px black;
 }
