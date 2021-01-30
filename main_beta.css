@@ -29,8 +29,20 @@ html, body {
   height: 28px;  
   border: 1px solid black;
 }
-
+.channelSelect5th {
+  border-spacing: 0px;
+  padding: 0px;
+  margin: 0px;  
+  background-color: silver;
+  width: 250px;
+  height: 28px;  
+  border: 1px solid black;
+}
 .channelSelect:focus {
+  outline: none;
+  border: 2px solid black;
+}
+.channelSelect5th:focus {
   outline: none;
   border: 2px solid black;
 }

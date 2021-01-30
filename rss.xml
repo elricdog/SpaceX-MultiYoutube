@@ -8,10 +8,13 @@
       <title>Welcome to SpaceX Board</title>
     </item>
     <item>
-      <title>Updated live channels at 29-Jan (reload to ensure latests links)</title>
+      <title>Updated live channels at 30-Jan (reload to ensure latests links)</title>
     </item>
     <item>
       <title>You have a beta version with experimental features at view_beta.html</title>
+    </item>
+    <item>
+      <title>You have a old version more simple at view_old.html</title>
     </item>
     <item>
       <title>NEWS: SN10 is in the launch pad!</title>
