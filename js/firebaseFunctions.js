@@ -69,7 +69,7 @@ function getRealtimeNumViews(view){
     });
 }
 
-function getRealTimeVisitors(){
+function getRealTimeVisitors(view){
   firebase.database().ref('visitors/').on('value', (visitorTime) =>{
       view.innerHTML = snapshot.numChildren();
   });
@@ -89,7 +89,7 @@ addView();
 //Get number of views from database
 getRealtimeNumViews(document.getElementById("visitors"));
 
-//get visitors in the last 30min
+//get visitors in the last 20min
 //getRealTimeVisitors(document.getElementById("visitors"));
 
 //get rss from firebase database
