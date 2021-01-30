@@ -45,7 +45,7 @@ function addView(){
   
   var intervalAddVisitor = window.setInterval(function(){
     addVisitor();
-  }, 300000);
+  }, 600000);
   
   addVisitor();
 }
@@ -95,11 +95,11 @@ function getRealtimeRss(view){
 // Add one view more
 addView();
 
-//Get number of views from database
+// Get number of views from database
 getRealtimeNumViews(document.getElementById("visitors"));
 
-//get visitors in the last 20min
+// Get visitors in the last 20min
 getRealTimeVisitors(document.getElementById("visitorsNow"));
 
-//get rss from firebase database
-//getRealtimeRss(document.getElementById("visitors"));
+// Get RSS from firebase database
+//getRealtimeRss(document.getElementById("XXX"));
