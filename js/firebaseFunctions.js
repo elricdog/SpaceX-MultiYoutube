@@ -36,6 +36,8 @@ firebase.analytics();
 // Get a reference to the database service
 var database = firebase.database();
 
+let counterCleanOldVisitors = 0;
+
 function addView(){
   firebase.database().ref('views/counter').once('value', (snapshot) =>{
       firebase.database().ref('views').set({
@@ -44,9 +46,17 @@ function addView(){
   });
   
   var intervalAddVisitor = window.setInterval(function(){
-    updateVisitor();
-  }, 600000);
-  
+	counterCleanOldVisitors++;
+	counterCleanOldVisitors%=5;
+	if (counterCleanOldVisitors==0) {
+		console.log("CleanOldVisitors procedure")
+		addVisitor();
+	} else {
+		console.log("updateVisitor procedure")
+		updateVisitor();
+	}
+  }, 300000);
+  console.log("addVisitor procedure")
   addVisitor();
 }
 
