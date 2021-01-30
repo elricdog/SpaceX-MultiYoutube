@@ -12,8 +12,9 @@ class RSSMarquee {
      * @param {number} options.speed duration in ms per character. Bigger values = slow speed
      * @param {number} options.maxItems specify max number of titles to show (useful to debug)
      * @param {object} options.hostnameSelector The selector of the element where you want to show the URL of the news feed source (usefull for copyright atttribution)
+	 * @param {boolean} options.removeHtmlTags specify if tags are allowed on rss texts.
      */
-    constructor(feedURLs, elementContainer, options = { speed: 110, maxItems: null, hostnameSelector: null }) {
+    constructor(feedURLs, elementContainer, options = { speed: 110, maxItems: null, hostnameSelector: null, removeHtmlTags: false }) {
         this._feedURLs = new Array();
 
         if (Array.isArray(feedURLs)) {
@@ -47,6 +48,7 @@ class RSSMarquee {
             speed: this.validateSpeed(options.speed),
             maxItems: options.maxItems,
             hostnameSelector: options.hostnameSelector,
+			removeHtmlTags: options.removeHtmlTags,
             // ...options
         };
 
@@ -112,7 +114,8 @@ class RSSMarquee {
 
         this.fetchRSS(url)
             .then((xmlText) => {
-                this._newsText = this.parseXMLFeed(xmlText);
+				//console.log ("RSS text: "+xmlText);
+                this._newsText = this.parseXMLFeed(xmlText, this._options.removeHtmlTags);
 
                 this.showMarquee(this._newsText);
 
@@ -192,8 +195,14 @@ class RSSMarquee {
             elementChildNode.style.display = 'inline-block';
             elementChildNode.style.paddingLeft = '100%';
 
-            const textNode = document.createTextNode(text);
-
+			var textNode;
+			if (this._options.removeHtmlTags) {
+				textNode = document.createTextNode(text);
+			} else {
+				textNode = document.createElement("rss");
+				textNode.innerHTML = text;
+			}
+			
             elementChildNode.appendChild(textNode);
 
             this._elementContainer.appendChild(elementChildNode);
@@ -251,31 +260,32 @@ class RSSMarquee {
      * - Select title elementContainer
      * - add dot separator between "headlines"
      * - remove <![CDATA[ string
-     * - remove html tags
+     * - remove html tags [Optionally]
      * 
      * @param {string} xmlText 
      * @returns {string} parsed feed
      */
-    parseXMLFeed(xmlText) {
+    parseXMLFeed(xmlText, removeHtmlTags) {
         try {
             const parser = new DOMParser();
             const doc = parser.parseFromString(xmlText, "text/xml");
-
+			
             let news = '';
             let totals = 0;
 
             for (let item of doc.querySelectorAll('item')) {
                 let title = item.getElementsByTagName("title")[0].childNodes[0].nodeValue;
                 // let description = item.getElementsByTagName("description")[0].childNodes[0].nodeValue;
-
+				
                 if (title) {
                     if (news.length) {
                         news += '\xa0' + ' • ' + '\xa0';
-                    }
-
+                    }					
                     title = this.remoteCData(title);
-                    title = this.stripTags(title);
-
+					if (removeHtmlTags) {						
+						title = this.stripTags(title);
+					}
+					//console.log ("RSS parsed item: "+title);
                     news += title;
 
                     totals += 1;
