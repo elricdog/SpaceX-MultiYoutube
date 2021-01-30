@@ -13,13 +13,11 @@
 </head>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-JPZ7LEND3T"></script>
+<script async src="https://www.googletagmanager.com/gtag/js"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
-  gtag('config', 'G-JPZ7LEND3T');
 </script>
 
 <!-- Contact form (emailjs.com) -->
@@ -165,6 +163,7 @@
 		
 		document.getElementById("iconOptions").addEventListener ("click", toggleIconGroups, false);
 		document.getElementById("iconLastUpdate").addEventListener ("click", toggleLastUpdate, false);
+		document.getElementById("iconVisitors").addEventListener ("click", toggleVisitors, false);
 		document.getElementById("iconTime").addEventListener ("click", toggleTimeGroups, false);
 		document.getElementById("iconContact").addEventListener ("click", toggleContact, false);
 		document.getElementById("buttonContactClose").addEventListener ("click", toggleContact, false);				
@@ -179,6 +178,12 @@
 		document.getElementById("icon5thColumn").addEventListener ("click", toggle5thColumn, false);
 		document.getElementById("icon5thColumnB").addEventListener ("click", toggle5thColumn, false);
 						
+		document.getElementById("iconRefreshCH1").addEventListener ("click", refreshCH1, false);
+		document.getElementById("iconRefreshCH2").addEventListener ("click", refreshCH2, false);
+		document.getElementById("iconRefreshCH3").addEventListener ("click", refreshCH3, false);
+		document.getElementById("iconRefreshCH4").addEventListener ("click", refreshCH4, false);
+		document.getElementById("iconRefreshCH5").addEventListener ("click", refreshCH5, false);
+
 		const select1 = document.getElementById("selectCH1");
 		const select2 = document.getElementById("selectCH2");
 		const select3 = document.getElementById("selectCH3");
@@ -207,9 +212,10 @@
 		toggleIconGroups();		
 		if (isMobile())
 		{
-			//toggleLastUpdate();			
+			toggleLastUpdate();
+			toggleVisitors();
 			toggleTimeGroups();
-			//toggleRSSScroll();
+			toggleRSSScroll();
 			toggle5thColumn();
 		}
 											
@@ -230,12 +236,31 @@
 		}		
 	};
 
-    function updateRSSTextScrollWidth()
-	{		
+	function refreshCH1() {
+		refresh("iframeCH1");
+	}	
+	function refreshCH2() {
+		refresh("iframeCH2");
+	}	
+	function refreshCH3() {
+		refresh("iframeCH3");
+	}	
+	function refreshCH4() {
+		refresh("iframeCH4");
+	}	
+	function refreshCH5() {
+		refresh("iframeCH5");
+	}		
+	function refresh(id) {
+		var iframe = document.getElementById(id);
+		iframe.src = iframe.src;
+	}
+
+    function updateRSSTextScrollWidth() {
 		var w = document.getElementById('rowOfTopLeft').getBoundingClientRect().width;
 		const rssTextScroll = document.getElementById('rssTextScroll');
 		w2 = document.getElementById('selectCH1').getBoundingClientRect().width;
-		var fw = (w-w2)-28; // Note: Button
+		var fw = (w-w2)-56; // Note: Buttons
 		if (fw<50) fw=50;
 		rssTextScroll.style.width = fw+"px";		
 	}
@@ -293,6 +318,21 @@
 		setLastUpdate(lastUpdateLabel.style.visibility == "hidden");
 	};
 	
+	function setVisitors(visible) {
+		const visitorsLabel = document.getElementById('groupVisitors');
+		if (visible) {
+			visitorsLabel.style.visibility = "visible";
+			visitorsLabel.style.width = "auto";
+		} else {
+			visitorsLabel.style.visibility = "hidden";
+			visitorsLabel.style.width = "0px";
+		}
+	};
+	function toggleVisitors() {
+		const visitorsLabel = document.getElementById('groupVisitors');
+		setVisitors(visitorsLabel.style.visibility == "hidden");
+	};
+
 	function setTimeGroups(visible) {		
 		const timersIconLabels = document.getElementById('timersIconLabels');
 		if (visible) {
@@ -319,7 +359,7 @@
 		}
 	}
 
-	let last5thColumnSplitSizes = "80, 20";
+	let last5thColumnSplitSizes = "83, 17";
 	function preserve5thColumn() {
 		// Preserve current SplitSizes
 		const mainView = document.getElementById("mainView");
@@ -403,10 +443,12 @@
 			
 			var rssTextScrollVisible = data["rssTextScrollVisible"];
 			var lastUpdateLabelVisible = data["lastUpdateLabelVisible"];
+			var visitorsLabelVisible = data["visitorsLabelVisible"];
 			var timersIconLabelsVisible = data["timersIconLabelsVisible"];
 			
 			setRSSScroll(rssTextScrollVisible);
 			setLastUpdate(lastUpdateLabelVisible);
+			setVisitors(visitorsLabelVisible);
 			setTimeGroups(timersIconLabelsVisible);
 			
 			const splitter1 = document.getElementById("rootView");
@@ -456,6 +498,8 @@
 		const rssTextScrollVisible = (rssTextScroll.style.visibility == "visible");
 		const lastUpdateLabel = document.getElementById('groupLastUpdate');
 		const lastUpdateLabelVisible = (lastUpdateLabel.style.visibility == "visible");
+		const visitorsLabel = document.getElementById('groupVisitors');
+		const visitorsLabelVisible = (visitorsLabel.style.visibility == "visible");		
 		const timersIconLabels = document.getElementById('timersIconLabels');
 		const timersIconLabelsVisible = (timersIconLabels.style.visibility == "visible");
 		
@@ -497,6 +541,7 @@
 			"ch5":select5.options[select5.selectedIndex].text, 
 			"rssTextScrollVisible":rssTextScrollVisible,
 			"lastUpdateLabelVisible":lastUpdateLabelVisible,
+			"visitorsLabelVisible":visitorsLabelVisible,
 			"timersIconLabelsVisible":timersIconLabelsVisible,			
 			"splitter1Sizes":splitter1SplitSizes,
 			"splitter2Sizes":splitter2SplitSizes,
@@ -535,7 +580,7 @@
 <div class="allViews">
 
 <!-- 4 views -->
-<div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="80, 20" id="rootView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
+<div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="83, 17" id="rootView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
 
 <div data-role="splitter" data-split-mode="vertical" data-gutter-size="5" data-split-sizes="50, 50" id="mainView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
     <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="50, 50" id="mainView12">
@@ -547,6 +592,7 @@
 						<div class="stub">
 							<select id="selectCH1" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH1').src = this.options[this.selectedIndex].value" value="">
 							</select>
+							<div title="Refresh" class="icon" id="iconRefreshCH1"><img src="Icons/refresh.png"/></div>
 						</div>
 						<div class="cell flex-justify-between">
 							<div class="rssTextScroll" id="rssTextScroll"></div>
@@ -569,12 +615,16 @@
 						<div class="stub">
 							<select id="selectCH2" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH2').src = this.options[this.selectedIndex].value" value="">
 							</select>
+							<div title="Refresh" class="icon" id="iconRefreshCH2"><img src="Icons/refresh.png"/></div>
 						</div>
 						<div class="cell flex-justify-between">
 						</div>
 						<div class="stub">
 							<div title="Last update date & time" class="iconLabel" id="groupLastUpdate">Last Update:<div id="lastUpdate"></div></div>
 						</div>
+						<div class="stub">
+							<div title="Views counter of this website" class="iconLabel" id="groupVisitors">Views Counter:<div id="visitors">0</div></div>
+						</div>						
 						<div class="stub">
 							<div class="iconGroup" id="timersIconLabels">
 								<div title="LOCAL TIME AT BOCACHICA" class="iconLabel" id="groupLOCAL">LOCAL<div id="timeLOCAL">00:00:00</div></div>
@@ -594,6 +644,7 @@
 								<div title="Load saved configuration" class="icon" id="iconLoad"><img src="Icons/load.png"/></div>
 								<div title="Show/Hide the clocks (LOCAL/UTC/YOUR CURRENT TIME)" class="icon" id="iconTime"><img src="Icons/time.png"/></div>
 								<div title="Show/Hide last update information" class="icon" id="iconLastUpdate"><img src="Icons/lastUpdate.png"/></div>
+								<div title="Show/Hide visitors information" class="icon" id="iconVisitors"><img src="Icons/visitors.png"/></div>
 							</div>
 						</div>
 						<div class="stub flex-justify-end">
@@ -616,6 +667,7 @@
 						<div class="stub">
 							<select id="selectCH3" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH3').src = this.options[this.selectedIndex].value" value="">
 							</select>
+							<div title="Refresh" class="icon" id="iconRefreshCH3"><img src="Icons/refresh.png"/></div>
 						</div>
 					</div>
 				</div>
@@ -632,6 +684,7 @@
 						<div class="stub">
 							<select id="selectCH4" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH4').src = this.options[this.selectedIndex].value" value="">
 							</select>
+							<div title="Refresh" class="icon" id="iconRefreshCH4"><img src="Icons/refresh.png"/></div>
 						</div>
 					</div>
 				</div>
@@ -650,6 +703,7 @@
 				<div class="stub">
 					<select id="selectCH5" class="channelSelect5th" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH5').src = this.options[this.selectedIndex].value" value="">
 					</select>
+					<div title="Refresh" class="icon" id="iconRefreshCH5"><img src="Icons/refresh.png"/></div>
 				</div>
 				<div class="cell flex-justify-between">
 				</div>
@@ -708,6 +762,7 @@ const channels = {
  "NASA Live":composeYouTubeLiveStreamURL("21X5lGlDOfg", 0),
  "NASA Media Channel":composeYouTubeLiveStreamURL("nA9UZF-SZoQ", 0),
  
+ "INFORMATION - LabPadre Boca Chica Weather":"https://www.weatherlink.com/embeddablePage/show/6a07fed5552d4f768299e4b8c611feed/signature",
  "INFORMATION - Boca Chica, TX Weather":"weather.html",
  "INFORMATION - Flight Radar 24":"https://www.flightradar24.com/simple_index.php?lat=25.99&lon=-97.16&z=11&airports=1&label1=callsign&label2=altspeed&label3=tofrom&size=auto",
  "INFORMATION - Road Closures":"https://tfr.faa.gov/tfr2/list.jsp",
@@ -802,6 +857,13 @@ var intervalId = window.setInterval(function(){
 updateDateTime();
 
 </script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>
 
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-database.js"></script>
+<script src="js/firebaseFunctions.js"></script>
 </body>
 </html>
