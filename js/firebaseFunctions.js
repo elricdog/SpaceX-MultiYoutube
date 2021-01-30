@@ -46,23 +46,16 @@ function addView(){
   addVisitor();
 }
 
-function getTime(){
-  var date = new Date();
-  var halfHour = date.getMinutes()<30 ? "00" : "30";
-  return date.getHours()+""+halfHour;
-}
-
 // Add visitor in the current minute
 function addVisitor(){
-  var time = getTime();
-  firebase.database().ref('visitors/'+time+'/'+getGUID()).set({
-    value: 1
+  firebase.database().ref('visitors/'+getGUID()).set({
+    value: new Date().valueOf()
   });
 
   //Clean old visitors
   firebase.database().ref('visitors/').once('value', (visitors) =>{
       visitors.forEach((child)=>{
-        if(child.key != time){
+        if(child.val().value < new Date().valueOf()-1200000){
           firebase.database().ref('visitors').child(child.key).remove();
         }
       });
@@ -77,7 +70,7 @@ function getRealtimeNumViews(view){
 }
 
 function getRealTimeVisitors(){
-  firebase.database().ref('visitors/'+getTime()).on('value', (visitorTime) =>{
+  firebase.database().ref('visitors/').on('value', (visitorTime) =>{
       view.innerHTML = snapshot.numChildren();
   });
 }
