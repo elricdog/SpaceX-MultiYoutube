@@ -1,8 +1,10 @@
-body {
+html, body {
 	background-color: gray;
 	font-family: Arial, Helvetica, sans-serif;
+	border-spacing: 0px;
 	padding: 0px;
-	margin: 0px;
+	margin: 0px;	
+	height: 100%;
 }
 
 table {

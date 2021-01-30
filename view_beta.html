@@ -7,7 +7,7 @@
 	<link rel="icon" href="./favicon.ico" type="image/x-icon"/>
 	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
 	<link rel="manifest" href="./manifest.webmanifest">	
-	<link type="text/css" rel="stylesheet" href="main.css">
+	<link type="text/css" rel="stylesheet" href="main_beta.css">
 	<link rel="stylesheet" href="https://cdn.metroui.org.ua/v4.4.3/css/metro-all.min.css">
 	<script src="https://cdn.metroui.org.ua/v4.4.3/js/metro.min.js"></script>
 </head>
@@ -190,19 +190,27 @@
 		});		
 		updateRSSTextScrollWidth();
 
+		toggleIconGroups();
 		if (isMobile())
 		{
-			toggleLastUpdate();
-			toggleIconGroups();
+			//toggleLastUpdate();			
 			toggleTimeGroups();
-			toggleRSSScroll();
+			//toggleRSSScroll();
 		}
 											
-		var lastModifiedDateString = fetchHeader(location.href,'Last-Modified');
 		const lastUpdate = document.getElementById("lastUpdate");
+
+		var lastModifiedDateString = fetchHeader(location.href,'Last-Modified');
 		var lastModifiedDate = new Date();
 		lastModifiedDate.setTime(Date.parse(lastModifiedDateString));
-		lastUpdate.innerHTML = lastModifiedDate.toLocaleString();
+		var lastModifiedRSSDateString = fetchHeader(feedTextScrollUrl[0],'Last-Modified');
+		var lastModifiedRSSDate = new Date();
+		lastModifiedRSSDate.setTime(Date.parse(lastModifiedRSSDateString));
+		if (lastModifiedDate>lastModifiedRSSDate) {
+			lastUpdate.innerHTML = lastModifiedDate.toLocaleString();
+		} else {
+			lastUpdate.innerHTML = lastModifiedRSSDate.toLocaleString();
+		}
 	};
 
     function updateRSSTextScrollWidth()
