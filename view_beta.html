@@ -6,8 +6,10 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">	
 	<link rel="icon" href="./favicon.ico" type="image/x-icon"/>
 	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
-	<link type="text/css" rel="stylesheet" href="main.css">
 	<link rel="manifest" href="./manifest.webmanifest">	
+	<link type="text/css" rel="stylesheet" href="main.css">
+	<link rel="stylesheet" href="https://cdn.metroui.org.ua/v4.4.3/css/metro-all.min.css">
+	<script src="https://cdn.metroui.org.ua/v4.4.3/js/metro.min.js"></script>
 </head>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -50,11 +52,11 @@
 		</p>
         <label>Message</label>
 		<div class="contactMessage">
-        <textarea class="contactMessageText" name="message" rows="10"></textarea>
+        <textarea class="contactMessageText" name="message" rows="5"></textarea>
 		</div>
 		<br>
 		<center>		
-        <input class="myButton" type="submit" value="Send"></input>
+		<button id="buttonContactSend" class="myButton">Send</button>
 		<button id="buttonContactClose" class="myButton">Close</button>
 		<br>
 		<br>
@@ -75,6 +77,7 @@
 	<br>
 	Elric and Sworied
 	</p>
+	<br>
 	<button id="buttonAboutUsClose" class="myButton">Close</button>
 	<br>
 	<br>Link to this web:<br>
@@ -93,6 +96,7 @@
 	<p>
 	<input type="file" id="load-file-input"/>
 	</p>
+	<br>
 	<button id="buttonLoad" class="myButton">Select</button>
 	<button id="buttonLoadClose" class="myButton">Close</button>
 	</center>
@@ -107,10 +111,7 @@
             return false;
 		}
     }
-</script>
 	
-<!-- OnLoad and Icons -->
-<script>
 	function fetchHeader(url, wch) {
 		try {
 			var req=new XMLHttpRequest();
@@ -123,8 +124,20 @@
 		} catch(er) {
 			return er.message;
 		}
-	}
+	}	
 	
+	function indexMatchingText(ele, text) {
+		for (var i=0; i<ele.length;i++) {
+			if (ele[i].childNodes[0].nodeValue === text){
+				return i;
+			}
+		}
+		return undefined;
+	}
+</script>
+	
+<!-- OnLoad and Icons -->
+<script>	
 	window.onload = function() {
 		document.getElementById('contact-form').addEventListener('submit', function(event) {
 			event.preventDefault();			
@@ -154,15 +167,7 @@
 		document.getElementById("buttonLoad").addEventListener ("click", configurationLoad, false);
 		document.getElementById("iconFullScreen").addEventListener ("click", toggleFullScreen, false);
 		document.getElementById("iconRSS").addEventListener ("click", toggleRSSScroll, false);
-
-		const feedTextScrollUrl = ['https://elricdog.github.io/SpaceX-MultiYoutube/rss.xml'];
-        const rssTextScroll = document.getElementById('rssTextScroll');
-        new RSSMarquee(feedTextScrollUrl, rssTextScroll, { speed: 150 } );		
-		window.addEventListener('resize', () => {
-			updateRSSTextScrollWidth();
-		});
-		updateRSSTextScrollWidth();
-				
+						
 		const select1 = document.getElementById("selectCH1");
 		const select2 = document.getElementById("selectCH2");
 		const select3 = document.getElementById("selectCH3");
@@ -176,6 +181,14 @@
 		select2.dispatchEvent(event);
 		select3.dispatchEvent(event);
 		select4.dispatchEvent(event);
+
+		const feedTextScrollUrl = ['https://elricdog.github.io/SpaceX-MultiYoutube/rss.xml'];
+        const rssTextScroll = document.getElementById('rssTextScroll');
+        new RSSMarquee(feedTextScrollUrl, rssTextScroll, { speed: 150 } );		
+		window.addEventListener('resize', () => {
+			updateRSSTextScrollWidth();
+		});		
+		updateRSSTextScrollWidth();
 
 		if (isMobile())
 		{
@@ -197,7 +210,7 @@
 		var w = document.getElementById('rowOfTopLeft').getBoundingClientRect().width;
 		const rssTextScroll = document.getElementById('rssTextScroll');
 		w2 = document.getElementById('selectCH1').getBoundingClientRect().width;
-		var fw = (w-w2)-(28+2+3); // Note: Button + Button-Margin + Margin
+		var fw = (w-w2)-28; // Note: Button
 		if (fw<50) fw=50;
 		rssTextScroll.style.width = fw+"px";		
 	}
@@ -207,8 +220,10 @@
 		if (contactScreen.style.visibility == "hidden") {
 			document.getElementById('lblContactError').innerHTML = "";
 			contactScreen.style.visibility = "visible";
+			contactScreen.style.height = "fit-content";
 		} else {
 			contactScreen.style.visibility = "hidden";
+			contactScreen.style.height = "0px";
 		}
 	};	
 	
@@ -216,8 +231,10 @@
 		const aboutUsScreen = document.getElementById('aboutus');					
 		if (aboutUsScreen.style.visibility == "hidden") {
 			aboutUsScreen.style.visibility = "visible";
+			aboutUsScreen.style.height = "fit-content";
 		} else {
 			aboutUsScreen.style.visibility = "hidden";
+			aboutUsScreen.style.height = "0px";
 		}
 	};	
 	
@@ -281,8 +298,10 @@
 		const loadScreen = document.getElementById('load');					
 		if (loadScreen.style.visibility == "hidden") {
 			loadScreen.style.visibility = "visible";
+			loadScreen.style.height = "fit-content";
 		} else {
 			loadScreen.style.visibility = "hidden";
+			loadScreen.style.height = "0px";
 		}
 	};	
 	
@@ -294,16 +313,7 @@
 		});
 		reader.readAsText(file);	
 	};
-	
-	function indexMatchingText(ele, text) {
-		for (var i=0; i<ele.length;i++) {
-			if (ele[i].childNodes[0].nodeValue === text){
-				return i;
-			}
-		}
-		return undefined;
-	};
-	
+		
 	function configurationLoad() {
 		let file = document.getElementById("load-file-input").files[0];
 		if (file === null) return;
@@ -384,107 +394,138 @@
 	
 	function toggleFullScreen() {
 	
-		const middleBar = document.getElementById("Middle-Select-Bar");	
-		const select3 = document.getElementById("selectCH3");
-		const select4 = document.getElementById("selectCH4");
-		
+		const middleBar3 = document.getElementById("middleBarfBottomLeft");	
+		const middleBar4 = document.getElementById("middleBarfBottomRight");		
 		var doc = window.document;
 		var docEl = doc.documentElement;
-
+		
 		var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
 		var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
-
 		if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {		
-			middleBar.style.visibility = "hidden";			
-			middleBar.style.height = "0px";
-			select3.style.height = "0px";
-			select4.style.height = "0px";
-		
+			middleBar3.style.visibility = "hidden";			
+			middleBar3.style.height = "0px";
+			middleBar4.style.visibility = "hidden";			
+			middleBar4.style.height = "0px";		
 			requestFullScreen.call(docEl);
 		} else {
-			middleBar.style.visibility = "visible";
-			middleBar.style.width = "50%";
-			middleBar.style.height = "30px";
-			select3.style.height = "30px";
-			select4.style.height = "30px";
-			
+			middleBar3.style.visibility = "visible";
+			middleBar3.style.height = "28px";
+			middleBar4.style.visibility = "visible";
+			middleBar4.style.height = "28px";			
 			cancelFullScreen.call(doc);
 		}
 	};
 </script>
 
+<div class="allViews">
+
 <!-- 4 views -->
-<table style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;">
-
-<tr id="Top-Select-Bar" style="width: 50%; height: 30px;">
-	<td style="width: 50%; height: 30px;">
-		<div class="iconRow" id="rowOfTopLeft">
-			<div class="iconGroup">
-				<div title="Show/Hide the RSS scroll" class="icon" id="iconRSS"><img src="Icons/rss.png"/></div>
-				<div class="rssTextScroll" id="rssTextScroll"></div>
+<div data-role="splitter" data-split-mode="vertical" data-gutter-size="5" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
+    <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5">
+		<!-- Top-Left -->
+        <div class="d-flex flex-column flex-justify-left" id="rowOfTopLeft">		
+			<div class="container" style="height:28px; max-height:28px; padding:0px;">
+				<div class="grid">
+					<div class="row no-gap">
+						<div class="stub">
+							<select id="selectCH1" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH1').src = this.options[this.selectedIndex].value" value="">
+							</select>
+						</div>
+						<div class="cell flex-justify-between">
+							<div class="rssTextScroll" id="rssTextScroll"></div>
+						</div>
+						<div class="stub flex-align-end">
+							<div title="Show/Hide the RSS scroll" class="icon" id="iconRSS"><img src="Icons/rss.png"/></div>
+						</div>
+					</div>
+				</div>
 			</div>
+			<div class="container" style="height:100%; padding:0px;">
+				<iframe id="iframeCH1" class="channels" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			</div>					
 		</div>
-		<div class="floating-form">
-			<select id="selectCH1" class="floating-select" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH1').src = this.options[this.selectedIndex].value" value=""/>
-		</div>
-	</td>
-	<td style="width: 50%; height: 30px;">
-		<div class="iconRow">
-			<div title="Options" class="icon" id="iconOptions"><img src="Icons/options.png"/></div>
-			<div class="iconGroup" id="optionsIcons">
-				<div title="Go to FullScreen" class="icon" id="iconFullScreen"><img src="Icons/fullscreen.png"/></div>
-				<div title="Information about Us and this web site" class="icon" id="iconAboutUs"><img src="Icons/aboutus.png"/></div>
-				<div title="You have any comment or idea?" class="icon" id="iconContact"><img src="Icons/contact.png"/></div>
-				<div title="Save current configuration" class="icon" id="iconSave"><img src="Icons/save.png"/></div>
-				<div title="Load saved configuration" class="icon" id="iconLoad"><img src="Icons/load.png"/></div>
-				<div title="Show/Hide the clocks (LOCAL/UTC/YOUR CURRENT TIME)" class="icon" id="iconTime"><img src="Icons/time.png"/></div>
-				<div title="Show/Hide last update information" class="icon" id="iconLastUpdate"><img src="Icons/lastUpdate.png"/></div>
+		<!-- Top-Right -->
+        <div class="d-flex flex-column flex-justify-left" id="rowOfTopRight">		
+			<div class="container" style="height:28px; max-height:28px; padding:0px;">			
+				<div class="grid">
+					<div class="row no-gap">
+						<div class="stub">
+							<select id="selectCH2" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH2').src = this.options[this.selectedIndex].value" value="">
+							</select>
+						</div>
+						<div class="cell flex-justify-between">
+						</div>
+						<div class="stub">
+							<div title="Last update date & time" class="iconLabel" id="groupLastUpdate">Last Update:<div id="lastUpdate"></div></div>
+						</div>
+						<div class="stub">
+							<div class="iconGroup" id="timersIconLabels">
+								<div title="LOCAL TIME AT BOCACHICA" class="iconLabel" id="groupLOCAL">LOCAL<div id="timeLOCAL">00:00:00</div></div>
+								<div title="UTC TIME" class="iconLabel" id="groupUTC">UTC<div id="timeUTC">00:00:00</div></div>
+								<div title="YOUR CURRENT LOCAL TIME" class="iconLabel" id="groupTIME">TIME<div id="timeTIME">00:00:00</div></div>
+							</div>
+						</div>
+						<div class="cell flex-justify-between">
+						</div>
+						<div class="stub flex-justify-end" id="optionsIcons">		
+							<div class="iconPopUp">
+								<div title="Go to FullScreen" class="icon" id="iconFullScreen"><img src="Icons/fullscreen.png"/></div>
+								<div title="Information about Us and this web site" class="icon" id="iconAboutUs"><img src="Icons/aboutus.png"/></div>
+								<div title="You have any comment or idea?" class="icon" id="iconContact"><img src="Icons/contact.png"/></div>
+								<div title="Save current configuration" class="icon" id="iconSave"><img src="Icons/save.png"/></div>
+								<div title="Load saved configuration" class="icon" id="iconLoad"><img src="Icons/load.png"/></div>
+								<div title="Show/Hide the clocks (LOCAL/UTC/YOUR CURRENT TIME)" class="icon" id="iconTime"><img src="Icons/time.png"/></div>
+								<div title="Show/Hide last update information" class="icon" id="iconLastUpdate"><img src="Icons/lastUpdate.png"/></div>
+							</div>
+						</div>
+						<div class="stub flex-justify-end">
+							<div title="Options" class="icon" id="iconOptions"><img src="Icons/options.png"/></div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="iconGroup" id="timersIconLabels">
-				<div title="LOCAL TIME AT BOCACHICA" class="iconLabel" id="groupLOCAL">LOCAL<div id="timeLOCAL">00:00:00</div></div>
-				<div title="UTC TIME" class="iconLabel" id="groupUTC">UTC<div id="timeUTC">00:00:00</div></div>
-				<div title="YOUR CURRENT LOCAL TIME" class="iconLabel" id="groupTIME">TIME<div id="timeTIME">00:00:00</div></div>
+			<div class="container" style="height:100%; padding:0px;">
+				<iframe id="iframeCH2" class="channels" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			</div>		
+		</div>		
+    </div>
+    <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5">
+		<!-- Bottom-Left -->
+        <div class="d-flex flex-column flex-justify-left" id="rowOfBottomLeft">		
+			<div class="container" style="height:28px; max-height:28px; padding:0px;" id="middleBarfBottomLeft">		
+				<div class="grid">
+					<div class="row no-gap">
+						<div class="stub">
+							<select id="selectCH3" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH3').src = this.options[this.selectedIndex].value" value="">
+							</select>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div title="Last update date & time" class="iconLabel" id="groupLastUpdate">Last Update:<div id="lastUpdate"></div></div>
+			<div class="container" style="height:100%; padding:0px;">
+				<iframe id="iframeCH3" class="channels" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			</div>		
+		</div>		
+		<!-- Bottom-Right -->
+        <div class="d-flex flex-column flex-justify-left" id="rowOfBottomRight">		
+			<div class="container" style="height:28px; max-height:28px; padding:0px;" id="middleBarfBottomRight">		
+				<div class="grid">
+					<div class="row no-gap">
+						<div class="stub">
+							<select id="selectCH4" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH4').src = this.options[this.selectedIndex].value" value="">
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container" style="height:100%; padding:0px;">
+				<iframe id="iframeCH4" class="channels" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			</div>		
 		</div>
-		<div class="floating-form">
-			<select id="selectCH2" class="floating-select" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH2').src = this.options[this.selectedIndex].value" value=""/>
-		</div>
-	</td>
-</tr>
+    </div>
+</div>
 
-<tr style="width: 50%; height: 50%;">
-	<td>
-		<iframe id="iframeCH1" class="channels" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-	</td>
-	<td>
-		<iframe id="iframeCH2" class="channels" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-	</td>
-</tr>
-
-<tr id="Middle-Select-Bar" style="width: 50%; height: 30px;">
-	<td>
-		<div class="floating-form">
-			<select id="selectCH3" class="floating-select" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH3').src = this.options[this.selectedIndex].value" value=""/>
-		</div>
-	</td>
-	<td>
-		<div class="floating-form">
-			<select id="selectCH4" class="floating-select" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH4').src = this.options[this.selectedIndex].value" value=""/>
-		</div>
-	</td>
-</tr>
-
-<tr style="width: 50%; height: 50%;">
-	<td>
-		<iframe id="iframeCH3" class="channels" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-	</td>
-	<td>
-		<iframe id="iframeCH4" class="channels" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-	</td>
-</tr>
-
-</table>
+</div>
 
 <!-- Main Entry Point -->
 <script>
@@ -536,10 +577,10 @@ for (var key in channels) {
     var el = document.createElement("option");
     el.textContent = key;
     el.value = channels[key];
-    select1.appendChild(el);
-	select2.appendChild(el.cloneNode(true));
-	select3.appendChild(el.cloneNode(true));
-	select4.appendChild(el.cloneNode(true));
+    if (select1!=null) select1.appendChild(el);
+	if (select2!=null) select2.appendChild(el.cloneNode(true));
+	if (select3!=null) select3.appendChild(el.cloneNode(true));
+	if (select4!=null) select4.appendChild(el.cloneNode(true));
 }
 
 // Update Time
@@ -551,9 +592,9 @@ function updateDateTime() {
 	utc.setHours( utc.getHours() + currentTimeZoneOffsetInHours );
 	let local = new Date();
 	local.setHours( local.getHours() + currentTimeZoneOffsetInHours - 6 );
-	timeLOCAL.innerHTML = local.toLocaleTimeString();
-	timeUTC.innerHTML = utc.toLocaleTimeString();
-	timeTIME.innerHTML = d.toLocaleTimeString();
+	if (timeLOCAL!=null) timeLOCAL.innerHTML = local.toLocaleTimeString();
+	if (timeUTC!=null) timeUTC.innerHTML = utc.toLocaleTimeString();
+	if (timeTIME!=null) timeTIME.innerHTML = d.toLocaleTimeString();
 }
 var intervalId = window.setInterval(function(){
 	updateDateTime();
