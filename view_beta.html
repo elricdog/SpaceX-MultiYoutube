@@ -678,25 +678,33 @@ const timeLOCAL = document.getElementById("timeLOCAL");
 const timeUTC = document.getElementById("timeUTC");
 const timeTIME = document.getElementById("timeTIME");
 
+function composeYouTubeLiveStreamURL(videoId, muteDefault) {
+	return "https://www.youtube.com/embed/"+videoId+"?autoplay=1&mute="+muteDefault;
+}
+
 const channels = {
  "Select one channel":"",
 
  // Live Streams
- "SPACEX":"https://www.youtube.com/embed/_qwLHlVjRyw?autoplay=1&mute=0",
- "SpaceFlight":"https://www.youtube.com/embed/FpQwQx4Q_Dc?autoplay=1&mute=0",
- "NSF Fleet Cam":"https://www.youtube.com/embed/gnt2wZBg89g?autoplay=1&mute=1",
- "Lab Padre - Nerdle Cam 4K":"https://www.youtube.com/embed/Ky5l9ZxsG9M?autoplay=1&mute=1",
- "Lab Padre - Sapphire Cam":"https://www.youtube.com/embed/dROdPn9Tpxg?autoplay=1&mute=1",
- "Lab Padre - South Padre Island Pearl Beach Cam":"https://www.youtube.com/embed/agmFDeP5u_w?autoplay=1&mute=1",
- "Lab Padre - Predator Cam":"https://www.youtube.com/embed/lTJ9OgcIMSs?autoplay=1&mute=1",
- "Lab Padre - Lab Cam":"https://www.youtube.com/embed/hpqoqJxbNpw?autoplay=1&mute=1",
- "Lab Padre - Launch Pad Cam":"https://www.youtube.com/embed/Z72Au8Px7mM?autoplay=1&mute=1",
- "Lab Padre - Sentinel Cam":"https://www.youtube.com/embed/n5ozYnVQahE?autoplay=1&mute=1",
- "Everyday Astronaut":"https://www.youtube.com/embed/QJ6YN5upGH0?autoplay=1&mute=0",
- "SpaceX Storm (Spanish)":"https://www.youtube.com/embed/39T-NWgFtME?autoplay=1&mute=0",
- "Marcus House":"https://www.youtube.com/embed/MkLpg5Rs8mI?autoplay=1&mute=0",
- "What about it":"https://www.youtube.com/embed/QRRSvq5s0oE?autoplay=1&mute=0",
- "NASA Live":"https://www.youtube.com/embed/21X5lGlDOfg?autoplay=1&mute=0",
+ "SPACEX":composeYouTubeLiveStreamURL("_qwLHlVjRyw", 0),
+ 
+ "SpaceFlight":composeYouTubeLiveStreamURL("FpQwQx4Q_Dc", 0),
+ "NSF Fleet Cam":composeYouTubeLiveStreamURL("gnt2wZBg89g", 1),
+ 
+ "Lab Padre - Nerdle Cam 4K":composeYouTubeLiveStreamURL("Ky5l9ZxsG9M", 0),
+ "Lab Padre - Sapphire Cam":composeYouTubeLiveStreamURL("dROdPn9Tpxg", 1),
+ "Lab Padre - South Padre Island Pearl Beach Cam":composeYouTubeLiveStreamURL("agmFDeP5u_w", 1),
+ "Lab Padre - Predator Cam":composeYouTubeLiveStreamURL("lTJ9OgcIMSs", 1),
+ "Lab Padre - Lab Cam":composeYouTubeLiveStreamURL("hpqoqJxbNpw", 1),
+ "Lab Padre - Launch Pad Cam":composeYouTubeLiveStreamURL("Z72Au8Px7mM", 1),
+ "Lab Padre - Sentinel Cam":composeYouTubeLiveStreamURL("n5ozYnVQahE", 1),
+ 
+ "Everyday Astronaut":composeYouTubeLiveStreamURL("QJ6YN5upGH0", 0),
+ "SpaceX Storm (Spanish)":composeYouTubeLiveStreamURL("39T-NWgFtME", 0),
+ "Marcus House":composeYouTubeLiveStreamURL("MkLpg5Rs8mI", 0),
+ "What about it":composeYouTubeLiveStreamURL("QRRSvq5s0oE", 0),
+ "NASA Live":composeYouTubeLiveStreamURL("21X5lGlDOfg", 0),
+ "NASA Media Channel":composeYouTubeLiveStreamURL("nA9UZF-SZoQ", 0),
 
  "INFORMATION - Boca Chica, TX Weather":"weather.html",
  "INFORMATION - Flight Radar 24":"https://www.flightradar24.com/simple_index.php?lat=25.99&lon=-97.16&z=11&airports=1&label1=callsign&label2=altspeed&label3=tofrom&size=auto",
