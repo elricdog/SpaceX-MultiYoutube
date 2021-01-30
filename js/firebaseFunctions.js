@@ -42,20 +42,29 @@ function addView(){
         counter: snapshot.val()+1
       });
   });
-
+  
+  var intervalAddVisitor = window.setInterval(function(){
+    addVisitor();
+  }, 300000);
+  
   addVisitor();
 }
 
 // Add visitor in the current minute
-function addVisitor(){
+function addVisitor(){	
+  let d = new Date();
+  let currentTimeZoneOffsetInHours = d.getTimezoneOffset() / 60;
+  let utc = new Date();
+  utc.setHours( utc.getHours() + currentTimeZoneOffsetInHours );
+	
   firebase.database().ref('visitors/'+getGUID()).set({
-    value: new Date().valueOf()
+    value: utc.valueOf()
   });
 
   //Clean old visitors
   firebase.database().ref('visitors/').once('value', (visitors) =>{
       visitors.forEach((child)=>{
-        if(child.val().value < new Date().valueOf()-1800000){
+        if(child.val().value < utc.valueOf()-1800000){
           firebase.database().ref('visitors').child(child.key).remove();
         }
       });
