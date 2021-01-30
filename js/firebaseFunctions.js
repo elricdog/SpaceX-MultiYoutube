@@ -20,3 +20,7 @@ function addView(){
     counter: 1
   });
 }
+
+
+// Add one view more
+addView();
