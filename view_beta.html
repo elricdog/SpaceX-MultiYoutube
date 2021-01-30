@@ -7,7 +7,7 @@
 	<link rel="icon" href="./favicon.ico" type="image/x-icon"/>
 	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
 	<link type="text/css" rel="stylesheet" href="main.css">
-	<link rel="manifest" href="./manifest.webmanifest">
+	<link rel="manifest" href="./manifest.webmanifest">	
 </head>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -32,8 +32,8 @@
 
 <script src="./js/rss-marquee.js"></script>
 
-<!-- Contact -->
-<div id="contact" style="visibility:hidden">
+<!-- Contact --> 
+<div id="contact" style="visibility:hidden; width: fit-content; height: fit-content;">
 	<center>
 	<h1>Contact</h1>
 	Please, feel free to send any idea to improve this website. We will take in consideration as soon as posible, or later or never.
@@ -66,21 +66,28 @@
 </div>
 
 <!-- About Us -->
-<div id="aboutus" style="visibility:hidden">
+<div id="aboutus" style="visibility:hidden; width: fit-content; height: fit-content;">
 	<center>
 	<h1>About Us</h1>
 	<p>
-	One day we see that browser tabs was not enough to follow Starship evolution...then...
+	One day we see that browser tabs was not enough to follow Starship evolution...then...	
 	<br>
 	<br>
 	Elric and Sworied
 	</p>
 	<button id="buttonAboutUsClose" class="myButton">Close</button>
+	<br>
+	<br>Link to this web:<br>
+	<a href="https://elricdog.github.io/SpaceX-MultiYoutube/view.html">https://elricdog.github.io/SpaceX-MultiYoutube/view.html</a>
+	<br>Link to BETA version (bugs and not stable):<br>
+	<a href="https://elricdog.github.io/SpaceX-MultiYoutube/view_beta.html">https://elricdog.github.io/SpaceX-MultiYoutube/view_beta.html</a>
+	<br>Source Code at GitHub:<br>
+	<a href="https://github.com/elricdog/SpaceX-MultiYoutube">https://github.com/elricdog/SpaceX-MultiYoutube</a>	
 	</center>
 </div>
 
 <!-- To read local disk files -->
-<div id="load" style="visibility:hidden">
+<div id="load" style="visibility:hidden; width: fit-content; height: fit-content;">
 	<center>
 	<h1>Select a Configuration File</h1>
 	<p>
@@ -186,8 +193,7 @@
 	};
 
     function updateRSSTextScrollWidth()
-	{
-		console.log("updateRSSTextScrollWidth");		
+	{		
 		var w = document.getElementById('rowOfTopLeft').getBoundingClientRect().width;
 		const rssTextScroll = document.getElementById('rssTextScroll');
 		w2 = document.getElementById('selectCH1').getBoundingClientRect().width;
@@ -214,17 +220,51 @@
 			aboutUsScreen.style.visibility = "hidden";
 		}
 	};	
-		
-	function toggleRSSScroll() {		
+	
+	function setRSSScroll(visible) {
 		const rssTextScroll = document.getElementById('rssTextScroll');
-		if (rssTextScroll.style.visibility == "hidden") {			
+		if (visible) {			
 			rssTextScroll.style.visibility = "visible";
 			updateRSSTextScrollWidth();
 		} else {
 			rssTextScroll.style.visibility = "hidden";
 			rssTextScroll.style.width = "0px";
 		}
+	}	
+	function toggleRSSScroll() {		
+		const rssTextScroll = document.getElementById('rssTextScroll');
+		setRSSScroll(rssTextScroll.style.visibility == "hidden");
 	}
+		
+	function setLastUpdate(visible) {		
+		const lastUpdateLabel = document.getElementById('groupLastUpdate');
+		if (visible) {
+			lastUpdateLabel.style.visibility = "visible";
+			lastUpdateLabel.style.width = "auto";
+		} else {
+			lastUpdateLabel.style.visibility = "hidden";
+			lastUpdateLabel.style.width = "0px";
+		}
+	};	
+	function toggleLastUpdate() {		
+		const lastUpdateLabel = document.getElementById('groupLastUpdate');
+		setLastUpdate(lastUpdateLabel.style.visibility == "hidden");
+	};
+	
+	function setTimeGroups(visible) {		
+		const timersIconLabels = document.getElementById('timersIconLabels');
+		if (visible) {
+			timersIconLabels.style.visibility = "visible";
+			timersIconLabels.style.width = "auto";
+		} else {
+			timersIconLabels.style.visibility = "hidden";
+			timersIconLabels.style.width = "0px";
+		}
+	};
+	function toggleTimeGroups() {		
+		const timersIconLabels = document.getElementById('timersIconLabels');
+		setTimeGroups(timersIconLabels.style.visibility == "hidden");
+	};
 	
 	function toggleIconGroups() {		
 		const optionsIcons = document.getElementById('optionsIcons');
@@ -236,28 +276,6 @@
 			optionsIcons.style.width = "0px";
 		}
 	}
-	
-	function toggleLastUpdate() {		
-		const lastUpdateLabel = document.getElementById('groupLastUpdate');
-		if (lastUpdateLabel.style.visibility == "hidden") {
-			lastUpdateLabel.style.visibility = "visible";
-			lastUpdateLabel.style.width = "auto";
-		} else {
-			lastUpdateLabel.style.visibility = "hidden";
-			lastUpdateLabel.style.width = "0px";
-		}
-	};
-	
-	function toggleTimeGroups() {		
-		const timersIconLabels = document.getElementById('timersIconLabels');
-		if (timersIconLabels.style.visibility == "hidden") {
-			timersIconLabels.style.visibility = "visible";
-			timersIconLabels.style.width = "auto";
-		} else {
-			timersIconLabels.style.visibility = "hidden";
-			timersIconLabels.style.width = "0px";
-		}
-	};
 	
 	function toggleLoad() {		
 		const loadScreen = document.getElementById('load');					
@@ -308,8 +326,17 @@
 			select3.dispatchEvent(event);
 			select4.dispatchEvent(event);
 			
+			var rssTextScrollVisible = data["rssTextScrollVisible"];
+			var lastUpdateLabelVisible = data["lastUpdateLabelVisible"];
+			var timersIconLabelsVisible = data["timersIconLabelsVisible"];
+			
+			setRSSScroll(rssTextScrollVisible);
+			setLastUpdate(lastUpdateLabelVisible);
+			setTimeGroups(timersIconLabelsVisible);
+			
 			toggleLoad();
-		});		
+			console.log("Loaded OK");
+		});
 	};
 	
 	function download(data, filename, type) {
@@ -327,6 +354,7 @@
 				window.URL.revokeObjectURL(url);  
 			}, 0); 
 		}
+		console.log("Saved OK");
 	};
 	
 	function configurationSave() {
@@ -334,12 +362,22 @@
 		const select2 = document.getElementById("selectCH2");
 		const select3 = document.getElementById("selectCH3");
 		const select4 = document.getElementById("selectCH4");
+
+		const rssTextScroll = document.getElementById('rssTextScroll');
+		const rssTextScrollVisible = (rssTextScroll.style.visibility == "visible");
+		const lastUpdateLabel = document.getElementById('groupLastUpdate');
+		const lastUpdateLabelVisible = (lastUpdateLabel.style.visibility == "visible");
+		const timersIconLabels = document.getElementById('timersIconLabels');
+		const timersIconLabelsVisible = (timersIconLabels.style.visibility == "visible");
 	
 		var data = { 
 			"ch1":select1.options[select1.selectedIndex].text, 
 			"ch2":select2.options[select2.selectedIndex].text, 
 			"ch3":select3.options[select3.selectedIndex].text, 
 			"ch4":select4.options[select4.selectedIndex].text, 
+			"rssTextScrollVisible":rssTextScrollVisible,
+			"lastUpdateLabelVisible":lastUpdateLabelVisible,
+			"timersIconLabelsVisible":timersIconLabelsVisible,
 		};
 		download(JSON.stringify(data), "configuration", "text/plain;charset=utf-8");
 	};
@@ -461,6 +499,7 @@ const timeTIME = document.getElementById("timeTIME");
 
 const channels = {
  "Select one channel":"",
+ // Live Streams
  "SPACEX":"https://www.youtube.com/embed/_qwLHlVjRyw?autoplay=1&mute=0",
  "SpaceFlight":"https://www.youtube.com/embed/FpQwQx4Q_Dc?autoplay=1&mute=0",
  "NSF Fleet Cam":"https://www.youtube.com/embed/gnt2wZBg89g?autoplay=1&mute=1",
@@ -476,6 +515,7 @@ const channels = {
  "Marcus House":"https://www.youtube.com/embed/MkLpg5Rs8mI?autoplay=1&mute=0",
  "What about it":"https://www.youtube.com/embed/QRRSvq5s0oE?autoplay=1&mute=0",
  "NASA Live":"https://www.youtube.com/embed/21X5lGlDOfg?autoplay=1&mute=0",
+ 
  "INFORMATION - Boca Chica, TX Weather":"weather.html",
  "INFORMATION - Flight Radar 24":"https://www.flightradar24.com/simple_index.php?lat=25.99&lon=-97.16&z=11&airports=1&label1=callsign&label2=altspeed&label3=tofrom&size=auto",
  "INFORMATION - Road Closures":"https://tfr.faa.gov/tfr2/list.jsp",
