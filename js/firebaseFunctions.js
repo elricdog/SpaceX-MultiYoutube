@@ -71,7 +71,7 @@ function getRealtimeNumViews(view){
 
 function getRealTimeVisitors(view){
   firebase.database().ref('visitors/').on('value', (visitorTime) =>{
-      view.innerHTML = snapshot.numChildren();
+      view.innerHTML = visitorTime.numChildren();
   });
 }
 
