@@ -136,6 +136,13 @@
 		}
 		return undefined;
 	}
+	
+	function calcSplitSizes(a, b) {
+		var w = a + b;
+		a = ((a*100)/w);
+		b = ((b*100)/w);
+		return "" + a +", " + b; 
+	}
 </script>
 	
 <!-- OnLoad and Icons -->
@@ -311,15 +318,39 @@
 			optionsIcons.style.width = "0px";
 		}
 	}
+
+	let last5thColumnSplitSizes = "80, 20";
+	function preserve5thColumn() {
+		// Preserve current SplitSizes
+		const mainView = document.getElementById("mainView");
+		const column5thView = document.getElementById('column5thView');
+		var mainViewBounds = mainView.getBoundingClientRect();
+		var column5thViewBounds = column5thView.getBoundingClientRect();
+		splitter1SplitSizes = calcSplitSizes(mainViewBounds.width, column5thViewBounds.width);			
+		last5thColumnSplitSizes = splitter1SplitSizes;
+	}
 	
+	function set5thColumn(visible, splitSizes) {		
+		const rootView = document.getElementById('rootView');
+		const column5thView = document.getElementById('column5thView');
+		if (visible) {
+			column5thView.style.visibility = "visible";
+			rootView.dataset.splitSizes = splitSizes;			
+		} else {
+			column5thView.style.visibility = "hidden";			
+			rootView.dataset.splitSizes = "100, 0";
+		}
+		last5thColumnSplitSizes = splitSizes;		
+	}	
 	function toggle5thColumn() {		
 		const rootView = document.getElementById('rootView');
 		const column5thView = document.getElementById('column5thView');
 		if (column5thView.style.visibility == "hidden") {
 			column5thView.style.visibility = "visible";
-			rootView.dataset.splitSizes = "80, 20";
+			rootView.dataset.splitSizes = last5thColumnSplitSizes;
 		} else {
 			column5thView.style.visibility = "hidden";
+			preserve5thColumn();
 			rootView.dataset.splitSizes = "100, 0";
 		}
 	}
@@ -349,6 +380,7 @@
 		if (file === null) return;
 		upload(file, function(text) {
 			var data = JSON.parse(text);			
+			console.log("Configuration loaded");
 			console.log(data);
 			
 			const select1 = document.getElementById("selectCH1");
@@ -376,6 +408,19 @@
 			setRSSScroll(rssTextScrollVisible);
 			setLastUpdate(lastUpdateLabelVisible);
 			setTimeGroups(timersIconLabelsVisible);
+			
+			const splitter1 = document.getElementById("rootView");
+			const splitter2 = document.getElementById("mainView");
+			const splitter3 = document.getElementById("mainView12");
+			const splitter4 = document.getElementById("mainView34");
+			
+			splitter1.dataset.splitSizes = data["splitter1Sizes"];
+			splitter2.dataset.splitSizes = data["splitter2Sizes"];
+			splitter3.dataset.splitSizes = data["splitter3Sizes"];
+			splitter4.dataset.splitSizes = data["splitter4Sizes"];
+						
+			var column5thViewVisible = data["column5thViewVisible"];
+			set5thColumn(column5thViewVisible, splitter1.dataset.splitSizes);
 			
 			toggleLoad();
 			console.log("Loaded OK");
@@ -413,6 +458,36 @@
 		const lastUpdateLabelVisible = (lastUpdateLabel.style.visibility == "visible");
 		const timersIconLabels = document.getElementById('timersIconLabels');
 		const timersIconLabelsVisible = (timersIconLabels.style.visibility == "visible");
+		
+		const splitter1 = document.getElementById("rootView");		
+		const splitter3 = document.getElementById("mainView12");
+		const splitter4 = document.getElementById("mainView34");
+		
+		const mainView = document.getElementById("mainView");
+		const column5thView = document.getElementById("column5thView");
+		const rowOfTopLeft = document.getElementById("rowOfTopLeft");
+		const rowOfTopRight = document.getElementById("rowOfTopRight");
+		const rowOfBottomLeft = document.getElementById("rowOfBottomLeft");
+		const rowOfBottomRight = document.getElementById("rowOfBottomRight");
+		
+		var mainViewBounds = mainView.getBoundingClientRect();
+		var column5thViewBounds = column5thView.getBoundingClientRect();
+		var rowOfTopLeftBounds = rowOfTopLeft.getBoundingClientRect();
+		var rowOfTopRightBounds = rowOfTopRight.getBoundingClientRect();
+		var rowOfBottomLeftBounds = rowOfBottomLeft.getBoundingClientRect();
+		var rowOfBottomRightBounds = rowOfBottomRight.getBoundingClientRect();
+
+		// Compute relations between layers
+		if (column5thView.style.visibility == "hidden") {
+			splitter1SplitSizes = last5thColumnSplitSizes; 
+		} else {
+			splitter1SplitSizes = calcSplitSizes(mainViewBounds.width, column5thViewBounds.width);
+		}
+		splitter2SplitSizes = calcSplitSizes(rowOfTopLeftBounds.height, rowOfBottomLeftBounds.height);		
+		splitter3SplitSizes = calcSplitSizes(rowOfTopLeftBounds.width, rowOfTopRightBounds.width);
+		splitter4SplitSizes = calcSplitSizes(rowOfBottomLeftBounds.width, rowOfBottomRightBounds.width);
+	
+		const column5thViewVisible = (column5thView.style.visibility == "visible");		
 	
 		var data = { 
 			"ch1":select1.options[select1.selectedIndex].text, 
@@ -422,7 +497,12 @@
 			"ch5":select5.options[select5.selectedIndex].text, 
 			"rssTextScrollVisible":rssTextScrollVisible,
 			"lastUpdateLabelVisible":lastUpdateLabelVisible,
-			"timersIconLabelsVisible":timersIconLabelsVisible,
+			"timersIconLabelsVisible":timersIconLabelsVisible,			
+			"splitter1Sizes":splitter1SplitSizes,
+			"splitter2Sizes":splitter2SplitSizes,
+			"splitter3Sizes":splitter3SplitSizes,
+			"splitter4Sizes":splitter4SplitSizes,
+			"column5thViewVisible":column5thViewVisible,
 		};
 		download(JSON.stringify(data), "configuration", "text/plain;charset=utf-8");
 	};
@@ -457,8 +537,8 @@
 <!-- 4 views -->
 <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="80, 20" id="rootView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
 
-<div data-role="splitter" data-split-mode="vertical" data-gutter-size="5" id="mainView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
-    <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5">
+<div data-role="splitter" data-split-mode="vertical" data-gutter-size="5" data-split-sizes="50, 50" id="mainView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
+    <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="50, 50" id="mainView12">
 		<!-- Top-Left -->
         <div class="d-flex flex-column flex-justify-left" id="rowOfTopLeft">		
 			<div class="container" style="height:28px; max-height:28px; padding:0px;">
@@ -527,7 +607,7 @@
 			</div>		
 		</div>		
     </div>
-    <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5">
+    <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="50, 50" id="mainView34">
 		<!-- Bottom-Left -->
         <div class="d-flex flex-column flex-justify-left" id="rowOfBottomLeft">		
 			<div class="container" style="height:28px; max-height:28px; padding:0px;" id="middleBarfBottomLeft">		
@@ -602,6 +682,7 @@ const timeTIME = document.getElementById("timeTIME");
 
 const channels = {
  "Select one channel":"",
+ 
  // Live Streams
  "SPACEX":"https://www.youtube.com/embed/_qwLHlVjRyw?autoplay=1&mute=0",
  "SpaceFlight":"https://www.youtube.com/embed/FpQwQx4Q_Dc?autoplay=1&mute=0",
@@ -630,6 +711,9 @@ const channels = {
 };
 
 const channelsVertical = {
+ "Select one channel":"",
+
+ // Twitter timelines
  "TWITTER - SpaceX":"twitter.html?people=spacex",
  "TWITTER - Elon Musk":"twitter.html?people=elonmusk",
  "TWITTER - Jessie Anderson":"twitter.html?people=whoisheartbreak",
