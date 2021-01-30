@@ -1,3 +1,24 @@
+/**
+ * @function _guid
+ * @description Creates GUID for user based on several different browser variables
+ * It will never be RFC4122 compliant but it is robust
+ * @returns {Number}
+ * @private
+ */
+function getGUID() {
+
+    var nav = window.navigator;
+    var screen = window.screen;
+    var guid = nav.mimeTypes.length;
+    guid += nav.userAgent.replace(/\D+/g, '');
+    guid += nav.plugins.length;
+    guid += screen.height || '';
+    guid += screen.width || '';
+    guid += screen.pixelDepth || '';
+
+    return guid;
+};
+
 var firebaseConfig = {
   apiKey: "AIzaSyDF-bCz0fuvpWEBFYN9l6uqtunG-gN_lRI",
   authDomain: "spacexboard.firebaseapp.com",
@@ -21,6 +42,31 @@ function addView(){
         counter: snapshot.val()+1
       });
   });
+
+  addVisitor();
+}
+
+function getTime(){
+  var date = new Date();
+  var halfHour = date.getMinutes()<30 ? "00" : "30";
+  return date.getHours()+""+halfHour;
+}
+
+// Add visitor in the current minute
+function addVisitor(){
+  var time = getTime();
+  firebase.database().ref('visitors/'+time+'/'+getGUID()).set({
+    value: 1
+  });
+
+  //Clean old visitors
+  firebase.database().ref('visitors/').once('value', (visitors) =>{
+      visitors.forEach((child)=>{
+        if(child.key != time){
+          firebase.database().ref('visitors').child(child.key).remove();
+        }
+      });
+  });
 }
 
 function getRealtimeNumViews(view){
@@ -28,6 +74,12 @@ function getRealtimeNumViews(view){
     .on('value', (snapshot)=>{
       view.innerHTML = snapshot.val();
     });
+}
+
+function getRealTimeVisitors(){
+  firebase.database().ref('visitors/'+getTime()).on('value', (visitorTime) =>{
+      view.innerHTML = snapshot.numChildren();
+  });
 }
 
 function getRealtimeRss(view){
@@ -43,6 +95,9 @@ addView();
 
 //Get number of views from database
 getRealtimeNumViews(document.getElementById("visitors"));
+
+//get visitors in the last 30min
+//getRealTimeVisitors(document.getElementById("visitors"));
 
 //get rss from firebase database
 //getRealtimeRss(document.getElementById("visitors"));
