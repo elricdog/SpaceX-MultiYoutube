@@ -3,10 +3,10 @@
 <head>
 	<title>SpaceX Board</title>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">	
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 	<link rel="icon" href="./favicon.ico" type="image/x-icon"/>
 	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
-	<link rel="manifest" href="./manifest.webmanifest">	
+	<link rel="manifest" href="./manifest.webmanifest">
 	<link type="text/css" rel="stylesheet" href="main.css">
 	<link rel="stylesheet" href="https://cdn.metroui.org.ua/v4.4.3/css/metro-all.min.css">
 	<script src="https://cdn.metroui.org.ua/v4.4.3/js/metro.min.js"></script>
@@ -26,20 +26,20 @@
 	(function(){
 		emailjs.init("user_BjUMLZEqKE9VdA5391rv8");
 	})();
-</script>	
+</script>
 
 <body>
 
 <script src="./js/rss-marquee.js"></script>
 
-<!-- Contact --> 
+<!-- Contact -->
 <div id="contact" style="visibility:hidden; width: fit-content; height: fit-content;">
 	<center>
 	<h1>Contact</h1>
 	Please, feel free to send any idea to improve this website. We will take in consideration as soon as posible, or later or never.
 	</center>
 	<br>
-	<form id="contact-form">	
+	<form id="contact-form">
         <input type="hidden" name="contact_number">
 		<p>
         <label>Name</label>
@@ -53,16 +53,16 @@
         <textarea class="contactMessageText" name="message" rows="5"></textarea>
 		</div>
 		<br>
-		<center>		
+		<center>
 		<button id="buttonContactSend" class="myButton">Send</button>
 		<button id="buttonContactClose" class="myButton">Close</button>
 		<br>
 		<br>
 		<label id="lblContactError" style="color:red;"></label>
-	</form>	
+	</form>
 	<br>
 	<label style="color:yellow;">(Still not work, under development)</label>
-	</center>		
+	</center>
 </div>
 
 <!-- About Us -->
@@ -70,10 +70,10 @@
 	<center>
 	<h1>About Us</h1>
 	<p>
-	One day we see that browser tabs was not enough to follow Starship evolution...then...	
+	One day we see that browser tabs was not enough to follow Starship evolution...then...
 	<br>
 	<br>
-	Elric and Sworied
+	Elric and Sworied and Berrgurt
 	</p>
 	<br>
 	<button id="buttonAboutUsClose" class="myButton">Close</button>
@@ -85,7 +85,7 @@
 	<br>Link to OLD version (more simple):<br>
 	<a href="https://elricdog.github.io/SpaceX-MultiYoutube/view_old.html">https://elricdog.github.io/SpaceX-MultiYoutube/view_old.html</a>
 	<br>Source Code at GitHub:<br>
-	<a href="https://github.com/elricdog/SpaceX-MultiYoutube">https://github.com/elricdog/SpaceX-MultiYoutube</a>	
+	<a href="https://github.com/elricdog/SpaceX-MultiYoutube">https://github.com/elricdog/SpaceX-MultiYoutube</a>
 	</center>
 </div>
 
@@ -111,7 +111,7 @@
             return false;
 		}
     }
-	
+
 	function fetchHeader(url, wch) {
 		try {
 			var req=new XMLHttpRequest();
@@ -124,8 +124,8 @@
 		} catch(er) {
 			return er.message;
 		}
-	}	
-	
+	}
+
 	function indexMatchingText(ele, text) {
 		for (var i=0; i<ele.length;i++) {
 			if (ele[i].childNodes[0].nodeValue === text){
@@ -134,20 +134,20 @@
 		}
 		return undefined;
 	}
-	
+
 	function calcSplitSizes(a, b) {
 		var w = a + b;
 		a = ((a*100)/w);
 		b = ((b*100)/w);
-		return "" + a +", " + b; 
+		return "" + a +", " + b;
 	}
 </script>
-	
+
 <!-- OnLoad and Icons -->
-<script>	
+<script>
 	window.onload = function() {
 		document.getElementById('contact-form').addEventListener('submit', function(event) {
-			event.preventDefault();			
+			event.preventDefault();
 			// generate a five digit number for the contact_number variable
 			this.contact_number.value = Math.random() * 100000 | 0;
 			// these IDs from the previous steps
@@ -160,24 +160,24 @@
 					document.getElementById('lblContactError').innerHTML = 'FAILED(' + error.status +')...' + error.text;
 				});
 		});
-		
+
 		document.getElementById("iconOptions").addEventListener ("click", toggleIconGroups, false);
 		document.getElementById("iconLastUpdate").addEventListener ("click", toggleLastUpdate, false);
 		document.getElementById("iconVisitors").addEventListener ("click", toggleVisitors, false);
 		document.getElementById("iconTime").addEventListener ("click", toggleTimeGroups, false);
 		document.getElementById("iconContact").addEventListener ("click", toggleContact, false);
-		document.getElementById("buttonContactClose").addEventListener ("click", toggleContact, false);				
-		document.getElementById("iconAboutUs").addEventListener ("click", toggleAboutUs, false);		
-		document.getElementById("buttonAboutUsClose").addEventListener ("click", toggleAboutUs, false);				
-		document.getElementById("iconSave").addEventListener ("click", configurationSave, false);		
+		document.getElementById("buttonContactClose").addEventListener ("click", toggleContact, false);
+		document.getElementById("iconAboutUs").addEventListener ("click", toggleAboutUs, false);
+		document.getElementById("buttonAboutUsClose").addEventListener ("click", toggleAboutUs, false);
+		document.getElementById("iconSave").addEventListener ("click", configurationSave, false);
 		document.getElementById("iconLoad").addEventListener ("click", toggleLoad, false);
-		document.getElementById("buttonLoadClose").addEventListener ("click", toggleLoad, false);				
+		document.getElementById("buttonLoadClose").addEventListener ("click", toggleLoad, false);
 		document.getElementById("buttonLoad").addEventListener ("click", configurationLoad, false);
 		document.getElementById("iconFullScreen").addEventListener ("click", toggleFullScreen, false);
 		document.getElementById("iconRSS").addEventListener ("click", toggleRSSScroll, false);
 		document.getElementById("icon5thColumn").addEventListener ("click", toggle5thColumn, false);
 		document.getElementById("icon5thColumnB").addEventListener ("click", toggle5thColumn, false);
-						
+		
 		document.getElementById("iconRefreshCH1").addEventListener ("click", refreshCH1, false);
 		document.getElementById("iconRefreshCH2").addEventListener ("click", refreshCH2, false);
 		document.getElementById("iconRefreshCH3").addEventListener ("click", refreshCH3, false);
@@ -191,9 +191,9 @@
 		const select5 = document.getElementById("selectCH5");
 		var event = new Event('change');
 		select1.selectedIndex = indexMatchingText(select1, "SpaceFlight");
-		select2.selectedIndex = indexMatchingText(select2, "Lab Padre - Nerdle Cam 4K");
-		select3.selectedIndex = indexMatchingText(select3, "Lab Padre - Sentinel Cam");
-		select4.selectedIndex = indexMatchingText(select4, "Everyday Astronaut");			
+		select2.selectedIndex = indexMatchingText(select2, "LabPadre - Nerdle Cam 4K");
+		select3.selectedIndex = indexMatchingText(select3, "LabPadre - Sentinel Cam");
+		select4.selectedIndex = indexMatchingText(select4, "Everyday Astronaut");
 		select5.selectedIndex = indexMatchingText(select5, "My TWITTER SpaceX List");
 		select1.dispatchEvent(event);
 		select2.dispatchEvent(event);
@@ -203,13 +203,13 @@
 
 		const feedTextScrollUrl = ['https://elricdog.github.io/SpaceX-MultiYoutube/rss.xml'];
         const rssTextScroll = document.getElementById('rssTextScroll');
-        new RSSMarquee(feedTextScrollUrl, rssTextScroll, { speed: 150 } );		
+        new RSSMarquee(feedTextScrollUrl, rssTextScroll, { speed: 150 } );
 		window.addEventListener('resize', () => {
 			updateRSSTextScrollWidth();
-		});		
+		});
 		updateRSSTextScrollWidth();
 
-		toggleIconGroups();		
+		toggleIconGroups();
 		if (isMobile())
 		{
 			toggleLastUpdate();
@@ -218,9 +218,8 @@
 			toggleRSSScroll();
 			toggle5thColumn();
 		}
-											
+		
 		const lastUpdate = document.getElementById("lastUpdate");
-
 		var lastModifiedDateString = fetchHeader(location.href,'Last-Modified');
 		var lastModifiedDate = new Date();
 		lastModifiedDate.setTime(Date.parse(lastModifiedDateString));
@@ -233,7 +232,7 @@
 		} else {
 			lastUpdate.innerHTML = lastModifiedRSSDate.toLocaleString();
 			console.log("LastUpdate: "+lastUpdate.innerHTML);
-		}		
+		}
 	};
 
 	function refreshCH1() {
@@ -255,18 +254,18 @@
 		var iframe = document.getElementById(id);
 		iframe.src = iframe.src;
 	}
-
+	
     function updateRSSTextScrollWidth() {
 		var w = document.getElementById('rowOfTopLeft').getBoundingClientRect().width;
 		const rssTextScroll = document.getElementById('rssTextScroll');
 		w2 = document.getElementById('selectCH1').getBoundingClientRect().width;
 		var fw = (w-w2)-56; // Note: Buttons
 		if (fw<50) fw=50;
-		rssTextScroll.style.width = fw+"px";		
+		rssTextScroll.style.width = fw+"px";
 	}
-	
-	function toggleContact() {		
-		const contactScreen = document.getElementById('contact');					
+
+	function toggleContact() {
+		const contactScreen = document.getElementById('contact');
 		if (contactScreen.style.visibility == "hidden") {
 			document.getElementById('lblContactError').innerHTML = "";
 			contactScreen.style.visibility = "visible";
@@ -275,10 +274,10 @@
 			contactScreen.style.visibility = "hidden";
 			contactScreen.style.height = "0px";
 		}
-	};	
-	
-	function toggleAboutUs() {		
-		const aboutUsScreen = document.getElementById('aboutus');					
+	};
+
+	function toggleAboutUs() {
+		const aboutUsScreen = document.getElementById('aboutus');
 		if (aboutUsScreen.style.visibility == "hidden") {
 			aboutUsScreen.style.visibility = "visible";
 			aboutUsScreen.style.height = "fit-content";
@@ -286,24 +285,24 @@
 			aboutUsScreen.style.visibility = "hidden";
 			aboutUsScreen.style.height = "0px";
 		}
-	};	
-	
+	};
+
 	function setRSSScroll(visible) {
 		const rssTextScroll = document.getElementById('rssTextScroll');
-		if (visible) {			
+		if (visible) {
 			rssTextScroll.style.visibility = "visible";
 			updateRSSTextScrollWidth();
 		} else {
 			rssTextScroll.style.visibility = "hidden";
 			rssTextScroll.style.width = "0px";
 		}
-	}	
-	function toggleRSSScroll() {		
+	}
+	function toggleRSSScroll() {
 		const rssTextScroll = document.getElementById('rssTextScroll');
 		setRSSScroll(rssTextScroll.style.visibility == "hidden");
 	}
-		
-	function setLastUpdate(visible) {		
+
+	function setLastUpdate(visible) {
 		const lastUpdateLabel = document.getElementById('groupLastUpdate');
 		if (visible) {
 			lastUpdateLabel.style.visibility = "visible";
@@ -312,12 +311,12 @@
 			lastUpdateLabel.style.visibility = "hidden";
 			lastUpdateLabel.style.width = "0px";
 		}
-	};	
-	function toggleLastUpdate() {		
+	};
+	function toggleLastUpdate() {
 		const lastUpdateLabel = document.getElementById('groupLastUpdate');
 		setLastUpdate(lastUpdateLabel.style.visibility == "hidden");
 	};
-	
+
 	function setVisitors(visible) {
 		const visitorsLabel = document.getElementById('groupVisitors');
 		if (visible) {
@@ -333,7 +332,7 @@
 		setVisitors(visitorsLabel.style.visibility == "hidden");
 	};
 
-	function setTimeGroups(visible) {		
+	function setTimeGroups(visible) {
 		const timersIconLabels = document.getElementById('timersIconLabels');
 		if (visible) {
 			timersIconLabels.style.visibility = "visible";
@@ -343,12 +342,12 @@
 			timersIconLabels.style.width = "0px";
 		}
 	};
-	function toggleTimeGroups() {		
+	function toggleTimeGroups() {
 		const timersIconLabels = document.getElementById('timersIconLabels');
 		setTimeGroups(timersIconLabels.style.visibility == "hidden");
 	};
-	
-	function toggleIconGroups() {		
+
+	function toggleIconGroups() {
 		const optionsIcons = document.getElementById('optionsIcons');
 		if (optionsIcons.style.visibility == "hidden") {
 			optionsIcons.style.visibility = "visible";
@@ -366,23 +365,23 @@
 		const column5thView = document.getElementById('column5thView');
 		var mainViewBounds = mainView.getBoundingClientRect();
 		var column5thViewBounds = column5thView.getBoundingClientRect();
-		splitter1SplitSizes = calcSplitSizes(mainViewBounds.width, column5thViewBounds.width);			
+		splitter1SplitSizes = calcSplitSizes(mainViewBounds.width, column5thViewBounds.width);
 		last5thColumnSplitSizes = splitter1SplitSizes;
 	}
-	
-	function set5thColumn(visible, splitSizes) {		
+
+	function set5thColumn(visible, splitSizes) {
 		const rootView = document.getElementById('rootView');
 		const column5thView = document.getElementById('column5thView');
 		if (visible) {
 			column5thView.style.visibility = "visible";
-			rootView.dataset.splitSizes = splitSizes;			
+			rootView.dataset.splitSizes = splitSizes;
 		} else {
-			column5thView.style.visibility = "hidden";			
+			column5thView.style.visibility = "hidden";
 			rootView.dataset.splitSizes = "100, 0";
 		}
-		last5thColumnSplitSizes = splitSizes;		
-	}	
-	function toggle5thColumn() {		
+		last5thColumnSplitSizes = splitSizes;
+	}
+	function toggle5thColumn() {
 		const rootView = document.getElementById('rootView');
 		const column5thView = document.getElementById('column5thView');
 		if (column5thView.style.visibility == "hidden") {
@@ -394,9 +393,9 @@
 			rootView.dataset.splitSizes = "100, 0";
 		}
 	}
-	
-	function toggleLoad() {		
-		const loadScreen = document.getElementById('load');					
+
+	function toggleLoad() {
+		const loadScreen = document.getElementById('load');
 		if (loadScreen.style.visibility == "hidden") {
 			loadScreen.style.visibility = "visible";
 			loadScreen.style.height = "fit-content";
@@ -404,25 +403,25 @@
 			loadScreen.style.visibility = "hidden";
 			loadScreen.style.height = "0px";
 		}
-	};	
-	
-	function upload(file, fun) {		
+	};
+
+	function upload(file, fun) {
 		let reader = new FileReader();
 		reader.addEventListener('load', function(e) {
-	    	let text = e.target.result;	    	
+	    	let text = e.target.result;
 			fun(text);
 		});
-		reader.readAsText(file);	
+		reader.readAsText(file);
 	};
-		
+
 	function configurationLoad() {
 		let file = document.getElementById("load-file-input").files[0];
 		if (file === null) return;
 		upload(file, function(text) {
-			var data = JSON.parse(text);			
+			var data = JSON.parse(text);
 			console.log("Configuration loaded");
 			console.log(data);
-			
+
 			const select1 = document.getElementById("selectCH1");
 			const select2 = document.getElementById("selectCH2");
 			const select3 = document.getElementById("selectCH3");
@@ -433,42 +432,42 @@
 			select1.selectedIndex = indexMatchingText(select1, data["ch1"]);
 			select2.selectedIndex = indexMatchingText(select2, data["ch2"]);
 			select3.selectedIndex = indexMatchingText(select3, data["ch3"]);
-			select4.selectedIndex = indexMatchingText(select4, data["ch4"]);			
-			select5.selectedIndex = indexMatchingText(select5, data["ch5"]);			
+			select4.selectedIndex = indexMatchingText(select4, data["ch4"]);
+			select5.selectedIndex = indexMatchingText(select5, data["ch5"]);
 			select1.dispatchEvent(event);
 			select2.dispatchEvent(event);
 			select3.dispatchEvent(event);
 			select4.dispatchEvent(event);
 			select5.dispatchEvent(event);
-			
+
 			var rssTextScrollVisible = data["rssTextScrollVisible"];
 			var lastUpdateLabelVisible = data["lastUpdateLabelVisible"];
 			var visitorsLabelVisible = data["visitorsLabelVisible"];
 			var timersIconLabelsVisible = data["timersIconLabelsVisible"];
-			
+
 			setRSSScroll(rssTextScrollVisible);
 			setLastUpdate(lastUpdateLabelVisible);
 			setVisitors(visitorsLabelVisible);
 			setTimeGroups(timersIconLabelsVisible);
-			
+
 			const splitter1 = document.getElementById("rootView");
 			const splitter2 = document.getElementById("mainView");
 			const splitter3 = document.getElementById("mainView12");
 			const splitter4 = document.getElementById("mainView34");
-			
+
 			splitter1.dataset.splitSizes = data["splitter1Sizes"];
 			splitter2.dataset.splitSizes = data["splitter2Sizes"];
 			splitter3.dataset.splitSizes = data["splitter3Sizes"];
 			splitter4.dataset.splitSizes = data["splitter4Sizes"];
-						
+
 			var column5thViewVisible = data["column5thViewVisible"];
 			set5thColumn(column5thViewVisible, splitter1.dataset.splitSizes);
-			
+
 			toggleLoad();
 			console.log("Loaded OK");
 		});
 	};
-	
+
 	function download(data, filename, type) {
 		var file = new Blob([data], {type: type});
 		if (window.navigator.msSaveOrOpenBlob) // IE10+
@@ -481,12 +480,12 @@
 			a.click();
 			setTimeout(function() {
 				document.body.removeChild(a);
-				window.URL.revokeObjectURL(url);  
-			}, 0); 
+				window.URL.revokeObjectURL(url);
+			}, 0);
 		}
 		console.log("Saved OK");
 	};
-	
+
 	function configurationSave() {
 		const select1 = document.getElementById("selectCH1");
 		const select2 = document.getElementById("selectCH2");
@@ -502,18 +501,18 @@
 		const visitorsLabelVisible = (visitorsLabel.style.visibility == "visible");		
 		const timersIconLabels = document.getElementById('timersIconLabels');
 		const timersIconLabelsVisible = (timersIconLabels.style.visibility == "visible");
-		
-		const splitter1 = document.getElementById("rootView");		
+
+		const splitter1 = document.getElementById("rootView");
 		const splitter3 = document.getElementById("mainView12");
 		const splitter4 = document.getElementById("mainView34");
-		
+
 		const mainView = document.getElementById("mainView");
 		const column5thView = document.getElementById("column5thView");
 		const rowOfTopLeft = document.getElementById("rowOfTopLeft");
 		const rowOfTopRight = document.getElementById("rowOfTopRight");
 		const rowOfBottomLeft = document.getElementById("rowOfBottomLeft");
 		const rowOfBottomRight = document.getElementById("rowOfBottomRight");
-		
+
 		var mainViewBounds = mainView.getBoundingClientRect();
 		var column5thViewBounds = column5thView.getBoundingClientRect();
 		var rowOfTopLeftBounds = rowOfTopLeft.getBoundingClientRect();
@@ -523,26 +522,26 @@
 
 		// Compute relations between layers
 		if (column5thView.style.visibility == "hidden") {
-			splitter1SplitSizes = last5thColumnSplitSizes; 
+			splitter1SplitSizes = last5thColumnSplitSizes;
 		} else {
 			splitter1SplitSizes = calcSplitSizes(mainViewBounds.width, column5thViewBounds.width);
 		}
-		splitter2SplitSizes = calcSplitSizes(rowOfTopLeftBounds.height, rowOfBottomLeftBounds.height);		
+		splitter2SplitSizes = calcSplitSizes(rowOfTopLeftBounds.height, rowOfBottomLeftBounds.height);
 		splitter3SplitSizes = calcSplitSizes(rowOfTopLeftBounds.width, rowOfTopRightBounds.width);
 		splitter4SplitSizes = calcSplitSizes(rowOfBottomLeftBounds.width, rowOfBottomRightBounds.width);
-	
-		const column5thViewVisible = (column5thView.style.visibility == "visible");		
-	
-		var data = { 
-			"ch1":select1.options[select1.selectedIndex].text, 
-			"ch2":select2.options[select2.selectedIndex].text, 
-			"ch3":select3.options[select3.selectedIndex].text, 
-			"ch4":select4.options[select4.selectedIndex].text, 
-			"ch5":select5.options[select5.selectedIndex].text, 
+
+		const column5thViewVisible = (column5thView.style.visibility == "visible");
+
+		var data = {
+			"ch1":select1.options[select1.selectedIndex].text,
+			"ch2":select2.options[select2.selectedIndex].text,
+			"ch3":select3.options[select3.selectedIndex].text,
+			"ch4":select4.options[select4.selectedIndex].text,
+			"ch5":select5.options[select5.selectedIndex].text,
 			"rssTextScrollVisible":rssTextScrollVisible,
 			"lastUpdateLabelVisible":lastUpdateLabelVisible,
 			"visitorsLabelVisible":visitorsLabelVisible,
-			"timersIconLabelsVisible":timersIconLabelsVisible,			
+			"timersIconLabelsVisible":timersIconLabelsVisible,
 			"splitter1Sizes":splitter1SplitSizes,
 			"splitter2Sizes":splitter2SplitSizes,
 			"splitter3Sizes":splitter3SplitSizes,
@@ -551,27 +550,27 @@
 		};
 		download(JSON.stringify(data), "configuration", "text/plain;charset=utf-8");
 	};
-	
+
 	function toggleFullScreen() {
-	
-		const middleBar3 = document.getElementById("middleBarfBottomLeft");	
-		const middleBar4 = document.getElementById("middleBarfBottomRight");		
+
+		const middleBar3 = document.getElementById("middleBarfBottomLeft");
+		const middleBar4 = document.getElementById("middleBarfBottomRight");
 		var doc = window.document;
 		var docEl = doc.documentElement;
-		
+
 		var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
 		var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
-		if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {		
-			middleBar3.style.visibility = "hidden";			
+		if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+			middleBar3.style.visibility = "hidden";
 			middleBar3.style.height = "0px";
-			middleBar4.style.visibility = "hidden";			
-			middleBar4.style.height = "0px";		
+			middleBar4.style.visibility = "hidden";
+			middleBar4.style.height = "0px";
 			requestFullScreen.call(docEl);
 		} else {
 			middleBar3.style.visibility = "visible";
 			middleBar3.style.height = "28px";
 			middleBar4.style.visibility = "visible";
-			middleBar4.style.height = "28px";			
+			middleBar4.style.height = "28px";
 			cancelFullScreen.call(doc);
 		}
 	};
@@ -585,7 +584,7 @@
 <div data-role="splitter" data-split-mode="vertical" data-gutter-size="5" data-split-sizes="50, 50" id="mainView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
     <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="50, 50" id="mainView12">
 		<!-- Top-Left -->
-        <div class="d-flex flex-column flex-justify-left" id="rowOfTopLeft">		
+        <div class="d-flex flex-column flex-justify-left" id="rowOfTopLeft">
 			<div class="container" style="height:28px; max-height:28px; padding:0px;">
 				<div class="grid">
 					<div class="row no-gap">
@@ -605,11 +604,11 @@
 			</div>
 			<div class="container" style="height:100%; padding:0px;">
 				<iframe id="iframeCH1" class="channels" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-			</div>					
+			</div>
 		</div>
 		<!-- Top-Right -->
-        <div class="d-flex flex-column flex-justify-left" id="rowOfTopRight">		
-			<div class="container" style="height:28px; max-height:28px; padding:0px;">			
+        <div class="d-flex flex-column flex-justify-left" id="rowOfTopRight">
+			<div class="container" style="height:28px; max-height:28px; padding:0px;">
 				<div class="grid">
 					<div class="row no-gap">
 						<div class="stub">
@@ -627,14 +626,14 @@
 						</div>						
 						<div class="stub">
 							<div class="iconGroup" id="timersIconLabels">
-								<div title="LOCAL TIME AT BOCACHICA" class="iconLabel" id="groupLOCAL">LOCAL<div id="timeLOCAL">00:00:00</div></div>
+								<div title="LOCAL TIME AT BOCA CHICA" class="iconLabel" id="groupLOCAL">LOCAL<div id="timeLOCAL">00:00:00</div></div>
 								<div title="UTC TIME" class="iconLabel" id="groupUTC">UTC<div id="timeUTC">00:00:00</div></div>
 								<div title="YOUR CURRENT LOCAL TIME" class="iconLabel" id="groupTIME">TIME<div id="timeTIME">00:00:00</div></div>
 							</div>
 						</div>
 						<div class="cell flex-justify-between">
 						</div>
-						<div class="stub flex-justify-end" id="optionsIcons">		
+						<div class="stub flex-justify-end" id="optionsIcons">
 							<div class="iconPopUp">
 								<div title="Go to FullScreen" class="icon" id="iconFullScreen"><img src="Icons/fullscreen.png"/></div>
 								<div title="Show/Hide 5th column" class="icon" id="icon5thColumn"><img src="Icons/column5th.png"/></div>
@@ -655,13 +654,13 @@
 			</div>
 			<div class="container" style="height:100%; padding:0px;">
 				<iframe id="iframeCH2" class="channels" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-			</div>		
-		</div>		
+			</div>
+		</div>
     </div>
     <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="50, 50" id="mainView34">
 		<!-- Bottom-Left -->
-        <div class="d-flex flex-column flex-justify-left" id="rowOfBottomLeft">		
-			<div class="container" style="height:28px; max-height:28px; padding:0px;" id="middleBarfBottomLeft">		
+        <div class="d-flex flex-column flex-justify-left" id="rowOfBottomLeft">
+			<div class="container" style="height:28px; max-height:28px; padding:0px;" id="middleBarfBottomLeft">
 				<div class="grid">
 					<div class="row no-gap">
 						<div class="stub">
@@ -674,11 +673,11 @@
 			</div>
 			<div class="container" style="height:100%; padding:0px;">
 				<iframe id="iframeCH3" class="channels" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-			</div>		
-		</div>		
+			</div>
+		</div>
 		<!-- Bottom-Right -->
-        <div class="d-flex flex-column flex-justify-left" id="rowOfBottomRight">		
-			<div class="container" style="height:28px; max-height:28px; padding:0px;" id="middleBarfBottomRight">		
+        <div class="d-flex flex-column flex-justify-left" id="rowOfBottomRight">
+			<div class="container" style="height:28px; max-height:28px; padding:0px;" id="middleBarfBottomRight">
 				<div class="grid">
 					<div class="row no-gap">
 						<div class="stub">
@@ -691,12 +690,12 @@
 			</div>
 			<div class="container" style="height:100%; padding:0px;">
 				<iframe id="iframeCH4" class="channels" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-			</div>		
+			</div>
 		</div>
     </div>
 </div>
 
-<div class="d-flex flex-column flex-justify-left" id="column5thView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">		
+<div class="d-flex flex-column flex-justify-left" id="column5thView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
 	<div class="container" style="height:28px; max-height:28px; padding:0px;">
 		<div class="grid">
 			<div class="row no-gap">
@@ -715,7 +714,7 @@
 	</div>
 	<div class="container" style="height:100%; padding:0px;">
 		<iframe id="iframeCH5" class="channels" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="clipboard-write; encrypted-media;" allowfullscreen></iframe>
-	</div>					
+	</div>
 </div>
 
 </div>
@@ -740,28 +739,28 @@ function composeYouTubeLiveStreamURL(videoId, muteDefault) {
 
 const channels = {
  "Select one channel":"",
- 
+
  // Live Streams
  "SPACEX":composeYouTubeLiveStreamURL("_qwLHlVjRyw", 0),
  
  "SpaceFlight":composeYouTubeLiveStreamURL("FpQwQx4Q_Dc", 0),
  "NSF Fleet Cam":composeYouTubeLiveStreamURL("gnt2wZBg89g", 1),
  
- "Lab Padre - Nerdle Cam 4K":composeYouTubeLiveStreamURL("Ky5l9ZxsG9M", 0),
- "Lab Padre - Sapphire Cam":composeYouTubeLiveStreamURL("dROdPn9Tpxg", 1),
- "Lab Padre - South Padre Island Pearl Beach Cam":composeYouTubeLiveStreamURL("agmFDeP5u_w", 1),
- "Lab Padre - Predator Cam":composeYouTubeLiveStreamURL("lTJ9OgcIMSs", 1),
- "Lab Padre - Lab Cam":composeYouTubeLiveStreamURL("hpqoqJxbNpw", 1),
- "Lab Padre - Launch Pad Cam":composeYouTubeLiveStreamURL("Z72Au8Px7mM", 1),
- "Lab Padre - Sentinel Cam":composeYouTubeLiveStreamURL("n5ozYnVQahE", 1),
-
+ "LabPadre - Nerdle Cam 4K":composeYouTubeLiveStreamURL("Ky5l9ZxsG9M", 0),
+ "LabPadre - Sapphire Cam":composeYouTubeLiveStreamURL("dROdPn9Tpxg", 1),
+ "LabPadre - South Padre Island Pearl Beach Cam":composeYouTubeLiveStreamURL("agmFDeP5u_w", 1),
+ "LabPadre - Predator Cam":composeYouTubeLiveStreamURL("lTJ9OgcIMSs", 1),
+ "LabPadre - Lab Cam":composeYouTubeLiveStreamURL("hpqoqJxbNpw", 1),
+ "LabPadre - Launch Pad Cam":composeYouTubeLiveStreamURL("Z72Au8Px7mM", 1),
+ "LabPadre - Sentinel Cam":composeYouTubeLiveStreamURL("n5ozYnVQahE", 1),
+ 
  "Everyday Astronaut":composeYouTubeLiveStreamURL("QJ6YN5upGH0", 0),
- "SpaceX Storm (Spanish)":composeYouTubeLiveStreamURL("39T-NWgFtME", 0),
+ "SpaceXStorm (Castellano)":composeYouTubeLiveStreamURL("39T-NWgFtME", 0),
  "Marcus House":composeYouTubeLiveStreamURL("MkLpg5Rs8mI", 0),
  "What about it":composeYouTubeLiveStreamURL("QRRSvq5s0oE", 0),
  "NASA Live":composeYouTubeLiveStreamURL("21X5lGlDOfg", 0),
  "NASA Media Channel":composeYouTubeLiveStreamURL("nA9UZF-SZoQ", 0),
- 
+
  "INFORMATION - LabPadre Boca Chica Weather":"https://www.weatherlink.com/embeddablePage/show/6a07fed5552d4f768299e4b8c611feed/signature",
  "INFORMATION - Boca Chica, TX Weather":"weather.html",
  "INFORMATION - Flight Radar 24":"https://www.flightradar24.com/simple_index.php?lat=25.99&lon=-97.16&z=11&airports=1&label1=callsign&label2=altspeed&label3=tofrom&size=auto",
@@ -770,11 +769,15 @@ const channels = {
  "*INFORMATION - Cameron County":"https://www.cameroncounty.us/SpaceX",
  "*INFORMATION - Boca Chica":"https://www.bocachica.com",
 
+ "TWITCH - NASA":"https://www.twitch.tv/nasa", 
+ "TWITCH - Alex Riveiro (Castellano)":"https://www.twitch.tv/alex_riveiro",
+ "TWITCH - SpaceXStorm (Castellano)":"https://www.twitch.tv/spacexstorm",
+
  "*TWITTER":"https://twitter.com",
  "*REDDIT":"https://reddit.com",
  "*DISCORD":"https://discord.com", 
  "*YOUTUBE CHANNELS":"https://youtube.com",
- 
+  
  "SPACEX Web":"https://www.spacex.com",
  "SEARCH - Google":"https://www.google.com/search?igu=1&q=SpaceX",
  "SEARCH - Bing":"https://www.bing.com/search?q=SpaceX",
@@ -788,14 +791,17 @@ const channels = {
 const channelsVertical = {
  "Select one channel":"",
 
- // Twitter timelines
+ // Twitter lists
  "My TWITTER SpaceX List":"twitter.html?list=elricdog",
+ "My TWITTER SpaceX List (Català-Castellano)":"twitter.html?list=elricdog-cat-cas",
+ 
+ // Twitter timelines
  "TWITTER - SpaceX":"twitter.html?people=spacex",
  "TWITTER - Elon Musk":"twitter.html?people=elonmusk",
  "TWITTER - Jessie Anderson":"twitter.html?people=whoisheartbreak",
  "TWITTER - Mary":"twitter.html?people=BocaChicaGal",
  "TWITTER - Spaceflight Now":"twitter.html?people=SpaceflightNow",
- "TWITTER - Everyday Astronaut":"twitter.html?people=Erdayastronaut", 
+ "TWITTER - Everyday Astronaut":"twitter.html?people=Erdayastronaut",
  "TWITTER - Austin Barnard":"twitter.html?people=austinbarnard45",
  "TWITTER - Chris B - NSF":"twitter.html?people=NASASpaceflight",
  "TWITTER - Jack Beyer":"twitter.html?people=thejackbeyer",
@@ -803,8 +809,9 @@ const channelsVertical = {
  "TWITTER - Brendan (Diagram Creator)":"twitter.html?people=brendan2908",
  "TWITTER - SPadre":"twitter.html?people=SpacePadreIsle",
  "TWITTER - RGVAerialPhotography":"twitter.html?people=RGVaerialphotos",
- "TWITTER - SpaceX Català":"twitter.html?people=spacexcatala",
- "TWITTER - Ismael Flores (SpaceXStorm)":"twitter.html?people=ifcampoy",
+ "TWITTER - SpaceX (Català)":"twitter.html?people=spacexcatala",
+ "TWITTER - Ag. Romanov (Català)":"twitter.html?people=ivanvihe",
+ "TWITTER - Ismael Flores [SpaceXStorm] (Castellano)":"twitter.html?people=ifcampoy",
  
  "*TWITTER":"https://twitter.com",
  "*REDDIT":"https://reddit.com",

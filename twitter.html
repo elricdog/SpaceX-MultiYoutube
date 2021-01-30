@@ -32,7 +32,15 @@ if (people!==null) {
 	let list = findGetParameter("list");
 	if (list!==null) {
 		console.log ("Tweets from list: "+list);		
-		document.getElementById("item").href="https://twitter.com/elricdog/lists/spacex-10061?ref_src=twsrc%5Etfw";
+		switch (list)
+		{
+			case "elricdog":
+				document.getElementById("item").href="https://twitter.com/elricdog/lists/spacex-10061?ref_src=twsrc%5Etfw";
+				break;
+			case "elricdog-cat-cas":
+				document.getElementById("item").href="https://twitter.com/elricdog/lists/spacex-catal-castellano-12151?ref_src=twsrc%5Etfw";
+				break;		
+		}
 		document.getElementById("item").dataset.theme="dark";
 	}
 }
