@@ -91,6 +91,17 @@
 	</center>
 </div>
 
+<!-- Utilities -->
+<script>
+	function isMobile() {
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            return true;
+		} else {
+            return false;
+		}
+    }
+</script>
+	
 <!-- OnLoad and Icons -->
 <script>
 	function fetchHeader(url, wch) {
@@ -123,6 +134,8 @@
 				});
 		});
 		
+		document.getElementById("iconOptions").addEventListener ("click", toggleIconGroups, false);
+		document.getElementById("iconLastUpdate").addEventListener ("click", toggleLastUpdate, false);
 		document.getElementById("iconTime").addEventListener ("click", toggleTimeGroups, false);
 		document.getElementById("iconContact").addEventListener ("click", toggleContact, false);
 		document.getElementById("buttonContactClose").addEventListener ("click", toggleContact, false);				
@@ -135,12 +148,19 @@
 		document.getElementById("iconFullScreen").addEventListener ("click", toggleFullScreen, false);
 		document.getElementById("iconRSS").addEventListener ("click", toggleRSSScroll, false);
 
+		const feedTextScrollUrl = ['https://elricdog.github.io/SpaceX-MultiYoutube/rss.xml'];
+        const rssTextScroll = document.getElementById('rssTextScroll');
+        new RSSMarquee(feedTextScrollUrl, rssTextScroll, { speed: 150 } );		
+		window.addEventListener('resize', () => {
+			updateRSSTextScrollWidth();
+		});
+		updateRSSTextScrollWidth();
+				
 		const select1 = document.getElementById("selectCH1");
 		const select2 = document.getElementById("selectCH2");
 		const select3 = document.getElementById("selectCH3");
 		const select4 = document.getElementById("selectCH4");
 		var event = new Event('change');
-		//{"ch1":"SpaceFlight","ch2":"Lab Padre - Nerdle Cam 4K","ch3":"Lab Padre - Sentinel Cam","ch4":"Everyday Astronaut"}
 		select1.selectedIndex = indexMatchingText(select1, "SpaceFlight");
 		select2.selectedIndex = indexMatchingText(select2, "Lab Padre - Nerdle Cam 4K");
 		select3.selectedIndex = indexMatchingText(select3, "Lab Padre - Sentinel Cam");
@@ -149,19 +169,33 @@
 		select2.dispatchEvent(event);
 		select3.dispatchEvent(event);
 		select4.dispatchEvent(event);
-				
-		const feedTextScrollUrl = ['https://elricdog.github.io/SpaceX-MultiYoutube/rss.xml'];
-        const rssTextScroll = document.getElementById('rssTextScroll');
-		//var intervalRSSId = window.setInterval(function(){
-		//	new RSSMarquee(feedTextScrollUrl, rssTextScroll, { speed: 1000 } );
-		//}, 120000);
-        new RSSMarquee(feedTextScrollUrl, rssTextScroll, { speed: 1000 } );
-			
-		var lastModifiedDate = fetchHeader(location.href,'Last-Modified');
+
+		if (isMobile())
+		{
+			toggleLastUpdate();
+			toggleIconGroups();
+			toggleTimeGroups();
+			toggleRSSScroll();
+		}
+											
+		var lastModifiedDateString = fetchHeader(location.href,'Last-Modified');
 		const lastUpdate = document.getElementById("lastUpdate");
-		lastUpdate.innerHTML = lastModifiedDate;
+		var lastModifiedDate = new Date();
+		lastModifiedDate.setTime(Date.parse(lastModifiedDateString));
+		lastUpdate.innerHTML = lastModifiedDate.toLocaleString();
 	};
-		
+
+    function updateRSSTextScrollWidth()
+	{
+		console.log("updateRSSTextScrollWidth");		
+		var w = document.getElementById('rowOfTopLeft').getBoundingClientRect().width;
+		const rssTextScroll = document.getElementById('rssTextScroll');
+		w2 = document.getElementById('selectCH1').getBoundingClientRect().width;
+		var fw = (w-w2)-(28+2+3); // Note: Button + Button-Margin + Margin
+		if (fw<50) fw=50;
+		rssTextScroll.style.width = fw+"px";		
+	}
+	
 	function toggleContact() {		
 		const contactScreen = document.getElementById('contact');					
 		if (contactScreen.style.visibility == "hidden") {
@@ -183,33 +217,45 @@
 		
 	function toggleRSSScroll() {		
 		const rssTextScroll = document.getElementById('rssTextScroll');
-		if (rssTextScroll.style.visibility == "hidden") {
+		if (rssTextScroll.style.visibility == "hidden") {			
 			rssTextScroll.style.visibility = "visible";
-			rssTextScroll.style.width = "auto";
+			updateRSSTextScrollWidth();
 		} else {
 			rssTextScroll.style.visibility = "hidden";
 			rssTextScroll.style.width = "0px";
 		}
 	}
 	
-	function toggleTimeGroups() {		
-		const groupLOCAL = document.getElementById('groupLOCAL');
-		const groupUTC = document.getElementById('groupUTC');
-		const groupTIME = document.getElementById('groupTIME');
-		if (groupLOCAL.style.visibility == "hidden") {
-			groupLOCAL.style.visibility = "visible";
-			groupUTC.style.visibility = "visible";
-			groupTIME.style.visibility = "visible";			
-			groupLOCAL.style.width = "auto";
-			groupUTC.style.width = "auto";
-			groupTIME.style.width = "auto";
+	function toggleIconGroups() {		
+		const optionsIcons = document.getElementById('optionsIcons');
+		if (optionsIcons.style.visibility == "hidden") {
+			optionsIcons.style.visibility = "visible";
+			optionsIcons.style.width = "auto";
 		} else {
-			groupLOCAL.style.visibility = "hidden";
-			groupUTC.style.visibility = "hidden";
-			groupTIME.style.visibility = "hidden";
-			groupLOCAL.style.width = "0px";
-			groupUTC.style.width = "0px";
-			groupTIME.style.width = "0px";
+			optionsIcons.style.visibility = "hidden";
+			optionsIcons.style.width = "0px";
+		}
+	}
+	
+	function toggleLastUpdate() {		
+		const lastUpdateLabel = document.getElementById('groupLastUpdate');
+		if (lastUpdateLabel.style.visibility == "hidden") {
+			lastUpdateLabel.style.visibility = "visible";
+			lastUpdateLabel.style.width = "auto";
+		} else {
+			lastUpdateLabel.style.visibility = "hidden";
+			lastUpdateLabel.style.width = "0px";
+		}
+	};
+	
+	function toggleTimeGroups() {		
+		const timersIconLabels = document.getElementById('timersIconLabels');
+		if (timersIconLabels.style.visibility == "hidden") {
+			timersIconLabels.style.visibility = "visible";
+			timersIconLabels.style.width = "auto";
+		} else {
+			timersIconLabels.style.visibility = "hidden";
+			timersIconLabels.style.width = "0px";
 		}
 	};
 	
@@ -334,67 +380,47 @@
 
 <tr id="Top-Select-Bar" style="width: 50%; height: 30px;">
 	<td style="width: 50%; height: 30px;">
-		<table><tr>
-			<td>
-				<div class="floating-form">
-					<select id="selectCH1" class="floating-select" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH1').src = this.options[this.selectedIndex].value" value=""/>
-				</div>
-			</td>
-			<td>
-				<div class="rssTextScroll" id="rssTextScroll"></div>
-			</td>				
-			<td>
+		<div class="iconRow" id="rowOfTopLeft">
+			<div class="iconGroup">
 				<div title="Show/Hide the RSS scroll" class="icon" id="iconRSS"><img src="Icons/rss.png"/></div>
-			</td>
-			<td>
-				<div title="Last update date & time" class="iconLabel" id="groupLastUpdate">Last Update:<div id="lastUpdate"></div></div>
-			</td>
-		</tr></table>
+				<div class="rssTextScroll" id="rssTextScroll"></div>
+			</div>
+		</div>
+		<div class="floating-form">
+			<select id="selectCH1" class="floating-select" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH1').src = this.options[this.selectedIndex].value" value=""/>
+		</div>
 	</td>
 	<td style="width: 50%; height: 30px;">
-		<table><tr>
-			<td>
-				<div class="floating-form">
-					<select id="selectCH2" class="floating-select" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH2').src = this.options[this.selectedIndex].value" value=""/>
-				</div>
-			</td>
-			<td>
-				<div title="LOCAL TIME AT BOCACHICA" class="iconLabel" id="groupLOCAL">LOCAL<div id="timeLOCAL">00:00:00</div></div>
-			</td>
-			<td>
-				<div title="UTC TIME" class="iconLabel" id="groupUTC">UTC<div id="timeUTC">00:00:00</div></div>
-			</td>
-			<td>
-				<div title="YOUR CURRENT LOCAL TIME" class="iconLabel" id="groupTIME">TIME<div id="timeTIME">00:00:00</div></div>
-			</td>
-			<td>
-				<div title="Show/Hide the clocks (LOCAL/UTC/YOUR CURRENT TIME)" class="icon" id="iconTime"><img src="Icons/time.png"/></div>
-			</td>
-			<td>
-				<div title="Load saved configuration" class="icon" id="iconLoad"><img src="Icons/load.png"/></div>
-			</td>
-			<td>
-				<div title="Save current configuration" class="icon" id="iconSave"><img src="Icons/save.png"/></div>
-			</td>
-			<td>
-				<div title="You have any comment or idea?" class="icon" id="iconContact"><img src="Icons/contact.png"/></div>
-			</td>
-			<td>
-				<div title="Information about Us and this web site" class="icon" id="iconAboutUs"><img src="Icons/aboutus.png"/></div>
-			</td>
-			<td>
+		<div class="iconRow">
+			<div title="Options" class="icon" id="iconOptions"><img src="Icons/options.png"/></div>
+			<div class="iconGroup" id="optionsIcons">
 				<div title="Go to FullScreen" class="icon" id="iconFullScreen"><img src="Icons/fullscreen.png"/></div>
-			</td>
-	</tr></table>
+				<div title="Information about Us and this web site" class="icon" id="iconAboutUs"><img src="Icons/aboutus.png"/></div>
+				<div title="You have any comment or idea?" class="icon" id="iconContact"><img src="Icons/contact.png"/></div>
+				<div title="Save current configuration" class="icon" id="iconSave"><img src="Icons/save.png"/></div>
+				<div title="Load saved configuration" class="icon" id="iconLoad"><img src="Icons/load.png"/></div>
+				<div title="Show/Hide the clocks (LOCAL/UTC/YOUR CURRENT TIME)" class="icon" id="iconTime"><img src="Icons/time.png"/></div>
+				<div title="Show/Hide last update information" class="icon" id="iconLastUpdate"><img src="Icons/lastUpdate.png"/></div>
+			</div>
+			<div class="iconGroup" id="timersIconLabels">
+				<div title="LOCAL TIME AT BOCACHICA" class="iconLabel" id="groupLOCAL">LOCAL<div id="timeLOCAL">00:00:00</div></div>
+				<div title="UTC TIME" class="iconLabel" id="groupUTC">UTC<div id="timeUTC">00:00:00</div></div>
+				<div title="YOUR CURRENT LOCAL TIME" class="iconLabel" id="groupTIME">TIME<div id="timeTIME">00:00:00</div></div>
+			</div>
+			<div title="Last update date & time" class="iconLabel" id="groupLastUpdate">Last Update:<div id="lastUpdate"></div></div>
+		</div>
+		<div class="floating-form">
+			<select id="selectCH2" class="floating-select" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH2').src = this.options[this.selectedIndex].value" value=""/>
+		</div>
 	</td>
 </tr>
 
 <tr style="width: 50%; height: 50%;">
 	<td>
-		<iframe id="iframeCH1" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		<iframe id="iframeCH1" class="channels" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 	</td>
 	<td>
-		<iframe id="iframeCH2" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		<iframe id="iframeCH2" class="channels" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 	</td>
 </tr>
 
@@ -413,10 +439,10 @@
 
 <tr style="width: 50%; height: 50%;">
 	<td>
-		<iframe id="iframeCH3" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		<iframe id="iframeCH3" class="channels" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 	</td>
 	<td>
-		<iframe id="iframeCH4" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		<iframe id="iframeCH4" class="channels" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 	</td>
 </tr>
 
@@ -464,7 +490,6 @@ const channels = {
  "SEARCH - Bing":"https://www.bing.com/search?q=SpaceX",
  "3D / VR Model of StarShip":"https://elricdog.github.io/SpaceX-StarShip/VRStarShip/",
 };
-
 
 // Populate selection channels
 for (var key in channels) {
