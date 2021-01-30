@@ -208,9 +208,11 @@
 		lastModifiedRSSDate.setTime(Date.parse(lastModifiedRSSDateString));
 		if (lastModifiedDate>lastModifiedRSSDate) {
 			lastUpdate.innerHTML = lastModifiedDate.toLocaleString();
+			console.log("LastUpdate RSS: "+lastUpdate.innerHTML);
 		} else {
 			lastUpdate.innerHTML = lastModifiedRSSDate.toLocaleString();
-		}
+			console.log("LastUpdate: "+lastUpdate.innerHTML);
+		}		
 	};
 
     function updateRSSTextScrollWidth()
