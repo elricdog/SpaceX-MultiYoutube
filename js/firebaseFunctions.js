@@ -44,31 +44,26 @@ function addView(){
         counter: snapshot.val()+1
       });
   });
-  
+
   var intervalAddVisitor = window.setInterval(function(){
-	counterCleanOldVisitors++;
-	counterCleanOldVisitors%=5;
-	if (counterCleanOldVisitors==0) {
-		console.log("CleanOldVisitors procedure")
-		addVisitor();
-	} else {
-		console.log("updateVisitor procedure")
-		updateVisitor();
-	}
+  	counterCleanOldVisitors++;
+  	counterCleanOldVisitors%=5;
+  	if (counterCleanOldVisitors==0) {
+  		console.log("CleanOldVisitors procedure")
+  		addVisitor();
+  	} else {
+  		console.log("updateVisitor procedure")
+  		updateVisitor();
+  	}
   }, 300000);
   console.log("addVisitor procedure")
   addVisitor();
 }
 
 // Add visitor in the current minute
-function addVisitor(){	
-  let d = new Date();
-  let currentTimeZoneOffsetInHours = d.getTimezoneOffset() / 60;
-  let utc = new Date();
-  utc.setHours( utc.getHours() + currentTimeZoneOffsetInHours );
-	
+function addVisitor(){
   firebase.database().ref('visitors/'+getGUID()).set({
-    value: utc.valueOf()
+    value: getCurrentUTCTime()
   });
 
   //Clean old visitors
@@ -81,14 +76,9 @@ function addVisitor(){
   });
 }
 
-function updateVisitor(){	
-  let d = new Date();
-  let currentTimeZoneOffsetInHours = d.getTimezoneOffset() / 60;
-  let utc = new Date();
-  utc.setHours( utc.getHours() + currentTimeZoneOffsetInHours );
-	
+function updateVisitor(){
   firebase.database().ref('visitors/'+getGUID()).set({
-    value: utc.valueOf()
+    value: getCurrentUTCTime()
   });
 }
 
@@ -113,6 +103,16 @@ function getRealtimeRss(view){
       })
     });
 }
+
+function getCurrentUTCTime(){
+  let d = new Date();
+  let currentTimeZoneOffsetInHours = d.getTimezoneOffset() / 60;
+  let utc = new Date();
+  utc.setHours( utc.getHours() + currentTimeZoneOffsetInHours );
+
+  return utc.valueOf()
+}
+
 // Add one view more
 addView();
 
