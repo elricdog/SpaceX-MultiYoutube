@@ -279,19 +279,20 @@
 		rssTextScroll.style.width = fw+"px";
 	}
 
-	function openChat() {	
+	function openChat() {
 		const select4 = document.getElementById("selectCH4");
 		var event = new Event('change');
 		select4.selectedIndex = indexMatchingText(select4, "CHAT - SpaceX Board");
-		select4.dispatchEvent(event);	
+		select4.dispatchEvent(event);
 	}
-	
+
 	function toggleContact() {
 		const contactScreen = document.getElementById('contact');
 		if (contactScreen.style.visibility == "hidden") {
 			document.getElementById('lblContactError').innerHTML = "";
 			contactScreen.style.visibility = "visible";
 			contactScreen.style.height = "fit-content";
+			analytics.logEvent('option_click', { name: 'contact'});
 		} else {
 			contactScreen.style.visibility = "hidden";
 			contactScreen.style.height = "0px";
@@ -330,6 +331,7 @@
 		if (visible) {
 			lastUpdateLabel.style.visibility = "visible";
 			lastUpdateLabel.style.width = "auto";
+			analytics.logEvent('option_click', { name: 'groupLastUpdate'});
 		} else {
 			lastUpdateLabel.style.visibility = "hidden";
 			lastUpdateLabel.style.width = "0px";
@@ -345,6 +347,7 @@
 		if (visible) {
 			visitorsLabel.style.visibility = "visible";
 			visitorsLabel.style.width = "auto";
+			analytics.logEvent('option_click', { name: 'visitors'});
 		} else {
 			visitorsLabel.style.visibility = "hidden";
 			visitorsLabel.style.width = "0px";
