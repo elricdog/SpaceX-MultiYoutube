@@ -10,7 +10,7 @@
 	<link type="text/css" rel="stylesheet" href="main_beta.css">
 	<link rel="stylesheet" href="https://cdn.metroui.org.ua/v4.4.3/css/metro-all.min.css">
 	<script src="https://cdn.metroui.org.ua/v4.4.3/js/metro.min.js"></script>
-	<link type="text/css" rel="stylesheet" href="metro_redefines.css">	
+	<link type="text/css" rel="stylesheet" href="metro_redefines.css">
 </head>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -139,13 +139,13 @@
 	}
 
 	function calcSplitSizes(a, b, c=-1) {
-		if (c < 0) {		
+		if (c < 0) {
 			var w = a + b;
 			a = ((a*100)/w);
 			b = ((b*100)/w);
 			var result = "" + a +", " + b;
 			return result;
-		} else {		
+		} else {
 			var w = a + b + c;
 			a = ((a*100)/w);
 			b = ((b*100)/w);
@@ -191,8 +191,7 @@
 		document.getElementById("iconRSS").addEventListener ("click", toggleRSSScroll, false);
 		document.getElementById("icon5thColumn").addEventListener ("click", toggle5thColumn, false);
 		document.getElementById("icon5thColumnB").addEventListener ("click", toggle5thColumn, false);
-		document.getElementById("iconChat").addEventListener ("click", openChat, false);
-		
+
 		document.getElementById("iconRefreshCH1").addEventListener ("click", refreshCH1, false);
 		document.getElementById("iconRefreshCH2").addEventListener ("click", refreshCH2, false);
 		document.getElementById("iconRefreshCH3").addEventListener ("click", refreshCH3, false);
@@ -233,7 +232,7 @@
 			toggleRSSScroll();
 			toggle5thColumn();
 		}
-		
+
 		const lastUpdate = document.getElementById("lastUpdate");
 		var lastModifiedDateString = fetchHeader(location.href,'Last-Modified');
 		var lastModifiedDate = new Date();
@@ -252,40 +251,33 @@
 
 	function refreshCH1() {
 		refresh("iframeCH1");
-	}	
+	}
 	function refreshCH2() {
 		refresh("iframeCH2");
-	}	
+	}
 	function refreshCH3() {
 		refresh("iframeCH3");
-	}	
+	}
 	function refreshCH4() {
 		refresh("iframeCH4");
-	}	
+	}
 	function refreshCH5() {
 		refresh("iframeCH5");
-	}		
+	}
 	function refresh(id) {
 		var iframe = document.getElementById(id);
 		iframe.src = iframe.src;
 	}
-	
+
     function updateRSSTextScrollWidth() {
 		var w = document.getElementById('rowOfTopLeft').getBoundingClientRect().width;
 		const rssTextScroll = document.getElementById('rssTextScroll');
 		w2 = document.getElementById('selectCH1').getBoundingClientRect().width;
-		var fw = (w-w2)-56; // Note: 2 Buttons columns
+		var fw = (w-w2)-56; // Note: Buttons
 		if (fw<50) fw=50;
 		rssTextScroll.style.width = fw+"px";
 	}
 
-	function openChat() {	
-		const select4 = document.getElementById("selectCH4");
-		var event = new Event('change');
-		select4.selectedIndex = indexMatchingText(select4, "CHAT - SpaceX Board");
-		select4.dispatchEvent(event);	
-	}
-	
 	function toggleContact() {
 		const contactScreen = document.getElementById('contact');
 		if (contactScreen.style.visibility == "hidden") {
@@ -303,6 +295,11 @@
 		if (aboutUsScreen.style.visibility == "hidden") {
 			aboutUsScreen.style.visibility = "visible";
 			aboutUsScreen.style.height = "fit-content";
+			firebase.analytics().logEvent('select_content', {
+			  content_type: 'option',
+			  content_id: 'aboutUs'
+			});
+
 		} else {
 			aboutUsScreen.style.visibility = "hidden";
 			aboutUsScreen.style.height = "0px";
@@ -520,7 +517,7 @@
 		const lastUpdateLabel = document.getElementById('groupLastUpdate');
 		const lastUpdateLabelVisible = (lastUpdateLabel.style.visibility == "visible");
 		const visitorsLabel = document.getElementById('groupVisitors');
-		const visitorsLabelVisible = (visitorsLabel.style.visibility == "visible");		
+		const visitorsLabelVisible = (visitorsLabel.style.visibility == "visible");
 		const timersIconLabels = document.getElementById('timersIconLabels');
 		const timersIconLabelsVisible = (timersIconLabels.style.visibility == "visible");
 
@@ -645,7 +642,7 @@
 						</div>
 						<div class="stub">
 							<div title="Views counter of this website (Active Users • Views)" class="iconLabel" id="groupVisitors">Active • Views<div><label id="visitorsNow">0</label> • <label id="visitors">0</label></div></div>
-						</div>						
+						</div>
 						<div class="stub">
 							<div class="iconGroup" id="timersIconLabels">
 								<div title="LOCAL TIME AT BOCA CHICA" class="iconLabel" id="groupLOCAL">LOCAL<div id="timeLOCAL">00:00:00</div></div>
@@ -659,7 +656,6 @@
 							<div class="iconPopUp">
 								<div title="Go to FullScreen" class="icon" id="iconFullScreen"><img src="Icons/fullscreen.png"/></div>
 								<div title="Show/Hide 5th column" class="icon" id="icon5thColumn"><img src="Icons/column5th.png"/></div>
-								<div title="Open Chat" class="icon" id="iconChat"><img src="Icons/chat.png"/></div>
 								<div title="Information about Us and this web site" class="icon" id="iconAboutUs"><img src="Icons/aboutus.png"/></div>
 								<div title="You have any comment or idea?" class="icon" id="iconContact"><img src="Icons/contact.png"/></div>
 								<div title="Save current configuration" class="icon" id="iconSave"><img src="Icons/save.png"/></div>
@@ -765,10 +761,10 @@ const channels = {
 
  // Live Streams
  "SPACEX":composeYouTubeLiveStreamURL("_qwLHlVjRyw", 0),
- 
+
  "SpaceFlight":composeYouTubeLiveStreamURL("FpQwQx4Q_Dc", 0),
  "NSF Fleet Cam":composeYouTubeLiveStreamURL("gnt2wZBg89g", 1),
- 
+
  "LabPadre - Nerdle Cam 4K":composeYouTubeLiveStreamURL("Ky5l9ZxsG9M", 0),
  "LabPadre - Sapphire Cam":composeYouTubeLiveStreamURL("dROdPn9Tpxg", 1),
  "LabPadre - South Padre Island Pearl Beach Cam":composeYouTubeLiveStreamURL("agmFDeP5u_w", 1),
@@ -776,7 +772,7 @@ const channels = {
  "LabPadre - Lab Cam":composeYouTubeLiveStreamURL("hpqoqJxbNpw", 1),
  "LabPadre - Launch Pad Cam":composeYouTubeLiveStreamURL("Z72Au8Px7mM", 1),
  "LabPadre - Sentinel Cam":composeYouTubeLiveStreamURL("n5ozYnVQahE", 1),
- 
+
  "Everyday Astronaut":composeYouTubeLiveStreamURL("QJ6YN5upGH0", 0),
  "SpaceXStorm (Castellano)":composeYouTubeLiveStreamURL("39T-NWgFtME", 0),
  "Marcus House":composeYouTubeLiveStreamURL("MkLpg5Rs8mI", 0),
@@ -784,7 +780,7 @@ const channels = {
  "NASA Live":composeYouTubeLiveStreamURL("21X5lGlDOfg", 0),
  "NASA Media Channel":composeYouTubeLiveStreamURL("nA9UZF-SZoQ", 0),
 
- "INFORMATION - LabPadre Boca Chica Weather":"weather2.html",
+ "INFORMATION - LabPadre Boca Chica Weather":"https://www.weatherlink.com/embeddablePage/show/6a07fed5552d4f768299e4b8c611feed/signature",
  "INFORMATION - Boca Chica, TX Weather":"weather.html",
  "INFORMATION - Flight Radar 24":"https://www.flightradar24.com/simple_index.php?lat=25.99&lon=-97.16&z=11&airports=1&label1=callsign&label2=altspeed&label3=tofrom&size=auto",
  "INFORMATION - Road Closures":"https://tfr.faa.gov/tfr2/list.jsp",
@@ -792,24 +788,21 @@ const channels = {
  "*INFORMATION - Cameron County":"https://www.cameroncounty.us/SpaceX",
  "*INFORMATION - Boca Chica":"https://www.bocachica.com",
 
- "TWITCH - NASA":"https://www.twitch.tv/nasa", 
+ "TWITCH - NASA":"https://www.twitch.tv/nasa",
  "TWITCH - Alex Riveiro (Castellano)":"https://www.twitch.tv/alex_riveiro",
  "TWITCH - SpaceXStorm (Castellano)":"https://www.twitch.tv/spacexstorm",
 
  "*TWITTER":"https://twitter.com",
  "*REDDIT":"https://reddit.com",
- "*DISCORD":"https://discord.com", 
+ "*DISCORD":"https://discord.com",
  "*YOUTUBE CHANNELS":"https://youtube.com",
-  
+
  "SPACEX Web":"https://www.spacex.com",
- "NEXT LAUNCHES":"https://whenisthenextspacexlaunch.com/", 
+ "NEXT LAUNCHES":"https://whenisthenextspacexlaunch.com/",
  "SEARCH - Google":"https://www.google.com/search?igu=1&q=SpaceX",
  "SEARCH - Bing":"https://www.bing.com/search?q=SpaceX",
-
- "CHAT - SpaceX Board":"chat.html",
-
  "3D / VR Model of StarShip":"https://elricdog.github.io/SpaceX-StarShip/VRStarShip/",
- 
+
  "ChangeLog":"changelog.html",
  "RoadMap":"roadmap.html",
  "Help":"help_beta.html",
@@ -821,7 +814,7 @@ const channelsVertical = {
  // Twitter lists
  "My TWITTER SpaceX List":"twitter.html?list=elricdog",
  "My TWITTER SpaceX List (Català-Castellano)":"twitter.html?list=elricdog-cat-cas",
- 
+
  // Twitter timelines
  "TWITTER - SpaceX":"twitter.html?people=spacex",
  "TWITTER - Elon Musk":"twitter.html?people=elonmusk",
@@ -839,17 +832,17 @@ const channelsVertical = {
  "TWITTER - SpaceX (Català)":"twitter.html?people=spacexcatala",
  "TWITTER - Ag. Romanov (Català)":"twitter.html?people=ivanvihe",
  "TWITTER - Ismael Flores [SpaceXStorm] (Castellano)":"twitter.html?people=ifcampoy",
- 
+
  "*TWITTER":"https://twitter.com",
  "*REDDIT":"https://reddit.com",
- "*DISCORD":"https://discord.com", 
+ "*DISCORD":"https://discord.com",
  "*YOUTUBE CHANNELS":"https://youtube.com",
 
  "SPACEX Web":"https://www.spacex.com",
- "NEXT LAUNCHES":"https://whenisthenextspacexlaunch.com/", 
+ "NEXT LAUNCHES":"https://whenisthenextspacexlaunch.com/",
  "SEARCH - Google":"https://www.google.com/search?igu=1&q=SpaceX",
  "SEARCH - Bing":"https://www.bing.com/search?q=SpaceX",
- 
+
  "ChangeLog":"changelog.html",
  "RoadMap":"roadmap.html",
  "Help":"help_beta.html",
