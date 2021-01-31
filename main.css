@@ -18,6 +18,8 @@ html, body {
 	border-spacing: 0px;
 	padding: 0px;
 	margin: 0px;
+	min-width: 20%;
+	min-height: 20%;
 }
 
 .channelSelect {

@@ -38,7 +38,7 @@
 	<center>
 	<img id="imgLogo" src="./Images/logo_mini.png"/>
 	<br>
-	<h3>SpaceXBoard by Sworied, Berrgurt and Elric</h3><br>
+	<h3 style="color:silver;">SpaceXBoard by Sworied, Berrgurt and Elric</h3><br>
 	</center>
 	<div id="loader"/>
 </section>
@@ -178,6 +178,7 @@
 	{
 		const loadingScreen = document.getElementById( 'loading-screen' );
 		loadingScreen.style.visibility = "hidden";
+		loadingScreen.remove();
 	}
 
 	window.onload = function() {
@@ -197,23 +198,23 @@
 		});
 
 		document.getElementById("iconOptions").addEventListener ("click", toggleIconGroups, false);
-		document.getElementById("iconLastUpdate").addEventListener ("click", toggleLastUpdate, false);
-		document.getElementById("iconVisitors").addEventListener ("click", toggleVisitors, false);
-		document.getElementById("iconTime").addEventListener ("click", toggleTimeGroups, false);
-		document.getElementById("iconContact").addEventListener ("click", toggleContact, false);
+		document.getElementById("iconLastUpdate").addEventListener ("click", function() { toggleIconGroups(); toggleLastUpdate(); }, false);
+		document.getElementById("iconVisitors").addEventListener ("click", function() { toggleIconGroups(); toggleVisitors(); }, false);
+		document.getElementById("iconTime").addEventListener ("click", function() { toggleIconGroups(); toggleTimeGroups(); }, false);
+		document.getElementById("iconContact").addEventListener ("click", function() { toggleIconGroups(); toggleContact(); }, false);
 		document.getElementById("buttonContactClose").addEventListener ("click", toggleContact, false);
-		document.getElementById("iconAboutUs").addEventListener ("click", toggleAboutUs, false);
+		document.getElementById("iconAboutUs").addEventListener ("click", function() { toggleIconGroups(); toggleAboutUs(); }, false);
 		document.getElementById("buttonAboutUsClose").addEventListener ("click", toggleAboutUs, false);
-		document.getElementById("iconSave").addEventListener ("click", configurationSave, false);
-		document.getElementById("iconLoad").addEventListener ("click", toggleLoad, false);
+		document.getElementById("iconSave").addEventListener ("click", function() { toggleIconGroups(); configurationSave(); }, false);
+		document.getElementById("iconLoad").addEventListener ("click", function() { toggleIconGroups(); toggleLoad(); }, false);
 		document.getElementById("buttonLoadClose").addEventListener ("click", toggleLoad, false);
 		document.getElementById("buttonLoad").addEventListener ("click", configurationLoad, false);
-		document.getElementById("iconFullScreen").addEventListener ("click", toggleFullScreen, false);
+		document.getElementById("iconFullScreen").addEventListener ("click", function() { toggleIconGroups(); toggleFullScreen(); }, false);
 		document.getElementById("iconRSS").addEventListener ("click", toggleRSSScroll, false);
-		document.getElementById("icon5thColumn").addEventListener ("click", toggle5thColumn, false);
+		document.getElementById("icon5thColumn").addEventListener ("click", function() { toggleIconGroups(); toggle5thColumn(); }, false);
 		document.getElementById("icon5thColumnB").addEventListener ("click", toggle5thColumn, false);
-		document.getElementById("iconChat").addEventListener ("click", openChat, false);
-		document.getElementById("iconHelp").addEventListener ("click", openHelp, false);
+		document.getElementById("iconChat").addEventListener ("click", function() { toggleIconGroups(); openChat(); }, false);
+		document.getElementById("iconHelp").addEventListener ("click", function() { toggleIconGroups(); openHelp(); }, false);
 
 		document.getElementById("iconRefreshCH1").addEventListener ("click", refreshCH1, false);
 		document.getElementById("iconRefreshCH2").addEventListener ("click", refreshCH2, false);
@@ -245,6 +246,11 @@
 			updateRSSTextScrollWidth();
 		});
 		updateRSSTextScrollWidth();
+		const resizeObserver = new ResizeObserver(entries => {
+			updateRSSTextScrollWidth();
+		});
+		const iframeCH1 = document.getElementById("iframeCH1");
+		resizeObserver.observe(iframeCH1);
 
 		toggleIconGroups();
 		toggleLastUpdate();
@@ -272,10 +278,11 @@
 		}
 		
 		var intervalLoadingScreen = window.setInterval(function(){
+			console.log("Closing Loading screen");
 			closeLoadingScreen();
 			showAppScreen();
 			clearInterval(intervalLoadingScreen);
-		}, 3000);		
+		}, 2500);		
 	};
 
 	function refreshCH1() {
@@ -643,10 +650,10 @@
 <div class="allViews" id="app-screen" style="visibility:hidden;">
 
 <!-- 4 views -->
-<div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="83, 17" id="rootView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
+<div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="83, 17" data-min-sizes="100, 0" id="rootView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
 
-<div data-role="splitter" data-split-mode="vertical" data-gutter-size="5" data-split-sizes="50, 50" id="mainView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
-    <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="50, 50" id="mainView12">
+<div data-role="splitter" data-split-mode="vertical" data-gutter-size="5" data-split-sizes="50, 50" data-min-sizes="100, 100" id="mainView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
+    <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="50, 50" data-min-sizes="100, 100" id="mainView12">
 		<!-- Top-Left -->
         <div class="d-flex flex-column flex-justify-left" id="rowOfTopLeft">
 			<div class="container" style="height:28px; max-height:28px; padding:0px;">
@@ -723,7 +730,7 @@
 			</div>
 		</div>
     </div>
-    <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="50, 50" id="mainView34">
+    <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="50, 50" data-min-sizes="100, 100" id="mainView34">
 		<!-- Bottom-Left -->
         <div class="d-flex flex-column flex-justify-left" id="rowOfBottomLeft">
 			<div class="container" style="height:28px; max-height:28px; padding:0px;" id="middleBarfBottomLeft">
