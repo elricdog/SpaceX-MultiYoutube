@@ -31,7 +31,7 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-firebase.analytics();
+var analytics = firebase.analytics();
 
 // Get a reference to the database service
 var database = firebase.database();

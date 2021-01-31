@@ -295,11 +295,7 @@
 		if (aboutUsScreen.style.visibility == "hidden") {
 			aboutUsScreen.style.visibility = "visible";
 			aboutUsScreen.style.height = "fit-content";
-			firebase.analytics().logEvent('select_content', {
-			  content_type: 'option',
-			  content_id: 'aboutUs'
-			});
-
+			analytics.logEvent('option_click', { name: 'aboutUs'});
 		} else {
 			aboutUsScreen.style.visibility = "hidden";
 			aboutUsScreen.style.height = "0px";
