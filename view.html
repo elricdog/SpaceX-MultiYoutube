@@ -191,6 +191,7 @@
 		document.getElementById("iconRSS").addEventListener ("click", toggleRSSScroll, false);
 		document.getElementById("icon5thColumn").addEventListener ("click", toggle5thColumn, false);
 		document.getElementById("icon5thColumnB").addEventListener ("click", toggle5thColumn, false);
+		document.getElementById("iconChat").addEventListener ("click", openChat, false);
 		
 		document.getElementById("iconRefreshCH1").addEventListener ("click", refreshCH1, false);
 		document.getElementById("iconRefreshCH2").addEventListener ("click", refreshCH2, false);
@@ -276,6 +277,14 @@
 		var fw = (w-w2)-56; // Note: 2 Buttons columns
 		if (fw<50) fw=50;
 		rssTextScroll.style.width = fw+"px";
+	}
+
+	function openChat() {
+		const select4 = document.getElementById("selectCH4");
+		var event = new Event('change');
+		select4.selectedIndex = indexMatchingText(select4, "CHAT - SpaceX Board");
+		select4.dispatchEvent(event);
+		analytics.logEvent('option_click', { name: 'Chat'});
 	}
 
 	function toggleContact() {
@@ -611,7 +620,7 @@
 						<div class="stub">
 							<select id="selectCH1" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH1', this.options, this.selectedIndex)" value="">
 							</select>
-							<div title="Refresh" class="icon" id="iconRefreshCH1"><img src="Icons/refresh.png"/></div>
+							<div title="Refresh View 1" class="icon" id="iconRefreshCH1"><img src="Icons/refresh.png"/></div>
 						</div>
 						<div class="cell flex-justify-between">
 							<div class="rssTextScroll" id="rssTextScroll"></div>
@@ -634,7 +643,7 @@
 						<div class="stub">
 							<select id="selectCH2" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH2', this.options, this.selectedIndex)" value="">
 							</select>
-							<div title="Refresh" class="icon" id="iconRefreshCH2"><img src="Icons/refresh.png"/></div>
+							<div title="Refresh View 2" class="icon" id="iconRefreshCH2"><img src="Icons/refresh.png"/></div>
 						</div>
 						<div class="cell flex-justify-between">
 						</div>
@@ -657,6 +666,7 @@
 							<div class="iconPopUp">
 								<div title="Go to FullScreen" class="icon" id="iconFullScreen"><img src="Icons/fullscreen.png"/></div>
 								<div title="Show/Hide 5th column" class="icon" id="icon5thColumn"><img src="Icons/column5th.png"/></div>
+								<div title="Open Chat in View 4" class="icon" id="iconChat"><img src="Icons/chat.png"/></div>
 								<div title="Information about Us and this web site" class="icon" id="iconAboutUs"><img src="Icons/aboutus.png"/></div>
 								<div title="You have any comment or idea?" class="icon" id="iconContact"><img src="Icons/contact.png"/></div>
 								<div title="Save current configuration" class="icon" id="iconSave"><img src="Icons/save.png"/></div>
@@ -686,7 +696,7 @@
 						<div class="stub">
 							<select id="selectCH3" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH3', this.options, this.selectedIndex)" value="">
 							</select>
-							<div title="Refresh" class="icon" id="iconRefreshCH3"><img src="Icons/refresh.png"/></div>
+							<div title="Refresh View 3" class="icon" id="iconRefreshCH3"><img src="Icons/refresh.png"/></div>
 						</div>
 					</div>
 				</div>
@@ -703,7 +713,7 @@
 						<div class="stub">
 							<select id="selectCH4" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH4', this.options, this.selectedIndex)" value="">
 							</select>
-							<div title="Refresh" class="icon" id="iconRefreshCH4"><img src="Icons/refresh.png"/></div>
+							<div title="Refresh View 4" class="icon" id="iconRefreshCH4"><img src="Icons/refresh.png"/></div>
 						</div>
 					</div>
 				</div>
@@ -810,6 +820,9 @@ const channels = {
  "NEXT LAUNCHES":"https://whenisthenextspacexlaunch.com/", 
  "SEARCH - Google":"https://www.google.com/search?igu=1&q=SpaceX",
  "SEARCH - Bing":"https://www.bing.com/search?q=SpaceX",
+
+ "CHAT - SpaceX Board":"chat.html",
+
  "3D / VR Model of StarShip":"https://elricdog.github.io/SpaceX-StarShip/VRStarShip/",
  
  "ChangeLog":"changelog.html",
