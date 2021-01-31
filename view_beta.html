@@ -69,6 +69,8 @@
 <!-- About Us -->
 <div id="aboutus" style="visibility:hidden; width: fit-content; height: fit-content;">
 	<center>
+	<img src="Images/logo_mini.png"/>
+	<br>
 	<h1>About Us</h1>
 	<p>
 	One day we see that browser tabs was not enough to follow Starship evolution...then...
@@ -136,11 +138,22 @@
 		return undefined;
 	}
 
-	function calcSplitSizes(a, b) {
-		var w = a + b;
-		a = ((a*100)/w);
-		b = ((b*100)/w);
-		return "" + a +", " + b;
+	function calcSplitSizes(a, b, c=-1) {
+		if (c < 0) {		
+			var w = a + b;
+			a = ((a*100)/w);
+			b = ((b*100)/w);
+			var result = "" + a +", " + b;
+			return result;
+		} else {		
+			var w = a + b + c;
+			a = ((a*100)/w);
+			b = ((b*100)/w);
+			c = ((c*100)/w);
+			var result = "" + a + ", " + b + ", " + c;
+			console.log("calcSplitSizes: " + result);
+			return result;
+		}
 	}
 </script>
 
@@ -786,7 +799,7 @@ const channels = {
  
  "ChangeLog":"changelog.html",
  "RoadMap":"roadmap.html",
- "Help":"help.html",
+ "Help":"help_beta.html",
 };
 
 const channelsVertical = {
