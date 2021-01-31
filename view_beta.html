@@ -282,7 +282,7 @@
 			closeLoadingScreen();
 			showAppScreen();
 			clearInterval(intervalLoadingScreen);
-		}, 2500);		
+		}, 2000);		
 	};
 
 	function refreshCH1() {
@@ -801,6 +801,9 @@ function setSourceToElementiFrame(iFrameId, options, index) {
 	var title = options[index].textContent;
 	document.getElementById(iFrameId).src = source;
 	analytics.logEvent('source', { name: title});
+	
+	var id = iFrameId.replace("iframeCH","");
+	document.getElementById("selectCH" + id).title = "View " + id + " - " + title;
 }
 
 const select1 = document.getElementById("selectCH1");
@@ -845,6 +848,7 @@ const channels = {
  "INFORMATION - Boca Chica, TX Weather":"weather.html",
  "INFORMATION - Flight Radar 24":"https://www.flightradar24.com/simple_index.php?lat=25.99&lon=-97.16&z=11&airports=1&label1=callsign&label2=altspeed&label3=tofrom&size=auto",
  "INFORMATION - Road Closures":"https://tfr.faa.gov/tfr2/list.jsp",
+ "INFORMATION - notams.faa.gov":"https://www.notams.faa.gov/dinsQueryWeb/",
  "INFORMATION - Flight Restrictions Zone":"https://tfr.faa.gov/tfr_map_ims/html/ew/scale7/tile_33_61.html",
  "*INFORMATION - Cameron County":"https://www.cameroncounty.us/SpaceX",
  "*INFORMATION - Boca Chica":"https://www.bocachica.com",
@@ -916,6 +920,7 @@ const channelsVertical = {
 // Populate selection channels
 for (var key in channels) {
     var el = document.createElement("option");
+	el.title = channels[key];
     el.textContent = key;
     el.value = channels[key];
     if (select1!=null) select1.appendChild(el);
@@ -925,6 +930,7 @@ for (var key in channels) {
 }
 for (var key in channelsVertical) {
     var el = document.createElement("option");
+	el.title = channels[key];
     el.textContent = key;
     el.value = channelsVertical[key];
     if (select5!=null) select5.appendChild(el);
