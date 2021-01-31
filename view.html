@@ -273,7 +273,7 @@
 		var w = document.getElementById('rowOfTopLeft').getBoundingClientRect().width;
 		const rssTextScroll = document.getElementById('rssTextScroll');
 		w2 = document.getElementById('selectCH1').getBoundingClientRect().width;
-		var fw = (w-w2)-56; // Note: Buttons
+		var fw = (w-w2)-56; // Note: 2 Buttons columns
 		if (fw<50) fw=50;
 		rssTextScroll.style.width = fw+"px";
 	}
@@ -284,6 +284,7 @@
 			document.getElementById('lblContactError').innerHTML = "";
 			contactScreen.style.visibility = "visible";
 			contactScreen.style.height = "fit-content";
+			analytics.logEvent('option_click', { name: 'Contact'});
 		} else {
 			contactScreen.style.visibility = "hidden";
 			contactScreen.style.height = "0px";
@@ -295,6 +296,7 @@
 		if (aboutUsScreen.style.visibility == "hidden") {
 			aboutUsScreen.style.visibility = "visible";
 			aboutUsScreen.style.height = "fit-content";
+			analytics.logEvent('option_click', { name: 'AboutUs'});
 		} else {
 			aboutUsScreen.style.visibility = "hidden";
 			aboutUsScreen.style.height = "0px";
@@ -306,6 +308,7 @@
 		if (visible) {
 			rssTextScroll.style.visibility = "visible";
 			updateRSSTextScrollWidth();
+			analytics.logEvent('option_click', { name: 'RSSScroll'});
 		} else {
 			rssTextScroll.style.visibility = "hidden";
 			rssTextScroll.style.width = "0px";
@@ -321,6 +324,7 @@
 		if (visible) {
 			lastUpdateLabel.style.visibility = "visible";
 			lastUpdateLabel.style.width = "auto";
+			analytics.logEvent('option_click', { name: 'LastUpdate'});
 		} else {
 			lastUpdateLabel.style.visibility = "hidden";
 			lastUpdateLabel.style.width = "0px";
@@ -336,6 +340,7 @@
 		if (visible) {
 			visitorsLabel.style.visibility = "visible";
 			visitorsLabel.style.width = "auto";
+			analytics.logEvent('option_click', { name: 'Visitors'});
 		} else {
 			visitorsLabel.style.visibility = "hidden";
 			visitorsLabel.style.width = "0px";
@@ -351,6 +356,7 @@
 		if (visible) {
 			timersIconLabels.style.visibility = "visible";
 			timersIconLabels.style.width = "auto";
+			analytics.logEvent('option_click', { name: 'TimersLabels'});
 		} else {
 			timersIconLabels.style.visibility = "hidden";
 			timersIconLabels.style.width = "0px";
@@ -603,7 +609,7 @@
 				<div class="grid">
 					<div class="row no-gap">
 						<div class="stub">
-							<select id="selectCH1" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH1').src = this.options[this.selectedIndex].value" value="">
+							<select id="selectCH1" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH1', this.options, this.selectedIndex)" value="">
 							</select>
 							<div title="Refresh" class="icon" id="iconRefreshCH1"><img src="Icons/refresh.png"/></div>
 						</div>
@@ -626,7 +632,7 @@
 				<div class="grid">
 					<div class="row no-gap">
 						<div class="stub">
-							<select id="selectCH2" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH2').src = this.options[this.selectedIndex].value" value="">
+							<select id="selectCH2" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH2', this.options, this.selectedIndex)" value="">
 							</select>
 							<div title="Refresh" class="icon" id="iconRefreshCH2"><img src="Icons/refresh.png"/></div>
 						</div>
@@ -678,7 +684,7 @@
 				<div class="grid">
 					<div class="row no-gap">
 						<div class="stub">
-							<select id="selectCH3" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH3').src = this.options[this.selectedIndex].value" value="">
+							<select id="selectCH3" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH3', this.options, this.selectedIndex)" value="">
 							</select>
 							<div title="Refresh" class="icon" id="iconRefreshCH3"><img src="Icons/refresh.png"/></div>
 						</div>
@@ -695,7 +701,7 @@
 				<div class="grid">
 					<div class="row no-gap">
 						<div class="stub">
-							<select id="selectCH4" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH4').src = this.options[this.selectedIndex].value" value="">
+							<select id="selectCH4" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH4', this.options, this.selectedIndex)" value="">
 							</select>
 							<div title="Refresh" class="icon" id="iconRefreshCH4"><img src="Icons/refresh.png"/></div>
 						</div>
@@ -714,7 +720,7 @@
 		<div class="grid">
 			<div class="row no-gap">
 				<div class="stub">
-					<select id="selectCH5" class="channelSelect5th" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH5').src = this.options[this.selectedIndex].value" value="">
+					<select id="selectCH5" class="channelSelect5th" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH5', this.options, this.selectedIndex)" value="">
 					</select>
 					<div title="Refresh" class="icon" id="iconRefreshCH5"><img src="Icons/refresh.png"/></div>
 				</div>
@@ -737,6 +743,14 @@
 
 <!-- Main Entry Point -->
 <script>
+
+function setSourceToElementiFrame(iFrameId, options, index) {
+	var source = options[index].value;
+	var title = options[index].textContent;
+	document.getElementById(iFrameId).src = source;
+	analytics.logEvent('source', { name: title});
+}
+
 const select1 = document.getElementById("selectCH1");
 const select2 = document.getElementById("selectCH2");
 const select3 = document.getElementById("selectCH3");
@@ -775,7 +789,7 @@ const channels = {
  "NASA Live":composeYouTubeLiveStreamURL("21X5lGlDOfg", 0),
  "NASA Media Channel":composeYouTubeLiveStreamURL("nA9UZF-SZoQ", 0),
 
- "INFORMATION - LabPadre Boca Chica Weather":"https://www.weatherlink.com/embeddablePage/show/6a07fed5552d4f768299e4b8c611feed/signature",
+ "INFORMATION - LabPadre Boca Chica Weather":"weather2.html",
  "INFORMATION - Boca Chica, TX Weather":"weather.html",
  "INFORMATION - Flight Radar 24":"https://www.flightradar24.com/simple_index.php?lat=25.99&lon=-97.16&z=11&airports=1&label1=callsign&label2=altspeed&label3=tofrom&size=auto",
  "INFORMATION - Road Closures":"https://tfr.faa.gov/tfr2/list.jsp",

@@ -759,7 +759,6 @@ function setSourceToElementiFrame(iFrameId, options, index) {
 	var title = options[index].textContent;
 	document.getElementById(iFrameId).src = source;
 	analytics.logEvent('source', { name: title});
-	//console.log("Adding source analytics: " + title);
 }
 
 const select1 = document.getElementById("selectCH1");
