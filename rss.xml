@@ -5,22 +5,22 @@
     <description>SpaceX Board RSS</description>
     <link>https://elricdog.github.io/SpaceX-MultiYoutube/view.html</link>
     <item>
-      <title>Welcome to SpaceX Board</title>
+      <title>Welcome to SpaceX Board!</title> 
     </item>
     <item>
-      <title>NEWS: &lt;img src='./RSSIcons/rocket-scrub.png'/&gt; SN9 launch delayed, no road closure for Monday</title>
+      <title>NEWS: &lt;img src='./RSSIcons/rocket-scrub.png'/&gt; SN9 Pending FAA approval to fly, NET feb 2</title>
     </item>
     <item>
       <title>NEWS: &lt;img src='./RSSIcons/rocket.png'/&gt; SN10 is in the launch pad!</title>
     </item>
     <item>
-      <title>Updated live channels at 31-Jan (reload to ensure latests links)</title>
-    </item>
-    <item>
       <title>Weather looks good for Thuesday</title>
     </item>
     <item>
-      <title>Added experimental SpaceXBoard chat room (buggy and unstable and not moderated, use at your own risk). See more info in help</title>
+      <title>Updated live channels (reload to ensure latests links)</title>
+    </item>
+    <item>
+      <title>Added SpaceXBoard chat room (buggy, unstable and not moderated, use at your own risk). More info in "help"</title>
     </item>
   </channel>
 </rss>
