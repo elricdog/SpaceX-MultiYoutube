@@ -191,6 +191,7 @@
 		document.getElementById("iconRSS").addEventListener ("click", toggleRSSScroll, false);
 		document.getElementById("icon5thColumn").addEventListener ("click", toggle5thColumn, false);
 		document.getElementById("icon5thColumnB").addEventListener ("click", toggle5thColumn, false);
+		document.getElementById("iconChat").addEventListener ("click", openChat, false);
 
 		document.getElementById("iconRefreshCH1").addEventListener ("click", refreshCH1, false);
 		document.getElementById("iconRefreshCH2").addEventListener ("click", refreshCH2, false);
@@ -273,11 +274,18 @@
 		var w = document.getElementById('rowOfTopLeft').getBoundingClientRect().width;
 		const rssTextScroll = document.getElementById('rssTextScroll');
 		w2 = document.getElementById('selectCH1').getBoundingClientRect().width;
-		var fw = (w-w2)-56; // Note: Buttons
+		var fw = (w-w2)-56; // Note: 2 Buttons columns
 		if (fw<50) fw=50;
 		rssTextScroll.style.width = fw+"px";
 	}
 
+	function openChat() {	
+		const select4 = document.getElementById("selectCH4");
+		var event = new Event('change');
+		select4.selectedIndex = indexMatchingText(select4, "CHAT - SpaceX Board");
+		select4.dispatchEvent(event);	
+	}
+	
 	function toggleContact() {
 		const contactScreen = document.getElementById('contact');
 		if (contactScreen.style.visibility == "hidden") {
@@ -652,6 +660,7 @@
 							<div class="iconPopUp">
 								<div title="Go to FullScreen" class="icon" id="iconFullScreen"><img src="Icons/fullscreen.png"/></div>
 								<div title="Show/Hide 5th column" class="icon" id="icon5thColumn"><img src="Icons/column5th.png"/></div>
+								<div title="Open Chat" class="icon" id="iconChat"><img src="Icons/chat.png"/></div>
 								<div title="Information about Us and this web site" class="icon" id="iconAboutUs"><img src="Icons/aboutus.png"/></div>
 								<div title="You have any comment or idea?" class="icon" id="iconContact"><img src="Icons/contact.png"/></div>
 								<div title="Save current configuration" class="icon" id="iconSave"><img src="Icons/save.png"/></div>
@@ -776,7 +785,7 @@ const channels = {
  "NASA Live":composeYouTubeLiveStreamURL("21X5lGlDOfg", 0),
  "NASA Media Channel":composeYouTubeLiveStreamURL("nA9UZF-SZoQ", 0),
 
- "INFORMATION - LabPadre Boca Chica Weather":"https://www.weatherlink.com/embeddablePage/show/6a07fed5552d4f768299e4b8c611feed/signature",
+ "INFORMATION - LabPadre Boca Chica Weather":"weather2.html",
  "INFORMATION - Boca Chica, TX Weather":"weather.html",
  "INFORMATION - Flight Radar 24":"https://www.flightradar24.com/simple_index.php?lat=25.99&lon=-97.16&z=11&airports=1&label1=callsign&label2=altspeed&label3=tofrom&size=auto",
  "INFORMATION - Road Closures":"https://tfr.faa.gov/tfr2/list.jsp",
@@ -797,6 +806,9 @@ const channels = {
  "NEXT LAUNCHES":"https://whenisthenextspacexlaunch.com/",
  "SEARCH - Google":"https://www.google.com/search?igu=1&q=SpaceX",
  "SEARCH - Bing":"https://www.bing.com/search?q=SpaceX",
+
+ "CHAT - SpaceX Board":"chat.html",
+
  "3D / VR Model of StarShip":"https://elricdog.github.io/SpaceX-StarShip/VRStarShip/",
 
  "ChangeLog":"changelog.html",
