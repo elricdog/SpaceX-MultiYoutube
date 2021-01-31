@@ -618,7 +618,7 @@
 				<div class="grid">
 					<div class="row no-gap">
 						<div class="stub">
-							<select id="selectCH1" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH1').src = this.options[this.selectedIndex].value" value="">
+							<select id="selectCH1" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH1', this.options, this.selectedIndex)" value="">
 							</select>
 							<div title="Refresh" class="icon" id="iconRefreshCH1"><img src="Icons/refresh.png"/></div>
 						</div>
@@ -641,7 +641,7 @@
 				<div class="grid">
 					<div class="row no-gap">
 						<div class="stub">
-							<select id="selectCH2" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH2').src = this.options[this.selectedIndex].value" value="">
+							<select id="selectCH2" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH2', this.options, this.selectedIndex)" value="">
 							</select>
 							<div title="Refresh" class="icon" id="iconRefreshCH2"><img src="Icons/refresh.png"/></div>
 						</div>
@@ -694,7 +694,7 @@
 				<div class="grid">
 					<div class="row no-gap">
 						<div class="stub">
-							<select id="selectCH3" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH3').src = this.options[this.selectedIndex].value" value="">
+							<select id="selectCH3" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH3', this.options, this.selectedIndex)" value="">
 							</select>
 							<div title="Refresh" class="icon" id="iconRefreshCH3"><img src="Icons/refresh.png"/></div>
 						</div>
@@ -711,7 +711,7 @@
 				<div class="grid">
 					<div class="row no-gap">
 						<div class="stub">
-							<select id="selectCH4" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH4').src = this.options[this.selectedIndex].value" value="">
+							<select id="selectCH4" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH4', this.options, this.selectedIndex)" value="">
 							</select>
 							<div title="Refresh" class="icon" id="iconRefreshCH4"><img src="Icons/refresh.png"/></div>
 						</div>
@@ -730,7 +730,7 @@
 		<div class="grid">
 			<div class="row no-gap">
 				<div class="stub">
-					<select id="selectCH5" class="channelSelect5th" onclick="this.setAttribute('value', this.value);" onchange="document.getElementById('iframeCH5').src = this.options[this.selectedIndex].value" value="">
+					<select id="selectCH5" class="channelSelect5th" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH5', this.options, this.selectedIndex)" value="">
 					</select>
 					<div title="Refresh" class="icon" id="iconRefreshCH5"><img src="Icons/refresh.png"/></div>
 				</div>
@@ -753,6 +753,15 @@
 
 <!-- Main Entry Point -->
 <script>
+
+function setSourceToElementiFrame(iFrameId, options, index) {
+	var source = options[index].value;
+	var title = options[index].textContent;
+	document.getElementById(iFrameId).src = source;
+	analytics.logEvent('source', { name: title});
+	//console.log("Adding source analytics: " + title);
+}
+
 const select1 = document.getElementById("selectCH1");
 const select2 = document.getElementById("selectCH2");
 const select3 = document.getElementById("selectCH3");
