@@ -284,6 +284,7 @@
 		var event = new Event('change');
 		select4.selectedIndex = indexMatchingText(select4, "CHAT - SpaceX Board");
 		select4.dispatchEvent(event);
+		analytics.logEvent('option_click', { name: 'Chat'});
 	}
 
 	function toggleContact() {
@@ -292,7 +293,7 @@
 			document.getElementById('lblContactError').innerHTML = "";
 			contactScreen.style.visibility = "visible";
 			contactScreen.style.height = "fit-content";
-			analytics.logEvent('option_click', { name: 'contact'});
+			analytics.logEvent('option_click', { name: 'Contact'});
 		} else {
 			contactScreen.style.visibility = "hidden";
 			contactScreen.style.height = "0px";
@@ -304,7 +305,7 @@
 		if (aboutUsScreen.style.visibility == "hidden") {
 			aboutUsScreen.style.visibility = "visible";
 			aboutUsScreen.style.height = "fit-content";
-			analytics.logEvent('option_click', { name: 'aboutUs'});
+			analytics.logEvent('option_click', { name: 'AboutUs'});
 		} else {
 			aboutUsScreen.style.visibility = "hidden";
 			aboutUsScreen.style.height = "0px";
@@ -316,6 +317,7 @@
 		if (visible) {
 			rssTextScroll.style.visibility = "visible";
 			updateRSSTextScrollWidth();
+			analytics.logEvent('option_click', { name: 'RSSScroll'});
 		} else {
 			rssTextScroll.style.visibility = "hidden";
 			rssTextScroll.style.width = "0px";
@@ -331,7 +333,7 @@
 		if (visible) {
 			lastUpdateLabel.style.visibility = "visible";
 			lastUpdateLabel.style.width = "auto";
-			analytics.logEvent('option_click', { name: 'groupLastUpdate'});
+			analytics.logEvent('option_click', { name: 'LastUpdate'});
 		} else {
 			lastUpdateLabel.style.visibility = "hidden";
 			lastUpdateLabel.style.width = "0px";
@@ -347,7 +349,7 @@
 		if (visible) {
 			visitorsLabel.style.visibility = "visible";
 			visitorsLabel.style.width = "auto";
-			analytics.logEvent('option_click', { name: 'visitors'});
+			analytics.logEvent('option_click', { name: 'Visitors'});
 		} else {
 			visitorsLabel.style.visibility = "hidden";
 			visitorsLabel.style.width = "0px";
@@ -363,6 +365,7 @@
 		if (visible) {
 			timersIconLabels.style.visibility = "visible";
 			timersIconLabels.style.width = "auto";
+			analytics.logEvent('option_click', { name: 'TimersLabels'});
 		} else {
 			timersIconLabels.style.visibility = "hidden";
 			timersIconLabels.style.width = "0px";
@@ -377,7 +380,7 @@
 		const optionsIcons = document.getElementById('optionsIcons');
 		if (optionsIcons.style.visibility == "hidden") {
 			optionsIcons.style.visibility = "visible";
-			optionsIcons.style.width = "auto";
+			optionsIcons.style.width = "auto";			
 		} else {
 			optionsIcons.style.visibility = "hidden";
 			optionsIcons.style.width = "0px";
