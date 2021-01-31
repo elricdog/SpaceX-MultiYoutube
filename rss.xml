@@ -22,11 +22,5 @@
     <item>
       <title>Added experimental SpaceXBoard chat room (buggy and unstable and not moderated, use at your own risk). See more info in help</title>
     </item>
-    <item>
-      <title>You have a beta version with experimental features at &lt;a href=&quot;view_beta.html&quot;&gt;view_beta.html&lt;/a&gt;</title>
-    </item>
-    <item>
-      <title>You have a old version more simple at &lt;a href=&quot;view_old.html&quot;&gt;view_old.html&lt;/a&gt; (without maintenance)</title>
-    </item>
   </channel>
 </rss>
