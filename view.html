@@ -192,6 +192,7 @@
 		document.getElementById("icon5thColumn").addEventListener ("click", toggle5thColumn, false);
 		document.getElementById("icon5thColumnB").addEventListener ("click", toggle5thColumn, false);
 		document.getElementById("iconChat").addEventListener ("click", openChat, false);
+		document.getElementById("iconHelp").addEventListener ("click", openHelp, false);
 		
 		document.getElementById("iconRefreshCH1").addEventListener ("click", refreshCH1, false);
 		document.getElementById("iconRefreshCH2").addEventListener ("click", refreshCH2, false);
@@ -225,9 +226,9 @@
 		updateRSSTextScrollWidth();
 
 		toggleIconGroups();
+		toggleLastUpdate();
 		if (isMobile())
 		{
-			toggleLastUpdate();
 			toggleVisitors();
 			toggleTimeGroups();
 			toggleRSSScroll();
@@ -279,6 +280,13 @@
 		rssTextScroll.style.width = fw+"px";
 	}
 
+	function openHelp() {
+		const select3 = document.getElementById("selectCH3");
+		var event = new Event('change');
+		select3.selectedIndex = indexMatchingText(select3, "Help");
+		select3.dispatchEvent(event);
+		analytics.logEvent('option_click', { name: 'Help'});
+	}
 	function openChat() {
 		const select4 = document.getElementById("selectCH4");
 		var event = new Event('change');
@@ -666,6 +674,7 @@
 							<div class="iconPopUp">
 								<div title="Go to FullScreen" class="icon" id="iconFullScreen"><img src="Icons/fullscreen.png"/></div>
 								<div title="Show/Hide 5th column" class="icon" id="icon5thColumn"><img src="Icons/column5th.png"/></div>
+								<div title="Open Help in View 3" class="icon" id="iconHelp"><img src="Icons/help.png"/></div>
 								<div title="Open Chat in View 4" class="icon" id="iconChat"><img src="Icons/chat.png"/></div>
 								<div title="Information about Us and this web site" class="icon" id="iconAboutUs"><img src="Icons/aboutus.png"/></div>
 								<div title="You have any comment or idea?" class="icon" id="iconContact"><img src="Icons/contact.png"/></div>
