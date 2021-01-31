@@ -69,7 +69,7 @@ function addVisitor(){
   //Clean old visitors
   firebase.database().ref('visitors/').once('value', (visitors) =>{
       visitors.forEach((child)=>{
-        if(child.val().value < utc.valueOf()-1800000){
+        if(child.val().value < getCurrentUTCTime()-1800000){
           firebase.database().ref('visitors').child(child.key).remove();
         }
       });
