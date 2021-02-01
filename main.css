@@ -27,6 +27,8 @@ html, body {
   padding: 0px;
   margin: 0px;  
   background-color: silver;
+  left:0px;
+  top:0px;
   width: 165px;
   height: 28px;  
   border: 1px solid black;
@@ -37,6 +39,8 @@ html, body {
   padding: 0px;
   margin: 0px;  
   background-color: silver;
+  left:0px;
+  top:0px;
   width: 155px;
   height: 28px;  
   border: 1px solid black;

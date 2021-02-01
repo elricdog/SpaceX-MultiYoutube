@@ -623,9 +623,10 @@
 	};
 
 	function toggleFullScreen() {
-
 		const middleBar3 = document.getElementById("middleBarfBottomLeft");
 		const middleBar4 = document.getElementById("middleBarfBottomRight");
+		const container3 = document.getElementById("containerOfBottomLeft");
+		const container4 = document.getElementById("containerOfBottomRight");
 		var doc = window.document;
 		var docEl = doc.documentElement;
 
@@ -636,12 +637,16 @@
 			middleBar3.style.height = "0px";
 			middleBar4.style.visibility = "hidden";
 			middleBar4.style.height = "0px";
+			container3.style.min_height = "0px";
+			container4.style.min_height = "0px";
 			requestFullScreen.call(docEl);
 		} else {
 			middleBar3.style.visibility = "visible";
 			middleBar3.style.height = "28px";
 			middleBar4.style.visibility = "visible";
 			middleBar4.style.height = "28px";
+			container3.style.min_height = "28px";
+			container4.style.min_height = "28px";
 			cancelFullScreen.call(doc);
 		}
 	};
@@ -656,7 +661,7 @@
     <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="50, 50" data-min-sizes="100, 100" id="mainView12">
 		<!-- Top-Left -->
         <div class="d-flex flex-column flex-justify-left" id="rowOfTopLeft">
-			<div class="container" style="height:28px; max-height:28px; padding:0px;">
+			<div class="container" style="height:28px; min-height:28px; max-height:28px; padding:0px;">
 				<div class="grid">
 					<div class="row no-gap">
 						<div class="stub">
@@ -679,7 +684,7 @@
 		</div>
 		<!-- Top-Right -->
         <div class="d-flex flex-column flex-justify-left" id="rowOfTopRight">
-			<div class="container" style="height:28px; max-height:28px; padding:0px;">
+			<div class="container" style="height:28px; min-height:28px; max-height:28px; padding:0px;">
 				<div class="grid">
 					<div class="row no-gap">
 						<div class="stub">
@@ -733,7 +738,7 @@
     <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="50, 50" data-min-sizes="100, 100" id="mainView34">
 		<!-- Bottom-Left -->
         <div class="d-flex flex-column flex-justify-left" id="rowOfBottomLeft">
-			<div class="container" style="height:28px; max-height:28px; padding:0px;" id="middleBarfBottomLeft">
+			<div class="container" id="containerOfBottomLeft" style="height:28px; min-height:28px; max-height:28px; padding:0px;" id="middleBarfBottomLeft">
 				<div class="grid">
 					<div class="row no-gap">
 						<div class="stub">
@@ -750,7 +755,7 @@
 		</div>
 		<!-- Bottom-Right -->
         <div class="d-flex flex-column flex-justify-left" id="rowOfBottomRight">
-			<div class="container" style="height:28px; max-height:28px; padding:0px;" id="middleBarfBottomRight">
+			<div class="container" id="containerOfBottomRight" style="height:28px; min-height:28px; max-height:28px; padding:0px;" id="middleBarfBottomRight">
 				<div class="grid">
 					<div class="row no-gap">
 						<div class="stub">
@@ -769,7 +774,7 @@
 </div>
 
 <div class="d-flex flex-column flex-justify-left" id="column5thView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
-	<div class="container" style="height:28px; max-height:28px; padding:0px;">
+	<div class="container" style="height:28px; min-height:28px; max-height:28px; padding:0px;">
 		<div class="grid">
 			<div class="row no-gap">
 				<div class="stub">
