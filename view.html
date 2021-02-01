@@ -654,7 +654,8 @@
 
 		var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
 		var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
-		if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+		var middleBarHidded = middleBar3.style.visibility == "hidden";
+		if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement && !middleBarHidded) {
 			middleBar3.style.visibility = "hidden";
 			middleBar3.style.minHeight = "0px";
 			middleBar3.style.height = "0px";
