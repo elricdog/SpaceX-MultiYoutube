@@ -8,7 +8,7 @@
       <title>Welcome to SpaceX Board!</title> 
     </item>
     <item>
-      <title>NEWS: &lt;img src='./RSSIcons/rocket-scrub.png'/&gt; SN9 Pending FAA approval to fly, NET feb 2</title>
+      <title>NEWS: &lt;img src='./RSSIcons/rocket-scrub.png'/&gt; SN9 NET feb 2, Pending FAA approval to fly</title>
     </item>
     <item>
       <title>NEWS: &lt;img src='./RSSIcons/rocket.png'/&gt; SN10 is in the launch pad!</title>
@@ -20,7 +20,7 @@
       <title>Updated live channels (reload to ensure latests links)</title>
     </item>
     <item>
-      <title>Added SpaceXBoard chat room (buggy, unstable and not moderated, use at your own risk). More info in "help"</title>
+      <title>Added SpaceXBoard chat room (not moderated, use at your own risk). More info in "help"</title>
     </item>
   </channel>
 </rss>
