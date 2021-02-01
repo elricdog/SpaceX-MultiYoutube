@@ -190,7 +190,7 @@ html, body {
 
 #loading-screen {
 	position: absolute;
-	z-index: 2;
+	z-index: 20000;
 	top: 0;
 	left: 0;
 	width: 100%;

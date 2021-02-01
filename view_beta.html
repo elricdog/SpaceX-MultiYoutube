@@ -246,12 +246,12 @@
 			updateRSSTextScrollWidth();
 		});
 		updateRSSTextScrollWidth();
-		const resizeObserver = new ResizeObserver(entries => {
+		const resizeRSSObserver = new ResizeObserver(entries => {
 			updateRSSTextScrollWidth();
 		});
 		const iframeCH1 = document.getElementById("iframeCH1");
-		resizeObserver.observe(iframeCH1);
-
+		resizeRSSObserver.observe(iframeCH1);
+		
 		toggleIconGroups();
 		toggleLastUpdate();
 		if (isMobile())
@@ -260,7 +260,31 @@
 			toggleTimeGroups();
 			toggleRSSScroll();
 			toggle5thColumn();
+		} else {
+			set5thColumn(true, last5thColumnSplitSizes);
 		}
+
+		const resize5thObserver = new ResizeObserver(entries => {		
+			const column5thView = document.getElementById('column5thView');
+			var column5thViewBounds = column5thView.getBoundingClientRect();
+			console.log("Observing 5th column: " + column5thViewBounds.width);
+			if (column5thViewBounds.width>28) {
+				if (column5thView.style.visibility == "hidden") {
+					console.log("Auto Show 5th column");
+					toggle5thColumn();
+				}
+			}
+			else {				
+				if (column5thViewBounds.width==0) {
+					if (column5thView.style.visibility == "visible") {
+						console.log("Auto Hide 5th column");
+						toggle5thColumn();
+					}
+				}
+			}
+		});
+		const column5thView = document.getElementById("column5thView");
+		resize5thObserver.observe(column5thView);		
 
 		const lastUpdate = document.getElementById("lastUpdate");
 		var lastModifiedDateString = fetchHeader(location.href,'Last-Modified');
@@ -653,7 +677,7 @@
 <div class="allViews" id="app-screen" style="visibility:hidden;">
 
 <!-- 4 views -->
-<div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="83, 17" data-min-sizes="100, 0" id="rootView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
+<div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="83, 17" data-min-sizes="200, 0" id="rootView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
 
 <div data-role="splitter" data-split-mode="vertical" data-gutter-size="5" data-split-sizes="50, 50" data-min-sizes="100, 100" id="mainView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
     <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="50, 50" data-min-sizes="100, 100" id="mainView12">
@@ -771,7 +795,7 @@
     </div>
 </div>
 
-<div class="d-flex flex-column flex-justify-left" id="column5thView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
+<div class="d-flex flex-column flex-justify-left" id="column5thView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray; visibility:hidden">
 	<div class="container" style="height:28px; min-height:28px; max-height:28px; padding:0px;">
 		<div class="grid">
 			<div class="row no-gap">
