@@ -632,11 +632,11 @@
 		var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
 		if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
 			middleBar3.style.visibility = "hidden";
-			middleBar3.style.height = "0px";
 			middleBar3.style.min_height = "0px";
+			middleBar3.style.height = "0px";
 			middleBar4.style.visibility = "hidden";
-			middleBar4.style.height = "0px";
 			middleBar4.style.min_height = "0px";
+			middleBar4.style.height = "0px";
 			requestFullScreen.call(docEl);
 		} else {
 			middleBar3.style.visibility = "visible";
