@@ -6,3 +6,25 @@ html, body {
 	margin: 0px;	
 	height: 100%;
 }
+
+.myButton {
+	background-color:gray;
+	border-radius:15px;
+	border: 2px solid #black;
+	display:inline-block;
+	cursor:pointer;
+	color:white;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+	padding:8px 14px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px black;
+}
+.myButton:hover {
+	background-color:silver;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
