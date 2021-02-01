@@ -371,10 +371,14 @@
 		analytics.logEvent('option_click', { name: 'Help'});
 	}
 	function openChat() {
-		const select4 = document.getElementById("selectCH4");
+		var view = 4;
+		if (isMobile()) {
+			view = 2;
+		}
+		const select = document.getElementById("selectCH"+view);
 		var event = new Event('change');
-		select4.selectedIndex = indexMatchingText(select4, "CHAT - SpaceX Board");
-		select4.dispatchEvent(event);
+		select.selectedIndex = indexMatchingText(select, "CHAT - SpaceX Board");
+		select.dispatchEvent(event);
 		analytics.logEvent('option_click', { name: 'Chat'});
 	}
 
@@ -817,8 +821,8 @@
 								<div title="Go to FullScreen" class="icon" id="iconFullScreen"><img src="Icons/fullscreen.png"/></div>
 								<div title="Reload application" class="icon" id="iconRefreshApp"><img src="Icons/refresh.png"/></div>
 								<div title="Show/Hide 5th column" class="icon" id="icon5thColumn"><img src="Icons/column5th.png"/></div>
-								<div title="Open Help in View 3" class="icon" id="iconHelp"><img src="Icons/help.png"/></div>
-								<div title="Open Chat in View 4" class="icon" id="iconChat"><img src="Icons/chat.png"/></div>
+								<div title="Open Help in View" class="icon" id="iconHelp"><img src="Icons/help.png"/></div>
+								<div title="Open Chat in View" class="icon" id="iconChat"><img src="Icons/chat.png"/></div>
 								<div title="Information about Us and this web site" class="icon" id="iconAboutUs"><img src="Icons/aboutus.png"/></div>
 								<div title="You have any comment or idea?" class="icon" id="iconContact"><img src="Icons/contact.png"/></div>
 								<div title="Save current configuration" class="icon" id="iconSave"><img src="Icons/save.png"/></div>

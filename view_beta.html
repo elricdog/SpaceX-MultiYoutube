@@ -117,13 +117,33 @@
 
 <!-- Utilities -->
 <script>
+	let last5thColumnSplitSizes = "83, 17";	
+	let isMobileFlag = null;
+	
+	function useCookiesForConfiguration() {
+		// return true; // Force cookies
+		return isMobile();
+	}
+	
 	function isMobile() {
+		if (isMobileFlag == null)
+		{
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            return true;
+				console.log("Setting mobile style");
+				isMobileFlag = true;            
 		} else {
+				console.log("Setting computer style");
+				isMobileFlag = false;            
+			}
+		}
+		return isMobileFlag;
+    }
+	
+	function isAndroidApp() {
+		// Android.showToast(toast);
+		if (Android!=null) return true;		
             return false;
 		}
-    }
 
 	function fetchHeader(url, wch) {
 		try {
@@ -206,7 +226,7 @@
 		document.getElementById("iconAboutUs").addEventListener ("click", function() { toggleIconGroups(); toggleAboutUs(); }, false);
 		document.getElementById("buttonAboutUsClose").addEventListener ("click", toggleAboutUs, false);
 		document.getElementById("iconSave").addEventListener ("click", function() { toggleIconGroups(); configurationSave(); }, false);
-		document.getElementById("iconLoad").addEventListener ("click", function() { toggleIconGroups(); toggleLoad(); }, false);
+		document.getElementById("iconLoad").addEventListener ("click", function() { toggleIconGroups(); checkTheWayToLoad(); }, false);
 		document.getElementById("buttonLoadClose").addEventListener ("click", toggleLoad, false);
 		document.getElementById("buttonLoad").addEventListener ("click", configurationLoad, false);
 		document.getElementById("iconFullScreen").addEventListener ("click", function() { toggleIconGroups(); toggleFullScreen(); }, false);
@@ -215,6 +235,7 @@
 		document.getElementById("icon5thColumnB").addEventListener ("click", toggle5thColumn, false);
 		document.getElementById("iconChat").addEventListener ("click", function() { toggleIconGroups(); openChat(); }, false);
 		document.getElementById("iconHelp").addEventListener ("click", function() { toggleIconGroups(); openHelp(); }, false);
+		document.getElementById("iconRefreshApp").addEventListener ("click", function() { toggleIconGroups(); refreshApp(); }, false);
 
 		document.getElementById("iconRefreshCH1").addEventListener ("click", refreshCH1, false);
 		document.getElementById("iconRefreshCH2").addEventListener ("click", refreshCH2, false);
@@ -259,7 +280,8 @@
 			toggleVisitors();
 			toggleTimeGroups();
 			toggleRSSScroll();
-			toggle5thColumn();
+			last5thColumnSplitSizes = "70, 30";
+			set5thColumn(false, last5thColumnSplitSizes);
 		} else {
 			set5thColumn(true, last5thColumnSplitSizes);
 		}
@@ -309,6 +331,9 @@
 		}, 2000);		
 	};
 
+	function refreshApp() {
+		location.reload();
+	}
 	function refreshCH1() {
 		refresh("iframeCH1");
 	}
@@ -346,10 +371,14 @@
 		analytics.logEvent('option_click', { name: 'Help'});
 	}
 	function openChat() {
-		const select4 = document.getElementById("selectCH4");
+		var view = 4;
+		if (isMobile()) {
+			view = 2;
+		}
+		const select = document.getElementById("selectCH"+view);
 		var event = new Event('change');
-		select4.selectedIndex = indexMatchingText(select4, "CHAT - SpaceX Board");
-		select4.dispatchEvent(event);
+		select.selectedIndex = indexMatchingText(select, "CHAT - SpaceX Board");
+		select.dispatchEvent(event);
 		analytics.logEvent('option_click', { name: 'Chat'});
 	}
 
@@ -453,7 +482,6 @@
 		}
 	}
 
-	let last5thColumnSplitSizes = "83, 17";
 	function preserve5thColumn() {
 		// Preserve current SplitSizes
 		const mainView = document.getElementById("mainView");
@@ -509,6 +537,51 @@
 		reader.readAsText(file);
 	};
 
+	function read_cookie(name) {
+		console.log("read_cookie from " + name);
+		var result = getCookie(name);		
+		console.log("- loaded = " + result);
+		return result;
+	}
+	function bake_cookie(name, value) {
+		console.log("bake_cookie to " + name);
+		console.log("- tosave = " + value);
+		setCookie(name, value, 7);
+	}	
+	
+	function setCookie(name,value,days) {
+		var expires = "";
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime() + (days*24*60*60*1000));
+			expires = "; expires=" + date.toUTCString();
+		}
+		document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+	}
+	function getCookie(name) {
+		var nameEQ = name + "=";
+		var ca = document.cookie.split(';');
+		for(var i=0;i < ca.length;i++) {
+			var c = ca[i];
+			while (c.charAt(0)==' ') c = c.substring(1,c.length);
+			if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+		}
+		return null;
+	}	
+	
+	function checkTheWayToLoad() {
+		if (useCookiesForConfiguration())
+		{		
+			var text = read_cookie("SpaceXBoard-Configuration");
+			if (text==null) return;
+			var data = JSON.parse(text);
+			console.log("Configuration loaded");
+			console.log(data);
+			internalConfigurationLoad(data);
+		} else {
+			toggleLoad();				
+		}
+	}
 	function configurationLoad() {
 		let file = document.getElementById("load-file-input").files[0];
 		if (file === null) return;
@@ -516,7 +589,12 @@
 			var data = JSON.parse(text);
 			console.log("Configuration loaded");
 			console.log(data);
+			internalConfigurationLoad(data);				
+			toggleLoad();				
+		});
+	}
 
+	function internalConfigurationLoad(data) {
 			const select1 = document.getElementById("selectCH1");
 			const select2 = document.getElementById("selectCH2");
 			const select3 = document.getElementById("selectCH3");
@@ -558,10 +636,8 @@
 			var column5thViewVisible = data["column5thViewVisible"];
 			set5thColumn(column5thViewVisible, splitter1.dataset.splitSizes);
 
-			toggleLoad();
 			console.log("Loaded OK");
-		});
-	};
+	}
 
 	function download(data, filename, type) {
 		var file = new Blob([data], {type: type});
@@ -643,7 +719,15 @@
 			"splitter4Sizes":splitter4SplitSizes,
 			"column5thViewVisible":column5thViewVisible,
 		};
-		download(JSON.stringify(data), "configuration", "text/plain;charset=utf-8");
+		var text = JSON.stringify(data);
+		
+		if (useCookiesForConfiguration())
+		{		
+			bake_cookie("SpaceXBoard-Configuration", text);			
+			console.log("Saved OK");
+		} else {		
+			download(text, "configuration", "text/plain;charset=utf-8");
+		}		
 	};
 
 	function toggleFullScreen() {
@@ -735,9 +819,10 @@
 						<div class="stub flex-justify-end" id="optionsIcons">
 							<div class="iconPopUp">
 								<div title="Go to FullScreen" class="icon" id="iconFullScreen"><img src="Icons/fullscreen.png"/></div>
+								<div title="Reload application" class="icon" id="iconRefreshApp"><img src="Icons/refresh.png"/></div>
 								<div title="Show/Hide 5th column" class="icon" id="icon5thColumn"><img src="Icons/column5th.png"/></div>																
-								<div title="Open Help in View 3" class="icon" id="iconHelp"><img src="Icons/help.png"/></div>
-								<div title="Open Chat in View 4" class="icon" id="iconChat"><img src="Icons/chat.png"/></div>
+								<div title="Open Help in View" class="icon" id="iconHelp"><img src="Icons/help.png"/></div>
+								<div title="Open Chat in View" class="icon" id="iconChat"><img src="Icons/chat.png"/></div>
 								<div title="Information about Us and this web site" class="icon" id="iconAboutUs"><img src="Icons/aboutus.png"/></div>
 								<div title="You have any comment or idea?" class="icon" id="iconContact"><img src="Icons/contact.png"/></div>
 								<div title="Save current configuration" class="icon" id="iconSave"><img src="Icons/save.png"/></div>
