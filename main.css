@@ -203,10 +203,10 @@ html, body {
     display: block;
     position: relative;
     left: 50%;
-    top: 15%;
-    width: 150px;
-    height: 150px;
-    margin: -75px 0 0 -75px;
+    top: 5%;
+    width: 100px;
+    height: 100px;
+    margin: -50px 0 0 -50px;
     border-radius: 50%;
     border: 3px solid transparent;
     border-top-color: #70DB93;
