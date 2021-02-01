@@ -117,12 +117,17 @@
 
 <!-- Utilities -->
 <script>
+	var isMobileFlag = null;
 	function isMobile() {
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            return true;
-		} else {
-            return false;
+		if (isMobileFlag==null)
+		{
+			if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+				isMobileFlag = true;            
+			} else {
+				isMobileFlag = false;            
+			}
 		}
+		return isMobileFlag;
     }
 
 	function fetchHeader(url, wch) {
@@ -215,6 +220,7 @@
 		document.getElementById("icon5thColumnB").addEventListener ("click", toggle5thColumn, false);
 		document.getElementById("iconChat").addEventListener ("click", function() { toggleIconGroups(); openChat(); }, false);
 		document.getElementById("iconHelp").addEventListener ("click", function() { toggleIconGroups(); openHelp(); }, false);
+		document.getElementById("iconRefreshApp").addEventListener ("click", function() { toggleIconGroups(); refreshApp(); }, false);
 		
 		document.getElementById("iconRefreshCH1").addEventListener ("click", refreshCH1, false);
 		document.getElementById("iconRefreshCH2").addEventListener ("click", refreshCH2, false);
@@ -260,6 +266,7 @@
 			toggleTimeGroups();
 			toggleRSSScroll();
 			toggle5thColumn();
+			last5thColumnSplitSizes = "75, 25";
 		} else {
 			set5thColumn(true, last5thColumnSplitSizes);
 		}
@@ -309,6 +316,9 @@
 		}, 2000);		
 	};
 
+	function refreshApp() {
+		location.reload();
+	}
 	function refreshCH1() {
 		refresh("iframeCH1");
 	}	
@@ -735,6 +745,7 @@
 						<div class="stub flex-justify-end" id="optionsIcons">
 							<div class="iconPopUp">
 								<div title="Go to FullScreen" class="icon" id="iconFullScreen"><img src="Icons/fullscreen.png"/></div>
+								<div title="Reload application" class="icon" id="iconRefreshApp"><img src="Icons/refresh.png"/></div>
 								<div title="Show/Hide 5th column" class="icon" id="icon5thColumn"><img src="Icons/column5th.png"/></div>
 								<div title="Open Help in View 3" class="icon" id="iconHelp"><img src="Icons/help.png"/></div>
 								<div title="Open Chat in View 4" class="icon" id="iconChat"><img src="Icons/chat.png"/></div>
