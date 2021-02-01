@@ -117,18 +117,33 @@
 
 <!-- Utilities -->
 <script>
-	var isMobileFlag = null;
+	let last5thColumnSplitSizes = "83, 17";	
+	let isMobileFlag = null;
+	
+	function useCookiesForConfiguration() {
+		// return true; // Force cookies
+		return isMobile();
+	}
+	
 	function isMobile() {
-		if (isMobileFlag==null)
+		if (isMobileFlag == null)
 		{
 			if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+				console.log("Setting mobile style");
 				isMobileFlag = true;            
 			} else {
+				console.log("Setting computer style");
 				isMobileFlag = false;            
 			}
 		}
 		return isMobileFlag;
     }
+	
+	function isAndroidApp() {
+		// Android.showToast(toast);
+		if (Android!=null) return true;		
+		return false;
+	}
 
 	function fetchHeader(url, wch) {
 		try {
@@ -211,7 +226,7 @@
 		document.getElementById("iconAboutUs").addEventListener ("click", function() { toggleIconGroups(); toggleAboutUs(); }, false);
 		document.getElementById("buttonAboutUsClose").addEventListener ("click", toggleAboutUs, false);
 		document.getElementById("iconSave").addEventListener ("click", function() { toggleIconGroups(); configurationSave(); }, false);
-		document.getElementById("iconLoad").addEventListener ("click", function() { toggleIconGroups(); toggleLoad(); }, false);
+		document.getElementById("iconLoad").addEventListener ("click", function() { toggleIconGroups(); checkTheWayToLoad(); }, false);
 		document.getElementById("buttonLoadClose").addEventListener ("click", toggleLoad, false);
 		document.getElementById("buttonLoad").addEventListener ("click", configurationLoad, false);
 		document.getElementById("iconFullScreen").addEventListener ("click", function() { toggleIconGroups(); toggleFullScreen(); }, false);
@@ -265,8 +280,8 @@
 			toggleVisitors();
 			toggleTimeGroups();
 			toggleRSSScroll();
-			toggle5thColumn();
-			last5thColumnSplitSizes = "75, 25";
+			last5thColumnSplitSizes = "70, 30";
+			set5thColumn(false, last5thColumnSplitSizes);
 		} else {
 			set5thColumn(true, last5thColumnSplitSizes);
 		}
@@ -462,8 +477,7 @@
 			optionsIcons.style.width = "0px";
 		}
 	}
-
-	let last5thColumnSplitSizes = "83, 17";
+	
 	function preserve5thColumn() {
 		// Preserve current SplitSizes
 		const mainView = document.getElementById("mainView");
@@ -518,60 +532,108 @@
 		});
 		reader.readAsText(file);
 	};
-
+	
+	function read_cookie(name) {
+		console.log("read_cookie from " + name);
+		var result = getCookie(name);		
+		console.log("- loaded = " + result);
+		return result;
+	}
+	function bake_cookie(name, value) {
+		console.log("bake_cookie to " + name);
+		console.log("- tosave = " + value);
+		setCookie(name, value, 7);
+	}	
+	
+	function setCookie(name,value,days) {
+		var expires = "";
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime() + (days*24*60*60*1000));
+			expires = "; expires=" + date.toUTCString();
+		}
+		document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+	}
+	function getCookie(name) {
+		var nameEQ = name + "=";
+		var ca = document.cookie.split(';');
+		for(var i=0;i < ca.length;i++) {
+			var c = ca[i];
+			while (c.charAt(0)==' ') c = c.substring(1,c.length);
+			if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+		}
+		return null;
+	}	
+	
+	function checkTheWayToLoad() {
+		if (useCookiesForConfiguration())
+		{		
+			var text = read_cookie("SpaceXBoard-Configuration");
+			if (text==null) return;
+			var data = JSON.parse(text);
+			console.log("Configuration loaded");
+			console.log(data);
+			internalConfigurationLoad(data);
+		} else {
+			toggleLoad();				
+		}
+	}
 	function configurationLoad() {
 		let file = document.getElementById("load-file-input").files[0];
 		if (file === null) return;
 		upload(file, function(text) {
 			var data = JSON.parse(text);
 			console.log("Configuration loaded");
-			console.log(data);
-
-			const select1 = document.getElementById("selectCH1");
-			const select2 = document.getElementById("selectCH2");
-			const select3 = document.getElementById("selectCH3");
-			const select4 = document.getElementById("selectCH4");
-			const select5 = document.getElementById("selectCH5");
-
-			var event = new Event('change');
-			select1.selectedIndex = indexMatchingText(select1, data["ch1"]);
-			select2.selectedIndex = indexMatchingText(select2, data["ch2"]);
-			select3.selectedIndex = indexMatchingText(select3, data["ch3"]);
-			select4.selectedIndex = indexMatchingText(select4, data["ch4"]);
-			select5.selectedIndex = indexMatchingText(select5, data["ch5"]);
-			select1.dispatchEvent(event);
-			select2.dispatchEvent(event);
-			select3.dispatchEvent(event);
-			select4.dispatchEvent(event);
-			select5.dispatchEvent(event);
-
-			var rssTextScrollVisible = data["rssTextScrollVisible"];
-			var lastUpdateLabelVisible = data["lastUpdateLabelVisible"];
-			var visitorsLabelVisible = data["visitorsLabelVisible"];
-			var timersIconLabelsVisible = data["timersIconLabelsVisible"];
-
-			setRSSScroll(rssTextScrollVisible);
-			setLastUpdate(lastUpdateLabelVisible);
-			setVisitors(visitorsLabelVisible);
-			setTimeGroups(timersIconLabelsVisible);
-
-			const splitter1 = document.getElementById("rootView");
-			const splitter2 = document.getElementById("mainView");
-			const splitter3 = document.getElementById("mainView12");
-			const splitter4 = document.getElementById("mainView34");
-
-			splitter1.dataset.splitSizes = data["splitter1Sizes"];
-			splitter2.dataset.splitSizes = data["splitter2Sizes"];
-			splitter3.dataset.splitSizes = data["splitter3Sizes"];
-			splitter4.dataset.splitSizes = data["splitter4Sizes"];
-
-			var column5thViewVisible = data["column5thViewVisible"];
-			set5thColumn(column5thViewVisible, splitter1.dataset.splitSizes);
-
-			toggleLoad();
-			console.log("Loaded OK");
+			console.log(data);				
+			internalConfigurationLoad(data);				
+			toggleLoad();				
 		});
-	};
+	}
+	
+	function internalConfigurationLoad(data) {
+		const select1 = document.getElementById("selectCH1");
+		const select2 = document.getElementById("selectCH2");
+		const select3 = document.getElementById("selectCH3");
+		const select4 = document.getElementById("selectCH4");
+		const select5 = document.getElementById("selectCH5");
+
+		var event = new Event('change');
+		select1.selectedIndex = indexMatchingText(select1, data["ch1"]);
+		select2.selectedIndex = indexMatchingText(select2, data["ch2"]);
+		select3.selectedIndex = indexMatchingText(select3, data["ch3"]);
+		select4.selectedIndex = indexMatchingText(select4, data["ch4"]);
+		select5.selectedIndex = indexMatchingText(select5, data["ch5"]);
+		select1.dispatchEvent(event);
+		select2.dispatchEvent(event);
+		select3.dispatchEvent(event);
+		select4.dispatchEvent(event);
+		select5.dispatchEvent(event);
+
+		var rssTextScrollVisible = data["rssTextScrollVisible"];
+		var lastUpdateLabelVisible = data["lastUpdateLabelVisible"];
+		var visitorsLabelVisible = data["visitorsLabelVisible"];
+		var timersIconLabelsVisible = data["timersIconLabelsVisible"];
+
+		setRSSScroll(rssTextScrollVisible);
+		setLastUpdate(lastUpdateLabelVisible);
+		setVisitors(visitorsLabelVisible);
+		setTimeGroups(timersIconLabelsVisible);
+
+		const splitter1 = document.getElementById("rootView");
+		const splitter2 = document.getElementById("mainView");
+		const splitter3 = document.getElementById("mainView12");
+		const splitter4 = document.getElementById("mainView34");
+
+		splitter1.dataset.splitSizes = data["splitter1Sizes"];
+		splitter2.dataset.splitSizes = data["splitter2Sizes"];
+		splitter3.dataset.splitSizes = data["splitter3Sizes"];
+		splitter4.dataset.splitSizes = data["splitter4Sizes"];
+
+		var column5thViewVisible = data["column5thViewVisible"];
+		set5thColumn(column5thViewVisible, splitter1.dataset.splitSizes);
+
+		console.log("Loaded OK");
+	}
 
 	function download(data, filename, type) {
 		var file = new Blob([data], {type: type});
@@ -652,8 +714,16 @@
 			"splitter3Sizes":splitter3SplitSizes,
 			"splitter4Sizes":splitter4SplitSizes,
 			"column5thViewVisible":column5thViewVisible,
-		};
-		download(JSON.stringify(data), "configuration", "text/plain;charset=utf-8");
+		};		
+		var text = JSON.stringify(data);
+		
+		if (useCookiesForConfiguration())
+		{		
+			bake_cookie("SpaceXBoard-Configuration", text);			
+			console.log("Saved OK");
+		} else {		
+			download(text, "configuration", "text/plain;charset=utf-8");
+		}		
 	};
 
 	function toggleFullScreen() {
