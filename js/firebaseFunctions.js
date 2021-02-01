@@ -97,11 +97,16 @@ function getRealTimeVisitors(view){
 }
 
 function getRealtimeRss(view){
+	console.log("RSS Fetch");
     firebase.database().ref('rss')
     .on('value', (snapshot)=>{
+      console.log("RSS Updated");
+	  var result = "";
       snapshot.forEach((child)=>{
-      console.log("test: "+child.val().title)
-      })
+		result += '\xa0' + ' • ' + '\xa0' + child.val().title.trim();
+      });
+	  console.log("RSS Text: " + result);
+	  view.innerHTML = result.trim() + '\xa0' + ' • ' + '\xa0';
     });
 }
 
@@ -110,7 +115,6 @@ function getCurrentUTCTime(){
   let currentTimeZoneOffsetInHours = d.getTimezoneOffset() / 60;
   let utc = new Date();
   utc.setHours( utc.getHours() + currentTimeZoneOffsetInHours );
-
   return utc.valueOf()
 }
 
@@ -124,4 +128,4 @@ getRealtimeNumViews(document.getElementById("visitors"));
 getRealTimeVisitors(document.getElementById("visitorsNow"));
 
 // Get RSS from firebase database
-//getRealtimeRss(document.getElementById("XXX"));
+getRealtimeRss(document.getElementById("rssTextScrollContent"));

@@ -31,8 +31,6 @@
 
 <body>
 
-<script src="./js/rss-marquee.js"></script>
-
 <section id="loading-screen" style="visibility:visible;">
 	<br>
 	<center>
@@ -260,18 +258,12 @@
 		select4.dispatchEvent(event);
 		select5.dispatchEvent(event);
 
-		const feedTextScrollUrl = ['https://elricdog.github.io/SpaceX-MultiYoutube/rss.xml'];
-        const rssTextScroll = document.getElementById('rssTextScroll');
-        new RSSMarquee(feedTextScrollUrl, rssTextScroll, { speed: 100 } );
-		window.addEventListener('resize', () => {
-			updateRSSTextScrollWidth();
-		});
-		updateRSSTextScrollWidth();
 		const resizeRSSObserver = new ResizeObserver(entries => {
 			updateRSSTextScrollWidth();
 		});
 		const iframeCH1 = document.getElementById("iframeCH1");
 		resizeRSSObserver.observe(iframeCH1);
+		updateRSSTextScrollWidth();
 
 		toggleIconGroups();
 		toggleLastUpdate();
@@ -311,16 +303,8 @@
 		var lastModifiedDateString = fetchHeader(location.href,'Last-Modified');
 		var lastModifiedDate = new Date();
 		lastModifiedDate.setTime(Date.parse(lastModifiedDateString));
-		var lastModifiedRSSDateString = fetchHeader(feedTextScrollUrl[0],'Last-Modified');
-		var lastModifiedRSSDate = new Date();
-		lastModifiedRSSDate.setTime(Date.parse(lastModifiedRSSDateString));
-		if (lastModifiedDate>lastModifiedRSSDate) {
-			lastUpdate.innerHTML = lastModifiedDate.toLocaleString();
-			console.log("LastUpdate RSS: "+lastUpdate.innerHTML);
-		} else {
-			lastUpdate.innerHTML = lastModifiedRSSDate.toLocaleString();
-			console.log("LastUpdate: "+lastUpdate.innerHTML);
-		}
+		lastUpdate.innerHTML = lastModifiedDate.toLocaleString();
+		console.log("LastUpdate: "+lastUpdate.innerHTML);
 		
 		var intervalLoadingScreen = window.setInterval(function(){
 			console.log("Closing Loading screen");
@@ -776,7 +760,7 @@
 							<div title="Refresh View 1" class="icon" id="iconRefreshCH1"><img src="Icons/refresh.png"/></div>
 						</div>
 						<div class="cell flex-justify-between">
-							<div class="rssTextScroll" id="rssTextScroll"></div>
+							<div class="rssTextScroll" id="rssTextScroll"><div id="rssTextScrollContent"></div></div>
 						</div>
 						<div class="stub flex-align-end">
 							<div title="Show/Hide the RSS scroll" class="icon" id="iconRSS"><img src="Icons/rss.png"/></div>
@@ -929,7 +913,7 @@ const timeUTC = document.getElementById("timeUTC");
 const timeTIME = document.getElementById("timeTIME");
 
 function composeYouTubeLiveStreamURL(videoId, muteDefault) {
-	return "https://www.youtube.com/embed/"+videoId+"?autoplay=1&mute="+muteDefault;
+	return "https://www.youtube.com/embed/"+videoId+"?autoplay=1&ref=0&mute="+muteDefault;
 }
 
 const channels = {
@@ -983,7 +967,8 @@ const channels = {
 
  "GAMES - SpaceX ISS Docking Simulator":"https://iss-sim.spacex.com",
  "GAMES - Quiz SpaceX Game":"gameQuiz.html",
- 
+
+ "360 View BocaChica SpaceX":composeYouTubeLiveStreamURL("nVo5AsMz0TI", 1), 
  "3D / VR Model of StarShip":"https://elricdog.github.io/SpaceX-StarShip/VRStarShip/",
  
  "ChangeLog":"changelog.html",
@@ -1070,13 +1055,11 @@ var intervalId = window.setInterval(function(){
 updateDateTime();
 
 </script>
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-analytics.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-database.js"></script>
 <script src="js/firebaseFunctions.js"></script>
+
 </body>
 </html>
