@@ -70,7 +70,7 @@ function addVisitor(){
   firebase.database().ref('visitors/'+getGUID()).set({
     value: getCurrentUTCTime()
   });
-
+  return;
   //Clean old visitors
   firebase.database().ref('visitors/').once('value', (visitors) =>{
 	  var lowLimit = new Date(getCurrentUTCTime()-(1800*1000));
