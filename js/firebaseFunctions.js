@@ -186,7 +186,9 @@ function getFeedsFromDB() {
 			updateOptionsWithNewFeed(select1, title, newURL);
 			updateOptionsWithNewFeed(select2, title, newURL);
 			updateOptionsWithNewFeed(select3, title, newURL);
-			updateOptionsWithNewFeed(select4, title, newURL);			
+			updateOptionsWithNewFeed(select4, title, newURL);
+			
+			
 		});
 	});
 }
@@ -198,6 +200,16 @@ function updateOptionsWithNewFeed(optionSelect, title, newURL) {
 			console.log("- Replaced URL on " + id);
 			el.title = newURL;
 			el.value = newURL;
+			
+			var index = optionSelect.selectedIndex;
+			var sel = optionSelect.options[index];
+			console.log("- Currently selected " + sel.textContent);
+			if (sel.textContent==title) {
+				console.log("- Reload currently selected " + sel.index);
+				var event = new Event('change');
+				optionSelect.selectedIndex = sel.index;
+				optionSelect.dispatchEvent(event);
+			}
 			return;
 		}
 	}			
