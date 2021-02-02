@@ -209,6 +209,7 @@
          
          	document.getElementById("iconOptions").addEventListener ("click", toggleIconGroups, false);
          	document.getElementById("iconLastUpdate").addEventListener ("click", function() { toggleIconGroups(); toggleLastUpdate(); }, false);
+			document.getElementById("iconLaunchState").addEventListener ("click", function() { toggleIconGroups(); toggleLaunchState(); }, false);
          	document.getElementById("iconVisitors").addEventListener ("click", function() { toggleIconGroups(); toggleVisitors(); }, false);
          	document.getElementById("iconTime").addEventListener ("click", function() { toggleIconGroups(); toggleTimeGroups(); }, false);
          	document.getElementById("iconContact").addEventListener ("click", function() { toggleIconGroups(); toggleContact(); }, false);
@@ -262,6 +263,7 @@
          	if (isMobile())
          	{
          		toggleVisitors();
+				toggleLaunchState();
          		toggleTimeGroups();			
          		last5thColumnSplitSizes = "70, 30";
          		set5thColumn(false, last5thColumnSplitSizes);
@@ -412,6 +414,22 @@
          function toggleLastUpdate() {
          	const lastUpdateLabel = document.getElementById('groupLastUpdate');
          	setLastUpdate(lastUpdateLabel.style.visibility == "hidden");
+         };
+         		 
+         function setLaunchState(visible) {
+         	const launchStateLabel = document.getElementById('groupLaunchState');
+         	if (visible) {
+         		launchStateLabel.style.visibility = "visible";
+         		launchStateLabel.style.width = "auto";
+         		analytics.logEvent('option_click', { name: 'LaunchState'});
+         	} else {
+         		launchStateLabel.style.visibility = "hidden";
+         		launchStateLabel.style.width = "0px";
+         	}
+         };
+         function toggleLaunchState() {
+         	const launchStateLabel = document.getElementById('groupLaunchState');
+         	setLaunchState(launchStateLabel.style.visibility == "hidden");
          };
          
          function setVisitors(visible) {
@@ -591,11 +609,13 @@
          	var rssTextScrollVisible = data["rssTextScrollVisible"];
          	var lastUpdateLabelVisible = data["lastUpdateLabelVisible"];
          	var visitorsLabelVisible = data["visitorsLabelVisible"];
+			var launchStateLabelVisible = data["launchStateLabelVisible"];
          	var timersIconLabelsVisible = data["timersIconLabelsVisible"];
          
          	setRSSScroll(rssTextScrollVisible);
          	setLastUpdate(lastUpdateLabelVisible);
          	setVisitors(visitorsLabelVisible);
+			setLaunchState(launchStateVisible);
          	setTimeGroups(timersIconLabelsVisible);
          
          	const splitter1 = document.getElementById("rootView");
@@ -645,6 +665,8 @@
          	const lastUpdateLabelVisible = (lastUpdateLabel.style.visibility == "visible");
          	const visitorsLabel = document.getElementById('groupVisitors');
          	const visitorsLabelVisible = (visitorsLabel.style.visibility == "visible");		
+         	const launchStateLabel = document.getElementById('groupLaunchState');
+         	const launchStateLabelVisible = (launchStateLabel.style.visibility == "visible");					
          	const timersIconLabels = document.getElementById('timersIconLabels');
          	const timersIconLabelsVisible = (timersIconLabels.style.visibility == "visible");
          
@@ -687,6 +709,7 @@
          		"rssTextScrollVisible":rssTextScrollVisible,
          		"lastUpdateLabelVisible":lastUpdateLabelVisible,
          		"visitorsLabelVisible":visitorsLabelVisible,
+				"launchStateLabelVisible":launchStateLabelVisible,
          		"timersIconLabelsVisible":timersIconLabelsVisible,
          		"splitter1Sizes":splitter1SplitSizes,
          		"splitter2Sizes":splitter2SplitSizes,
@@ -788,6 +811,12 @@
                                  </div>
                               </div>
                               <div class="stub">
+                                 <div title="Views launch current state" class="iconLabel2" id="groupLaunchState">
+                                    Launch State
+                                    <div><label id="launchState">...</label></div>
+                                 </div>
+                              </div>
+                              <div class="stub">
                                  <div class="iconGroup" id="timersIconLabels">
                                     <div title="LOCAL TIME AT BOCA CHICA" class="iconLabel" id="groupLOCAL">
                                        LOCAL
@@ -819,6 +848,7 @@
                                     <div title="Show/Hide the clocks (LOCAL/UTC/YOUR CURRENT TIME)" class="icon" id="iconTime"><img src="Icons/time.png"/></div>
                                     <div title="Show/Hide last update information" class="icon" id="iconLastUpdate"><img src="Icons/lastUpdate.png"/></div>
                                     <div title="Show/Hide visitors information" class="icon" id="iconVisitors"><img src="Icons/visitors.png"/></div>
+									<div title="Show/Hide launch state information" class="icon" id="iconLaunchState"><img src="Icons/launchState.png"/></div>
                                  </div>
                               </div>
                               <div class="stub flex-justify-end">

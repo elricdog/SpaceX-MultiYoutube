@@ -103,7 +103,13 @@ function getRealtimeRss(view){
       console.log("RSS Updated");
 	  var result = "";
       snapshot.forEach((child)=>{
-		result += '\xa0' + ' • ' + '\xa0' + child.val().title.trim();
+		  var newItem = child.val();
+		  if (newItem!=null) {
+			  var newText = newItem.title;
+			  if (newText!=null) {
+				result += '\xa0' + ' • ' + '\xa0' + newText.trim();
+			  }
+		  }		  
       });
 	  console.log("RSS Text: " + result);
 	  view.innerHTML = result.trim() + '\xa0' + ' • ' + '\xa0';
@@ -118,6 +124,49 @@ function getCurrentUTCTime(){
   return utc.valueOf()
 }
 
+let lastUpdateLaunchState = "...";
+let minutesUpdateLaunchState = 0;
+let intervalUpdateLaunchState = null;
+function clearIntervalUpdateLaunchState() {
+	if (intervalUpdateLaunchState!==null) {
+		window.clearInterval(intervalUpdateLaunchState);
+		intervalUpdateLaunchState = null;
+	}
+}
+
+function getLaunchState(view){
+    firebase.database().ref('state/text')
+    .on('value', (snapshot)=>{
+		clearIntervalUpdateLaunchState();
+		lastUpdateLaunchState = snapshot.val();
+		view.innerHTML = lastUpdateLaunchState;
+    });
+    firebase.database().ref('state/minutes')
+    .on('value', (snapshot)=>{
+		clearIntervalUpdateLaunchState();
+		minutesUpdateLaunchState = snapshot.val();
+		if ((minutesUpdateLaunchState!=null) && (minutesUpdateLaunchState!="") && (minutesUpdateLaunchState!=0) && (minutesUpdateLaunchState!="0")) {
+			intervalUpdateLaunchState = window.setInterval(function(){
+				if (minutesUpdateLaunchState<=0)
+				{
+					clearIntervalUpdateLaunchState();					
+					view.innerHTML = "GO FOR LAUNCH";
+				} else {
+					minutesUpdateLaunchState = minutesUpdateLaunchState-1;
+					view.innerHTML = "T - "+minutesUpdateLaunchState;
+				}
+				console.log("Updated Launch State to: " + view.innerHTML);
+			}, 60000);			  
+			view.innerHTML = "T - "+minutesUpdateLaunchState;
+		} else {
+			if (minutesUpdateLaunchState==0) {
+				view.innerHTML = lastUpdateLaunchState;
+			}
+		}
+		console.log("Updated Launch State dur DB change to: " + view.innerHTML);
+    });
+}
+
 // Add one view more
 addView();
 
@@ -129,3 +178,6 @@ getRealTimeVisitors(document.getElementById("visitorsNow"));
 
 // Get RSS from firebase database
 getRealtimeRss(document.getElementById("rssTextScrollContent"));
+
+// Get state of launch from database
+getLaunchState(document.getElementById("launchState"));

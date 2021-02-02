@@ -105,6 +105,24 @@ body {
 	z-index: 10000;
 }
 
+.iconLabel2 {
+	white-space: nowrap;
+	border-spacing: 0px;
+	padding: 0px 1px 0px 1px;
+	margin: 0px 1px 0px 0px;
+	min-height: 28px;
+	max-height: 28px;
+	height: 28px;
+	max-width: auto;
+	background-color: #F6C7A7;
+	text-align: center;
+	line-height: 13px;
+	font-size: 10px;
+	border: 1px solid black;
+	float: right;
+	z-index: 10000;
+}
+
 .rssTextScroll {
 	border-spacing: 0px;
 	padding: 0px;
