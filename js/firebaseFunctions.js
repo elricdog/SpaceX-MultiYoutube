@@ -163,8 +163,44 @@ function getLaunchState(view){
 				view.innerHTML = lastUpdateLaunchState;
 			}
 		}
-		console.log("Updated Launch State dur DB change to: " + view.innerHTML);
+		console.log("Updated Launch State due DB change to: " + view.innerHTML);
     });
+}
+
+function getFeedsFromDB() {
+	firebase.database().ref('feeds')
+	.on('value', (snapshot)=>{
+		snapshot.forEach((child)=>{
+			var title = child.key;
+			var value = child.val();
+			console.log("Feed [" + title + "] updated to: " + value);
+			var newURL = composeYouTubeLiveStreamURL(value);
+			console.log("- New URL: " + newURL);
+
+			// Update options
+			const select1 = document.getElementById("selectCH1");
+			const select2 = document.getElementById("selectCH2");
+			const select3 = document.getElementById("selectCH3");
+			const select4 = document.getElementById("selectCH4");
+						
+			updateOptionsWithNewFeed(select1, title, newURL);
+			updateOptionsWithNewFeed(select2, title, newURL);
+			updateOptionsWithNewFeed(select3, title, newURL);
+			updateOptionsWithNewFeed(select4, title, newURL);			
+		});
+	});
+}
+
+function updateOptionsWithNewFeed(optionSelect, title, newURL) {
+	for (var id in optionSelect.options) {
+		var el = optionSelect.options[id];
+		if (el.textContent==title) {				
+			console.log("- Replaced URL on " + id);
+			el.title = newURL;
+			el.value = newURL;
+			return;
+		}
+	}			
 }
 
 // Add one view more
@@ -181,3 +217,6 @@ getRealtimeRss(document.getElementById("rssTextScrollContent"));
 
 // Get state of launch from database
 getLaunchState(document.getElementById("launchState"));
+
+// Get feeds from DB database
+getFeedsFromDB();
