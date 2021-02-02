@@ -68,16 +68,18 @@ function isValidDate(d) {
 // Add visitor in the current minute
 function addVisitor(){
   firebase.database().ref('visitors/'+getGUID()).set({
-    value: getCurrentUTCTime()
+    value: getCurrentUTCTime().toUTCString()
   });
 
   //Clean old visitors
   firebase.database().ref('visitors/').once('value', (visitors) =>{
 	  var lowLimit = new Date(getCurrentUTCTime()-(1800*1000));
       visitors.forEach((child)=>{
-		var utc = child.val().value;
-		if(utc < lowLimit){
-		  firebase.database().ref('visitors').child(child.key).remove();
+		var utc = Date.parse(child.val().value);
+		if (isValidDate(utc)) {
+			if(utc < lowLimit){
+			  firebase.database().ref('visitors').child(child.key).remove();
+			}
 		}
       });
   });
@@ -85,7 +87,7 @@ function addVisitor(){
 
 function updateVisitor(){
   firebase.database().ref('visitors/'+getGUID()).set({
-    value: getCurrentUTCTime()
+    value: getCurrentUTCTime().toUTCString()
   });
 }
 
