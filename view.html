@@ -33,15 +33,15 @@
             <img id="imgLogo" src="./Images/logo_mini.png"/>
             <br>
             <h3 style="color:silver;">SpaceXBoard by Sworied, Berrgurt and Elric</h3>
-            <br>
 			<h5 style="color:white;"><i>Best looked on a computer big screen or horizontally in mobile devices</i></h5>
+			<br>
          </center>
          <div id="loader"/>
       </section>
       <!-- Contact -->
       <div id="contact" style="visibility:hidden; width: fit-content; height: fit-content;">
          <center>
-            <h1>Contact</h1>
+            <h2>Contact</h2>
             Please, feel free to send any idea to improve this website.<br>
 			We will take in consideration as soon as posible, or later or never.<br>
 			We work on this on our free time. Always under construction.<br>
@@ -75,7 +75,7 @@
          <center>
             <img src="Images/logo_mini.png"/>
             <br>
-            <h1>About Us</h1>
+            <h2>About Us</h2>
             <p>
                One day we see that browser tabs was not enough to follow Starship evolution...then...
                <br>
@@ -267,11 +267,12 @@
          	if (isMobile())
          	{
 				const linksToWeb = document.getElementById("linksToWeb");				
-				linksToWeb.style.visibility = "hidden";
-				linksToWeb.style.height = "0px";
+				linksToWeb.remove();
 
-				document.getElementById("iconSave").style.visibility = "hidden";
-				document.getElementById("iconLoad").style.visibility = "hidden";
+				const iconSave = document.getElementById("iconSave");
+				const iconLoad = document.getElementById("iconLoad");
+				iconSave.remove();
+				iconLoad.remove();
 				
          		toggleVisitors();
 				toggleLaunchState();
