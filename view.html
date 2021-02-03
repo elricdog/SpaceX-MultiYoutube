@@ -34,7 +34,7 @@
             <br>
             <h3 style="color:silver;">SpaceXBoard by Sworied, Berrgurt and Elric</h3>
             <br>
-			<h5 style="color:white;"><i>Best looked in a computer big screen or horizontally in mobile devices</i></h5>
+			<h5 style="color:white;"><i>Best looked on a computer big screen or horizontally in mobile devices</i></h5>
          </center>
          <div id="loader"/>
       </section>
@@ -42,31 +42,31 @@
       <div id="contact" style="visibility:hidden; width: fit-content; height: fit-content;">
          <center>
             <h1>Contact</h1>
-            Please, feel free to send any idea to improve this website. We will take in consideration as soon as posible, or later or never. We work on this on our free time. Always under construction. Be patient.
-         </center>
-         <br>
+            Please, feel free to send any idea to improve this website.<br>
+			We will take in consideration as soon as posible, or later or never.<br>
+			We work on this on our free time. Always under construction.<br>
+			Be patient.<br>
+         </center>         
          <form id="contact-form">
             <input type="hidden" name="contact_number">
             <p>
                <label>Name</label>
                <input type="text" name="user_name" size="32" maxlength="32">
                <br>
-               <label>Email</label>
+               <label>E-mail</label>
                <input type="email" name="user_email" size="64" maxlength="128">
             </p>
             <label>Message</label>
             <div class="contactMessage">
-               <textarea class="contactMessageText" name="message" rows="5"></textarea>
+               <textarea class="contactMessageText" name="message" size="64" rows="5"></textarea>
             </div>
             <br>
             <center>
                <button id="buttonContactSend" class="myButton">Send</button>
                <button id="buttonContactClose" class="myButton">Close</button>
-               <br>
-               <br>
+               <br>               
                <label id="lblContactError" style="color:red;"></label>
-         </form>
-         <br>
+         </form>         
          <label style="color:yellow;">(Still not work, under development)</label>
          </center>
       </div>
@@ -85,14 +85,16 @@
             <br>
             <button id="buttonAboutUsClose" class="myButton">Close</button>
             <br>
-            <br>Link to this web:<br>
-            <a href="https://elricdog.github.io/SpaceX-MultiYoutube/view.html">https://elricdog.github.io/SpaceX-MultiYoutube/view.html</a>
-            <br>Link to BETA version (bugs and not stable):<br>
-            <a href="https://elricdog.github.io/SpaceX-MultiYoutube/view_beta.html">https://elricdog.github.io/SpaceX-MultiYoutube/view_beta.html</a>
-            <br>Link to OLD version (more simple):<br>
-            <a href="https://elricdog.github.io/SpaceX-MultiYoutube/view_old.html">https://elricdog.github.io/SpaceX-MultiYoutube/view_old.html</a>
-            <br>Source Code at GitHub:<br>
-            <a href="https://github.com/elricdog/SpaceX-MultiYoutube">https://github.com/elricdog/SpaceX-MultiYoutube</a>
+			<div id="linksToWeb"> 
+				<br>Link to this web:<br>
+				<a href="https://elricdog.github.io/SpaceX-MultiYoutube/view.html">https://elricdog.github.io/SpaceX-MultiYoutube/view.html</a>
+				<br>Link to BETA version (bugs and not stable):<br>
+				<a href="https://elricdog.github.io/SpaceX-MultiYoutube/view_beta.html">https://elricdog.github.io/SpaceX-MultiYoutube/view_beta.html</a>
+				<br>Link to OLD version (more simple):<br>
+				<a href="https://elricdog.github.io/SpaceX-MultiYoutube/view_old.html">https://elricdog.github.io/SpaceX-MultiYoutube/view_old.html</a>
+				<br>Source Code at GitHub:<br>
+				<a href="https://github.com/elricdog/SpaceX-MultiYoutube">https://github.com/elricdog/SpaceX-MultiYoutube</a>
+			</div>
          </center>
       </div>
       <!-- To read local disk files -->
@@ -264,6 +266,9 @@
          	toggleLastUpdate();
          	if (isMobile())
          	{
+				const linksToWeb = document.getElementById("linksToWeb");				
+				linksToWeb.style.visibility = "hidden";
+				
          		toggleVisitors();
 				toggleLaunchState();
          		toggleTimeGroups();			
@@ -736,29 +741,49 @@
          function toggleFullScreen() {
          	const middleBar3 = document.getElementById("middleBarOfBottomLeft");
          	const middleBar4 = document.getElementById("middleBarOfBottomRight");
-         	var doc = window.document;
-         	var docEl = doc.documentElement;
-         
-         	var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
-         	var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
-         	var middleBarHidded = middleBar3.style.visibility == "hidden";
-         	if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement && !middleBarHidded) {
-         		middleBar3.style.visibility = "hidden";
-         		middleBar3.style.minHeight = "0px";
-         		middleBar3.style.height = "0px";
-         		middleBar4.style.visibility = "hidden";
-         		middleBar4.style.minHeight = "0px";
-         		middleBar4.style.height = "0px";
-         		requestFullScreen.call(docEl);
-         	} else {
-         		middleBar3.style.visibility = "visible";
-         		middleBar3.style.height = "28px";
-         		middleBar3.style.minHeight = "28px";
-         		middleBar4.style.visibility = "visible";
-         		middleBar4.style.height = "28px";
-         		middleBar4.style.minHeight = "28px";
-         		cancelFullScreen.call(doc);
-         	}
+			
+			if (isMobile())
+			{
+				var middleBarHidded = middleBar3.style.visibility == "hidden";
+				if (!middleBarHidded) {
+					middleBar3.style.visibility = "hidden";
+					middleBar3.style.minHeight = "0px";
+					middleBar3.style.height = "0px";
+					middleBar4.style.visibility = "hidden";
+					middleBar4.style.minHeight = "0px";
+					middleBar4.style.height = "0px";				
+				} else {
+					middleBar3.style.visibility = "visible";
+					middleBar3.style.height = "28px";
+					middleBar3.style.minHeight = "28px";
+					middleBar4.style.visibility = "visible";
+					middleBar4.style.height = "28px";
+					middleBar4.style.minHeight = "28px";
+				}
+			} else {
+				var doc = window.document;
+				var docEl = doc.documentElement;
+						
+				var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+				var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;							
+				if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement && !middleBarHidded) {
+					middleBar3.style.visibility = "hidden";
+					middleBar3.style.minHeight = "0px";
+					middleBar3.style.height = "0px";
+					middleBar4.style.visibility = "hidden";
+					middleBar4.style.minHeight = "0px";
+					middleBar4.style.height = "0px";				
+					requestFullScreen.call(docEl);
+				} else {
+					middleBar3.style.visibility = "visible";
+					middleBar3.style.height = "28px";
+					middleBar3.style.minHeight = "28px";
+					middleBar4.style.visibility = "visible";
+					middleBar4.style.height = "28px";
+					middleBar4.style.minHeight = "28px";
+					cancelFullScreen.call(doc);
+				}
+			}
          };
       </script>
       <div class="allViews" id="app-screen" style="visibility:hidden;">

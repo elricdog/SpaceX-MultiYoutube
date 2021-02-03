@@ -65,29 +65,58 @@ function isValidDate(d) {
   return d instanceof Date && !isNaN(d);
 }
 
+function getCurrentUTCTime(){
+  let d = new Date();
+  let currentTimeZoneOffsetInHours = d.getTimezoneOffset() / 60;
+  let utc = new Date();
+  utc.setHours( utc.getHours() + currentTimeZoneOffsetInHours );  
+  return utc;
+}
+
+function dateToDB(a) {
+    return a.getDay() + "|" + a.getMonth() + "|" + a.getFullYear() + "|" + a.getHours() + "|" + a.getMinutes() + "|" + a.getSeconds();
+}
+function dbToDate(a) {
+	var items = a.split("|");
+	const y = items[2];
+	const m = items[1];
+	const d = items[0];
+	const hh = items[3];
+	const mm = items[4];
+	const ss = items[5];
+    return new Date(Date.UTC(y, m, d, hh, mm, ss));
+}
+
 // Add visitor in the current minute
 function addVisitor(){
   firebase.database().ref('visitors/'+getGUID()).set({
-    value: getCurrentUTCTime().toUTCString()
+    value: dateToDB(getCurrentUTCTime())
   });
 
   //Clean old visitors
   firebase.database().ref('visitors/').once('value', (visitors) =>{
-	  var lowLimit = new Date(getCurrentUTCTime()-(1800*1000));
+	  var lowLimit = new Date(Date.now()-(1800*1000));	  
+	  //console.log("Low Limit");
+	  //console.log(lowLimit);
       visitors.forEach((child)=>{
-		var utc = Date.parse(child.val().value);
-		if (isValidDate(utc)) {
-			if(utc < lowLimit){
+		  var dbValue = child.val().value;
+			if (typeof dbValue === 'string' || dbValue instanceof String) {
+				var dbDate = dbToDate(dbValue);				
+				//console.log("Date parsed");
+				//console.log(dbDate);
+				if (isValidDate(dbDate)) {
+					if(dbDate < lowLimit){
 			  firebase.database().ref('visitors').child(child.key).remove();
 			}
 		}
+			}
       });
   });
 }
 
 function updateVisitor(){
   firebase.database().ref('visitors/'+getGUID()).set({
-    value: getCurrentUTCTime().toUTCString()
+    value: dateToDB(getCurrentUTCTime())
   });
 }
 
@@ -122,14 +151,6 @@ function getRealtimeRss(view){
 	  console.log("RSS Text: " + result);
 	  view.innerHTML = result.trim() + '\xa0' + ' • ' + '\xa0';
     });
-}
-
-function getCurrentUTCTime(){
-  let d = new Date();
-  let currentTimeZoneOffsetInHours = d.getTimezoneOffset() / 60;
-  let utc = new Date();
-  utc.setHours( utc.getHours() + currentTimeZoneOffsetInHours );
-  return utc.valueOf()
 }
 
 let lastUpdateLaunchState = "...";
