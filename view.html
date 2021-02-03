@@ -613,7 +613,7 @@
          		var data = JSON.parse(text);
          		console.log("Configuration loaded");
          		console.log(data);
-         		internalConfigurationLoad(data);
+         		internalConfigurationLoad(data);				
          	} else {
          		toggleLoad();				
          	}
@@ -765,10 +765,11 @@
          	if (useCookiesForConfiguration())
          	{		
          		bake_cookie("SpaceXBoard-Configuration", text);			
+				alert("Layout configuration saved");
          		console.log("Saved OK");
          	} else {		
          		download(text, "configuration", "text/plain;charset=utf-8");
-         	}		
+         	}					
          };
          
          function toggleFullScreen() {

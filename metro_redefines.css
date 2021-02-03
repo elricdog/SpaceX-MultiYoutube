@@ -1,4 +1,9 @@
 .splitter>.gutter {
-	border: 1px solid #777;
-	background-color: #777;
+	border: 1px solid #87898C;
+	background-color: #87898C;
+}
+
+.splitter>.gutter:hover {
+	border: 1px solid #003268;
+	background-color: #003268;
 }
