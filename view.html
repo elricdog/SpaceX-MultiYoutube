@@ -42,21 +42,23 @@
       <div id="contact" style="visibility:hidden; width: fit-content; height: fit-content;">
          <center>
             <h2>Contact</h2>
-            Please, feel free to send any idea to improve this website.<br>
-			We will take in consideration as soon as posible, or later or never.<br>
-			We work on this on our free time. Always under construction.<br>
-			Be patient.<br>
+			<div id="extendedContactMessage">
+				Please, feel free to send any idea to improve this website.<br>
+				We will take in consideration as soon as posible, or later or never.<br>
+				We work on this on our free time. Always under construction.<br>
+				Be patient.
+			</div>
          </center>         
          <form id="contact-form">
             <input type="hidden" name="contact_number">
             <p>
-               <label>Name</label>
+               <label>Name:</label>
                <input type="text" name="user_name" size="32" maxlength="32">
                <br>
-               <label>E-mail</label>
+               <label>E-mail:</label>
                <input type="email" name="user_email" size="64" maxlength="128">
             </p>
-            <label>Message</label>
+            <label>Message:</label>
             <div class="contactMessage">
                <textarea class="contactMessageText" name="message" size="64" rows="5"></textarea>
             </div>
@@ -268,6 +270,14 @@
          	{
 				const linksToWeb = document.getElementById("linksToWeb");				
 				linksToWeb.remove();
+				const extendedContactMessage = document.getElementById("extendedContactMessage");				
+				extendedContactMessage.remove();
+				
+				select1.style.width = "100px";
+				select2.style.width = "100px";
+				select3.style.width = "100px";
+				select4.style.width = "100px";
+				select5.style.width = "100px";
 
 				const iconSave = document.getElementById("iconSave");
 				const iconLoad = document.getElementById("iconLoad");
@@ -275,7 +285,7 @@
 				iconLoad.remove();
 				
          		toggleVisitors();
-				toggleLaunchState();
+				setLaunchState(true);
          		toggleTimeGroups();			
          		last5thColumnSplitSizes = "70, 30";
          		set5thColumn(false, last5thColumnSplitSizes);
