@@ -285,21 +285,39 @@
 				select4.style.fontSize = "11px";
 				select5.style.fontSize = "11px";
 				
+				const heightStyle = "calc(100% - 28px)";
+				/*
 				const iframeCH1 = document.getElementById("iframeCH1");
 				const iframeCH2 = document.getElementById("iframeCH2");
 				const iframeCH3 = document.getElementById("iframeCH3");
 				const iframeCH4 = document.getElementById("iframeCH4");
 				const iframeCH5 = document.getElementById("iframeCH5");
-				iframeCH1.style.height = "calc(100%-28px)"; 
-				iframeCH1.style.maxHeight = "calc(100%-28px)"; 
-				iframeCH2.style.height = "calc(100%-28px)"; 
-				iframeCH2.style.maxHeight = "calc(100%-28px)"; 
-				iframeCH3.style.height = "calc(100%-28px)"; 
-				iframeCH3.style.maxHeight = "calc(100%-28px)"; 
-				iframeCH4.style.height = "calc(100%-28px)"; 
-				iframeCH4.style.maxHeight = "calc(100%-28px)"; 
-				iframeCH5.style.height = "calc(100%-28px)"; 
-				iframeCH5.style.maxHeight = "calc(100%-28px)"; 
+				iframeCH1.style.height = 
+				iframeCH1.style.maxHeight = 
+				iframeCH2.style.height = 
+				iframeCH2.style.maxHeight = 
+				iframeCH3.style.height = 
+				iframeCH3.style.maxHeight = 
+				iframeCH4.style.height = 
+				iframeCH4.style.maxHeight = 
+				iframeCH5.style.height = 
+				iframeCH5.style.maxHeight = heightStyle; 
+				*/
+				const containerCH1 = document.getElementById("containerCH1");
+				const containerCH2 = document.getElementById("containerCH2");
+				const containerCH3 = document.getElementById("containerCH3");
+				const containerCH4 = document.getElementById("containerCH4");
+				const containerCH5 = document.getElementById("containerCH5");
+				containerCH1.style.height = 
+				containerCH1.style.maxHeight = 
+				containerCH2.style.height = 
+				containerCH2.style.maxHeight = 
+				containerCH3.style.height = 
+				containerCH3.style.maxHeight = 
+				containerCH4.style.height = 
+				containerCH4.style.maxHeight = 
+				containerCH5.style.height = 
+				containerCH5.style.maxHeight = heightStyle; 
 				
          		toggleVisitors();
 				setLaunchState(true);
@@ -844,7 +862,7 @@
                            </div>
                         </div>
                      </div>
-                     <div class="container" style="height:100%; padding:0px; margin: 0px;">
+                     <div class="container" id="containerCH1" style="height:100%; padding:0px; margin: 0px;">
                         <iframe id="iframeCH1" class="channels" style="position: relative; height:100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                      </div>
                   </div>
@@ -921,7 +939,7 @@
                            </div>
                         </div>
                      </div>
-                     <div class="container" style="height:100%; padding:0px; margin: 0px;">
+                     <div class="container" id="containerCH2" style="height:100%; padding:0px; margin: 0px;">
                         <iframe id="iframeCH2" class="channels" style="position: relative; height:100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                      </div>
                   </div>
@@ -940,7 +958,7 @@
                            </div>
                         </div>
                      </div>
-                     <div class="container" style="height:100%; padding:0px; margin: 0px;">
+                     <div class="container" id="containerCH3" style="height:100%; padding:0px; margin: 0px;">
                         <iframe id="iframeCH3" class="channels" style="position: relative; height:100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                      </div>
                   </div>
@@ -957,7 +975,7 @@
                            </div>
                         </div>
                      </div>
-                     <div class="container" style="height:100%; padding:0px; margin: 0px;">
+                     <div class="container" id="containerCH4" style="height:100%; padding:0px; margin: 0px;">
                         <iframe id="iframeCH4" class="channels" style="position: relative; height:100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                      </div>
                   </div>
@@ -980,7 +998,7 @@
                      </div>
                   </div>
                </div>
-               <div class="container" style="height:100%; padding:0px; margin: 0px;">
+               <div class="container" id="containerCH5" style="height:100%; padding:0px; margin: 0px;">
                   <iframe id="iframeCH5" class="channels" style="position: relative; height:100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="clipboard-write; encrypted-media;" allowfullscreen></iframe>
                </div>
             </div>
