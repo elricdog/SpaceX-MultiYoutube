@@ -49,6 +49,15 @@ a:active {
 select:focus > option:hover { background: #2072A8 !important; }
 select:focus > option:checked { background: #003268 !important; }
 
+@keyframes optionScroll {
+	0% {
+		transform: translate(0, 0);
+	}
+	100% {
+		transform: translate(-100%, 0);
+	}
+}
+
 .channels {
 	border-spacing: 0px;
 	padding: 0px;
@@ -140,7 +149,7 @@ select:focus > option:checked { background: #003268 !important; }
 	text-align: center;
 	line-height: 13px;
 	font-size: 10px;
-	border: 1px solid #005288;
+	border: 0px;
 	float: right;
 	z-index: 10000;
 }
@@ -159,7 +168,7 @@ select:focus > option:checked { background: #003268 !important; }
 	text-align: center;
 	line-height: 13px;
 	font-size: 10px;
-	border: 1px solid #005288;
+	border: 0px;
 	float: right;
 	z-index: 10000;
 }
@@ -174,7 +183,7 @@ select:focus > option:checked { background: #003268 !important; }
 	height: 28px;
 	background-color: #2072A8;
 	color: white;
-	border: 1px solid #005288;
+	border: 0px;
 	z-index: 10000;
 	white-space: nowrap;
 	overflow: hidden;
