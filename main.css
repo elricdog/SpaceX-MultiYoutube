@@ -11,29 +11,6 @@ body {
 	height: 100%;
 }
 
-h1,h2,h3,h4,h5 { color: #C7C9CC; }
-
-a:link {
-  color: #A7A9AC;
-  background-color: transparent;
-  text-decoration: none;
-}
-a:visited {
-  color: pink;
-  background-color: transparent;
-  text-decoration: none;
-}
-a:hover {
-  color: red;
-  background-color: transparent;
-  text-decoration: underline;
-}
-a:active {
-  color: yellow;
-  background-color: transparent;
-  text-decoration: underline;
-}
-
 .allViews {
 	width: 100%;
 	height: 100%;
@@ -44,6 +21,9 @@ a:active {
 
 .container {
 	background-color: #A7A9AC;
+	border-spacing: 0px;
+	padding: 0px;
+	margin: 0px;
 }
 
 select:focus > option:hover { background: #2072A8 !important; }
@@ -62,8 +42,8 @@ select:focus > option:checked { background: #003268 !important; }
 	border-spacing: 0px;
 	padding: 0px;
 	margin: 0px;
-	min-width: 20%;
-	min-height: 20%;
+	min-width: 5%;
+	min-height: 5%;
 }
 
 .channelSelect {
