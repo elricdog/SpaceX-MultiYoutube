@@ -286,23 +286,6 @@
 				select5.style.fontSize = "11px";
 				
 				const heightStyle = "calc(100% - 28px)";
-				/*
-				const iframeCH1 = document.getElementById("iframeCH1");
-				const iframeCH2 = document.getElementById("iframeCH2");
-				const iframeCH3 = document.getElementById("iframeCH3");
-				const iframeCH4 = document.getElementById("iframeCH4");
-				const iframeCH5 = document.getElementById("iframeCH5");
-				iframeCH1.style.height = 
-				iframeCH1.style.maxHeight = 
-				iframeCH2.style.height = 
-				iframeCH2.style.maxHeight = 
-				iframeCH3.style.height = 
-				iframeCH3.style.maxHeight = 
-				iframeCH4.style.height = 
-				iframeCH4.style.maxHeight = 
-				iframeCH5.style.height = 
-				iframeCH5.style.maxHeight = heightStyle; 
-				*/
 				const containerCH1 = document.getElementById("containerCH1");
 				const containerCH2 = document.getElementById("containerCH2");
 				const containerCH3 = document.getElementById("containerCH3");
@@ -801,7 +784,13 @@
 					middleBar3.style.height = "0px";
 					middleBar4.style.visibility = "hidden";
 					middleBar4.style.minHeight = "0px";
-					middleBar4.style.height = "0px";				
+					middleBar4.style.height = "0px";	
+					const containerCH3 = document.getElementById("containerCH3");
+					const containerCH4 = document.getElementById("containerCH4");
+					containerCH3.style.height = 
+					containerCH3.style.maxHeight = 
+					containerCH4.style.height = 
+					containerCH4.style.maxHeight = "100%"; 
 				} else {
 					middleBar3.style.visibility = "visible";
 					middleBar3.style.height = "28px";
@@ -809,6 +798,13 @@
 					middleBar4.style.visibility = "visible";
 					middleBar4.style.height = "28px";
 					middleBar4.style.minHeight = "28px";
+					const heightStyle = "calc(100% - 28px)";
+					const containerCH3 = document.getElementById("containerCH3");
+					const containerCH4 = document.getElementById("containerCH4");
+					containerCH3.style.height = 
+					containerCH3.style.maxHeight = 
+					containerCH4.style.height = 
+					containerCH4.style.maxHeight = heightStyle; 
 				}
 			} else {
 				var doc = window.document;
