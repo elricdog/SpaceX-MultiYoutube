@@ -42,8 +42,8 @@ select:focus > option:checked { background: #003268 !important; }
 	border-spacing: 0px;
 	padding: 0px;
 	margin: 0px;
-	min-width: 5%;
-	min-height: 5%;
+	min-width: 20%;
+	min-height: 20%;
 }
 
 .channelSelect {
