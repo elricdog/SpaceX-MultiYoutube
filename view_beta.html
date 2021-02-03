@@ -34,6 +34,7 @@
             <br>
             <h3 style="color:silver;">SpaceXBoard by Sworied, Berrgurt and Elric</h3>
             <br>
+			<h5 style="color:white;"><i>Best looked in a computer big screen or horizontally in mobile devices</i></h5>
          </center>
          <div id="loader"/>
       </section>
@@ -242,7 +243,7 @@
          	var event = new Event('change');
          	select1.selectedIndex = indexMatchingText(select1, "SpaceFlight");
          	select2.selectedIndex = indexMatchingText(select2, "LabPadre - Nerdle Cam 4K");
-         	select3.selectedIndex = indexMatchingText(select3, "LabPadre - Sentinel Cam");
+         	select3.selectedIndex = indexMatchingText(select3, "SpaceXStorm (Castellano)");
          	select4.selectedIndex = indexMatchingText(select4, "Everyday Astronaut");
          	select5.selectedIndex = indexMatchingText(select5, "My TWITTER SpaceX List");
          	select1.dispatchEvent(event);
@@ -615,7 +616,7 @@
          	setRSSScroll(rssTextScrollVisible);
          	setLastUpdate(lastUpdateLabelVisible);
          	setVisitors(visitorsLabelVisible);
-			setLaunchState(launchStateVisible);
+			setLaunchState(launchStateLabelVisible);
          	setTimeGroups(timersIconLabelsVisible);
          
          	const splitter1 = document.getElementById("rootView");
@@ -931,7 +932,7 @@
          	analytics.logEvent('source', { name: title});
          	
          	var id = iFrameId.replace("iframeCH","");
-         	document.getElementById("selectCH" + id).title = "View " + id + " - " + title;
+         	document.getElementById("selectCH" + id).title = "View " + id + " - " + title + " (" + source + ")";
          }
          
          const select1 = document.getElementById("selectCH1");
@@ -967,11 +968,13 @@
           
           "Everyday Astronaut":composeYouTubeLiveStreamURL("QJ6YN5upGH0", 0),
           "SpaceXStorm (Castellano)":composeYouTubeLiveStreamURL("39T-NWgFtME", 0),
+		  "Frontera Espacial (Castellano)":composeYouTubeLiveStreamURL("uVMXkl-i7l8", 0),
           "Marcus House":composeYouTubeLiveStreamURL("MkLpg5Rs8mI", 0),
-          "What about it":composeYouTubeLiveStreamURL("QRRSvq5s0oE", 0),
+          "What about it!?":composeYouTubeLiveStreamURL("QRRSvq5s0oE", 0),
           "NASA Live":composeYouTubeLiveStreamURL("21X5lGlDOfg", 0),
           "NASA Media Channel":composeYouTubeLiveStreamURL("nA9UZF-SZoQ", 0),
          
+		  "INFORMATION - Space OK (Castellano)":"https://spaceokk.weebly.com/bocachica.html",
           "INFORMATION - LabPadre Boca Chica Weather":"weather2.html",
           "INFORMATION - Boca Chica, TX Weather":"weather.html",
           "INFORMATION - Flight Radar 24":"https://www.flightradar24.com/simple_index.php?lat=25.99&lon=-97.16&z=11&airports=1&label1=callsign&label2=altspeed&label3=tofrom&size=auto",
@@ -1026,6 +1029,8 @@
           "TWITTER - Mary":"twitter.html?people=BocaChicaGal",
           "TWITTER - Spaceflight Now":"twitter.html?people=SpaceflightNow",
           "TWITTER - Everyday Astronaut":"twitter.html?people=Erdayastronaut",
+		  "TWITTER - What about it!?":"twitter.html?people=FelixSchlang",
+		  "TWITTER - Marcus House":"twitter.html?people=MarcusHouseGame",
           "TWITTER - Austin Barnard":"twitter.html?people=austinbarnard45",
           "TWITTER - Chris B - NSF":"twitter.html?people=NASASpaceflight",
           "TWITTER - Jack Beyer":"twitter.html?people=thejackbeyer",
@@ -1036,6 +1041,7 @@
           "TWITTER - SpaceX (Català)":"twitter.html?people=spacexcatala",
           "TWITTER - Ag. Romanov (Català)":"twitter.html?people=ivanvihe",
           "TWITTER - Ismael Flores [SpaceXStorm] (Castellano)":"twitter.html?people=ifcampoy",
+		  "TWITTER - Frontera Espacial (Castellano)":"twitter.html?people=FronteraSpacial",
           
           "*TWITTER":"https://twitter.com",
           "*REDDIT":"https://reddit.com",

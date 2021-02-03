@@ -182,7 +182,7 @@ function getFeedsFromDB() {
 			var title = child.key;
 			var value = child.val();
 			console.log("Feed [" + title + "] updated to: " + value);
-			var newURL = composeYouTubeLiveStreamURL(value);
+			var newURL = composeYouTubeLiveStreamURL(value, 0);
 			console.log("- New URL: " + newURL);
 
 			// Update options
