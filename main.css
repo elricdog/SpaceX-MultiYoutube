@@ -29,6 +29,10 @@ body {
 select:focus > option:hover { background: #2072A8 !important; }
 select:focus > option:checked { background: #003268 !important; }
 
+select:hover {
+	border: 1px solid #A7A9AC;
+}
+
 @keyframes optionScroll {
 	0% {
 		transform: translate(0, 0);
