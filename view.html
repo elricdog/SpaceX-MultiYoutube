@@ -50,7 +50,7 @@
 			</div>
          </center>         
          <form id="contact-form">
-            <input type="hidden" name="contact_number">
+            <input type="hidden" name="contact_number" id="contact_number">
             <p>
                <label>Name:</label>
                <input type="text" name="user_name" size="32" maxlength="32">
@@ -69,7 +69,6 @@
                <br>               
                <label id="lblContactError" style="color:red;"></label>
          </form>         
-         <label style="color:yellow;">(Still not work, under development)</label>
          </center>
       </div>
       <!-- About Us -->
@@ -200,9 +199,10 @@
          	document.getElementById('contact-form').addEventListener('submit', function(event) {
          		event.preventDefault();
          		// generate a five digit number for the contact_number variable
-         		this.contact_number.value = Math.random() * 100000 | 0;
+				var contact_number = document.getElementById( 'contact_number' );
+         		contact_number.value = Math.random() * 100000 | 0;
          		// these IDs from the previous steps
-         		emailjs.sendForm('contact_service', 'contact_form', this)
+         		emailjs.sendForm('service_d2xivgp', 'template_0m1o4oi', "#contact-form", "user_BjUMLZEqKE9VdA5391rv8")
          			.then(function() {
          				console.log('SUCCESS!');
          				toggleContact();
