@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
-      <title>SpaceX Board</title>
+      <title>SpaceXBoard</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
       <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
@@ -234,6 +234,7 @@
          	document.getElementById("icon5thColumn").addEventListener ("click", function() { toggleIconGroups(); toggle5thColumn(); }, false);
          	document.getElementById("icon5thColumnB").addEventListener ("click", toggle5thColumn, false);
          	document.getElementById("iconChat").addEventListener ("click", function() { openChat(); }, false);
+			document.getElementById("iconQuiz").addEventListener ("click", function() { toggleIconGroups(); openQuiz(); }, false);
          	document.getElementById("iconHelp").addEventListener ("click", function() { toggleIconGroups(); openHelp(); }, false);
          	document.getElementById("iconRefreshApp").addEventListener ("click", function() { toggleIconGroups(); refreshApp(); }, false);
          	
@@ -383,8 +384,12 @@
 				const rssTextScroll = document.getElementById('rssTextScroll');
 				w2 = document.getElementById('selectCH1').getBoundingClientRect().width;
 				var fw = (w-w2)-56; // Note: 2 Buttons columns
-				if (fw<50) fw=50;
-				rssTextScroll.style.width = fw+"px";
+				if (fw<20)
+				{
+					toggleRSSScroll();
+				} else {
+					rssTextScroll.style.width = fw+"px";
+				}
 			}
          
          function openHelp() {
@@ -401,9 +406,20 @@
          	}
          	const select = document.getElementById("selectCH"+view);
          	var event = new Event('change');
-         	select.selectedIndex = indexMatchingText(select, "CHAT - SpaceX Board");
+         	select.selectedIndex = indexMatchingText(select, "CHAT - SpaceXBoard");
          	select.dispatchEvent(event);
          	analytics.logEvent('option_click', { name: 'Chat'});
+         }
+         function openQuiz() {
+         	var view = 3;
+         	if (isMobile()) {
+         		view = 1;
+         	}
+         	const select = document.getElementById("selectCH"+view);
+         	var event = new Event('change');
+         	select.selectedIndex = indexMatchingText(select, "GAMES - Quiz SpaceX Game");
+         	select.dispatchEvent(event);
+         	analytics.logEvent('option_click', { name: 'Quiz'});
          }
          
          function toggleContact() {
@@ -841,9 +857,9 @@
       </script>
       <div class="allViews" id="app-screen" style="visibility:hidden;">
          <!-- 4 views -->
-         <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="83, 17" data-min-sizes="200, 0" id="rootView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
-            <div data-role="splitter" data-split-mode="vertical" data-gutter-size="5" data-split-sizes="50, 50" data-min-sizes="100, 100" id="mainView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
-               <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="50, 50" data-min-sizes="100, 100" id="mainView12">
+         <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="83, 17" data-min-sizes="100, 0" id="rootView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
+            <div data-role="splitter" data-split-mode="vertical" data-gutter-size="5" data-split-sizes="50, 50" data-min-sizes="50, 50" id="mainView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
+               <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="50, 50" data-min-sizes="50, 50" id="mainView12">
                   <!-- Top-Left -->
                   <div class="d-flex flex-column flex-justify-left" id="rowOfTopLeft">
                      <div class="container" style="height:28px; min-height:28px; max-height:28px; padding:0px; margin: 0px;">
@@ -925,6 +941,7 @@
                                     <div title="Go to FullScreen" class="icon" id="iconFullScreen"><img src="Icons/fullscreen.png"/></div>
                                     <div title="Reload application" class="icon" id="iconRefreshApp"><img src="Icons/refresh.png"/></div>
                                     <div title="Show/Hide 5th column" class="icon" id="icon5thColumn"><img src="Icons/column5th.png"/></div>
+									<div title="Open Quiz in View" class="icon" id="iconQuiz"><img src="Icons/quiz.png"/></div>
                                     <div title="Open Help in View" class="icon" id="iconHelp"><img src="Icons/help.png"/></div>                                    
                                     <div title="Information about Us and this web site" class="icon" id="iconAboutUs"><img src="Icons/aboutus.png"/></div>
                                     <div title="You have any comment or idea?" class="icon" id="iconContact"><img src="Icons/contact.png"/></div>
@@ -947,7 +964,7 @@
                      </div>
                   </div>
                </div>
-               <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="50, 50" data-min-sizes="100, 100" id="mainView34">
+               <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="50, 50" data-min-sizes="50, 50" id="mainView34">
                   <!-- Bottom-Left -->
                   <div class="d-flex flex-column flex-justify-left" id="rowOfBottomLeft">
                      <div class="container" style="height:28px; min-height:28px; max-height:28px; padding:0px; margin: 0px;" id="middleBarOfBottomLeft">
@@ -1090,7 +1107,7 @@
           "SEARCH - Google":"https://www.google.com/search?igu=1&q=SpaceX",
           "SEARCH - Bing":"https://www.bing.com/search?q=SpaceX",
          
-          "CHAT - SpaceX Board":"chat.html",
+          "CHAT - SpaceXBoard":"chat.html",		  
          
           "GAMES - SpaceX ISS Docking Simulator":"https://iss-sim.spacex.com",
           "GAMES - Quiz SpaceX Game":"gameQuiz.html",
