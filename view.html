@@ -198,18 +198,22 @@
          window.onload = function() {
          	document.getElementById('contact-form').addEventListener('submit', function(event) {
          		event.preventDefault();
-         		// generate a five digit number for the contact_number variable
-				var contact_number = document.getElementById( 'contact_number' );
-         		contact_number.value = Math.random() * 100000 | 0;
-         		// these IDs from the previous steps
-         		emailjs.sendForm('service_d2xivgp', 'template_0m1o4oi', "#contact-form", "user_BjUMLZEqKE9VdA5391rv8")
-         			.then(function() {
-         				console.log('SUCCESS!');
-         				toggleContact();
-         			}, function(error) {
-         				console.log('FAILED...', error);
-         				document.getElementById('lblContactError').innerHTML = 'FAILED(' + error.status +')...' + error.text;
-         			});
+				
+				const contactScreen = document.getElementById('contact');
+				if (contactScreen.style.visibility == "visible") {				
+					// generate a five digit number for the contact_number variable
+					var contact_number = document.getElementById( 'contact_number' );
+					contact_number.value = Math.random() * 100000 | 0;
+					// these IDs from the previous steps
+					emailjs.sendForm('service_d2xivgp', 'template_0m1o4oi', "#contact-form", "user_BjUMLZEqKE9VdA5391rv8")
+						.then(function() {
+							console.log('SUCCESS!');
+							toggleContact();
+						}, function(error) {
+							console.log('FAILED...', error);
+							document.getElementById('lblContactError').innerHTML = 'FAILED(' + error.status +')...' + error.text;
+						});
+				}
          	});
          
          	document.getElementById("iconOptions").addEventListener ("click", toggleIconGroups, false);
