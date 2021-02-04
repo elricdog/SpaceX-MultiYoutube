@@ -210,14 +210,11 @@ function getFeedsFromDB() {
 			const select1 = document.getElementById("selectCH1");
 			const select2 = document.getElementById("selectCH2");
 			const select3 = document.getElementById("selectCH3");
-			const select4 = document.getElementById("selectCH4");
-						
+			const select4 = document.getElementById("selectCH4");						
 			updateOptionsWithNewFeed(select1, title, newURL);
 			updateOptionsWithNewFeed(select2, title, newURL);
 			updateOptionsWithNewFeed(select3, title, newURL);
-			updateOptionsWithNewFeed(select4, title, newURL);
-			
-			
+			updateOptionsWithNewFeed(select4, title, newURL);						
 		});
 	});
 }
@@ -226,18 +223,20 @@ function updateOptionsWithNewFeed(optionSelect, title, newURL) {
 	for (var id in optionSelect.options) {
 		var el = optionSelect.options[id];
 		if (el.textContent==title) {				
-			console.log("- Replaced URL on " + id);
-			el.title = newURL;
-			el.value = newURL;
-			
-			var index = optionSelect.selectedIndex;
-			var sel = optionSelect.options[index];
-			console.log("- Currently selected " + sel.textContent);
-			if (sel.textContent==title) {
-				console.log("- Reload currently selected " + sel.index);
-				var event = new Event('change');
-				optionSelect.selectedIndex = sel.index;
-				optionSelect.dispatchEvent(event);
+			console.log("- Replaced URL on option position " + id);
+			var changed = el.title != newURL;		
+			if (changed) {
+				el.title = newURL;			
+				el.value = newURL;				
+				var index = optionSelect.selectedIndex;
+				var sel = optionSelect.options[index];
+				console.log("- Currently selected " + sel.textContent);
+				if (sel.textContent==title) {
+					console.log("- Reload currently selected");
+					var event = new Event('change');
+					optionSelect.selectedIndex = sel.index;
+					optionSelect.dispatchEvent(event);
+				}
 			}
 			return;
 		}
