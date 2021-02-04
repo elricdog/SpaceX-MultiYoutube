@@ -144,7 +144,10 @@ function getRealtimeRss(view){
 		  if (newItem!=null) {
 			  var newText = newItem.title;
 			  if (newText!=null) {
-				result += '\xa0' + ' • ' + '\xa0' + newText.trim();
+				  newText = newText.trim();
+				  if (newText!="") {
+					result += '\xa0' + ' • ' + '\xa0' + newText;
+				  }
 			  }
 		  }		  
       });
