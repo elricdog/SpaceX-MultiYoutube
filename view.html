@@ -116,10 +116,16 @@
          let isMobileFlag = null;
          
          function useCookiesForConfiguration() {
-         	// return true; // Force cookies
+         	// return true; // Force cookies and orientation changes
          	return isMobile();
          }
          
+         function isMobileLandscape() {
+			if(window.innerHeight > window.innerWidth){
+				return false;
+			}		 
+			return true;
+		}
          function isMobile() {
          	if (isMobileFlag == null)
          	{
@@ -696,6 +702,7 @@
          	var column5thViewVisible = data["column5thViewVisible"];
          	set5thColumn(column5thViewVisible, splitter1.dataset.splitSizes);
          
+			
          	console.log("Loaded OK");
          }
          
@@ -869,6 +876,7 @@
                                  <select id="selectCH1" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH1', this.options, this.selectedIndex)" value="">
                                  </select>
                                  <div title="Refresh View 1" class="icon" id="iconRefreshCH1"><img src="Icons/refresh.png"/></div>
+								 <div title="Is Live" class="icon" id="isLiveCH1" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                               </div>
                               <div class="cell flex-justify-between">
                                  <div class="rssTextScroll" id="rssTextScroll">
@@ -894,6 +902,7 @@
                                  <select id="selectCH2" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH2', this.options, this.selectedIndex)" value="">
                                  </select>
                                  <div title="Refresh View 2" class="icon" id="iconRefreshCH2"><img src="Icons/refresh.png"/></div>
+								 <div title="Is Live" class="icon" id="isLiveCH2" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                               </div>
                               <div class="cell flex-justify-between">
                               </div>
@@ -974,6 +983,7 @@
                                  <select id="selectCH3" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH3', this.options, this.selectedIndex)" value="">
                                  </select>
                                  <div title="Refresh View 3" class="icon" id="iconRefreshCH3"><img src="Icons/refresh.png"/></div>
+								 <div title="Is Live" class="icon" id="isLiveCH3" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                               </div>
                            </div>
                         </div>
@@ -991,6 +1001,7 @@
                                  <select id="selectCH4" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH4', this.options, this.selectedIndex)" value="">
                                  </select>
                                  <div title="Refresh View 4" class="icon" id="iconRefreshCH4"><img src="Icons/refresh.png"/></div>
+								 <div title="Is Live" class="icon" id="isLiveCH4" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                               </div>
                            </div>
                         </div>
@@ -1026,26 +1037,99 @@
       </div>
       <!-- Main Entry Point -->
       <script>
-         function setSourceToElementiFrame(iFrameId, options, index) {
+		var sourcesLive = null;
+		
+		function updateSourceLiveNow(id, source) {         				
+			// Still iFrame not loaded
+			if (source.includes("SpaceX-MultiYoutube/view.html")) return;
+			
+			console.log("Update Source Live Icon at "+id+" with source: " + source);
+			var liveSymbol = document.getElementById("isLiveCH" + id);
+			if (liveSymbol!=null) {
+				if (isSourceLiveNow(source)) {
+					console.log("Is Live");					
+					liveSymbol.style.visibility = "visible";
+					liveSymbol.style.width = "28px";
+					liveSymbol.style.minWidth = "28px";				
+				} else {
+					console.log("Is NOT Live");
+					liveSymbol.style.visibility = "hidden";
+					liveSymbol.style.width = "0px";
+					liveSymbol.style.minWidth = "0px";
+				}
+			}
+		}
+		function loadSourcesLiveNow() {	
+			console.log("Loading Sources Live NOW...");
+			var request = new XMLHttpRequest();
+			request.open('GET', "https://spacex.elric.ws:1080/sourcesLiveNow.txt", true);			
+			request.send(null);
+			request.onreadystatechange = function () {
+				if (request.readyState === 4 && request.status === 200) {
+					var type = request.getResponseHeader('Content-Type');
+					if (type.indexOf("text") !== 1) {
+						sourcesLive = request.responseText.split("\r\n");
+						console.log("Sources Live NOW:");
+						console.log(sourcesLive);
+						
+						const iframeCH1 = document.getElementById("iframeCH1");
+						updateSourceLiveNow(1, iframeCH1.src);					
+						const iframeCH2 = document.getElementById("iframeCH2");
+						updateSourceLiveNow(2, iframeCH2.src);					
+						const iframeCH3 = document.getElementById("iframeCH3");
+						updateSourceLiveNow(3, iframeCH3.src);					
+						const iframeCH4 = document.getElementById("iframeCH4");
+						updateSourceLiveNow(4, iframeCH4.src);					
+					}					
+				}
+			}
+		}		
+		function isBlank(str) {
+			return (!str || /^\s*$/.test(str));
+		}
+		function isSourceLiveNow(source) {	
+			var result = false;
+			if (sourcesLive != null) {		
+				sourcesLive.forEach(item => {									
+					var videoId = item.split(" | ")[0].trim();
+					if (isBlank(videoId)==false) {
+						if (source.includes(videoId)) {
+							console.log("Source is in LiveNow sources: "+source);
+							result = true;
+							return;
+						}
+					}
+				});
+			}
+			return result;
+		}
+		
+        var intervalLoadSourcesLiveNow = window.setInterval(function(){
+         	loadSourcesLiveNow();
+        }, 5*60*1000);		
+		loadSourcesLiveNow();
+				
+        function setSourceToElementiFrame(iFrameId, options, index) {
          	var source = options[index].value;
          	var title = options[index].textContent;
+			
+			console.log("Setting source at " + iFrameId + "("+title+") - " + source);
+			
          	document.getElementById(iFrameId).src = source;
          	analytics.logEvent('source', { name: title});
          	
          	var id = iFrameId.replace("iframeCH","");
          	document.getElementById("selectCH" + id).title = "View " + id + " - " + title + " (" + source + ")";
-         }
-         
+			
+			updateSourceLiveNow(id, source);
+        }
+         		 
          const select1 = document.getElementById("selectCH1");
          const select2 = document.getElementById("selectCH2");
          const select3 = document.getElementById("selectCH3");
          const select4 = document.getElementById("selectCH4");
          const select5 = document.getElementById("selectCH5");
-         
-         const timeLOCAL = document.getElementById("timeLOCAL");
-         const timeUTC = document.getElementById("timeUTC");
-         const timeTIME = document.getElementById("timeTIME");
-         
+                  
          function composeYouTubeLiveStreamURL(videoId, muteDefault) {
          	return "https://www.youtube.com/embed/"+videoId+"?autoplay=1&ref=0&mute="+muteDefault;
          }
@@ -1168,23 +1252,28 @@
          
          // Populate selection channels
          for (var key in channels) {
-             var el = document.createElement("option");
+            var el = document.createElement("option");
          	el.title = channels[key];
-             el.textContent = key;
-             el.value = channels[key];
-             if (select1!=null) select1.appendChild(el);
+            el.textContent = key;
+            el.value = channels[key];
+            if (select1!=null) select1.appendChild(el);
          	if (select2!=null) select2.appendChild(el.cloneNode(true));
          	if (select3!=null) select3.appendChild(el.cloneNode(true));
          	if (select4!=null) select4.appendChild(el.cloneNode(true));
          }
          for (var key in channelsVertical) {
-             var el = document.createElement("option");
+            var el = document.createElement("option");
          	el.title = channels[key];
-             el.textContent = key;
-             el.value = channelsVertical[key];
-             if (select5!=null) select5.appendChild(el);
+            el.textContent = key;
+            el.value = channelsVertical[key];
+            if (select5!=null) select5.appendChild(el);
          }
-         
+
+		 // Timers
+         const timeLOCAL = document.getElementById("timeLOCAL");
+         const timeUTC = document.getElementById("timeUTC");
+         const timeTIME = document.getElementById("timeTIME");
+		 
          // Update Time
          function updateDateTime() {
          	let d = new Date();

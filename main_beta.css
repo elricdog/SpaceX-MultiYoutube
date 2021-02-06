@@ -1,6 +1,9 @@
+/* blau SpaceX: #005288, L #2072A8 D #003268 */
+/* gris SpaceX: #A7A9AC, L #C7C9CC D #87898C */
+
 html,
 body {
-	background-color: gray;
+	background-color: #A7A9AC;	
 	font-family: Arial, Helvetica, sans-serif;
 	border-spacing: 0px;
 	padding: 0px;
@@ -13,6 +16,30 @@ body {
 	height: 100%;
 	min-width: 100%;
 	min-height: 100%;
+	background-color: #A7A9AC;
+}
+
+.container {
+	background-color: #A7A9AC;
+	border-spacing: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+
+select:focus > option:hover { background: #2072A8 !important; }
+select:focus > option:checked { background: #003268 !important; }
+
+select:hover {
+	border: 1px solid #A7A9AC;
+}
+
+@keyframes optionScroll {
+	0% {
+		transform: translate(0, 0);
+	}
+	100% {
+		transform: translate(-100%, 0);
+	}
 }
 
 .channels {
@@ -28,12 +55,14 @@ body {
 	border-spacing: 0px;
 	padding: 0px;
 	margin: 0px;
-	background-color: silver;
+	background-color: #005288;
+	color: white;
+	outline: none;
 	left: 0px;
 	top: 0px;
 	width: 165px;
 	height: 28px;
-	border: 1px solid black;
+	border: 0px;
 	font-size: 12px;
 }
 
@@ -42,23 +71,24 @@ body {
 	border-spacing: 0px;
 	padding: 0px;
 	margin: 0px;
-	background-color: silver;
+	background-color: #005288;
+	color: white;
+	outline: none;
 	left: 0px;
 	top: 0px;
 	width: 155px;
 	height: 28px;
-	border: 1px solid black;
+	border: 0px;
 	font-size: 12px;
 }
 
 .channelSelect:focus {
-	outline: none;
-	border: 2px solid black;
+	background-color: #005288;
 }
 
 .channelSelect5th:focus {
-	outline: none;
-	border: 2px solid black;
+	background-color: #005288;
+	
 }
 
 .iconPopUp {
@@ -66,6 +96,7 @@ body {
 	max-width: 56px;
 	float: right;
 	z-index: 10000;
+	background-color: #005288;
 }
 
 .iconGroup {
@@ -85,7 +116,44 @@ body {
 	border: 0px;
 	float: right;
 	z-index: 10000;
+	background-color: #005288;
 }
+
+.icon:hover {
+	border: 1px solid #A7A9AC;
+}
+
+/*
+.icon:hover {
+    background: linear-gradient(112deg, #A7A9AC, #005288, #C7C9CC, #2072A8, #87898C, #003268);
+    background-size: 400% 400%;
+
+    -webkit-animation: AnimationName 2s ease infinite;
+    -moz-animation: AnimationName 2s ease infinite;
+    animation: AnimationName 2s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:58% 0%}
+    50%{background-position:43% 100%}
+    100%{background-position:58% 0%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:58% 0%}
+    50%{background-position:43% 100%}
+    100%{background-position:58% 0%}
+}
+@-o-keyframes AnimationName {
+    0%{background-position:58% 0%}
+    50%{background-position:43% 100%}
+    100%{background-position:58% 0%}
+}
+@keyframes AnimationName {
+    0%{background-position:58% 0%}
+    50%{background-position:43% 100%}
+    100%{background-position:58% 0%}
+}
+*/
 
 .iconLabel {
 	white-space: nowrap;
@@ -96,11 +164,12 @@ body {
 	max-height: 28px;
 	height: 28px;
 	max-width: auto;
-	background-color: #F6F5D7;
+	background-color: #2072A8;
+	color: white;
 	text-align: center;
 	line-height: 13px;
 	font-size: 10px;
-	border: 1px solid black;
+	border: 0px;
 	float: right;
 	z-index: 10000;
 }
@@ -114,11 +183,12 @@ body {
 	max-height: 28px;
 	height: 28px;
 	max-width: auto;
-	background-color: #F6C7A7;
+	background-color: #003268;
+	color: white;
 	text-align: center;
 	line-height: 13px;
 	font-size: 10px;
-	border: 1px solid black;
+	border: 0px;
 	float: right;
 	z-index: 10000;
 }
@@ -131,8 +201,9 @@ body {
 	max-height: 28px;
 	width: inherit;
 	height: 28px;
-	background-color: #F6F5D7;
-	border: 1px solid black;
+	background-color: #2072A8;
+	color: white;
+	border: 0px;
 	z-index: 10000;
 	white-space: nowrap;
 	overflow: hidden;
@@ -168,11 +239,12 @@ body {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	padding: 10px;
+	padding: 5px;
 	z-index: 300000;
 	visibility: hidden;
-	border: 1px solid black;
-	background-color: #AAA;
+	border: 1px solid #003268;
+	background-color: #005288;
+	color: white;
 	overflow: auto;
 }
 
@@ -196,11 +268,12 @@ body {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	padding: 10px;
+	padding: 5px;
 	z-index: 300000;
 	visibility: hidden;
-	border: 1px solid black;
-	background-color: #AAA;
+	border: 1px solid #003268;
+	background-color: #005288;
+	color: white;
 	overflow: auto;
 }
 
@@ -209,18 +282,18 @@ body {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	padding: 10px;
+	padding: 5px;
 	z-index: 300000;
 	visibility: hidden;
-	border: 1px solid black;
-	background-color: #AAA;
+	border: 1px solid #003268;
+	background-color: #005288;
+	color:white;
 	overflow: auto;
 }
 
 .myButton {
-	background-color: gray;
-	border-radius: 15px;
-	border: 2px solid #black;
+	background-color: #003268;
+	border: 0px;
 	display: inline-block;
 	cursor: pointer;
 	color: white;
@@ -228,12 +301,10 @@ body {
 	font-size: 20px;
 	font-weight: bold;
 	padding: 8px 14px;
-	text-decoration: none;
-	text-shadow: 0px 1px 0px black;
 }
 
 .myButton:hover {
-	background-color: silver;
+	background-color: #2072A8;
 }
 
 .myButton:active {
@@ -268,7 +339,7 @@ body {
 	margin: -50px 0 0 -50px;
 	border-radius: 50%;
 	border: 3px solid transparent;
-	border-top-color: #70DB93;
+	border-top-color: #005288;
 	-webkit-animation: spin 2s linear infinite;
 	animation: spin 2s linear infinite;
 }
@@ -282,7 +353,7 @@ body {
 	bottom: 5px;
 	border-radius: 50%;
 	border: 3px solid transparent;
-	border-top-color: #55D3BA;
+	border-top-color: #003268;
 	-webkit-animation: spin 3s linear infinite;
 	animation: spin 3s linear infinite;
 }
@@ -296,7 +367,7 @@ body {
 	bottom: 15px;
 	border-radius: 50%;
 	border: 3px solid transparent;
-	border-top-color: #00FFFF;
+	border-top-color: #2072A8;
 	-webkit-animation: spin 1.5s linear infinite;
 	animation: spin 1.5s linear infinite;
 }
@@ -325,4 +396,20 @@ body {
 		-ms-transform: rotate(360deg);
 		transform: rotate(360deg);
 	}
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #A7A9AC;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C7C9CC;
+}
+
+::-webkit-scrollbar-corner {
+  background: #A7A9AC;
 }

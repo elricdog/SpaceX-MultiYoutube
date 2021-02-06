@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
-      <title>SpaceX Board</title>
+      <title>SpaceXBoard</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
       <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
@@ -33,41 +33,42 @@
             <img id="imgLogo" src="./Images/logo_mini.png"/>
             <br>
             <h3 style="color:silver;">SpaceXBoard by Sworied, Berrgurt and Elric</h3>
+			<h5 style="color:white;"><i>Best looked on a computer big screen or horizontally in mobile devices</i></h5>
             <br>
-			<h5 style="color:white;"><i>Best looked in a computer big screen or horizontally in mobile devices</i></h5>
          </center>
          <div id="loader"/>
       </section>
       <!-- Contact -->
       <div id="contact" style="visibility:hidden; width: fit-content; height: fit-content;">
          <center>
-            <h1>Contact</h1>
-            Please, feel free to send any idea to improve this website. We will take in consideration as soon as posible, or later or never. We work on this on our free time. Always under construction. Be patient.
+            <h2>Contact</h2>
+			<div id="extendedContactMessage">
+				Please, feel free to send any idea to improve this website.<br>
+				We will take in consideration as soon as posible, or later or never.<br>
+				We work on this on our free time. Always under construction.<br>
+				Be patient.
+			</div>
          </center>
-         <br>
          <form id="contact-form">
-            <input type="hidden" name="contact_number">
+            <input type="hidden" name="contact_number" id="contact_number">
             <p>
-               <label>Name</label>
+               <label>Name:</label>
                <input type="text" name="user_name" size="32" maxlength="32">
                <br>
-               <label>Email</label>
+               <label>E-mail:</label>
                <input type="email" name="user_email" size="64" maxlength="128">
             </p>
-            <label>Message</label>
+            <label>Message:</label>
             <div class="contactMessage">
-               <textarea class="contactMessageText" name="message" rows="5"></textarea>
+               <textarea class="contactMessageText" name="message" size="64" rows="5"></textarea>
             </div>
             <br>
             <center>
                <button id="buttonContactSend" class="myButton">Send</button>
                <button id="buttonContactClose" class="myButton">Close</button>
                <br>
-               <br>
                <label id="lblContactError" style="color:red;"></label>
          </form>
-         <br>
-         <label style="color:yellow;">(Still not work, under development)</label>
          </center>
       </div>
       <!-- About Us -->
@@ -75,7 +76,7 @@
          <center>
             <img src="Images/logo_mini.png"/>
             <br>
-            <h1>About Us</h1>
+            <h2>About Us</h2>
             <p>
                One day we see that browser tabs was not enough to follow Starship evolution...then...
                <br>
@@ -85,6 +86,7 @@
             <br>
             <button id="buttonAboutUsClose" class="myButton">Close</button>
             <br>
+			<div id="linksToWeb"> 
             <br>Link to this web:<br>
             <a href="https://elricdog.github.io/SpaceX-MultiYoutube/view.html">https://elricdog.github.io/SpaceX-MultiYoutube/view.html</a>
             <br>Link to BETA version (bugs and not stable):<br>
@@ -93,6 +95,7 @@
             <a href="https://elricdog.github.io/SpaceX-MultiYoutube/view_old.html">https://elricdog.github.io/SpaceX-MultiYoutube/view_old.html</a>
             <br>Source Code at GitHub:<br>
             <a href="https://github.com/elricdog/SpaceX-MultiYoutube">https://github.com/elricdog/SpaceX-MultiYoutube</a>
+			</div>
          </center>
       </div>
       <!-- To read local disk files -->
@@ -113,10 +116,16 @@
          let isMobileFlag = null;
          
          function useCookiesForConfiguration() {
-         	// return true; // Force cookies
+         	// return true; // Force cookies and orientation changes
          	return isMobile();
          }
          
+         function isMobileLandscape() {
+			if(window.innerHeight > window.innerWidth){
+				return false;
+			}		 
+			return true;
+		}
          function isMobile() {
          	if (isMobileFlag == null)
          	{
@@ -195,10 +204,14 @@
          window.onload = function() {
          	document.getElementById('contact-form').addEventListener('submit', function(event) {
          		event.preventDefault();
+				
+				const contactScreen = document.getElementById('contact');
+				if (contactScreen.style.visibility == "visible") {				
          		// generate a five digit number for the contact_number variable
-         		this.contact_number.value = Math.random() * 100000 | 0;
+					var contact_number = document.getElementById( 'contact_number' );
+					contact_number.value = Math.random() * 100000 | 0;
          		// these IDs from the previous steps
-         		emailjs.sendForm('contact_service', 'contact_form', this)
+					emailjs.sendForm('service_d2xivgp', 'template_0m1o4oi', "#contact-form", "user_BjUMLZEqKE9VdA5391rv8")
          			.then(function() {
          				console.log('SUCCESS!');
          				toggleContact();
@@ -206,6 +219,7 @@
          				console.log('FAILED...', error);
          				document.getElementById('lblContactError').innerHTML = 'FAILED(' + error.status +')...' + error.text;
          			});
+				}
          	});
          
          	document.getElementById("iconOptions").addEventListener ("click", toggleIconGroups, false);
@@ -226,6 +240,7 @@
          	document.getElementById("icon5thColumn").addEventListener ("click", function() { toggleIconGroups(); toggle5thColumn(); }, false);
          	document.getElementById("icon5thColumnB").addEventListener ("click", toggle5thColumn, false);
          	document.getElementById("iconChat").addEventListener ("click", function() { openChat(); }, false);
+			document.getElementById("iconQuiz").addEventListener ("click", function() { toggleIconGroups(); openQuiz(); }, false);
          	document.getElementById("iconHelp").addEventListener ("click", function() { toggleIconGroups(); openHelp(); }, false);
          	document.getElementById("iconRefreshApp").addEventListener ("click", function() { toggleIconGroups(); refreshApp(); }, false);
          	
@@ -264,8 +279,42 @@
          	toggleLastUpdate();
          	if (isMobile())
          	{
+				const linksToWeb = document.getElementById("linksToWeb");				
+				linksToWeb.remove();
+				const extendedContactMessage = document.getElementById("extendedContactMessage");				
+				extendedContactMessage.remove();
+				
+				select1.style.width = "100px";				
+				select2.style.width = "100px";
+				select3.style.width = "100px";
+				select4.style.width = "100px";
+				select5.style.width = "100px";
+				
+				select1.style.fontSize = "11px";
+				select2.style.fontSize = "11px";
+				select3.style.fontSize = "11px";
+				select4.style.fontSize = "11px";
+				select5.style.fontSize = "11px";
+				
+				const heightStyle = "calc(100% - 28px)";
+				const containerCH1 = document.getElementById("containerCH1");
+				const containerCH2 = document.getElementById("containerCH2");
+				const containerCH3 = document.getElementById("containerCH3");
+				const containerCH4 = document.getElementById("containerCH4");
+				const containerCH5 = document.getElementById("containerCH5");
+				containerCH1.style.height = 
+				containerCH1.style.maxHeight = 
+				containerCH2.style.height = 
+				containerCH2.style.maxHeight = 
+				containerCH3.style.height = 
+				containerCH3.style.maxHeight = 
+				containerCH4.style.height = 
+				containerCH4.style.maxHeight = 
+				containerCH5.style.height = 
+				containerCH5.style.maxHeight = heightStyle; 
+				
          		toggleVisitors();
-				toggleLaunchState();
+				setLaunchState(true);
          		toggleTimeGroups();			
          		last5thColumnSplitSizes = "70, 30";
          		set5thColumn(false, last5thColumnSplitSizes);
@@ -341,9 +390,13 @@
          	const rssTextScroll = document.getElementById('rssTextScroll');
          	w2 = document.getElementById('selectCH1').getBoundingClientRect().width;
          	var fw = (w-w2)-56; // Note: 2 Buttons columns
-         	if (fw<50) fw=50;
+				if (fw<20)
+				{
+					toggleRSSScroll();
+				} else {
          	rssTextScroll.style.width = fw+"px";
          }
+			}
          
          function openHelp() {
          	const select3 = document.getElementById("selectCH3");
@@ -359,9 +412,20 @@
          	}
          	const select = document.getElementById("selectCH"+view);
          	var event = new Event('change');
-         	select.selectedIndex = indexMatchingText(select, "CHAT - SpaceX Board");
+         	select.selectedIndex = indexMatchingText(select, "CHAT - SpaceXBoard");
          	select.dispatchEvent(event);
          	analytics.logEvent('option_click', { name: 'Chat'});
+         }
+         function openQuiz() {
+         	var view = 3;
+         	if (isMobile()) {
+         		view = 1;
+         	}
+         	const select = document.getElementById("selectCH"+view);
+         	var event = new Event('change');
+         	select.selectedIndex = indexMatchingText(select, "GAMES - Quiz SpaceX Game");
+         	select.dispatchEvent(event);
+         	analytics.logEvent('option_click', { name: 'Quiz'});
          }
          
          function toggleContact() {
@@ -474,9 +538,11 @@
          	if (optionsIcons.style.visibility == "hidden") {
          		optionsIcons.style.visibility = "visible";
          		optionsIcons.style.width = "auto";
+				optionsIcons.style.height = "auto";
          	} else {
          		optionsIcons.style.visibility = "hidden";
          		optionsIcons.style.width = "0px";
+				optionsIcons.style.height = "0px";
          	}
          }
          
@@ -636,6 +702,7 @@
          	var column5thViewVisible = data["column5thViewVisible"];
          	set5thColumn(column5thViewVisible, splitter1.dataset.splitSizes);
          
+			
          	console.log("Loaded OK");
          }
          
@@ -727,6 +794,7 @@
          	if (useCookiesForConfiguration())
          	{		
          		bake_cookie("SpaceXBoard-Configuration", text);			
+				alert("Layout configuration saved");
          		console.log("Saved OK");
          	} else {		
          		download(text, "configuration", "text/plain;charset=utf-8");
@@ -736,12 +804,44 @@
          function toggleFullScreen() {
          	const middleBar3 = document.getElementById("middleBarOfBottomLeft");
          	const middleBar4 = document.getElementById("middleBarOfBottomRight");
+			
+			if (isMobile())
+			{
+				var middleBarHidded = middleBar3.style.visibility == "hidden";
+				if (!middleBarHidded) {
+					middleBar3.style.visibility = "hidden";
+					middleBar3.style.minHeight = "0px";
+					middleBar3.style.height = "0px";
+					middleBar4.style.visibility = "hidden";
+					middleBar4.style.minHeight = "0px";
+					middleBar4.style.height = "0px";	
+					const containerCH3 = document.getElementById("containerCH3");
+					const containerCH4 = document.getElementById("containerCH4");
+					containerCH3.style.height = 
+					containerCH3.style.maxHeight = 
+					containerCH4.style.height = 
+					containerCH4.style.maxHeight = "100%"; 
+				} else {
+					middleBar3.style.visibility = "visible";
+					middleBar3.style.height = "28px";
+					middleBar3.style.minHeight = "28px";
+					middleBar4.style.visibility = "visible";
+					middleBar4.style.height = "28px";
+					middleBar4.style.minHeight = "28px";
+					const heightStyle = "calc(100% - 28px)";
+					const containerCH3 = document.getElementById("containerCH3");
+					const containerCH4 = document.getElementById("containerCH4");
+					containerCH3.style.height = 
+					containerCH3.style.maxHeight = 
+					containerCH4.style.height = 
+					containerCH4.style.maxHeight = heightStyle; 
+				}
+			} else {
          	var doc = window.document;
          	var docEl = doc.documentElement;
          
          	var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
          	var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
-         	var middleBarHidded = middleBar3.style.visibility == "hidden";
          	if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement && !middleBarHidded) {
          		middleBar3.style.visibility = "hidden";
          		middleBar3.style.minHeight = "0px";
@@ -759,22 +859,24 @@
          		middleBar4.style.minHeight = "28px";
          		cancelFullScreen.call(doc);
          	}
+			}
          };
       </script>
       <div class="allViews" id="app-screen" style="visibility:hidden;">
          <!-- 4 views -->
-         <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="83, 17" data-min-sizes="200, 0" id="rootView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
-            <div data-role="splitter" data-split-mode="vertical" data-gutter-size="5" data-split-sizes="50, 50" data-min-sizes="100, 100" id="mainView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
-               <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="50, 50" data-min-sizes="100, 100" id="mainView12">
+         <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="83, 17" data-min-sizes="100, 0" id="rootView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
+            <div data-role="splitter" data-split-mode="vertical" data-gutter-size="5" data-split-sizes="50, 50" data-min-sizes="50, 50" id="mainView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
+               <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="50, 50" data-min-sizes="50, 50" id="mainView12">
                   <!-- Top-Left -->
                   <div class="d-flex flex-column flex-justify-left" id="rowOfTopLeft">
-                     <div class="container" style="height:28px; min-height:28px; max-height:28px; padding:0px;">
+                     <div class="container" style="height:28px; min-height:28px; max-height:28px; padding:0px; margin: 0px;">
                         <div class="grid">
                            <div class="row no-gap">
                               <div class="stub">
                                  <select id="selectCH1" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH1', this.options, this.selectedIndex)" value="">
                                  </select>
                                  <div title="Refresh View 1" class="icon" id="iconRefreshCH1"><img src="Icons/refresh.png"/></div>
+								 <div title="Is Live" class="icon" id="isLiveCH1" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                               </div>
                               <div class="cell flex-justify-between">
                                  <div class="rssTextScroll" id="rssTextScroll">
@@ -787,19 +889,20 @@
                            </div>
                         </div>
                      </div>
-                     <div class="container" style="height:100%; padding:0px;">
-                        <iframe id="iframeCH1" class="channels" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                     <div class="container" id="containerCH1" style="height:100%; padding:0px; margin: 0px;">
+                        <iframe id="iframeCH1" class="channels" style="position: relative; height:100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                      </div>
                   </div>
                   <!-- Top-Right -->
                   <div class="d-flex flex-column flex-justify-left" id="rowOfTopRight">
-                     <div class="container" style="height:28px; min-height:28px; max-height:28px; padding:0px;">
+                     <div class="container" style="height:28px; min-height:28px; max-height:28px; padding:0px; margin: 0px;">
                         <div class="grid">
                            <div class="row no-gap">
                               <div class="stub">
                                  <select id="selectCH2" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH2', this.options, this.selectedIndex)" value="">
                                  </select>
                                  <div title="Refresh View 2" class="icon" id="iconRefreshCH2"><img src="Icons/refresh.png"/></div>
+								 <div title="Is Live" class="icon" id="isLiveCH2" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                               </div>
                               <div class="cell flex-justify-between">
                               </div>
@@ -847,6 +950,7 @@
                                     <div title="Go to FullScreen" class="icon" id="iconFullScreen"><img src="Icons/fullscreen.png"/></div>
                                     <div title="Reload application" class="icon" id="iconRefreshApp"><img src="Icons/refresh.png"/></div>
                                     <div title="Show/Hide 5th column" class="icon" id="icon5thColumn"><img src="Icons/column5th.png"/></div>
+									<div title="Open Quiz in View" class="icon" id="iconQuiz"><img src="Icons/quiz.png"/></div>
                                     <div title="Open Help in View" class="icon" id="iconHelp"><img src="Icons/help.png"/></div>
                                     <div title="Information about Us and this web site" class="icon" id="iconAboutUs"><img src="Icons/aboutus.png"/></div>
                                     <div title="You have any comment or idea?" class="icon" id="iconContact"><img src="Icons/contact.png"/></div>
@@ -864,50 +968,52 @@
                            </div>
                         </div>
                      </div>
-                     <div class="container" style="height:100%; padding:0px;">
-                        <iframe id="iframeCH2" class="channels" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                     <div class="container" id="containerCH2" style="height:100%; padding:0px; margin: 0px;">
+                        <iframe id="iframeCH2" class="channels" style="position: relative; height:100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                      </div>
                   </div>
                </div>
-               <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="50, 50" data-min-sizes="100, 100" id="mainView34">
+               <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="50, 50" data-min-sizes="50, 50" id="mainView34">
                   <!-- Bottom-Left -->
                   <div class="d-flex flex-column flex-justify-left" id="rowOfBottomLeft">
-                     <div class="container" style="height:28px; min-height:28px; max-height:28px; padding:0px;" id="middleBarOfBottomLeft">
+                     <div class="container" style="height:28px; min-height:28px; max-height:28px; padding:0px; margin: 0px;" id="middleBarOfBottomLeft">
                         <div class="grid">
                            <div class="row no-gap">
                               <div class="stub">
                                  <select id="selectCH3" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH3', this.options, this.selectedIndex)" value="">
                                  </select>
                                  <div title="Refresh View 3" class="icon" id="iconRefreshCH3"><img src="Icons/refresh.png"/></div>
+								 <div title="Is Live" class="icon" id="isLiveCH3" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                               </div>
                            </div>
                         </div>
                      </div>
-                     <div class="container" style="height:100%; padding:0px;">
-                        <iframe id="iframeCH3" class="channels" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                     <div class="container" id="containerCH3" style="height:100%; padding:0px; margin: 0px;">
+                        <iframe id="iframeCH3" class="channels" style="position: relative; height:100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                      </div>
                   </div>
                   <!-- Bottom-Right -->
                   <div class="d-flex flex-column flex-justify-left" id="rowOfBottomRight">
-                     <div class="container" style="height:28px; min-height:28px; max-height:28px; padding:0px;" id="middleBarOfBottomRight">
+                     <div class="container" style="height:28px; min-height:28px; max-height:28px; padding:0px; margin: 0px;" id="middleBarOfBottomRight">
                         <div class="grid">
                            <div class="row no-gap">
                               <div class="stub">
                                  <select id="selectCH4" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH4', this.options, this.selectedIndex)" value="">
                                  </select>
                                  <div title="Refresh View 4" class="icon" id="iconRefreshCH4"><img src="Icons/refresh.png"/></div>
+								 <div title="Is Live" class="icon" id="isLiveCH4" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                               </div>
                            </div>
                         </div>
                      </div>
-                     <div class="container" style="height:100%; padding:0px;">
-                        <iframe id="iframeCH4" class="channels" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                     <div class="container" id="containerCH4" style="height:100%; padding:0px; margin: 0px;">
+                        <iframe id="iframeCH4" class="channels" style="position: relative; height:100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                      </div>
                   </div>
                </div>
             </div>
             <div class="d-flex flex-column flex-justify-left" id="column5thView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray; visibility:hidden">
-               <div class="container" style="height:28px; min-height:28px; max-height:28px; padding:0px;">
+               <div class="container" style="height:28px; min-height:28px; max-height:28px; padding:0px; margin: 0px;">
                   <div class="grid">
                      <div class="row no-gap">
                         <div class="stub">
@@ -923,22 +1029,99 @@
                      </div>
                   </div>
                </div>
-               <div class="container" style="height:100%; padding:0px;">
-                  <iframe id="iframeCH5" class="channels" style="position: relative; height: 100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="clipboard-write; encrypted-media;" allowfullscreen></iframe>
+               <div class="container" id="containerCH5" style="height:100%; padding:0px; margin: 0px;">
+                  <iframe id="iframeCH5" class="channels" style="position: relative; height:100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="clipboard-write; encrypted-media;" allowfullscreen></iframe>
                </div>
             </div>
          </div>
       </div>
       <!-- Main Entry Point -->
       <script>
+		var sourcesLive = null;
+		
+		function updateSourceLiveNow(id, source) {         				
+			// Still iFrame not loaded
+			if (source.includes("SpaceX-MultiYoutube/view.html")) return;
+			
+			console.log("Update Source Live Icon at "+id+" with source: " + source);
+			var liveSymbol = document.getElementById("isLiveCH" + id);
+			if (liveSymbol!=null) {
+				if (isSourceLiveNow(source)) {
+					console.log("Is Live");					
+					liveSymbol.style.visibility = "visible";
+					liveSymbol.style.width = "28px";
+					liveSymbol.style.minWidth = "28px";				
+				} else {
+					console.log("Is NOT Live");
+					liveSymbol.style.visibility = "hidden";
+					liveSymbol.style.width = "0px";
+					liveSymbol.style.minWidth = "0px";
+				}
+			}
+		}
+		function loadSourcesLiveNow() {	
+			console.log("Loading Sources Live NOW...");
+			var request = new XMLHttpRequest();
+			request.open('GET', "https://spacex.elric.ws:1080/sourcesLiveNow.txt", true);			
+			request.send(null);
+			request.onreadystatechange = function () {
+				if (request.readyState === 4 && request.status === 200) {
+					var type = request.getResponseHeader('Content-Type');
+					if (type.indexOf("text") !== 1) {
+						sourcesLive = request.responseText.split("\r\n");
+						console.log("Sources Live NOW:");
+						console.log(sourcesLive);
+						
+						const iframeCH1 = document.getElementById("iframeCH1");
+						updateSourceLiveNow(1, iframeCH1.src);					
+						const iframeCH2 = document.getElementById("iframeCH2");
+						updateSourceLiveNow(2, iframeCH2.src);					
+						const iframeCH3 = document.getElementById("iframeCH3");
+						updateSourceLiveNow(3, iframeCH3.src);					
+						const iframeCH4 = document.getElementById("iframeCH4");
+						updateSourceLiveNow(4, iframeCH4.src);					
+					}					
+				}
+			}
+		}		
+		function isBlank(str) {
+			return (!str || /^\s*$/.test(str));
+		}
+		function isSourceLiveNow(source) {	
+			var result = false;
+			if (sourcesLive != null) {		
+				sourcesLive.forEach(item => {									
+					var videoId = item.split(" | ")[0].trim();
+					if (isBlank(videoId)==false) {
+						if (source.includes(videoId)) {
+							console.log("Source is in LiveNow sources: "+source);
+							result = true;
+							return;
+						}
+					}
+				});
+			}
+			return result;
+		}
+		
+        var intervalLoadSourcesLiveNow = window.setInterval(function(){
+         	loadSourcesLiveNow();
+        }, 5*60*1000);		
+		loadSourcesLiveNow();
+				
          function setSourceToElementiFrame(iFrameId, options, index) {
          	var source = options[index].value;
          	var title = options[index].textContent;
+			
+			console.log("Setting source at " + iFrameId + "("+title+") - " + source);
+			
          	document.getElementById(iFrameId).src = source;
          	analytics.logEvent('source', { name: title});
          	
          	var id = iFrameId.replace("iframeCH","");
          	document.getElementById("selectCH" + id).title = "View " + id + " - " + title + " (" + source + ")";
+			
+			updateSourceLiveNow(id, source);
          }
          
          const select1 = document.getElementById("selectCH1");
@@ -946,10 +1129,6 @@
          const select3 = document.getElementById("selectCH3");
          const select4 = document.getElementById("selectCH4");
          const select5 = document.getElementById("selectCH5");
-         
-         const timeLOCAL = document.getElementById("timeLOCAL");
-         const timeUTC = document.getElementById("timeUTC");
-         const timeTIME = document.getElementById("timeTIME");
          
          function composeYouTubeLiveStreamURL(videoId, muteDefault) {
          	return "https://www.youtube.com/embed/"+videoId+"?autoplay=1&ref=0&mute="+muteDefault;
@@ -1005,10 +1184,14 @@
           "*DISCORD":"https://discord.com", 
           "*YOUTUBE CHANNELS":"https://youtube.com",
            
+          "SPACEX Web":"https://www.spacex.com",
+          "NEXT LAUNCHES - Source 1":"https://whenisthenextspacexlaunch.com/", 
+		  "NEXT LAUNCHES - Source 2":"https://www.rocketlaunch.live/?filter=spacex", 		  
+		  "NEXT LAUNCHES - Source 3":"https://spaceflightnow.com/launch-schedule/", 		  		 
           "SEARCH - Google":"https://www.google.com/search?igu=1&q=SpaceX",
           "SEARCH - Bing":"https://www.bing.com/search?q=SpaceX",
          
-          "CHAT - SpaceX Board":"chat.html",
+          "CHAT - SpaceXBoard":"chat.html",		  
          
           "GAMES - SpaceX ISS Docking Simulator":"https://iss-sim.spacex.com",
           "GAMES - Quiz SpaceX Game":"gameQuiz.html",
@@ -1055,7 +1238,9 @@
           "*YOUTUBE CHANNELS":"https://youtube.com",
          
           "SPACEX Web":"https://www.spacex.com",
-          "NEXT LAUNCHES":"https://whenisthenextspacexlaunch.com/", 
+          "NEXT LAUNCHES - Source 1":"https://whenisthenextspacexlaunch.com/", 
+		  "NEXT LAUNCHES - Source 2":"https://www.rocketlaunch.live/?filter=spacex", 		  
+		  "NEXT LAUNCHES - Source 3":"https://spaceflightnow.com/launch-schedule/", 		  
           "SEARCH - Google":"https://www.google.com/search?igu=1&q=SpaceX",
           "SEARCH - Bing":"https://www.bing.com/search?q=SpaceX",
           
@@ -1084,6 +1269,11 @@
              if (select5!=null) select5.appendChild(el);
          }
          
+		 // Timers
+         const timeLOCAL = document.getElementById("timeLOCAL");
+         const timeUTC = document.getElementById("timeUTC");
+         const timeTIME = document.getElementById("timeTIME");
+		 
          // Update Time
          function updateDateTime() {
          	let d = new Date();
