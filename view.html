@@ -223,10 +223,10 @@
          	});
          
          	document.getElementById("iconOptions").addEventListener ("click", toggleIconGroups, false);
-         	document.getElementById("iconLastUpdate").addEventListener ("click", function() { toggleLastUpdate(); }, false);
-			document.getElementById("iconLaunchState").addEventListener ("click", function() { toggleLaunchState(); }, false);
-         	document.getElementById("iconVisitors").addEventListener ("click", function() { toggleVisitors(); }, false);
-         	document.getElementById("iconTime").addEventListener ("click", function() { toggleTimeGroups(); }, false);
+         	document.getElementById("iconLastUpdate").addEventListener ("click", function() { toggleLastUpdate(); updateRSSTextScrollWidth(); }, false);
+			document.getElementById("iconLaunchState").addEventListener ("click", function() { toggleLaunchState(); updateRSSTextScrollWidth(); }, false);
+         	document.getElementById("iconVisitors").addEventListener ("click", function() { toggleVisitors(); updateRSSTextScrollWidth(); }, false);
+         	document.getElementById("iconTime").addEventListener ("click", function() { toggleTimeGroups(); updateRSSTextScrollWidth(); }, false);
          	document.getElementById("iconContact").addEventListener ("click", function() { toggleIconGroups(); toggleContact(); }, false);
          	document.getElementById("buttonContactClose").addEventListener ("click", toggleContact, false);
          	document.getElementById("iconAboutUs").addEventListener ("click", function() { toggleIconGroups(); toggleAboutUs(); }, false);
@@ -238,7 +238,6 @@
          	document.getElementById("iconFullScreen").addEventListener ("click", function() { toggleIconGroups(); toggleFullScreen(); }, false);
          	document.getElementById("iconRSS").addEventListener ("click", toggleRSSScroll, false);
          	document.getElementById("icon5thColumn").addEventListener ("click", function() { toggleIconGroups(); toggle5thColumn(); }, false);
-         	document.getElementById("icon5thColumnB").addEventListener ("click", toggle5thColumn, false);
          	document.getElementById("iconChat").addEventListener ("click", function() { openChat(); }, false);
 			document.getElementById("iconQuiz").addEventListener ("click", function() { toggleIconGroups(); openQuiz(); }, false);
          	document.getElementById("iconHelp").addEventListener ("click", function() { toggleIconGroups(); openHelp(); }, false);
@@ -266,13 +265,12 @@
          	select3.dispatchEvent(event);
          	select4.dispatchEvent(event);
          	select5.dispatchEvent(event);
-         
+
          	const resizeRSSObserver = new ResizeObserver(entries => {
          		updateRSSTextScrollWidth();
          	});
-         	const iframeCH1 = document.getElementById("iframeCH1");
-         	resizeRSSObserver.observe(iframeCH1);
-         	updateRSSTextScrollWidth();
+         	const rowTopBar = document.getElementById("rowTopBar");
+         	resizeRSSObserver.observe(rowTopBar);         
 			setRSSScroll(true);
          
          	toggleIconGroups();
@@ -313,7 +311,7 @@
 				containerCH5.style.height = 
 				containerCH5.style.maxHeight = heightStyle; 
 				
-         		toggleVisitors();
+         		setVisitors(true);
 				setLaunchState(true);
          		toggleTimeGroups();			
          		last5thColumnSplitSizes = "70, 30";
@@ -384,20 +382,7 @@
          	var iframe = document.getElementById(id);
          	iframe.src = iframe.src;
          }
-         
-            function updateRSSTextScrollWidth() {
-				var w = document.getElementById('rowOfTopLeft').getBoundingClientRect().width;
-				const rssTextScroll = document.getElementById('rssTextScroll');
-				w2 = document.getElementById('selectCH1').getBoundingClientRect().width;
-				var fw = (w-w2)-56; // Note: 2 Buttons columns
-				if (fw<20)
-				{
-					toggleRSSScroll();
-				} else {
-					rssTextScroll.style.width = fw+"px";
-				}
-			}
-         
+                  
          function openHelp() {
          	const select3 = document.getElementById("selectCH3");
          	var event = new Event('change');
@@ -453,11 +438,24 @@
          	}
          };
          
+		 function updateRSSTextScrollWidth() {
+         	const rssTextScroll = document.getElementById('rssTextScroll');
+         	var fw = 1;
+			fw+=document.getElementById('rowTopBarB').getBoundingClientRect().width;
+			fw+=document.getElementById('rowTopBarC').getBoundingClientRect().width;
+			fw+=document.getElementById('rowTopBarD').getBoundingClientRect().width;
+			fw+=document.getElementById('rowTopBarE').getBoundingClientRect().width;
+			fw+=document.getElementById('rowTopBarF').getBoundingClientRect().width;
+			fw+=document.getElementById('rowTopBarG').getBoundingClientRect().width;
+			fw+=document.getElementById('rowTopBarH').getBoundingClientRect().width;
+         	rssTextScroll.style.width = "calc(100% - "+fw+"px)";
+		 }
+		 
          function setRSSScroll(visible) {
          	const rssTextScroll = document.getElementById('rssTextScroll');
          	if (visible) {
          		rssTextScroll.style.visibility = "visible";
-         		updateRSSTextScrollWidth();
+				updateRSSTextScrollWidth();
          		analytics.logEvent('option_click', { name: 'RSSScroll'});
          	} else {
          		rssTextScroll.style.visibility = "hidden";
@@ -473,7 +471,7 @@
          	const lastUpdateLabel = document.getElementById('groupLastUpdate');
          	if (visible) {
          		lastUpdateLabel.style.visibility = "visible";
-         		lastUpdateLabel.style.width = "auto";
+         		lastUpdateLabel.style.width = "auto";				
          		analytics.logEvent('option_click', { name: 'LastUpdate'});
          	} else {
          		lastUpdateLabel.style.visibility = "hidden";
@@ -489,7 +487,7 @@
          	const launchStateLabel = document.getElementById('groupLaunchState');
          	if (visible) {
          		launchStateLabel.style.visibility = "visible";
-         		launchStateLabel.style.width = "auto";
+         		launchStateLabel.style.width = "auto";				
          		analytics.logEvent('option_click', { name: 'LaunchState'});
          	} else {
          		launchStateLabel.style.visibility = "hidden";
@@ -505,7 +503,7 @@
          	const visitorsLabel = document.getElementById('groupVisitors');
          	if (visible) {
          		visitorsLabel.style.visibility = "visible";
-         		visitorsLabel.style.width = "auto";
+         		visitorsLabel.style.width = "auto";				
          		analytics.logEvent('option_click', { name: 'Visitors'});
          	} else {
          		visitorsLabel.style.visibility = "hidden";
@@ -521,7 +519,7 @@
          	const timersIconLabels = document.getElementById('timersIconLabels');
          	if (visible) {
          		timersIconLabels.style.visibility = "visible";
-         		timersIconLabels.style.width = "auto";
+         		timersIconLabels.style.width = "auto";				
          		analytics.logEvent('option_click', { name: 'TimersLabels'});
          	} else {
          		timersIconLabels.style.visibility = "hidden";
@@ -802,218 +800,191 @@
          };
          
          function toggleFullScreen() {
-         	const middleBar3 = document.getElementById("middleBarOfBottomLeft");
-         	const middleBar4 = document.getElementById("middleBarOfBottomRight");
-			
-			if (isMobile())
-			{
-				var middleBarHidded = middleBar3.style.visibility == "hidden";
-				if (!middleBarHidded) {
-					middleBar3.style.visibility = "hidden";
-					middleBar3.style.minHeight = "0px";
-					middleBar3.style.height = "0px";
-					middleBar4.style.visibility = "hidden";
-					middleBar4.style.minHeight = "0px";
-					middleBar4.style.height = "0px";	
-					const containerCH3 = document.getElementById("containerCH3");
-					const containerCH4 = document.getElementById("containerCH4");
-					containerCH3.style.height = 
-					containerCH3.style.maxHeight = 
-					containerCH4.style.height = 
-					containerCH4.style.maxHeight = "100%"; 
-				} else {
-					middleBar3.style.visibility = "visible";
-					middleBar3.style.height = "28px";
-					middleBar3.style.minHeight = "28px";
-					middleBar4.style.visibility = "visible";
-					middleBar4.style.height = "28px";
-					middleBar4.style.minHeight = "28px";
-					const heightStyle = "calc(100% - 28px)";
-					const containerCH3 = document.getElementById("containerCH3");
-					const containerCH4 = document.getElementById("containerCH4");
-					containerCH3.style.height = 
-					containerCH3.style.maxHeight = 
-					containerCH4.style.height = 
-					containerCH4.style.maxHeight = heightStyle; 
-				}
+			var doc = window.document;
+			var docEl = doc.documentElement;
+					
+			var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+			var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;							
+			if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+				requestFullScreen.call(docEl);
 			} else {
-				var doc = window.document;
-				var docEl = doc.documentElement;
-						
-				var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
-				var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;							
-				if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement && !middleBarHidded) {
-					middleBar3.style.visibility = "hidden";
-					middleBar3.style.minHeight = "0px";
-					middleBar3.style.height = "0px";
-					middleBar4.style.visibility = "hidden";
-					middleBar4.style.minHeight = "0px";
-					middleBar4.style.height = "0px";				
-					requestFullScreen.call(docEl);
-				} else {
-					middleBar3.style.visibility = "visible";
-					middleBar3.style.height = "28px";
-					middleBar3.style.minHeight = "28px";
-					middleBar4.style.visibility = "visible";
-					middleBar4.style.height = "28px";
-					middleBar4.style.minHeight = "28px";
-					cancelFullScreen.call(doc);
-				}
+				cancelFullScreen.call(doc);
 			}
          };
-      </script>
-      <div class="allViews" id="app-screen" style="visibility:hidden;">
+      </script>  
+      <div class="allViews" id="app-screen" style="visibility:hidden;">	  
+	  
+         <div class="rowTopBar" id="rowTopBar" style="height:28px; min-height:28px; max-height:28px; padding:0px; margin:0px; width:100%;">
+			
+			  <div class="rowTopBar1" id="rssTextScroll">
+				 <div class="rssTextScroll">
+					<div id="rssTextScrollContent"></div>
+				 </div>
+			  </div>
+					
+			  <div class="rowTopBar2" id="rowTopBarB">
+				 <div title="Options" class="icon" id="iconOptions"><img src="Icons/options.png"/></div>
+				 
+				  <div id="optionsIcons">
+					<div title="Go to FullScreen" class="icon" id="iconFullScreen"><img src="Icons/fullscreen.png"/></div>					
+					<div title="Reload application" class="icon" id="iconRefreshApp"><img src="Icons/refresh.png"/></div>
+					<div title="Show/Hide 5th column" class="icon" id="icon5thColumn"><img src="Icons/column5th.png"/></div>
+					<div title="Open Quiz in View" class="icon" id="iconQuiz"><img src="Icons/quiz.png"/></div>
+					<div title="Open Help in View" class="icon" id="iconHelp"><img src="Icons/help.png"/></div>                                    
+					<div title="Information about Us and this web site" class="icon" id="iconAboutUs"><img src="Icons/aboutus.png"/></div>
+					<div title="You have any comment or idea?" class="icon" id="iconContact"><img src="Icons/contact.png"/></div>
+					<div title="Save current configuration" class="icon" id="iconSave"><img src="Icons/save.png"/></div>
+					<div title="Load saved configuration" class="icon" id="iconLoad"><img src="Icons/load.png"/></div>
+					<div title="Show/Hide the clocks (LOCAL/UTC/YOUR CURRENT TIME)" class="icon" id="iconTime"><img src="Icons/time.png"/></div>
+					<div title="Show/Hide last update information" class="icon" id="iconLastUpdate"><img src="Icons/lastUpdate.png"/></div>
+					<div title="Show/Hide visitors information" class="icon" id="iconVisitors"><img src="Icons/visitors.png"/></div>
+					<div title="Show/Hide launch state information" class="icon" id="iconLaunchState"><img src="Icons/launchState.png"/></div>
+				  </div>
+				 
+			  </div>				   
+			 
+			  <div class="rowTopBar2" id="rowTopBarC">
+				<div title="Open Chat in View" class="icon" id="iconChat"><img src="Icons/chat.png"/></div>
+			  </div>
+			 
+			  <div class="rowTopBar2" id="rowTopBarD">
+				 <div title="Last update date & time" class="iconLabel3" id="groupLastUpdate">
+					Last Update
+					<div id="lastUpdate"></div>
+				 </div>
+			  </div>
+			  
+			  <div class="rowTopBar2" id="rowTopBarE">
+				 <div title="Views counter of this website (Active Users • Views)" class="iconLabel" id="groupVisitors">
+					Active • Views
+					<div><label id="visitorsNow">0</label> • <label id="visitors">0</label></div>
+				 </div>
+			  </div>
+			  			  
+			  <div class="rowTopBar2" id="rowTopBarF">
+				 <div class="iconGroup" id="timersIconLabels">
+					<div title="YOUR CURRENT LOCAL TIME" class="iconLabel" id="groupTIME">
+					   TIME
+					   <div id="timeTIME">00:00:00</div>
+					</div>
+					<div title="UTC TIME" class="iconLabel" id="groupUTC">
+					   UTC
+					   <div id="timeUTC">00:00:00</div>
+					</div>
+					<div title="LOCAL TIME AT BOCA CHICA" class="iconLabel" id="groupLOCAL">
+					   LOCAL
+					   <div id="timeLOCAL">00:00:00</div>
+					</div>
+				 </div>
+			  </div>
+			 
+			  <div class="rowTopBar2" id="rowTopBarG">
+				 <div title="Views launch current state" class="iconLabel2" id="groupLaunchState">
+					Launch State
+					<div><label id="launchState">...</label></div>
+				 </div>
+			  </div>
+			 
+			 <div class="rowTopBar2" id="rowTopBarH">
+				<div title="Show/Hide the RSS scroll" class="icon" id="iconRSS"><img src="Icons/rss.png"/></div>
+			 </div>
+		 </div>
+	  
          <!-- 4 views -->
-         <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="83, 17" data-min-sizes="100, 0" id="rootView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
-            <div data-role="splitter" data-split-mode="vertical" data-gutter-size="5" data-split-sizes="50, 50" data-min-sizes="50, 50" id="mainView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">
+         <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="83, 17" data-min-sizes="100, 0" id="rootView" style="width: 100%; height: calc(100% - 28px); left: 0; top: 0; background-color: gray;">		 		
+            <div data-role="splitter" data-split-mode="vertical" data-gutter-size="5" data-split-sizes="50, 50" data-min-sizes="50, 50" id="mainView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">		
                <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="50, 50" data-min-sizes="50, 50" id="mainView12">
                   <!-- Top-Left -->
                   <div class="d-flex flex-column flex-justify-left" id="rowOfTopLeft">
-                     <div class="container" style="height:28px; min-height:28px; max-height:28px; padding:0px; margin: 0px;">
+				  
+                     <div class="container" id="rowCH1" style="height:28px; min-height:28px; max-height:28px; padding:0px; margin: 0px; position: absolute; left:0; top:0; width:100%; z-index:10; opacity:0.75; background-color: transparent;">
                         <div class="grid">
                            <div class="row no-gap">
                               <div class="stub">
                                  <select id="selectCH1" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH1', this.options, this.selectedIndex)" value="">
                                  </select>
+								 <div title="Is Live" class="icon2" id="isLiveCH1" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                                  <div title="Refresh View 1" class="icon" id="iconRefreshCH1"><img src="Icons/refresh.png"/></div>
-								 <div title="Is Live" class="icon" id="isLiveCH1" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
-                              </div>
-                              <div class="cell flex-justify-between">
-                                 <div class="rssTextScroll" id="rssTextScroll">
-                                    <div id="rssTextScrollContent"></div>
-                                 </div>
-                              </div>
-                              <div class="stub flex-align-end">
-                                 <div title="Show/Hide the RSS scroll" class="icon" id="iconRSS"><img src="Icons/rss.png"/></div>
                               </div>
                            </div>
                         </div>
                      </div>
-                     <div class="container" id="containerCH1" style="height:100%; padding:0px; margin: 0px;">
+					 
+                     <div class="container" id="containerCH1" style="height:100%; padding:0px; margin: 0px; position: absolute; left:0; top:0; width:100%;">
                         <iframe id="iframeCH1" class="channels" style="position: relative; height:100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                      </div>
+					 
                   </div>
                   <!-- Top-Right -->
                   <div class="d-flex flex-column flex-justify-left" id="rowOfTopRight">
-                     <div class="container" style="height:28px; min-height:28px; max-height:28px; padding:0px; margin: 0px;">
+				  
+                     <div class="container" id="rowCH2" style="height:28px; min-height:28px; max-height:28px; padding:0px; margin: 0px; position: absolute; left:0; top:0; width:100%; z-index:10; opacity:0.75; background-color: transparent;">
                         <div class="grid">
                            <div class="row no-gap">
                               <div class="stub">
                                  <select id="selectCH2" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH2', this.options, this.selectedIndex)" value="">
                                  </select>
+								 <div title="Is Live" class="icon2" id="isLiveCH2" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                                  <div title="Refresh View 2" class="icon" id="iconRefreshCH2"><img src="Icons/refresh.png"/></div>
-								 <div title="Is Live" class="icon" id="isLiveCH2" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
-                              </div>
-                              <div class="cell flex-justify-between">
-                              </div>
-                              <div class="stub">
-                                 <div title="Last update date & time" class="iconLabel" id="groupLastUpdate">
-                                    Last Update
-                                    <div id="lastUpdate"></div>
-                                 </div>
-                              </div>
-                              <div class="stub">
-                                 <div title="Views counter of this website (Active Users • Views)" class="iconLabel" id="groupVisitors">
-                                    Active • Views
-                                    <div><label id="visitorsNow">0</label> • <label id="visitors">0</label></div>
-                                 </div>
-                              </div>
-                              <div class="stub">
-                                 <div title="Views launch current state" class="iconLabel2" id="groupLaunchState">
-                                    Launch State
-                                    <div><label id="launchState">...</label></div>
-                                 </div>
-                              </div>
-                              <div class="stub">
-                                 <div class="iconGroup" id="timersIconLabels">
-                                    <div title="LOCAL TIME AT BOCA CHICA" class="iconLabel" id="groupLOCAL">
-                                       LOCAL
-                                       <div id="timeLOCAL">00:00:00</div>
-                                    </div>
-                                    <div title="UTC TIME" class="iconLabel" id="groupUTC">
-                                       UTC
-                                       <div id="timeUTC">00:00:00</div>
-                                    </div>
-                                    <div title="YOUR CURRENT LOCAL TIME" class="iconLabel" id="groupTIME">
-                                       TIME
-                                       <div id="timeTIME">00:00:00</div>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="cell flex-justify-between">
-                              </div>
-							  <div class="stub flex-justify-end">
-								<div title="Open Chat in View" class="icon" id="iconChat"><img src="Icons/chat.png"/></div>
-							  </div>
-                              <div class="stub flex-justify-end" id="optionsIcons">
-                                 <div class="iconPopUp">
-                                    <div title="Go to FullScreen" class="icon" id="iconFullScreen"><img src="Icons/fullscreen.png"/></div>
-                                    <div title="Reload application" class="icon" id="iconRefreshApp"><img src="Icons/refresh.png"/></div>
-                                    <div title="Show/Hide 5th column" class="icon" id="icon5thColumn"><img src="Icons/column5th.png"/></div>
-									<div title="Open Quiz in View" class="icon" id="iconQuiz"><img src="Icons/quiz.png"/></div>
-                                    <div title="Open Help in View" class="icon" id="iconHelp"><img src="Icons/help.png"/></div>                                    
-                                    <div title="Information about Us and this web site" class="icon" id="iconAboutUs"><img src="Icons/aboutus.png"/></div>
-                                    <div title="You have any comment or idea?" class="icon" id="iconContact"><img src="Icons/contact.png"/></div>
-                                    <div title="Save current configuration" class="icon" id="iconSave"><img src="Icons/save.png"/></div>
-                                    <div title="Load saved configuration" class="icon" id="iconLoad"><img src="Icons/load.png"/></div>
-                                    <div title="Show/Hide the clocks (LOCAL/UTC/YOUR CURRENT TIME)" class="icon" id="iconTime"><img src="Icons/time.png"/></div>
-                                    <div title="Show/Hide last update information" class="icon" id="iconLastUpdate"><img src="Icons/lastUpdate.png"/></div>
-                                    <div title="Show/Hide visitors information" class="icon" id="iconVisitors"><img src="Icons/visitors.png"/></div>
-									<div title="Show/Hide launch state information" class="icon" id="iconLaunchState"><img src="Icons/launchState.png"/></div>
-                                 </div>
-                              </div>
-                              <div class="stub flex-justify-end">
-                                 <div title="Options" class="icon" id="iconOptions"><img src="Icons/options.png"/></div>
                               </div>
                            </div>
                         </div>
                      </div>
-                     <div class="container" id="containerCH2" style="height:100%; padding:0px; margin: 0px;">
+					 
+                     <div class="container" id="containerCH2" style="height:100%; padding:0px; margin: 0px; position: absolute; left:0; top:0; width:100%;">
                         <iframe id="iframeCH2" class="channels" style="position: relative; height:100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                      </div>
+					 
                   </div>
                </div>
                <div data-role="splitter" data-split-mode="horizontal" data-gutter-size="5" data-split-sizes="50, 50" data-min-sizes="50, 50" id="mainView34">
                   <!-- Bottom-Left -->
                   <div class="d-flex flex-column flex-justify-left" id="rowOfBottomLeft">
-                     <div class="container" style="height:28px; min-height:28px; max-height:28px; padding:0px; margin: 0px;" id="middleBarOfBottomLeft">
+				  
+                     <div class="container" id="rowCH3" style="height:28px; min-height:28px; max-height:28px; padding:0px; margin: 0px; position: absolute; left:0; top:0; width:100%; z-index:10; opacity:0.75; background-color: transparent;">
                         <div class="grid">
                            <div class="row no-gap">
                               <div class="stub">
                                  <select id="selectCH3" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH3', this.options, this.selectedIndex)" value="">
                                  </select>
+								 <div title="Is Live" class="icon2" id="isLiveCH3" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                                  <div title="Refresh View 3" class="icon" id="iconRefreshCH3"><img src="Icons/refresh.png"/></div>
-								 <div title="Is Live" class="icon" id="isLiveCH3" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                               </div>
                            </div>
                         </div>
                      </div>
-                     <div class="container" id="containerCH3" style="height:100%; padding:0px; margin: 0px;">
+					 
+                     <div class="container" id="containerCH3" style="height:100%; padding:0px; margin: 0px; position: absolute; left:0; top:0; width:100%;">
                         <iframe id="iframeCH3" class="channels" style="position: relative; height:100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                      </div>
+					 
                   </div>
                   <!-- Bottom-Right -->
                   <div class="d-flex flex-column flex-justify-left" id="rowOfBottomRight">
-                     <div class="container" style="height:28px; min-height:28px; max-height:28px; padding:0px; margin: 0px;" id="middleBarOfBottomRight">
+				  
+                     <div class="container" id="rowCH4" style="height:28px; min-height:28px; max-height:28px; padding:0px; margin: 0px; position: absolute; left:0; top:0; width:100%; z-index:10; opacity:0.75; background-color: transparent;">
                         <div class="grid">
                            <div class="row no-gap">
                               <div class="stub">
                                  <select id="selectCH4" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH4', this.options, this.selectedIndex)" value="">
                                  </select>
+								 <div title="Is Live" class="icon2" id="isLiveCH4" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                                  <div title="Refresh View 4" class="icon" id="iconRefreshCH4"><img src="Icons/refresh.png"/></div>
-								 <div title="Is Live" class="icon" id="isLiveCH4" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                               </div>
                            </div>
                         </div>
                      </div>
-                     <div class="container" id="containerCH4" style="height:100%; padding:0px; margin: 0px;">
+					 
+                     <div class="container" id="containerCH4" style="height:100%; padding:0px; margin: 0px; position: absolute; left:0; top:0; width:100%;">
                         <iframe id="iframeCH4" class="channels" style="position: relative; height:100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                      </div>
+					 
                   </div>
                </div>
             </div>
             <div class="d-flex flex-column flex-justify-left" id="column5thView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray; visibility:hidden">
-               <div class="container" style="height:28px; min-height:28px; max-height:28px; padding:0px; margin: 0px;">
+			
+               <div class="container" id="rowCH5" style="height:28px; min-height:28px; max-height:28px; padding:0px; margin: 0px;">
                   <div class="grid">
                      <div class="row no-gap">
                         <div class="stub">
@@ -1021,17 +992,14 @@
                            </select>
                            <div title="Refresh" class="icon" id="iconRefreshCH5"><img src="Icons/refresh.png"/></div>
                         </div>
-                        <div class="cell flex-justify-between">
-                        </div>
-                        <div class="stub flex-justify-end">
-                           <div title="Show/Hide 5th column" class="icon" id="icon5thColumnB"><img src="Icons/column5th.png"/></div>
-                        </div>
                      </div>
                   </div>
                </div>
+			   
                <div class="container" id="containerCH5" style="height:100%; padding:0px; margin: 0px;">
                   <iframe id="iframeCH5" class="channels" style="position: relative; height:100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="clipboard-write; encrypted-media;" allowfullscreen></iframe>
                </div>
+			   
             </div>
          </div>
       </div>
