@@ -1062,7 +1062,7 @@
 		function loadSourcesLiveNow() {	
 			console.log("Loading Sources Live NOW...");
 			var request = new XMLHttpRequest();
-			request.open('GET', "https://spacex.elric.ws:1080/sourcesLiveNow.txt", true);			
+			request.open('GET', "https://elricdog.homedns.org/SpaceXBoard/sourcesLiveNow.txt", true);			
 			request.send(null);
 			request.onreadystatechange = function () {
 				if (request.readyState === 4 && request.status === 200) {
