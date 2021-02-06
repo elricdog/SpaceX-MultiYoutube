@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>SpaceX Board</title>
+	<meta charset="utf-8">
+	<link rel="icon" href="./favicon.ico" type="image/x-icon"/>
+	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
+	<link type="text/css" rel="stylesheet" href="map.css">
+</head>
+<body>
+<center>
+<div class="mapView">
+<iframe id="map" width="100%" height="100%" frameborder="0" src="https://www.bing.com/maps/embed?h=400&w=800&cp=25.997387~-97.156927&lvl=16&typ=d&sty=a&src=SHELL&FORM=MBEDV8" scrolling="no"></iframe>
+</div>
+<script>
+window.onload = function() {
+	var iframe = document.getElementById("map");	
+	console.log(iframe);
+	var container = iframe.contentWindow.document.getElementsById("Microsoft.Maps.Imagery.Aerial");
+	container.style.width = "100%";
+	container.style.height = "100%";
+};
+</script>
+</center>
+</body>
+</html>
