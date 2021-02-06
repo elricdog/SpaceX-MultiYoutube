@@ -76,7 +76,7 @@
          <center>
             <img src="Images/logo_mini.png"/>
             <br>
-            <h2>About Us</h2>
+            <h3>About Us</h3>
             <p>
                One day we see that browser tabs was not enough to follow Starship evolution...then...
                <br>
@@ -197,7 +197,6 @@
          function closeLoadingScreen()
          {
          	const loadingScreen = document.getElementById( 'loading-screen' );
-         	loadingScreen.style.visibility = "hidden";
          	loadingScreen.remove();
          }
          
@@ -437,93 +436,79 @@
          function setRSSScroll(visible) {
          	const rssTextScroll = document.getElementById('rssTextScroll');
          	if (visible) {
-         		rssTextScroll.style.visibility = "visible";
-				updateRSSTextScrollWidth();
+         		rssTextScroll.style.display = "block";
          		analytics.logEvent('option_click', { name: 'RSSScroll'});
          	} else {
-         		rssTextScroll.style.visibility = "hidden";
-         		rssTextScroll.style.width = "0px";
+         		rssTextScroll.style.display = "none";         		
          	}
          }
          function toggleRSSScroll() {
          	const rssTextScroll = document.getElementById('rssTextScroll');
-         	setRSSScroll(rssTextScroll.style.visibility == "hidden");
+         	setRSSScroll(rssTextScroll.style.display == "none");
          }
          
          function setLastUpdate(visible) {
          	const lastUpdateLabel = document.getElementById('groupLastUpdate');
          	if (visible) {
-         		lastUpdateLabel.style.visibility = "visible";
-         		lastUpdateLabel.style.width = "auto";				
+         		lastUpdateLabel.style.display = "block";
          		analytics.logEvent('option_click', { name: 'LastUpdate'});
          	} else {
-         		lastUpdateLabel.style.visibility = "hidden";
-         		lastUpdateLabel.style.width = "0px";
+         		lastUpdateLabel.style.display = "none";
          	}
          };
          function toggleLastUpdate() {
          	const lastUpdateLabel = document.getElementById('groupLastUpdate');
-         	setLastUpdate(lastUpdateLabel.style.visibility == "hidden");
+         	setLastUpdate(lastUpdateLabel.style.display == "none");
          };
          		 
          function setLaunchState(visible) {
          	const launchStateLabel = document.getElementById('groupLaunchState');
          	if (visible) {
-         		launchStateLabel.style.visibility = "visible";
-         		launchStateLabel.style.width = "auto";				
+         		launchStateLabel.style.display = "block";
          		analytics.logEvent('option_click', { name: 'LaunchState'});
          	} else {
-         		launchStateLabel.style.visibility = "hidden";
-         		launchStateLabel.style.width = "0px";
+         		launchStateLabel.style.display = "none";
          	}
          };
          function toggleLaunchState() {
          	const launchStateLabel = document.getElementById('groupLaunchState');
-         	setLaunchState(launchStateLabel.style.visibility == "hidden");
+         	setLaunchState(launchStateLabel.style.display == "none");
          };
          
          function setVisitors(visible) {
          	const visitorsLabel = document.getElementById('groupVisitors');
          	if (visible) {
-         		visitorsLabel.style.visibility = "visible";
-         		visitorsLabel.style.width = "auto";				
+         		visitorsLabel.style.display = "block";
          		analytics.logEvent('option_click', { name: 'Visitors'});
          	} else {
-         		visitorsLabel.style.visibility = "hidden";
-         		visitorsLabel.style.width = "0px";
+         		visitorsLabel.style.display = "none";
          	}
          };
          function toggleVisitors() {
          	const visitorsLabel = document.getElementById('groupVisitors');
-         	setVisitors(visitorsLabel.style.visibility == "hidden");
+         	setVisitors(visitorsLabel.style.display == "none");
          };
          
          function setTimeGroups(visible) {
          	const timersIconLabels = document.getElementById('timersIconLabels');
          	if (visible) {
-         		timersIconLabels.style.visibility = "visible";
-         		timersIconLabels.style.width = "auto";				
+         		timersIconLabels.style.display = "block";
          		analytics.logEvent('option_click', { name: 'TimersLabels'});
          	} else {
-         		timersIconLabels.style.visibility = "hidden";
-         		timersIconLabels.style.width = "0px";
+         		timersIconLabels.style.display = "none";
          	}
          };
          function toggleTimeGroups() {
          	const timersIconLabels = document.getElementById('timersIconLabels');
-         	setTimeGroups(timersIconLabels.style.visibility == "hidden");
+         	setTimeGroups(timersIconLabels.style.display == "none");
          };
          
          function toggleIconGroups() {
          	const optionsIcons = document.getElementById('optionsIcons');
-         	if (optionsIcons.style.visibility == "hidden") {
-         		optionsIcons.style.visibility = "visible";
-         		optionsIcons.style.width = "auto";
-				optionsIcons.style.height = "auto";
+         	if (optionsIcons.style.display == "none") {
+         		optionsIcons.style.display = "block";
          	} else {
-         		optionsIcons.style.visibility = "hidden";
-         		optionsIcons.style.width = "0px";
-				optionsIcons.style.height = "0px";
+         		optionsIcons.style.display = "none";
          	}
          }
          
