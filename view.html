@@ -238,7 +238,7 @@
          	document.getElementById("iconFullScreen").addEventListener ("click", function() { toggleIconGroups(); toggleFullScreen(); }, false);
          	document.getElementById("iconRSS").addEventListener ("click", toggleRSSScroll, false);
          	document.getElementById("icon5thColumn").addEventListener ("click", function() { toggleIconGroups(); toggle5thColumn(); }, false);
-         	document.getElementById("iconChat").addEventListener ("click", function() { openChat(); }, false);
+         	document.getElementById("iconChat").addEventListener ("click", openChat, false);
 			document.getElementById("iconQuiz").addEventListener ("click", function() { toggleIconGroups(); openQuiz(); }, false);
          	document.getElementById("iconHelp").addEventListener ("click", function() { toggleIconGroups(); openHelp(); }, false);
          	document.getElementById("iconRefreshApp").addEventListener ("click", function() { toggleIconGroups(); refreshApp(); }, false);
