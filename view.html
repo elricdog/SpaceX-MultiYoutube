@@ -263,12 +263,20 @@
          	const select3 = document.getElementById("selectCH3");
          	const select4 = document.getElementById("selectCH4");
          	const select5 = document.getElementById("selectCH5");
-						
-			$("#selectCH1").select2({theme:"flat",width: 'resolve',dropdownAutoWidth:'true'}).maximizeSelect2Height();
-			$("#selectCH2").select2({theme:"flat",width: 'resolve',dropdownAutoWidth:'true'}).maximizeSelect2Height();
-			$("#selectCH3").select2({theme:"flat",width: 'resolve',dropdownAutoWidth:'true'}).maximizeSelect2Height();
-			$("#selectCH4").select2({theme:"flat",width: 'resolve',dropdownAutoWidth:'true'}).maximizeSelect2Height();
-			$("#selectCH5").select2({theme:"flat",width: 'resolve',dropdownAutoWidth:'true'}).maximizeSelect2Height();
+			
+			if (isMobile()) {
+				$("#selectCH1").select2({theme:"flat",width: minimumResultsForSearch: -1, 'resolve', dropdownAutoWidth:'true'}).maximizeSelect2Height();
+				$("#selectCH2").select2({theme:"flat",width: minimumResultsForSearch: -1, 'resolve', dropdownAutoWidth:'true'}).maximizeSelect2Height();
+				$("#selectCH3").select2({theme:"flat",width: minimumResultsForSearch: -1, 'resolve', dropdownAutoWidth:'true'}).maximizeSelect2Height();
+				$("#selectCH4").select2({theme:"flat",width: minimumResultsForSearch: -1, 'resolve', dropdownAutoWidth:'true'}).maximizeSelect2Height();
+				$("#selectCH5").select2({theme:"flat",width: minimumResultsForSearch: -1, 'resolve', dropdownAutoWidth:'true'}).maximizeSelect2Height();
+			} else {				
+				$("#selectCH1").select2({theme:"flat",width: 'resolve', dropdownAutoWidth:'true'}).maximizeSelect2Height();
+				$("#selectCH2").select2({theme:"flat",width: 'resolve', dropdownAutoWidth:'true'}).maximizeSelect2Height();
+				$("#selectCH3").select2({theme:"flat",width: 'resolve', dropdownAutoWidth:'true'}).maximizeSelect2Height();
+				$("#selectCH4").select2({theme:"flat",width: 'resolve', dropdownAutoWidth:'true'}).maximizeSelect2Height();
+				$("#selectCH5").select2({theme:"flat",width: 'resolve', dropdownAutoWidth:'true'}).maximizeSelect2Height();
+			}
 			$("body").on('click', '.select2-results__group', function() { $(this).siblings().toggle(); })			
 			
          	var event = new Event('change');
