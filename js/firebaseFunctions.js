@@ -34,9 +34,6 @@ firebase.initializeApp(firebaseConfig);
 // Get a reference to the analytics service
 var analytics = firebase.analytics();
 
-// Get a reference to the database service
-var database = firebase.database();
-
 let counterCleanOldVisitors = 0;
 
 function addView(){
@@ -263,21 +260,3 @@ function updateOptionsWithNewFeed(optionSelect, title, newURL) {
 		}
 	}			
 }
-
-// Add one view more
-addView();
-
-// Get number of views from database
-getRealtimeNumViews(document.getElementById("visitors"));
-
-// Get visitors in the last 20min
-getRealTimeVisitors(document.getElementById("visitorsNow"));
-
-// Get RSS from firebase database
-getRealtimeRss(document.getElementById("rssTextScrollContent"));
-
-// Get state of launch from database
-getLaunchState(document.getElementById("launchState"));
-
-// Get feeds from DB database
-getFeedsFromDB();
