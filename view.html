@@ -568,6 +568,7 @@
          	document.getElementById("buttonLoadClose").addEventListener ("click", toggleLoad, false);
          	document.getElementById("buttonLoad").addEventListener ("click", configurationLoad, false);
          	document.getElementById("iconFullScreen").addEventListener ("click", function() { toggleIconGroups(); toggleFullScreen(); updateRSSTextScrollWidth(); }, false);
+			document.getElementById("iconSelects").addEventListener ("click", function() { toggleIconGroups(); toggleSelects(); }, false);			
          	document.getElementById("iconRSS").addEventListener ("click", toggleRSSScroll, false);
          	document.getElementById("icon5thColumn").addEventListener ("click", function() { toggleIconGroups(); toggle5thColumn(); }, false);
          	document.getElementById("iconChat").addEventListener ("click", openChat, false);
@@ -1186,10 +1187,7 @@
          	}					
          };
          
-         function toggleFullScreen() {
-			var doc = window.document;
-			var docEl = doc.documentElement;
-
+         function toggleSelects() {
          	const select1 = document.getElementById("rowCH1");
          	const select2 = document.getElementById("rowCH2");
          	const select3 = document.getElementById("rowCH3");
@@ -1206,7 +1204,11 @@
 				select3.style.display = 
 				select4.style.display = "none";
 			}
-					
+		 }
+		 
+         function toggleFullScreen() {
+			var doc = window.document;
+			var docEl = doc.documentElement;					
 			var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
 			var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;							
 			if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
@@ -1248,6 +1250,7 @@
 				 
 				  <div id="optionsIcons">
 					<div title="Go to FullScreen" class="icon" id="iconFullScreen"><img src="Icons/fullscreen.png"/></div>					
+					<div title="Show/Hide Selection Boxes" class="icon" id="iconSelects"><img src="Icons/selects.png"/></div>					
 					<div title="Reload application" class="icon" id="iconRefreshApp"><img src="Icons/refresh.png"/></div>
 					<div title="Show/Hide 5th column" class="icon" id="icon5thColumn"><img src="Icons/column5th.png"/></div>
 					<div title="Open Quiz in View" class="icon" id="iconQuiz"><img src="Icons/quiz.png"/></div>

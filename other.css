@@ -27,3 +27,18 @@ html, body {
 	position: relative;
 	top: 1px;
 }
+
+.icon {
+	white-space: nowrap;
+	cursor: pointer;
+	border-spacing: 0px;
+	padding: 0px;
+	margin: 0px;
+	min-height: 28px;
+	max-height: 28px;
+	min-width: 28px;
+	max-width: 28px;
+	border: 0px;
+	z-index: 10000;
+	background-color: #005288;
+}
