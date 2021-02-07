@@ -1,6 +1,7 @@
 var LOG_NAMESPACE = "urn:x-cast:elricdog.github.io.spacexboard.Log"
 if(typeof cast !== "undefined"){
   var castReceiverContext = cast.framework.CastReceiverContext.getInstance();
+  //castReceiverContext.setLoggerLevel(cast.framework.LoggerLevel.DEBUG);
   castReceiverContext.addCustomMessageListener(LOG_NAMESPACE, function (customEvent) {
   logElement.innerText += LOG_NAMESPACE + " - " + customEvent.data.message + "\n";
   console.log(LOG_NAMESPACE + " - " + customEvent.data.message);
@@ -13,6 +14,11 @@ if(typeof cast !== "undefined"){
   castReceiverOptions.customNamespaces[LOG_NAMESPACE] = cast.framework.system.MessageType.JSON;
   castReceiverContext.start(castReceiverOptions);
 }
+
+
+window.addEventListener("load", function(){
+     onYouTubeIframeAPIReady();
+});
 
 var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
