@@ -35,28 +35,54 @@ body {
 	float:right;
 }
 
-select:focus > option:hover { background: #2072A8 !important; opacity: 1.0;}
-select:focus > option:checked { background: #003268 !important; opacity: 1.0;}
-
-select:hover {
-	border: 1px solid #A7A9AC;
-}
-
-@keyframes optionScroll {
-	0% {
-		transform: translate(0, 0);
-	}
-	100% {
-		transform: translate(-100%, 0);
-	}
-}
-
 .channels {
 	border-spacing: 0px;
 	padding: 0px;
 	margin: 0px;
 	min-width: 20%;
 	min-height: 20%;
+}
+
+.channelSelect {
+	border-spacing: 0px;
+	padding: 0px;
+	margin: 0px;
+	background-color: #005288;
+	color: white;
+	outline: none;
+	left: 0px;
+	top: 0px;
+	width: 165px;
+	height: 28px;
+	max-height: 28px;
+	border: 0px;
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.channelSelect5th {
+	border-spacing: 0px;
+	padding: 0px;
+	margin: 0px;
+	background-color: #005288;
+	color: white;
+	outline: none;
+	left: 0px;
+	top: 0px;
+	width: 165px;
+	height: 28px;
+	max-height: 28px;
+	border: 0px;
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+/*
+select:focus > option:hover { background: #2072A8 !important; opacity: 1.0;}
+select:focus > option:checked { background: #003268 !important; opacity: 1.0;}
+
+select:hover {
+	border: 1px solid #A7A9AC;
 }
 
 .channelSelect {
@@ -99,6 +125,7 @@ select:hover {
 	background-color: #005288;
 	
 }
+*/
 
 #optionsIcons {
 	left:calc(100% - 56px);
