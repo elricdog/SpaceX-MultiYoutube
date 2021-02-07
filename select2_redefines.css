@@ -8,7 +8,7 @@ Link : http://techhysahil.com
 /****** Single SCSS *******/
 .select2-container--flat .select2-selection--single {
   background: #005288;  
-  border: 0px;
+  border: 0px;  
   height: 28px; }
   .select2-container--flat .select2-selection--single .select2-selection__rendered {
     color: #fff;
@@ -36,6 +36,10 @@ Link : http://techhysahil.com
     cursor: pointer;
     float: right;
     font-weight: bold; }
+
+.select2-results {
+  max-height: 100px;
+}
 
 .select2-container--open .select2-dropdown--below,
 .select2-container--open .select2-dropdown--above {
@@ -89,9 +93,9 @@ Link : http://techhysahil.com
   background-image: none; }
   .select2-container .select2-choice div {
     border-left: 0px;
-    -webkit-border-radius: 0 4px 4px 0;
-    -moz-border-radius: 0 4px 4px 0;
-    border-radius: 0 4px 4px 0;
+    -webkit-border-radius: 0 0px 0px 0;
+    -moz-border-radius: 0 0px 0px 0;
+    border-radius: 0 0px 0px 0;
     -webkit-background-clip: padding-box;
     -moz-background-clip: padding;
     background-clip: padding-box; }
@@ -113,19 +117,19 @@ Link : http://techhysahil.com
   border: 0px;
   border-top: 0;
   border-radius: 0px !important;
-  -webkit-border-radius: 0 0 6px 6px;
-  -moz-border-radius: 0 0 6px 6px;
-  border-radius: 0 0 6px 6px;
+  -webkit-border-radius: 0 0 0px 0px;
+  -moz-border-radius: 0 0 0px 0px;
+  border-radius: 0 0 0px 0px;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none; }
   .select2-drop.select2-drop-above {
-    margin-top: 2px;
+    margin-top: 0px;
     border-top: 0px;
     border-bottom: 0;
-    -webkit-border-radius: 6px 6px 0 0;
-    -moz-border-radius: 6px 6px 0 0;
-    border-radius: 6px 6px 0 0;
+    -webkit-border-radius: 0px 0px 0 0;
+    -moz-border-radius: 0px 0px 0 0;
+    border-radius: 0px 0px 0 0;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none; }
@@ -161,7 +165,7 @@ Link : http://techhysahil.com
 
 .select2-results {
   padding: 0 0 0 0px;
-  margin: 4px 0px 0px 0; }
+  margin: 0px 0px 0px 0; }
   .select2-results .select2-highlighted {
     background: #003268;
     color: #fff;

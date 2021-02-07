@@ -134,8 +134,8 @@
             options,
             dropdownDownwards
           );
-
-			maxHeight-=32;
+		  maxHeight-=32;
+		  
           // Set the max height of the relevant DOM elements. We use max-height
           // instead of height directly to correctly handle cases in which there
           // are only a few elements (we don't want a giant empty dropdown box).
@@ -149,7 +149,7 @@
           // initial dropdown box.
           $(document).trigger("scroll");
         });
-      });
+      });	  	 
     });
   };
 })(jQuery);
