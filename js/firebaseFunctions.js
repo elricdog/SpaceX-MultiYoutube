@@ -124,12 +124,14 @@ function getRealtimeNumViews(view){
     firebase.database().ref('views/counter')
     .on('value', (snapshot)=>{
       view.innerHTML = snapshot.val();
+	  updateRSSTextScrollWidth();
     });
 }
 
 function getRealTimeVisitors(view){
   firebase.database().ref('visitors/').on('value', (visitorTime) =>{
       view.innerHTML = visitorTime.numChildren();
+	  updateRSSTextScrollWidth();
   });
 }
 
@@ -195,6 +197,7 @@ function getLaunchState(view){
 				view.innerHTML = lastUpdateLaunchState;
 			}
 		}
+		updateRSSTextScrollWidth();
 		console.log("Updated Launch State due DB change to: " + view.innerHTML);
     });
 }

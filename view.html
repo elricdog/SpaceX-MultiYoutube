@@ -234,7 +234,7 @@
          	document.getElementById("iconLoad").addEventListener ("click", function() { toggleIconGroups(); checkTheWayToLoad(); }, false);
          	document.getElementById("buttonLoadClose").addEventListener ("click", toggleLoad, false);
          	document.getElementById("buttonLoad").addEventListener ("click", configurationLoad, false);
-         	document.getElementById("iconFullScreen").addEventListener ("click", function() { toggleIconGroups(); toggleFullScreen(); }, false);
+         	document.getElementById("iconFullScreen").addEventListener ("click", function() { toggleIconGroups(); toggleFullScreen(); updateRSSTextScrollWidth(); }, false);
          	document.getElementById("iconRSS").addEventListener ("click", toggleRSSScroll, false);
          	document.getElementById("icon5thColumn").addEventListener ("click", function() { toggleIconGroups(); toggle5thColumn(); }, false);
          	document.getElementById("iconChat").addEventListener ("click", openChat, false);
