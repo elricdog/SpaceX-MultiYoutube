@@ -189,15 +189,17 @@ function getLaunchState(view){
 					minutesUpdateLaunchState = minutesUpdateLaunchState-1;
 					view.innerHTML = "T - "+minutesUpdateLaunchState;
 				}
+				updateRSSTextScrollWidth();
 				console.log("Updated Launch State to: " + view.innerHTML);
 			}, 60000);			  
 			view.innerHTML = "T - "+minutesUpdateLaunchState;
+			updateRSSTextScrollWidth();
 		} else {
 			if (minutesUpdateLaunchState==0) {
 				view.innerHTML = lastUpdateLaunchState;
+				updateRSSTextScrollWidth();		
 			}
-		}
-		updateRSSTextScrollWidth();
+		}		
 		console.log("Updated Launch State due DB change to: " + view.innerHTML);
     });
 }
