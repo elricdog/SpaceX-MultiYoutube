@@ -174,6 +174,7 @@ function getLaunchState(view){
 		clearIntervalUpdateLaunchState();
 		lastUpdateLaunchState = snapshot.val();
 		view.innerHTML = lastUpdateLaunchState;
+		updateRSSTextScrollWidth();
     });
     firebase.database().ref('state/minutes')
     .on('value', (snapshot)=>{
