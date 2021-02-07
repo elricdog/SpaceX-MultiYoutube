@@ -581,13 +581,7 @@
          	document.getElementById("iconRefreshCH3").addEventListener ("click", refreshCH3, false);
          	document.getElementById("iconRefreshCH4").addEventListener ("click", refreshCH4, false);
          	document.getElementById("iconRefreshCH5").addEventListener ("click", refreshCH5, false);
-         
-         	const select1 = document.getElementById("selectCH1");
-         	const select2 = document.getElementById("selectCH2");
-         	const select3 = document.getElementById("selectCH3");
-         	const select4 = document.getElementById("selectCH4");
-         	const select5 = document.getElementById("selectCH5");
-			
+         			
 			if (isMobile()) {
 				$("#selectCH1").select2({theme:"flat",width: 'resolve', minimumResultsForSearch:-1, dropdownAutoWidth:'true'}).maximizeSelect2Height();
 				$("#selectCH2").select2({theme:"flat",width: 'resolve', minimumResultsForSearch:-1, dropdownAutoWidth:'true'}).maximizeSelect2Height();
@@ -603,22 +597,17 @@
 			}
 			$("body").on('click', '.select2-results__group', function() { $(this).siblings().toggle(); })			
 
-			// Initialize iFrames
-			const iframeCH1 = document.getElementById("iframeCH1");
-			const iframeCH2 = document.getElementById("iframeCH2");
-			const iframeCH3 = document.getElementById("iframeCH3");
-			const iframeCH4 = document.getElementById("iframeCH4");
-			const iframeCH5 = document.getElementById("iframeCH5");			
-			select1.addEventListener ("click", function() { select1.setAttribute('value', select1.value); }, false);
-			select1.addEventListener ("change", function() { setSourceToElementiFrame('iframeCH1', select1.options, select1.selectedIndex) }, false);
-			select2.addEventListener ("click", function() { select2.setAttribute('value', select2.value); }, false);
-			select2.addEventListener ("change", function() { setSourceToElementiFrame('iframeCH2', select1.options, select2.selectedIndex) }, false);
-			select3.addEventListener ("click", function() { select3.setAttribute('value', select3.value); }, false);
-			select3.addEventListener ("change", function() { setSourceToElementiFrame('iframeCH3', select3.options, select3.selectedIndex) }, false);
-			select4.addEventListener ("click", function() { select4.setAttribute('value', select4.value); }, false);
-			select4.addEventListener ("change", function() { setSourceToElementiFrame('iframeCH4', select4.options, select4.selectedIndex) }, false);
-			select5.addEventListener ("click", function() { select5.setAttribute('value', select5.value); }, false);
-			select5.addEventListener ("change", function() { setSourceToElementiFrame('iframeCH5', select5.options, select5.selectedIndex) }, false);			
+			console.log("Subscribing to select events");
+         	const select1 = document.getElementById("selectCH1");
+         	const select2 = document.getElementById("selectCH2");
+         	const select3 = document.getElementById("selectCH3");
+         	const select4 = document.getElementById("selectCH4");
+         	const select5 = document.getElementById("selectCH5");		
+			$('#selectCH1').change(function(){ setSourceToElementiFrame('iframeCH1', select1.options, select1.selectedIndex) });
+			$('#selectCH2').change(function(){ setSourceToElementiFrame('iframeCH2', select2.options, select2.selectedIndex) });
+			$('#selectCH3').change(function(){ setSourceToElementiFrame('iframeCH3', select3.options, select3.selectedIndex) });
+			$('#selectCH4').change(function(){ setSourceToElementiFrame('iframeCH4', select4.options, select4.selectedIndex) });
+			$('#selectCH5').change(function(){ setSourceToElementiFrame('iframeCH5', select5.options, select5.selectedIndex) });		
          	var event = new Event('change');
          	select1.selectedIndex = indexMatchingText(select1, "SpaceFlight");
          	select2.selectedIndex = indexMatchingText(select2, "LabPadre - Nerdle Cam 4K");
