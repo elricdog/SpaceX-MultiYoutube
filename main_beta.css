@@ -17,17 +17,26 @@ body {
 	min-width: 100%;
 	min-height: 100%;
 	background-color: #A7A9AC;
+	overflow:hidden;
 }
 
-.container {
+.rowTopBar {
 	background-color: #A7A9AC;
 	border-spacing: 0px;
 	padding: 0px;
 	margin: 0px;
 }
 
-select:focus > option:hover { background: #2072A8 !important; }
-select:focus > option:checked { background: #003268 !important; }
+.rowTopBar1 {
+	float:left;
+}
+
+.rowTopBar2 {
+	float:right;
+}
+
+select:focus > option:hover { background: #2072A8 !important; opacity: 1.0;}
+select:focus > option:checked { background: #003268 !important; opacity: 1.0;}
 
 select:hover {
 	border: 1px solid #A7A9AC;
@@ -76,7 +85,7 @@ select:hover {
 	outline: none;
 	left: 0px;
 	top: 0px;
-	width: 155px;
+	width: calc(100% - 28px);
 	height: 28px;
 	border: 0px;
 	font-size: 12px;
@@ -91,11 +100,14 @@ select:hover {
 	
 }
 
-.iconPopUp {
+#optionsIcons {
+	left:calc(100% - 56px);
+	top:28px;
+	position: absolute;
 	min-width: 28px;
 	max-width: 56px;
 	float: right;
-	z-index: 10000;
+	z-index: 20000;
 	background-color: #005288;
 }
 
@@ -103,7 +115,7 @@ select:hover {
 	float: right;
 }
 
-.icon {
+.icon,.icon2 {
 	white-space: nowrap;
 	cursor: pointer;
 	border-spacing: 0px;
@@ -123,43 +135,10 @@ select:hover {
 	border: 1px solid #A7A9AC;
 }
 
-/*
-.icon:hover {
-    background: linear-gradient(112deg, #A7A9AC, #005288, #C7C9CC, #2072A8, #87898C, #003268);
-    background-size: 400% 400%;
-
-    -webkit-animation: AnimationName 2s ease infinite;
-    -moz-animation: AnimationName 2s ease infinite;
-    animation: AnimationName 2s ease infinite;
-}
-
-@-webkit-keyframes AnimationName {
-    0%{background-position:58% 0%}
-    50%{background-position:43% 100%}
-    100%{background-position:58% 0%}
-}
-@-moz-keyframes AnimationName {
-    0%{background-position:58% 0%}
-    50%{background-position:43% 100%}
-    100%{background-position:58% 0%}
-}
-@-o-keyframes AnimationName {
-    0%{background-position:58% 0%}
-    50%{background-position:43% 100%}
-    100%{background-position:58% 0%}
-}
-@keyframes AnimationName {
-    0%{background-position:58% 0%}
-    50%{background-position:43% 100%}
-    100%{background-position:58% 0%}
-}
-*/
-
 .iconLabel {
 	white-space: nowrap;
 	border-spacing: 0px;
-	padding: 0px 1px 0px 1px;
-	margin: 0px 1px 0px 0px;
+	padding: 0px 2px 0px 2px;	
 	min-height: 28px;
 	max-height: 28px;
 	height: 28px;
@@ -177,13 +156,30 @@ select:hover {
 .iconLabel2 {
 	white-space: nowrap;
 	border-spacing: 0px;
-	padding: 0px 1px 0px 1px;
-	margin: 0px 1px 0px 0px;
+	padding: 0px 2px 0px 2px;	
 	min-height: 28px;
 	max-height: 28px;
 	height: 28px;
 	max-width: auto;
 	background-color: #003268;
+	color: white;
+	text-align: center;
+	line-height: 13px;
+	font-size: 10px;
+	border: 0px;
+	float: right;
+	z-index: 10000;
+}
+
+.iconLabel3 {
+	white-space: nowrap;
+	border-spacing: 0px;
+	padding: 0px 2px 0px 2px;	
+	min-height: 28px;
+	max-height: 28px;
+	height: 28px;
+	max-width: auto;
+	background-color: #005288;
 	color: white;
 	text-align: center;
 	line-height: 13px;
@@ -199,7 +195,6 @@ select:hover {
 	margin: 0px;
 	min-height: 28px;
 	max-height: 28px;
-	width: inherit;
 	height: 28px;
 	background-color: #2072A8;
 	color: white;

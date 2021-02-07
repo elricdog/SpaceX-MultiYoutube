@@ -124,12 +124,14 @@ function getRealtimeNumViews(view){
     firebase.database().ref('views/counter')
     .on('value', (snapshot)=>{
       view.innerHTML = snapshot.val();
+	  updateRSSTextScrollWidth();
     });
 }
 
 function getRealTimeVisitors(view){
   firebase.database().ref('visitors/').on('value', (visitorTime) =>{
       view.innerHTML = visitorTime.numChildren();
+	  updateRSSTextScrollWidth();
   });
 }
 
@@ -144,7 +146,10 @@ function getRealtimeRss(view){
 		  if (newItem!=null) {
 			  var newText = newItem.title;
 			  if (newText!=null) {
-				result += '\xa0' + ' • ' + '\xa0' + newText.trim();
+				  newText = newText.trim();
+				  if (newText!="") {
+					result += '\xa0' + ' • ' + '\xa0' + newText;
+				  }
 			  }
 		  }		  
       });
@@ -192,6 +197,7 @@ function getLaunchState(view){
 				view.innerHTML = lastUpdateLaunchState;
 			}
 		}
+		updateRSSTextScrollWidth();
 		console.log("Updated Launch State due DB change to: " + view.innerHTML);
     });
 }
@@ -211,13 +217,10 @@ function getFeedsFromDB() {
 			const select2 = document.getElementById("selectCH2");
 			const select3 = document.getElementById("selectCH3");
 			const select4 = document.getElementById("selectCH4");
-						
 			updateOptionsWithNewFeed(select1, title, newURL);
 			updateOptionsWithNewFeed(select2, title, newURL);
 			updateOptionsWithNewFeed(select3, title, newURL);
 			updateOptionsWithNewFeed(select4, title, newURL);
-			
-			
 		});
 	});
 }
@@ -226,18 +229,20 @@ function updateOptionsWithNewFeed(optionSelect, title, newURL) {
 	for (var id in optionSelect.options) {
 		var el = optionSelect.options[id];
 		if (el.textContent==title) {				
-			console.log("- Replaced URL on " + id);
+			console.log("- Replaced URL on option position " + id);
+			var changed = el.title != newURL;		
+			if (changed) {
 			el.title = newURL;
 			el.value = newURL;
-			
 			var index = optionSelect.selectedIndex;
 			var sel = optionSelect.options[index];
 			console.log("- Currently selected " + sel.textContent);
 			if (sel.textContent==title) {
-				console.log("- Reload currently selected " + sel.index);
+					console.log("- Reload currently selected");
 				var event = new Event('change');
 				optionSelect.selectedIndex = sel.index;
 				optionSelect.dispatchEvent(event);
+				}
 			}
 			return;
 		}
