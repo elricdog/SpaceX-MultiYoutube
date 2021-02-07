@@ -240,8 +240,9 @@
          	document.getElementById("iconChat").addEventListener ("click", openChat, false);
 			document.getElementById("iconQuiz").addEventListener ("click", function() { toggleIconGroups(); openQuiz(); }, false);
          	document.getElementById("iconHelp").addEventListener ("click", function() { toggleIconGroups(); openHelp(); }, false);
-         	document.getElementById("iconRefreshApp").addEventListener ("click", function() { toggleIconGroups(); refreshApp(); }, false);
-         	
+         	document.getElementById("iconRefreshApp").addEventListener ("click", function() { toggleIconGroups(); refreshApp(); }, false);		
+			document.getElementById("iconEndRSS").addEventListener ("click", function() { launchGoToMars(); }, false); 
+
          	document.getElementById("iconRefreshCH1").addEventListener ("click", refreshCH1, false);
          	document.getElementById("iconRefreshCH2").addEventListener ("click", refreshCH2, false);
          	document.getElementById("iconRefreshCH3").addEventListener ("click", refreshCH3, false);
@@ -796,6 +797,18 @@
 				cancelFullScreen.call(doc);
 			}
          };
+		 
+		function launchGoToMars() {
+			const iframeCH1 = document.getElementById("iframeCH1");
+			const iframeCH2 = document.getElementById("iframeCH2");
+			const iframeCH3 = document.getElementById("iframeCH3");
+			const iframeCH4 = document.getElementById("iframeCH4");
+			iframeCH1.src="https://www.youtube.com/embed/0qo78R_yYFA?autoplay=1&ref=0&mute=0"
+			iframeCH2.src="https://www.youtube.com/embed/AhpvTJQBkrg?autoplay=1&ref=0&mute=1"
+			iframeCH3.src="https://www.youtube.com/embed/bvim4rsNHkQ?autoplay=1&ref=0&mute=1"
+			iframeCH4.src="https://www.youtube.com/embed/C8JyvzU0CXU?autoplay=1&ref=0&mute=1"
+		}
+		 
       </script>  
       <div class="allViews" id="app-screen" style="visibility:hidden;">	  
 	  
@@ -807,7 +820,7 @@
 				 </div>
 			  </div>
 						 
-			  <div title="SpaceXBoard logo" style="position:absolute; left:0px; top:0px; width:56px; height:28px;z-index:20000"><img src="Icons/endRSS.png"/></div>			
+			  <div title="SpaceXBoard logo" id="iconEndRSS" style="cursor:pointer; position:absolute; left:0px; top:0px; width:56px; height:28px;z-index:20000"><img src="Icons/endRSS.png"/></div>			
 			
 			  <div class="rowTopBar2" id="rowTopBarB">
 				 <div title="Options" class="icon" id="iconOptions"><img src="Icons/options.png"/></div>
