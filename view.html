@@ -669,6 +669,7 @@
          	var column5thViewVisible = data["column5thViewVisible"];
          	set5thColumn(column5thViewVisible, splitter1.dataset.splitSizes);
          
+			updateRSSTextScrollWidth();
 			
          	console.log("Loaded OK");
          }
@@ -1106,19 +1107,17 @@
           "Select one channel":"",
          
           // Live Streams
-          "SPACEX":composeYouTubeLiveStreamURL("_qwLHlVjRyw", 0),
-          
+		  "LIVE STREAMS":"GROUP",		  
+          "SPACEX":composeYouTubeLiveStreamURL("_qwLHlVjRyw", 0),          		  
           "SpaceFlight":composeYouTubeLiveStreamURL("FpQwQx4Q_Dc", 0),
-          "NSF Fleet Cam":composeYouTubeLiveStreamURL("gnt2wZBg89g", 1),
-          
+          "NSF Fleet Cam":composeYouTubeLiveStreamURL("gnt2wZBg89g", 1),          		  
           "LabPadre - Nerdle Cam 4K":composeYouTubeLiveStreamURL("Ky5l9ZxsG9M", 0),
           "LabPadre - Sapphire Cam":composeYouTubeLiveStreamURL("dROdPn9Tpxg", 1),
           "LabPadre - South Padre Island Pearl Beach Cam":composeYouTubeLiveStreamURL("agmFDeP5u_w", 1),
           "LabPadre - Predator Cam":composeYouTubeLiveStreamURL("lTJ9OgcIMSs", 1),
           "LabPadre - Lab Cam":composeYouTubeLiveStreamURL("hpqoqJxbNpw", 1),
           "LabPadre - Launch Pad Cam":composeYouTubeLiveStreamURL("Z72Au8Px7mM", 1),
-          "LabPadre - Sentinel Cam":composeYouTubeLiveStreamURL("n5ozYnVQahE", 1),
-          
+          "LabPadre - Sentinel Cam":composeYouTubeLiveStreamURL("n5ozYnVQahE", 1),          
           "Everyday Astronaut":composeYouTubeLiveStreamURL("QJ6YN5upGH0", 0),
           "SpaceXStorm (Castellano)":composeYouTubeLiveStreamURL("39T-NWgFtME", 0),
 		  "Frontera Espacial (Castellano)":composeYouTubeLiveStreamURL("uVMXkl-i7l8", 0),
@@ -1127,6 +1126,7 @@
           "NASA Live":composeYouTubeLiveStreamURL("21X5lGlDOfg", 0),
           "NASA Media Channel":composeYouTubeLiveStreamURL("nA9UZF-SZoQ", 0),
          
+		  "INFORMATION":"GROUP",
 		  "INFORMATION - Space OK (Castellano)":"https://spaceokk.weebly.com/bocachica.html",
           "INFORMATION - LabPadre Boca Chica Weather":"weather2.html",
           "INFORMATION - Boca Chica, TX Weather":"weather.html",
@@ -1138,36 +1138,44 @@
 		  "INFORMATION - Bing Maps":"map2.html",
           "*INFORMATION - Cameron County":"https://www.cameroncounty.us/SpaceX",
           "*INFORMATION - Boca Chica":"https://www.bocachica.com",
+                             
+		  "SPACEX INFORMATION":"GROUP",
+          "SPACEX Web":"https://www.spacex.com",
+		  "SPACEX INFORMATION - MISSION PATCHES":"https://www.elonx.net/spacex-mission-patches/",
+		  "SPACEX INFORMATION - PHOTOS":"https://www.gettyimages.es/fotos/spacex?phrase=spacex&sort=mostpopular",
+		  "SPACEX INFORMATION - WIKI HISTORY":"https://en.wikipedia.org/wiki/List_of_Falcon_9_and_Falcon_Heavy_launches",
+          "360 View BocaChica SpaceX":composeYouTubeLiveStreamURL("nVo5AsMz0TI", 1), 
+		 		 
+		  "NEXT LAUNCHES":"GROUP",
+          "NEXT LAUNCHES - SpaceX direct source":"https://whenisthenextspacexlaunch.com/", 
+          "NEXT LAUNCHES - Source 1":"https://whenisthenextspacexlaunch.com/", 
+		  "NEXT LAUNCHES - Source 2":"https://www.rocketlaunch.live/?filter=spacex", 		  
+		  "NEXT LAUNCHES - Source 3":"https://spaceflightnow.com/launch-schedule/", 		  		 
+
+		  "CHAT":"GROUP",
+          "CHAT - SpaceXBoard":"chat.html",		           
+		  
+		  "SEARCH":"GROUP",
+          "SEARCH - Google":"https://www.google.com/search?igu=1&q=SpaceX",
+          "SEARCH - Bing":"https://www.bing.com/search?q=SpaceX",
          
+		  "GAMES":"GROUP",
+          "GAMES - SpaceX ISS Docking Simulator":"https://iss-sim.spacex.com",		  
+          "GAMES - Quiz SpaceX Game":"gameQuiz.html",         
+          "3D / VR Model of StarShip":"https://elricdog.github.io/SpaceX-StarShip/VRStarShip/",
+         
+		  "TWITCH":"GROUP",
           "TWITCH - NASA":"https://www.twitch.tv/nasa", 
           "TWITCH - Alex Riveiro (Castellano)":"https://www.twitch.tv/alex_riveiro",
           "TWITCH - SpaceXStorm (Castellano)":"https://www.twitch.tv/spacexstorm",
-                    
-          "SPACEX Web":"https://www.spacex.com",
-          "SPACEX - NEXT LAUNCHES":"https://whenisthenextspacexlaunch.com/", 
-		  "SPACEX - MISSION PATCHES":"https://www.elonx.net/spacex-mission-patches/",
-		  "SPACEX - PHOTOS":"https://www.gettyimages.es/fotos/spacex?phrase=spacex&sort=mostpopular",
-		  "SPACEX - WIKI HISTORY":"https://en.wikipedia.org/wiki/List_of_Falcon_9_and_Falcon_Heavy_launches",
 		 
+ 		  "OTHERS":"GROUP",
           "*TWITTER":"https://twitter.com",
           "*REDDIT":"https://reddit.com",
           "*DISCORD":"https://discord.com", 
           "*YOUTUBE CHANNELS":"https://youtube.com",
-		 
-          "NEXT LAUNCHES - Source 1":"https://whenisthenextspacexlaunch.com/", 
-		  "NEXT LAUNCHES - Source 2":"https://www.rocketlaunch.live/?filter=spacex", 		  
-		  "NEXT LAUNCHES - Source 3":"https://spaceflightnow.com/launch-schedule/", 		  		 
-          "SEARCH - Google":"https://www.google.com/search?igu=1&q=SpaceX",
-          "SEARCH - Bing":"https://www.bing.com/search?q=SpaceX",
-         
-          "CHAT - SpaceXBoard":"chat.html",		  
-         
-          "GAMES - SpaceX ISS Docking Simulator":"https://iss-sim.spacex.com",
-          "GAMES - Quiz SpaceX Game":"gameQuiz.html",
-         
-          "360 View BocaChica SpaceX":composeYouTubeLiveStreamURL("nVo5AsMz0TI", 1), 
-          "3D / VR Model of StarShip":"https://elricdog.github.io/SpaceX-StarShip/VRStarShip/",
-          
+
+ 		  "APPLICATION":"GROUP",
           "ChangeLog":"changelog.html",
           "RoadMap":"roadmap.html",
           "Help":"help.html",
@@ -1181,6 +1189,7 @@
           "My TWITTER SpaceX List (Català-Castellano)":"twitter.html?list=elricdog-cat-cas",
           
           // Twitter timelines
+		  "TWITTER":"GROUP",
           "TWITTER - SpaceX":"twitter.html?people=spacex",
           "TWITTER - Elon Musk":"twitter.html?people=elonmusk",
           "TWITTER - Jessie Anderson":"twitter.html?people=whoisheartbreak",
@@ -1201,43 +1210,60 @@
           "TWITTER - Ismael Flores [SpaceXStorm] (Castellano)":"twitter.html?people=ifcampoy",
 		  "TWITTER - Frontera Espacial (Castellano)":"twitter.html?people=FronteraSpacial",
 
+		  "SPACEX INFORMATION":"GROUP",
           "SPACEX Web":"https://www.spacex.com",
           
+		  "OTHERS":"GROUP",
           "*TWITTER":"https://twitter.com",
           "*REDDIT":"https://reddit.com",
           "*DISCORD":"https://discord.com", 
           "*YOUTUBE CHANNELS":"https://youtube.com",
          
+		  "NEXT LAUNCHES":"GROUP",
+          "NEXT LAUNCHES - SpaceX direct source":"https://whenisthenextspacexlaunch.com/", 
           "NEXT LAUNCHES - Source 1":"https://whenisthenextspacexlaunch.com/", 
 		  "NEXT LAUNCHES - Source 2":"https://www.rocketlaunch.live/?filter=spacex", 		  
 		  "NEXT LAUNCHES - Source 3":"https://spaceflightnow.com/launch-schedule/", 		  
+
+		  "SEARCH":"GROUP",
           "SEARCH - Google":"https://www.google.com/search?igu=1&q=SpaceX",
           "SEARCH - Bing":"https://www.bing.com/search?q=SpaceX",
           
+ 		  "APPLICATION":"GROUP",
           "ChangeLog":"changelog.html",
           "RoadMap":"roadmap.html",
           "Help":"help.html",
          };
          
          
-         // Populate selection channels
-         for (var key in channels) {
-            var el = document.createElement("option");
-         	el.title = channels[key];
-            el.textContent = key;
-            el.value = channels[key];
-            if (select1!=null) select1.appendChild(el);
-         	if (select2!=null) select2.appendChild(el.cloneNode(true));
-         	if (select3!=null) select3.appendChild(el.cloneNode(true));
-         	if (select4!=null) select4.appendChild(el.cloneNode(true));
-         }
-         for (var key in channelsVertical) {
-            var el = document.createElement("option");
-         	el.title = channels[key];
-            el.textContent = key;
-            el.value = channelsVertical[key];
-            if (select5!=null) select5.appendChild(el);
-         }
+		function PopulateSelectionChannels(select, channels) {
+			var currentOptGroup = select;
+			var currentOptGroupToken = "";
+			for (var key in channels) {
+				var el = null;
+				if (channels[key]=="GROUP")
+				{
+					el = document.createElement("optgroup");
+					el.label = key;
+					select.appendChild(el);
+					currentOptGroup = el;
+					currentOptGroupToken = key + " - ";
+				} else {
+					el = document.createElement("option");
+					el.title = channels[key];
+					el.textContent = key.replace(currentOptGroupToken, "");
+					el.value = channels[key];				
+					currentOptGroup.appendChild(el);
+				}
+			}
+		};
+		
+         // Populate selection channels		 
+		 PopulateSelectionChannels(select1, channels);
+		 PopulateSelectionChannels(select2, channels);
+		 PopulateSelectionChannels(select3, channels);
+		 PopulateSelectionChannels(select4, channels);
+		 PopulateSelectionChannels(select5, channelsVertical);
 
 		 // Timers
          const timeLOCAL = document.getElementById("timeLOCAL");

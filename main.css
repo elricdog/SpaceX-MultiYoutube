@@ -415,7 +415,7 @@ select:hover {
 @keyframes blinkingText{
     0%{   color: white; }
     69%{  color: #2072A8; }
-    80%{  color: yellow; }
-    99%{  color: yellow; }
+    80%{  color: red; }
+    99%{  color: red; }
     100%{ color: white; }
 }
