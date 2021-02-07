@@ -408,3 +408,14 @@ select:hover {
 ::-webkit-scrollbar-corner {
   background: #A7A9AC;
 }
+
+.blinking {
+    animation:blinkingText 1.2s 6;
+}
+@keyframes blinkingText{
+    0%{   color: white; }
+    69%{  color: #2072A8; }
+    80%{  color: yellow; }
+    99%{  color: yellow; }
+    100%{ color: white; }
+}

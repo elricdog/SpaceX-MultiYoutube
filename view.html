@@ -422,7 +422,7 @@
          
 		 function updateRSSTextScrollWidth() {
          	const rssTextScroll = document.getElementById('rssTextScroll');
-         	var fw = 1;
+         	var fw = 0;
 			fw+=document.getElementById('rowTopBarB').getBoundingClientRect().width;
 			fw+=document.getElementById('rowTopBarC').getBoundingClientRect().width;
 			fw+=document.getElementById('rowTopBarD').getBoundingClientRect().width;
@@ -800,13 +800,15 @@
       <div class="allViews" id="app-screen" style="visibility:hidden;">	  
 	  
          <div class="rowTopBar" id="rowTopBar" style="height:28px; min-height:28px; max-height:28px; padding:0px; margin:0px; width:100%;">
-			
+						
 			  <div class="rowTopBar1" id="rssTextScroll">
 				 <div class="rssTextScroll">
 					<div id="rssTextScrollContent"></div>
 				 </div>
 			  </div>
-					
+						 
+			  <div title="SpaceXBoard logo" style="position:absolute; left:0px; top:0px; width:56px; height:28px;z-index:20000"><img src="Icons/endRSS.png"/></div>			
+			
 			  <div class="rowTopBar2" id="rowTopBarB">
 				 <div title="Options" class="icon" id="iconOptions"><img src="Icons/options.png"/></div>
 				 
@@ -864,7 +866,7 @@
 			  </div>
 			 
 			  <div class="rowTopBar2" id="rowTopBarG">
-				 <div title="Views launch current state" class="iconLabel2" id="groupLaunchState">
+				 <div title="Views launch current state" class="iconLabel blinking" id="groupLaunchState">
 					Launch State
 					<div><label id="launchState">...</label></div>
 				 </div>

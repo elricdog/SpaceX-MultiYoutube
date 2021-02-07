@@ -168,12 +168,21 @@ function clearIntervalUpdateLaunchState() {
 	}
 }
 
+function restartLaunchStateAnimation() {
+	console.log("Restart Launch State Animation");
+	var groupLaunchState = document.getElementById("groupLaunchState");
+	groupLaunchState.classList.remove("blinking");
+	void groupLaunchState.offsetWidth;
+	groupLaunchState.classList.add("blinking");
+}
+
 function getLaunchState(view){
     firebase.database().ref('state/text')
     .on('value', (snapshot)=>{
 		clearIntervalUpdateLaunchState();
 		lastUpdateLaunchState = snapshot.val();
 		view.innerHTML = lastUpdateLaunchState;
+		restartLaunchStateAnimation();
 		updateRSSTextScrollWidth();
     });
     firebase.database().ref('state/minutes')
@@ -190,14 +199,17 @@ function getLaunchState(view){
 					minutesUpdateLaunchState = minutesUpdateLaunchState-1;
 					view.innerHTML = "T - "+minutesUpdateLaunchState;
 				}
+				restartLaunchStateAnimation();
 				updateRSSTextScrollWidth();
 				console.log("Updated Launch State to: " + view.innerHTML);
 			}, 60000);			  
 			view.innerHTML = "T - "+minutesUpdateLaunchState;
+			restartLaunchStateAnimation();
 			updateRSSTextScrollWidth();
 		} else {
 			if (minutesUpdateLaunchState==0) {
 				view.innerHTML = lastUpdateLaunchState;
+				restartLaunchStateAnimation();
 				updateRSSTextScrollWidth();		
 			}
 		}		
