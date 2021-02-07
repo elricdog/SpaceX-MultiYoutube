@@ -8,6 +8,7 @@ var logElement = document.querySelector("#logger");
 logElement.innerText = "Logging Events\n\n";
 
 // JSON is the default type, but you can be sure anyway
+const castReceiverOptions = new cast.framework.CastReceiverOptions();
 castReceiverOptions.customNamespaces = Object.assign({});
 castReceiverOptions.customNamespaces[LOG_NAMESPACE] = cast.framework.system.MessageType.JSON;
 castReceiverContext.start(castReceiverOptions);
