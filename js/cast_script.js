@@ -8,6 +8,25 @@ var logElement = document.querySelector("#logger");
 logElement.innerText = "Logging Events\n\n";
 
 // JSON is the default type, but you can be sure anyway
+const castReceiverOptions = new cast.framework.CastReceiverOptions();
 castReceiverOptions.customNamespaces = Object.assign({});
 castReceiverOptions.customNamespaces[LOG_NAMESPACE] = cast.framework.system.MessageType.JSON;
 castReceiverContext.start(castReceiverOptions);
+
+var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+ function onYouTubeIframeAPIReady() {
+     document.querySelectorAll('.ytplayer').forEach((item) => {
+         new YT.Player(item, {
+             events: {
+                 'onReady': (event) => {
+                     event.target.playVideo();
+                     event.target.mute();
+                 }
+             }
+         })
+     })
+ }
