@@ -265,11 +265,11 @@
          	const select5 = document.getElementById("selectCH5");
 			
 			if (isMobile()) {
-				$("#selectCH1").select2({theme:"flat",width: minimumResultsForSearch: -1, 'resolve', dropdownAutoWidth:'true'}).maximizeSelect2Height();
-				$("#selectCH2").select2({theme:"flat",width: minimumResultsForSearch: -1, 'resolve', dropdownAutoWidth:'true'}).maximizeSelect2Height();
-				$("#selectCH3").select2({theme:"flat",width: minimumResultsForSearch: -1, 'resolve', dropdownAutoWidth:'true'}).maximizeSelect2Height();
-				$("#selectCH4").select2({theme:"flat",width: minimumResultsForSearch: -1, 'resolve', dropdownAutoWidth:'true'}).maximizeSelect2Height();
-				$("#selectCH5").select2({theme:"flat",width: minimumResultsForSearch: -1, 'resolve', dropdownAutoWidth:'true'}).maximizeSelect2Height();
+				$("#selectCH1").select2({theme:"flat",width: 'resolve', minimumResultsForSearch:-1, dropdownAutoWidth:'true'}).maximizeSelect2Height();
+				$("#selectCH2").select2({theme:"flat",width: 'resolve', minimumResultsForSearch:-1, dropdownAutoWidth:'true'}).maximizeSelect2Height();
+				$("#selectCH3").select2({theme:"flat",width: 'resolve', minimumResultsForSearch:-1, dropdownAutoWidth:'true'}).maximizeSelect2Height();
+				$("#selectCH4").select2({theme:"flat",width: 'resolve', minimumResultsForSearch:-1, dropdownAutoWidth:'true'}).maximizeSelect2Height();
+				$("#selectCH5").select2({theme:"flat",width: 'resolve', minimumResultsForSearch:-1, dropdownAutoWidth:'true'}).maximizeSelect2Height();
 			} else {				
 				$("#selectCH1").select2({theme:"flat",width: 'resolve', dropdownAutoWidth:'true'}).maximizeSelect2Height();
 				$("#selectCH2").select2({theme:"flat",width: 'resolve', dropdownAutoWidth:'true'}).maximizeSelect2Height();
