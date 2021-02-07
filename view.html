@@ -659,14 +659,15 @@
 				select4.style.fontSize = "11px";
 				select5.style.fontSize = "11px";
 				
-         		setVisitors(true);
 				setLaunchState(true);
          		toggleTimeGroups();			
 								
 				if (isLandscape()) {
+					setVisitors(true);
 					last5thColumnSplitSizes = "70, 30";
 					set5thColumn(false, last5thColumnSplitSizes);
 				} else {
+					setVisitors(false);
 					set5thColumn(false, null);
 				}
 				
@@ -681,8 +682,7 @@
 					}
 				});
 				const allViews = document.getElementById("allViews");				
-				resizeMobileObserver.observe(allViews);
-				
+				resizeMobileObserver.observe(allViews);				
          	} else {
          		setVisitors(true);
 				setLaunchState(true);
