@@ -284,6 +284,9 @@
 		 function composeYouTubeLiveStreamURL(videoId, muteDefault) {
 			return "https://www.youtube.com/embed/"+videoId+"?autoplay=1&ref=0&mute="+muteDefault;
 		 }
+		 function composeYouTubeChatURL(videoId) {
+			return "https://www.youtube.com/live_chat?is_popout=0&v="+videoId
+		 }
 		
 			function setSourceToElementiFrame(iFrameId, options, index) {
 				var source = options[index].value;
@@ -457,6 +460,16 @@
 			  "TWITTER - Ag. Romanov (Català)":"twitter.html?people=ivanvihe",
 			  "TWITTER - Ismael Flores [SpaceXStorm] (Castellano)":"twitter.html?people=ifcampoy",
 			  "TWITTER - Frontera Espacial (Castellano)":"twitter.html?people=FronteraSpacial",
+			  
+			  // Chats
+			  "CHAT":"GROUP",
+			  "NASASpaceflight":composeYouTubeChatURL("Ty5l9ZxsG9M"),
+			  "LabPadre":composeYouTubeChatURL("Ky5l9ZxsG9M"),
+			  "Everyday Astronaut":composeYouTubeChatURL("QJ6YN5upGH0"),
+			  "SpaceXStorm (Castellano)":composeYouTubeChatURL("39T-NWgFtME"),
+			  "Frontera Espacial (Castellano)":composeYouTubeChatURL("uVMXkl-i7l8"),
+			  "Marcus House":composeYouTubeChatURL("MkLpg5Rs8mI"),
+			  "What about it!?":composeYouTubeChatURL("QRRSvq5s0oE"),
 
 			  "SPACEX INFORMATION":"GROUP",
 			  "SPACEX Web":"https://www.spacex.com",

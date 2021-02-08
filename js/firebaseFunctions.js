@@ -222,6 +222,7 @@ function getFeedsFromDB() {
 			var value = child.val();
 			console.log("Feed [" + title + "] must be updated to: " + value);
 			var newURL = composeYouTubeLiveStreamURL(value, 0);
+			var newURLChat = composeYouTubeChatURL(value, 0);
 			console.log("- Newest URL: " + newURL);
 
 			// Update options
@@ -232,7 +233,9 @@ function getFeedsFromDB() {
 			updateOptionsWithNewFeed(select1, title, newURL);
 			updateOptionsWithNewFeed(select2, title, newURL);
 			updateOptionsWithNewFeed(select3, title, newURL);
-			updateOptionsWithNewFeed(select4, title, newURL);
+			updateOptionsWithNewFeed(select4, title, newURL);			
+			const select5 = document.getElementById("selectCH5");						
+			updateOptionsWithNewFeed(select5, title, newURLChat);
 		});			
 	});
 }
