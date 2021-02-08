@@ -42,3 +42,19 @@ html, body {
 	z-index: 10000;
 	background-color: #005288;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #A7A9AC;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C7C9CC;
+}
+
+::-webkit-scrollbar-corner {
+  background: #A7A9AC;
+}
