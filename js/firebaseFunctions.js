@@ -133,7 +133,7 @@ function getRealTimeVisitors(view){
 }
 
 function getRealtimeRss(view){
-	console.log("RSS Fetch");
+	console.log(">>> RSS Fetch");
     firebase.database().ref('rss')
     .on('value', (snapshot)=>{
       console.log("RSS Updated");
@@ -174,6 +174,7 @@ function restartLaunchStateAnimation() {
 }
 
 function getLaunchState(view){
+	console.log(">>> LaunchState Fetch");
     firebase.database().ref('state/text')
     .on('value', (snapshot)=>{
 		clearIntervalUpdateLaunchState();
@@ -196,7 +197,6 @@ function getLaunchState(view){
 					minutesUpdateLaunchState = minutesUpdateLaunchState-1;
 					view.innerHTML = "T - "+minutesUpdateLaunchState;
 				}
-				restartLaunchStateAnimation();
 				updateRSSTextScrollWidth();
 				console.log("Updated Launch State to: " + view.innerHTML);
 			}, 60000);			  
@@ -206,7 +206,6 @@ function getLaunchState(view){
 		} else {
 			if (minutesUpdateLaunchState==0) {
 				view.innerHTML = lastUpdateLaunchState;
-				restartLaunchStateAnimation();
 				updateRSSTextScrollWidth();		
 			}
 		}		
@@ -214,15 +213,16 @@ function getLaunchState(view){
     });
 }
 
-function getFeedsFromDB() {
+function getFeedsFromDB() {	
+	console.log(">>> Feeds Fetch");
 	firebase.database().ref('feeds')
 	.on('value', (snapshot)=>{
 		snapshot.forEach((child)=>{
 			var title = child.key;
 			var value = child.val();
-			console.log("Feed [" + title + "] updated to: " + value);
+			console.log("Feed [" + title + "] must be updated to: " + value);
 			var newURL = composeYouTubeLiveStreamURL(value, 0);
-			console.log("- New URL: " + newURL);
+			console.log("- Newest URL: " + newURL);
 
 			// Update options
 			const select1 = document.getElementById("selectCH1");
@@ -232,28 +232,37 @@ function getFeedsFromDB() {
 			updateOptionsWithNewFeed(select1, title, newURL);
 			updateOptionsWithNewFeed(select2, title, newURL);
 			updateOptionsWithNewFeed(select3, title, newURL);
-			updateOptionsWithNewFeed(select4, title, newURL);						
-		});
+			updateOptionsWithNewFeed(select4, title, newURL);
+		});			
 	});
 }
 
 function updateOptionsWithNewFeed(optionSelect, title, newURL) {
 	for (var id in optionSelect.options) {
 		var el = optionSelect.options[id];
-		if (el.textContent==title) {				
-			console.log("- Replaced URL on option position " + id);
-			var changed = el.title != newURL;		
+		if (el.title==title) {				
+			var changed = el.value != newURL;		
 			if (changed) {
-				el.title = newURL;			
+				console.log("- Replaced ["+title+"] with New URL on option position " + id + " on select " + optionSelect.id);				
 				el.value = newURL;				
 				var index = optionSelect.selectedIndex;
 				var sel = optionSelect.options[index];
-				console.log("- Currently selected " + sel.textContent);
-				if (sel.textContent==title) {
-					console.log("- Reload currently selected");
+				console.log("- Currently selected on "+optionSelect.id+": " + sel.title);
+				if (sel.title==title) {
+					console.log("- !!! RELOADING !!!");
 					var event = new Event('change');
 					optionSelect.selectedIndex = sel.index;
 					optionSelect.dispatchEvent(event);
+					console.log("- Reload selected done");
+					
+					// Update last set and blinking
+					const lastUpdate = document.getElementById("lastUpdate");
+					var lastModifiedDate = new Date();
+					lastUpdate.innerHTML = lastModifiedDate.toLocaleString();
+					const lastUpdateLabel = document.getElementById('groupLastUpdate');
+					lastUpdateLabel.classList.remove("blinking");
+					void lastUpdateLabel.offsetWidth;
+					lastUpdateLabel.classList.add("blinking");
 				}
 			}
 			return;

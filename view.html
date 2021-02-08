@@ -215,6 +215,27 @@
 	  <script>
 		var sourcesLive = null;
 		
+		function isSourceLiveNow(source) {	
+			var result = false;
+			if (source!=null) {			
+				if (sourcesLive != null) {		
+					sourcesLive.forEach(item => {									
+						var items = item.split(" | ");
+						var videoId = items[0].trim();					
+						if (isBlank(videoId)==false) {
+							if (source.includes(videoId)) {
+								var videoTitle = items[1].trim();
+								//console.log("Source is in LiveNow sources: "+source+ "("+videoTitle+")");
+								result = true;
+								return;
+							}
+						}
+					});
+				}
+			}
+			return result;
+		}
+		
 		function updateSourceLiveNow(id, source) {         				
 			// Still iFrame not loaded
 			if (source.includes("SpaceX-MultiYoutube/view.html")) return;
@@ -235,6 +256,7 @@
 				}
 			}
 		}
+				
 		function loadSourcesLiveNow() {	
 			console.log("Loading Sources Live NOW...");
 			var request = new XMLHttpRequest();
@@ -255,36 +277,19 @@
 						const iframeCH3 = document.getElementById("iframeCH3");
 						updateSourceLiveNow(3, iframeCH3.src);					
 						const iframeCH4 = document.getElementById("iframeCH4");
-						updateSourceLiveNow(4, iframeCH4.src);					
+						updateSourceLiveNow(4, iframeCH4.src);
 					}					
 				}
 			}
 		}		
-		
-		function isSourceLiveNow(source) {	
-			var result = false;
-			if (sourcesLive != null) {		
-				sourcesLive.forEach(item => {									
-					var videoId = item.split(" | ")[0].trim();
-					if (isBlank(videoId)==false) {
-						if (source.includes(videoId)) {
-							console.log("Source is in LiveNow sources: "+source);
-							result = true;
-							return;
-						}
-					}
-				});
-			}
-			return result;
-		}
-		
+				
 		 function composeYouTubeLiveStreamURL(videoId, muteDefault) {
 			return "https://www.youtube.com/embed/"+videoId+"?autoplay=1&ref=0&mute="+muteDefault;
 		 }
 		
 			function setSourceToElementiFrame(iFrameId, options, index) {
 				var source = options[index].value;
-				var title = options[index].textContent;
+				var title = options[index].title;
 				
 				console.log("Setting source at " + iFrameId + "("+title+") - " + source);
 				
@@ -292,9 +297,12 @@
 				analytics.logEvent('source', { name: title});
 				
 				var id = iFrameId.replace("iframeCH","");
-				document.getElementById("selectCH" + id).title = "View " + id + " - " + title + " (" + source + ")";
+				var select = document.getElementById("selectCH" + id);
+				select.title = title;
 				
-				updateSourceLiveNow(id, source);
+				if (iFrameId!="iframeCH5") {				
+					updateSourceLiveNow(id, source);
+				}
 			}
 		
 			function PopulateSelectionChannels(select, channels) {
@@ -311,8 +319,9 @@
 						currentOptGroupToken = key + " - ";
 					} else {
 						el = document.createElement("option");
-						el.title = channels[key];
-						el.textContent = key.replace(currentOptGroupToken, "");
+						var finalTitle = key.replace(currentOptGroupToken, "");
+						el.title = finalTitle;
+						el.textContent = finalTitle; // Will hold icon isLive later
 						el.value = channels[key];				
 						currentOptGroup.appendChild(el);
 					}
@@ -584,17 +593,52 @@
          	document.getElementById("iconRefreshCH5").addEventListener ("click", refreshCH5, false);
          			
 			if (isMobile()) {
-				$("#selectCH1").select2({theme:"flat",width: 'resolve', minimumResultsForSearch:-1, dropdownAutoWidth:'true'}).maximizeSelect2Height();
-				$("#selectCH2").select2({theme:"flat",width: 'resolve', minimumResultsForSearch:-1, dropdownAutoWidth:'true'}).maximizeSelect2Height();
-				$("#selectCH3").select2({theme:"flat",width: 'resolve', minimumResultsForSearch:-1, dropdownAutoWidth:'true'}).maximizeSelect2Height();
-				$("#selectCH4").select2({theme:"flat",width: 'resolve', minimumResultsForSearch:-1, dropdownAutoWidth:'true'}).maximizeSelect2Height();
-				$("#selectCH5").select2({theme:"flat",width: 'resolve', minimumResultsForSearch:-1, dropdownAutoWidth:'true'}).maximizeSelect2Height();
+				var options = {
+				  theme:"flat",
+				  width: 'resolve', 
+				  minimumResultsForSearch:-1, 
+				  dropdownAutoWidth:'true',
+				  escapeMarkup: function(markup) {
+					return markup;
+				  },
+				  templateResult: function(data) {
+					if (data.element==null) return "";
+					if (isSourceLiveNow(data.element.value)) {
+						const icon = " <img src='Icons/isLive-mini.png'/>";
+						return data.title + icon;
+					} else {
+						return data.text;
+					}
+				  },
+				};			
+				$("#selectCH1").select2(options).maximizeSelect2Height();
+				$("#selectCH2").select2(options).maximizeSelect2Height();
+				$("#selectCH3").select2(options).maximizeSelect2Height();
+				$("#selectCH4").select2(options).maximizeSelect2Height();
+				$("#selectCH5").select2(options).maximizeSelect2Height();
 			} else {				
-				$("#selectCH1").select2({theme:"flat",width: 'resolve', dropdownAutoWidth:'true'}).maximizeSelect2Height();
-				$("#selectCH2").select2({theme:"flat",width: 'resolve', dropdownAutoWidth:'true'}).maximizeSelect2Height();
-				$("#selectCH3").select2({theme:"flat",width: 'resolve', dropdownAutoWidth:'true'}).maximizeSelect2Height();
-				$("#selectCH4").select2({theme:"flat",width: 'resolve', dropdownAutoWidth:'true'}).maximizeSelect2Height();
-				$("#selectCH5").select2({theme:"flat",width: 'resolve', dropdownAutoWidth:'true'}).maximizeSelect2Height();
+				var options = {
+				  theme:"flat",
+				  width: 'resolve', 
+				  dropdownAutoWidth:'true',
+				  escapeMarkup: function(markup) {					
+					return markup;
+				  },
+				  templateResult: function(data) {
+					if (data.element==null) return "";
+					if (isSourceLiveNow(data.element.value)) {
+						const icon = " <img src='Icons/isLive.png'/>";
+						return data.title + icon;
+					} else {
+						return data.text;
+					}
+				  },
+				};
+				$("#selectCH1").select2(options).maximizeSelect2Height();
+				$("#selectCH2").select2(options).maximizeSelect2Height();
+				$("#selectCH3").select2(options).maximizeSelect2Height();
+				$("#selectCH4").select2(options).maximizeSelect2Height();
+				$("#selectCH5").select2(options).maximizeSelect2Height();
 			}
 			$("body").on('click', '.select2-results__group', function() { $(this).siblings().toggle(); })			
 
@@ -709,7 +753,7 @@
          	var lastModifiedDate = new Date();
          	lastModifiedDate.setTime(Date.parse(lastModifiedDateString));
          	lastUpdate.innerHTML = lastModifiedDate.toLocaleString();
-         	console.log("LastUpdate: "+lastUpdate.innerHTML);
+         	console.log("LastUpdate of sourcecode: "+lastUpdate.innerHTML);
          	
 			// Add one view more
 			addView();
