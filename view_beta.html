@@ -22,9 +22,11 @@
    <body>
 		<!-- Cast -->
 		<script>
+		let castIsAvailable = false;
 		window['__onGCastApiAvailable'] = function(isAvailable) {
 		  if (isAvailable) {
 			console.log("Cast is available");			
+			castIsAvailable = true;
 		  }
 		};
 		
@@ -710,7 +712,13 @@
          	document.getElementById("iconRefreshApp").addEventListener ("click", function() { toggleIconGroups(); refreshApp(); }, false);		
 			document.getElementById("iconEndRSS").addEventListener ("click", function() { launchGoToMars(); }, false); 
 			document.getElementById("iconOwnDonation").addEventListener ("click", function() { toggleIconGroups(); toggleOwnDonation(); }, false); 
-			document.getElementById("iconCastToTV").addEventListener ("click", function() { toggleIconGroups(); toggleCastToTV(); }, false); 
+			
+			const iconCastToTV = document.getElementById("iconCastToTV");
+			if (castIsAvailable) {
+				iconCastToTV.addEventListener ("click", function() { toggleIconGroups(); toggleCastToTV(); }, false); 
+			} else {				
+				iconCastToTV.remove();
+			}
 			
 			document.getElementById("buttonSupportUs").addEventListener ("click", function() { toggleAboutUs(); toggleOwnDonation(); }, false);
 			document.getElementById("buttonDonateGO").addEventListener ("click", function() { toggleDonation(); goToDonation(); }, false);
