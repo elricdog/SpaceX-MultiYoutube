@@ -3,9 +3,7 @@ var LOG_NAMESPACE = "urn:x-cast:elricdog.github.io.spacexboard.Log"
 var castReceiverContext = cast.framework.CastReceiverContext.getInstance();
 //castReceiverContext.setLoggerLevel(cast.framework.LoggerLevel.DEBUG);
 castReceiverContext.addCustomMessageListener(LOG_NAMESPACE, function (customEvent) {
-  logElement.innerText += LOG_NAMESPACE + " Position - " + customEvent.data.position + "\n";
-  logElement.innerText += LOG_NAMESPACE+ " VIDEOID - " + customEvent.data.videoId + "\n";
-  logElement.innerText += LOG_NAMESPACE+ " EVENT - " + customEvent + "\n";
+  logElement.innerText += LOG_NAMESPACE + " - " + customEvent.data + "\n";
   console.log(LOG_NAMESPACE + " - " + customEvent.data.message);
   changeVideo(customEvent.data.position, customEvent.data.videoId, customEvent.data.mute);
 });
