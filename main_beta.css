@@ -20,6 +20,15 @@ body {
 	overflow:hidden;
 }
 
+#horizontalViewLayout, #verticalViewLayout {
+	width: 100%;
+	height: 100%;
+	min-width: 100%;
+	min-height: 100%;
+	background-color: #A7A9AC;
+	overflow:hidden;
+}
+
 .rowTopBar {
 	background-color: #A7A9AC;
 	border-spacing: 0px;
@@ -35,22 +44,6 @@ body {
 	float:right;
 }
 
-select:focus > option:hover { background: #2072A8 !important; opacity: 1.0;}
-select:focus > option:checked { background: #003268 !important; opacity: 1.0;}
-
-select:hover {
-	border: 1px solid #A7A9AC;
-}
-
-@keyframes optionScroll {
-	0% {
-		transform: translate(0, 0);
-	}
-	100% {
-		transform: translate(-100%, 0);
-	}
-}
-
 .channels {
 	border-spacing: 0px;
 	padding: 0px;
@@ -60,7 +53,6 @@ select:hover {
 }
 
 .channelSelect {
-	cursor: pointer;
 	border-spacing: 0px;
 	padding: 0px;
 	margin: 0px;
@@ -71,12 +63,13 @@ select:hover {
 	top: 0px;
 	width: 165px;
 	height: 28px;
+	max-height: 28px;
 	border: 0px;
 	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 .channelSelect5th {
-	cursor: pointer;
 	border-spacing: 0px;
 	padding: 0px;
 	margin: 0px;
@@ -85,19 +78,12 @@ select:hover {
 	outline: none;
 	left: 0px;
 	top: 0px;
-	width: calc(100% - 28px);
+	width: 165px;
 	height: 28px;
+	max-height: 28px;
 	border: 0px;
 	font-size: 12px;
-}
-
-.channelSelect:focus {
-	background-color: #005288;
-}
-
-.channelSelect5th:focus {
-	background-color: #005288;
-	
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 #optionsIcons {
@@ -133,6 +119,10 @@ select:hover {
 
 .icon:hover {
 	border: 1px solid #A7A9AC;
+}
+
+.icon2 {	
+	cursor: auto;
 }
 
 .iconLabel {
@@ -207,7 +197,7 @@ select:hover {
 #rssTextScrollContent {
 	cursor: pointer;
 	background-color: transparent;
-	line-height: 26px;
+	line-height: 27px;
 	font-size: 14px;
 	border: 0px;
 	width: max-content;
@@ -272,6 +262,34 @@ select:hover {
 	overflow: auto;
 }
 
+#donation, #ownDonation {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 5px;
+	z-index: 300000;
+	visibility: hidden;
+	border: 1px solid #003268;
+	background-color: #005288;
+	color: white;
+	overflow: auto;
+}
+
+#castToTV {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 5px;
+	z-index: 300000;
+	visibility: hidden;
+	border: 1px solid #003268;
+	background-color: #005288;
+	color: white;
+	overflow: auto;
+}
+
 #load {
 	position: fixed;
 	top: 50%;
@@ -307,9 +325,30 @@ select:hover {
 	top: 1px;
 }
 
+.myButton2 {
+	background-color: #DAA520;
+	border: 0px;
+	display: inline-block;
+	cursor: pointer;
+	color: black;
+	font-family: Arial;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 8px 14px;
+}
+
+.myButton2:hover {
+	background-color: #FFD700;
+}
+
+.myButton2:active {
+	position: relative;
+	top: 1px;
+}
+
 #loading-screen {
 	position: absolute;
-	z-index: 20000;
+	z-index: 50000;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -317,11 +356,20 @@ select:hover {
 	background-color: #000000;
 	opacity: 1;
 	transition: 1s opacity;
-	visibility: hidden;
 }
 
 #loading-screen.fade-out {
 	opacity: 0;
+}
+
+#orientation-screen {
+	position: absolute;
+	z-index: 50000;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #000000;
 }
 
 #loader {
@@ -407,4 +455,13 @@ select:hover {
 
 ::-webkit-scrollbar-corner {
   background: #A7A9AC;
+}
+
+.blinking {
+    animation:blinkingText 1.2s 6;
+}
+@keyframes blinkingText{
+    0%{   color: white; }
+    69%{  color: red; text-shadow: 1px 1px #000; }
+    100%{ color: white; }
 }

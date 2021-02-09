@@ -1,43 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
-      <title>SpaceXBoard</title>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-      <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
-      <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
-      <link rel="manifest" href="./manifest.webmanifest">
-      <link type="text/css" rel="stylesheet" href="main_beta.css">
-      <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4.4.3/css/metro-all.min.css">
-      <script src="https://cdn.metroui.org.ua/v4.4.3/js/metro.min.js"></script>
-      <link type="text/css" rel="stylesheet" href="metro_redefines.css">
-   </head>
-   <!-- Global site tag (gtag.js) - Google Analytics -->
-   <script async src="https://www.googletagmanager.com/gtag/js"></script>
-   <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-   </script>
-   <!-- Contact form (emailjs.com) -->
-   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"/>
-      <script>
-      	(function(){
-      		emailjs.init("user_BjUMLZEqKE9VdA5391rv8");
-      	})();
-   </script>
+		<title>SpaceXBoard</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+		<link rel="icon" href="./favicon.ico" type="image/x-icon"/>
+		<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
+		<link rel="manifest" href="./manifest.webmanifest">
+
+		<link rel="stylesheet" href="https://cdn.metroui.org.ua/v4.4.3/css/metro-all.min.css">
+		<script src="https://cdn.metroui.org.ua/v4.4.3/js/metro.min.js"></script>
+		<link type="text/css" rel="stylesheet" href="metro_redefines.css">
+		  
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.full.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" />
+		<script src="./js/maximize-select2-height.js"></script>
+		<link type="text/css" rel="stylesheet" href="select2_redefines.css">
+		
+		<link type="text/css" rel="stylesheet" href="main_beta.css">	 
+   </head>     
    <body>
-      <section id="loading-screen" style="visibility:visible;">
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+		</script>
+		<!-- EMailjs for Contacts -->
+		<script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"/>   
+		<script>
+			(function(){
+				emailjs.init("user_BjUMLZEqKE9VdA5391rv8");
+			})();
+		</script>
+      
+	  <!-- Loading Screen -->
+      <section id="loading-screen" style="display:block;">
          <br>
          <center>
-            <img id="imgLogo" src="./Images/logo_mini.png"/>
+            <img id="imgLogo" width="128px" height="128px" src="./Images/logo_mini.png"/>
             <br>
-            <h3 style="color:silver;">SpaceXBoard by Sworied, Berrgurt and Elric</h3>
-			<h5 style="color:white;"><i>Best looked on a computer big screen or horizontally in mobile devices</i></h5>
-            <br>
+            <h3 style="color:silver;">SpaceXBoard by Sworied, Berrgurt and Elric</h3>			
+			<br>
          </center>
          <div id="loader"/>
       </section>
+      <section id="orientation-screen" style="display:none;">
+         <br>
+         <center>
+            <img id="imgLogo" width="128px" height="128px" src="./Images/logo_mini.png"/>
+            <br>
+            <h3 style="color:silver;">Reloading...</h3>			
+			<br>
+         </center>
+      </section>
+	  
       <!-- Contact -->
       <div id="contact" style="visibility:hidden; width: fit-content; height: fit-content;">
          <center>
@@ -48,7 +67,7 @@
 				We work on this on our free time. Always under construction.<br>
 				Be patient.
 			</div>
-         </center>
+         </center>         
          <form id="contact-form">
             <input type="hidden" name="contact_number" id="contact_number">
             <p>
@@ -66,9 +85,9 @@
             <center>
                <button id="buttonContactSend" class="myButton">Send</button>
                <button id="buttonContactClose" class="myButton">Close</button>
-               <br>
+               <br>               
                <label id="lblContactError" style="color:red;"></label>
-         </form>
+         </form>         
          </center>
       </div>
       <!-- About Us -->
@@ -84,20 +103,69 @@
                Elric and Sworied and Berrgurt
             </p>
             <br>
+            <button id="buttonSupportUs" class="myButton2">Support Us</button>
             <button id="buttonAboutUsClose" class="myButton">Close</button>
 			<div id="linksToWeb"> 
-            <br>
-            <br>Link to this web:<br>
-            <a href="https://elricdog.github.io/SpaceX-MultiYoutube/view.html">https://elricdog.github.io/SpaceX-MultiYoutube/view.html</a>
-            <br>Link to BETA version (bugs and not stable):<br>
-            <a href="https://elricdog.github.io/SpaceX-MultiYoutube/view_beta.html">https://elricdog.github.io/SpaceX-MultiYoutube/view_beta.html</a>
-            <br>Link to OLD version (more simple):<br>
-            <a href="https://elricdog.github.io/SpaceX-MultiYoutube/view_old.html">https://elricdog.github.io/SpaceX-MultiYoutube/view_old.html</a>
-            <br>Source Code at GitHub:<br>
-            <a href="https://github.com/elricdog/SpaceX-MultiYoutube">https://github.com/elricdog/SpaceX-MultiYoutube</a>
+				<br>
+				<br>Link to this web:<br>
+				<a href="https://elricdog.github.io/SpaceX-MultiYoutube/view.html">https://elricdog.github.io/SpaceX-MultiYoutube/view.html</a>
+				<br>Link to BETA version (bugs and not stable):<br>
+				<a href="https://elricdog.github.io/SpaceX-MultiYoutube/view_beta.html">https://elricdog.github.io/SpaceX-MultiYoutube/view_beta.html</a>
+				<br>Source Code at GitHub:<br>
+				<a href="https://github.com/elricdog/SpaceX-MultiYoutube">https://github.com/elricdog/SpaceX-MultiYoutube</a>
 			</div>
          </center>
       </div>
+	  
+      <!-- Donation -->
+      <div id="donation" style="visibility:hidden; width: fit-content; height: fit-content;">
+         <center>
+            <h3>Donation Instructions</h3>
+            <p>
+			   This option is to donate to the Live Stream you have currently selected.<br>
+               Pressing GO button will redirect you to normal youtube web page of selected Live Stream.<br>
+			   Then, go to chat panel, subscribe, join and donate using the same icon <img src="./Icons/donation.png"/> you will find there.<br>
+			   <b>Please, support those guys that are making this great live videos that all comunity enjoy.</b><br>
+			   If after that you want to help us to improve SpaceXBoard, go to ABOUT US button and support us too.<br>
+            </p>
+            <br>			
+            <button id="buttonDonateGO" class="myButton2">GO to YOUTUBE</button>
+			<button id="buttonDonateAboutUs" class="myButton">About Us</button>
+			<button id="buttonDonateClose" class="myButton">Close</button>
+         </center>
+      </div>
+
+      <!-- OwnDonation -->
+      <div id="ownDonation" style="visibility:hidden; width: fit-content; height: fit-content;">
+         <center>
+            <h3>Support SpaceXBoard</h3>
+            <p>
+				We start this project to help follow live streams.<br>
+				We dedicate our free time and we enjoy doing it.<br>
+				We don't want money, we want that SpaceXBoard success and help the comunity with this tool.<br>
+				<b>Talk about SpaceXBoard and tell your friends to use it</b>.<br>
+				After all this, if you still want to support our development, use the button below.<br>
+				We will invest all in SpaceXBoard to make it better every day.<br>
+            </p>
+            <br>
+			<button id="buttonOwnDonate" class="myButton2">Donate</button>
+			<button id="buttonOwnDonateClose" class="myButton">Close</button>
+         </center>
+      </div>
+
+      <!-- CastToTV -->
+      <div id="castToTV" style="visibility:hidden; width: fit-content; height: fit-content;">
+         <center>
+            <h3>Cast to TV</h3>
+            <p>
+			   UNDER CONSTRUCTION
+            </p>
+            <br>
+            <button id="buttonCastToTV" class="myButton"><img src="./Icons/castToTV.png"/> Cast</button>
+			<button id="buttonCastToTVClose" class="myButton">Close</button>
+         </center>
+      </div>
+	  
       <!-- To read local disk files -->
       <div id="load" style="visibility:hidden; width: fit-content; height: fit-content;">
          <center>
@@ -112,15 +180,21 @@
       </div>
       <!-- Utilities -->
       <script>
+	  
          let last5thColumnSplitSizes = "83, 17";	
          let isMobileFlag = null;
+		 let lastOrientationMode;
+		 let lastSelectedDonationVideoId = null;
          
+		function isBlank(str) {
+			return (!str || /^\s*$/.test(str));
+		}
+		 
          function useCookiesForConfiguration() {
-         	// return true; // Force cookies and orientation changes
          	return isMobile();
          }
          
-         function isMobileLandscape() {
+         function isLandscape() {
 			if(window.innerHeight > window.innerWidth){
 				return false;
 			}		 
@@ -141,7 +215,6 @@
             }
          
          function isAndroidApp() {
-         	// Android.showToast(toast);
          	if (Android!=null) return true;		
          	return false;
          }
@@ -187,37 +260,391 @@
          	}
          }
       </script>
-      <!-- OnLoad and Icons -->
+      	 
+	  <!-- Main -->
+	  <script>
+		var sourcesLive = null;
+		
+		function isSourceLiveNow(source) {	
+			var result = false;
+			if (source!=null) {			
+				if (sourcesLive != null) {		
+					sourcesLive.forEach(item => {									
+						var items = item.split(" | ");
+						var videoId = items[0].trim();					
+						if (isBlank(videoId)==false) {
+							if (source.includes(videoId)) {
+								var videoTitle = items[1].trim();
+								//console.log("Source is in LiveNow sources: "+source+ "("+videoTitle+")");
+								result = true;
+								return;
+							}
+						}
+					});
+				}
+			}
+			return result;
+		}
+		
+		function updateSourceLiveNow(id, source) {         				
+			// Still iFrame not loaded
+			if (source.includes("SpaceX-MultiYoutube/view.html")) return;
+			
+			console.log("Update Source Live Icon at "+id+" with source: " + source);
+			var liveSymbol = document.getElementById("isLiveCH" + id);
+			var chatSymbol = document.getElementById("liveChatCH" + id);
+			var donationSymbol = document.getElementById("liveDonationCH" + id);				
+			if (liveSymbol!=null) {
+				if (isSourceLiveNow(source)) {
+					console.log("Is Live");					
+					liveSymbol.style.visibility = "visible";
+					liveSymbol.style.width = "28px";
+					liveSymbol.style.minWidth = "28px";				
+					if (chatSymbol!=null) {
+						chatSymbol.style.visibility = "visible";
+						chatSymbol.style.width = "28px";
+						chatSymbol.style.minWidth = "28px";				
+					}
+					if (donationSymbol!=null) {
+						donationSymbol.style.visibility = "visible";
+						donationSymbol.style.width = "28px";
+						donationSymbol.style.minWidth = "28px";
+					}
+				} else {
+					console.log("Is NOT Live");
+					liveSymbol.style.visibility = "hidden";
+					liveSymbol.style.width = "0px";
+					liveSymbol.style.minWidth = "0px";
+					if (chatSymbol!=null) {
+						chatSymbol.style.visibility = "hidden";
+						chatSymbol.style.width = "0px";
+						chatSymbol.style.minWidth = "0px";				
+					}
+					if (donationSymbol!=null) {
+						donationSymbol.style.visibility = "hidden";
+						donationSymbol.style.width = "0px";
+						donationSymbol.style.minWidth = "0px";
+					}
+				}
+			}
+		}
+				
+		function loadSourcesLiveNow() {	
+			console.log("Loading Sources Live NOW...");
+			var request = new XMLHttpRequest();
+			request.open('GET', "https://elricdog.homedns.org/SpaceXBoard/sourcesLiveNow.txt", true);			
+			request.send(null);
+			request.onreadystatechange = function () {
+				if (request.readyState === 4 && request.status === 200) {
+					var type = request.getResponseHeader('Content-Type');
+					if (type.indexOf("text") !== 1) {
+						sourcesLive = request.responseText.split("\r\n");
+						console.log("Sources Live NOW:");
+						console.log(sourcesLive);
+						
+						const iframeCH1 = document.getElementById("iframeCH1");
+						updateSourceLiveNow(1, iframeCH1.src);					
+						const iframeCH2 = document.getElementById("iframeCH2");
+						updateSourceLiveNow(2, iframeCH2.src);					
+						const iframeCH3 = document.getElementById("iframeCH3");
+						updateSourceLiveNow(3, iframeCH3.src);					
+						const iframeCH4 = document.getElementById("iframeCH4");
+						updateSourceLiveNow(4, iframeCH4.src);
+						const iframeCH5 = document.getElementById("iframeCH5");
+						updateSourceLiveNow(5, iframeCH5.src);
+					}					
+				}
+			}
+		}		
+				
+		 function composeYouTubeLiveStreamURL(videoId, muteDefault) {
+			return "https://www.youtube.com/embed/"+videoId+"?autoplay=1&ref=0&mute="+muteDefault;
+		 }
+		 function composeYouTubeChatURL(videoId) {
+			return "https://www.youtube.com/live_chat?is_popout=1&v="+videoId;
+		 }
+		
+			function setSourceToElementiFrame(iFrameId, options, index) {
+				var source = options[index].value;
+				var title = options[index].title;
+				
+				console.log("Setting source at " + iFrameId + "("+title+") - " + source);
+				
+				document.getElementById(iFrameId).src = source;
+				analytics.logEvent('source', { name: title});
+				
+				var id = iFrameId.replace("iframeCH","");
+				var select = document.getElementById("selectCH" + id);
+				select.title = title;
+				
+				updateSourceLiveNow(id, source);
+			}
+		
+			function PopulateSelectionChannels(select, channels) {
+				var currentOptGroup = select;
+				var currentOptGroupToken = "";
+				var el = null;
+				for (var key in channels) {				
+					if (channels[key]=="GROUP")
+					{
+						el = document.createElement("optgroup");
+						el.label = key;
+						select.appendChild(el);
+						currentOptGroup = el;
+						currentOptGroupToken = key + " - ";
+					} else {
+						el = document.createElement("option");
+						var finalTitle = key.replace(currentOptGroupToken, "");
+						el.title = finalTitle;
+						el.textContent = finalTitle; // Will hold icon isLive later
+						el.value = channels[key];				
+						currentOptGroup.appendChild(el);
+					}
+				}
+			};
+		
+			 function updateDateTime() {
+				let d = new Date();
+				let currentTimeZoneOffsetInHours = d.getTimezoneOffset() / 60;
+			 
+				let utc = new Date();
+				utc.setHours( utc.getHours() + currentTimeZoneOffsetInHours );
+				let local = new Date();
+				local.setHours( local.getHours() + currentTimeZoneOffsetInHours - 6 );
+				if (timeLOCAL!=null) timeLOCAL.innerHTML = local.toLocaleTimeString();
+				if (timeUTC!=null) timeUTC.innerHTML = utc.toLocaleTimeString();
+				if (timeTIME!=null) timeTIME.innerHTML = d.toLocaleTimeString();
+			 }
+		
+		function mainInit() {		
+			var intervalLoadSourcesLiveNow = window.setInterval(function(){
+				loadSourcesLiveNow();
+			}, 5*60*1000);		
+			loadSourcesLiveNow();
+										 
+			 const select1 = document.getElementById("selectCH1");
+			 const select2 = document.getElementById("selectCH2");
+			 const select3 = document.getElementById("selectCH3");
+			 const select4 = document.getElementById("selectCH4");
+			 const select5 = document.getElementById("selectCH5");
+					  			 
+			 const channels = {
+			  "Select one channel":"",
+			 
+			  // Live Streams
+			  "LIVE STREAMS":"GROUP",		  
+			  "SPACEX":composeYouTubeLiveStreamURL("_qwLHlVjRyw", 0),          		  
+			  "NASASpaceflight":composeYouTubeLiveStreamURL("FpQwQx4Q_Dc", 0),
+			  "NSF Fleet Cam":composeYouTubeLiveStreamURL("gnt2wZBg89g", 1),          		  
+			  "LabPadre - Nerdle Cam 4K":composeYouTubeLiveStreamURL("Ky5l9ZxsG9M", 0),
+			  "LabPadre - Sapphire Cam":composeYouTubeLiveStreamURL("dROdPn9Tpxg", 1),
+			  "LabPadre - South Padre Island Pearl Beach Cam":composeYouTubeLiveStreamURL("agmFDeP5u_w", 1),
+			  "LabPadre - Predator Cam":composeYouTubeLiveStreamURL("lTJ9OgcIMSs", 1),
+			  "LabPadre - Lab Cam":composeYouTubeLiveStreamURL("hpqoqJxbNpw", 1),
+			  "LabPadre - Launch Pad Cam":composeYouTubeLiveStreamURL("Z72Au8Px7mM", 1),
+			  "LabPadre - Sentinel Cam":composeYouTubeLiveStreamURL("n5ozYnVQahE", 1),          
+			  "Everyday Astronaut":composeYouTubeLiveStreamURL("QJ6YN5upGH0", 0),
+			  "SpaceXStorm (Castellano)":composeYouTubeLiveStreamURL("39T-NWgFtME", 0),
+			  "Frontera Espacial (Castellano)":composeYouTubeLiveStreamURL("uVMXkl-i7l8", 0),
+			  "Marcus House":composeYouTubeLiveStreamURL("MkLpg5Rs8mI", 0),
+			  "What about it!?":composeYouTubeLiveStreamURL("QRRSvq5s0oE", 0),
+			  "NASA Live":composeYouTubeLiveStreamURL("21X5lGlDOfg", 0),
+			  "NASA Media Channel":composeYouTubeLiveStreamURL("nA9UZF-SZoQ", 0),
+			 
+			  "INFORMATION":"GROUP",
+			  "INFORMATION - Space OK (Castellano)":"https://spaceokk.weebly.com/bocachica.html",
+			  "INFORMATION - LabPadre Boca Chica Weather":"weather2.html",
+			  "INFORMATION - Boca Chica, TX Weather":"weather.html",
+			  "INFORMATION - Flight Radar 24":"https://www.flightradar24.com/simple_index.php?lat=25.99&lon=-97.16&z=11&airports=1&label1=callsign&label2=altspeed&label3=tofrom&size=auto",
+			  "INFORMATION - Road Closures":"https://tfr.faa.gov/tfr2/list.jsp",
+			  "INFORMATION - TFR (notams.faa.gov)":"notamTFR.html",
+			  "INFORMATION - Flight Restrictions Zone":"https://tfr.faa.gov/tfr_map_ims/html/ew/scale7/tile_33_61.html",
+			  "INFORMATION - Google Maps":"map.html",
+			  "INFORMATION - Bing Maps":"map2.html",
+			  "*INFORMATION - Cameron County":"https://www.cameroncounty.us/SpaceX",
+			  "*INFORMATION - Boca Chica":"https://www.bocachica.com",
+								 
+			  "SPACEX INFORMATION":"GROUP",
+			  "SPACEX Web":"https://www.spacex.com",
+			  "SPACEX INFORMATION - MISSION PATCHES":"https://www.elonx.net/spacex-mission-patches/",
+			  "SPACEX INFORMATION - PHOTOS":"https://www.gettyimages.es/fotos/spacex?phrase=spacex&sort=mostpopular",
+			  "SPACEX INFORMATION - WIKI HISTORY":"https://en.wikipedia.org/wiki/List_of_Falcon_9_and_Falcon_Heavy_launches",
+			  "360 View BocaChica SpaceX":composeYouTubeLiveStreamURL("nVo5AsMz0TI", 1), 
+					 
+			  "NEXT LAUNCHES":"GROUP",
+			  //"NEXT LAUNCHES - SpaceX direct source":"https://whenisthenextspacexlaunch.com/", 
+			  "NEXT LAUNCHES - Source 1":"https://whenisthenextspacexlaunch.com/", 
+			  "NEXT LAUNCHES - Source 2":"https://www.rocketlaunch.live/?filter=spacex", 		  
+			  "NEXT LAUNCHES - Source 3":"https://spaceflightnow.com/launch-schedule/", 		  		 
+
+			  "CHAT":"GROUP",
+			  "CHAT - SpaceXBoard":"chat.html",		           
+			  
+			  "SEARCH":"GROUP",
+			  "SEARCH - Google":"https://www.google.com/search?igu=1&q=SpaceX",
+			  "SEARCH - Bing":"https://www.bing.com/search?q=SpaceX",
+			 
+			  "GAMES":"GROUP",
+			  "GAMES - SpaceX ISS Docking Simulator":"https://iss-sim.spacex.com",		  
+			  "GAMES - Quiz SpaceX Game":"gameQuiz.html",         
+			  "3D / VR Model of StarShip":"https://elricdog.github.io/SpaceX-StarShip/VRStarShip/",
+			 
+			  "TWITCH":"GROUP",
+			  "TWITCH - NASA":"https://www.twitch.tv/nasa", 
+			  "TWITCH - Alex Riveiro (Castellano)":"https://www.twitch.tv/alex_riveiro",
+			  "TWITCH - SpaceXStorm (Castellano)":"https://www.twitch.tv/spacexstorm",
+			 
+			  "OTHERS":"GROUP",
+			  "*TWITTER":"https://twitter.com",
+			  "*REDDIT":"https://reddit.com",
+			  "*DISCORD":"https://discord.com", 
+			  "*YOUTUBE CHANNELS":"https://youtube.com",
+
+			  "APPLICATION":"GROUP",
+			  "ChangeLog":"changelog.html",
+			  "RoadMap":"roadmap.html",
+			  "Help":"help_beta.html",
+			 };
+			 
+			 const channelsVertical = {
+			  "Select one channel":"",
+			 
+			  // Twitter lists
+			  "My TWITTER SpaceX List":"twitter.html?list=elricdog",
+			  "My TWITTER SpaceX List (Català-Castellano)":"twitter.html?list=elricdog-cat-cas",
+			  
+			  // Twitter timelines
+			  "TWITTER":"GROUP",
+			  "TWITTER - SpaceX":"twitter.html?people=spacex",
+			  "TWITTER - Elon Musk":"twitter.html?people=elonmusk",
+			  "TWITTER - Jessie Anderson":"twitter.html?people=whoisheartbreak",
+			  "TWITTER - Mary":"twitter.html?people=BocaChicaGal",
+			  "TWITTER - Spaceflight Now":"twitter.html?people=SpaceflightNow",
+			  "TWITTER - Everyday Astronaut":"twitter.html?people=Erdayastronaut",
+			  "TWITTER - What about it!?":"twitter.html?people=FelixSchlang",
+			  "TWITTER - Marcus House":"twitter.html?people=MarcusHouseGame",
+			  "TWITTER - Austin Barnard":"twitter.html?people=austinbarnard45",
+			  "TWITTER - Chris B - NSF":"twitter.html?people=NASASpaceflight",
+			  "TWITTER - Jack Beyer":"twitter.html?people=thejackbeyer",
+			  "TWITTER - John Kraus":"twitter.html?people=johnkrausphotos",
+			  "TWITTER - Brendan (Diagram Creator)":"twitter.html?people=brendan2908",
+			  "TWITTER - SPadre":"twitter.html?people=SpacePadreIsle",
+			  "TWITTER - RGVAerialPhotography":"twitter.html?people=RGVaerialphotos",
+			  "TWITTER - SpaceX (Català)":"twitter.html?people=spacexcatala",
+			  "TWITTER - Ag. Romanov (Català)":"twitter.html?people=ivanvihe",
+			  "TWITTER - Ismael Flores [SpaceXStorm] (Castellano)":"twitter.html?people=ifcampoy",
+			  "TWITTER - Frontera Espacial (Castellano)":"twitter.html?people=FronteraSpacial",
+			  
+			  // Chats
+			  "CHAT":"GROUP",
+			  "NASASpaceflight":composeYouTubeChatURL("Ty5l9ZxsG9M"),
+			  "LabPadre - Nerdle Cam 4K":composeYouTubeChatURL("Ky5l9ZxsG9M"),
+			  "Everyday Astronaut":composeYouTubeChatURL("QJ6YN5upGH0"),
+			  "SpaceXStorm (Castellano)":composeYouTubeChatURL("39T-NWgFtME"),
+			  "Frontera Espacial (Castellano)":composeYouTubeChatURL("uVMXkl-i7l8"),
+			  "Marcus House":composeYouTubeChatURL("MkLpg5Rs8mI"),
+			  "What about it!?":composeYouTubeChatURL("QRRSvq5s0oE"),
+
+			  "SPACEX INFORMATION":"GROUP",
+			  "SPACEX Web":"https://www.spacex.com",
+			  
+			  "OTHERS":"GROUP",
+			  "*TWITTER":"https://twitter.com",
+			  "*REDDIT":"https://reddit.com",
+			  "*DISCORD":"https://discord.com", 
+			  "*YOUTUBE CHANNELS":"https://youtube.com",
+			 
+			  "NEXT LAUNCHES":"GROUP",
+			  //"NEXT LAUNCHES - SpaceX direct source":"https://whenisthenextspacexlaunch.com/", 
+			  "NEXT LAUNCHES - Source 1":"https://whenisthenextspacexlaunch.com/", 
+			  "NEXT LAUNCHES - Source 2":"https://www.rocketlaunch.live/?filter=spacex", 		  
+			  "NEXT LAUNCHES - Source 3":"https://spaceflightnow.com/launch-schedule/", 		  
+
+			  "SEARCH":"GROUP",
+			  "SEARCH - Google":"https://www.google.com/search?igu=1&q=SpaceX",
+			  "SEARCH - Bing":"https://www.bing.com/search?q=SpaceX",
+			  
+			  "APPLICATION":"GROUP",
+			  "ChangeLog":"changelog.html",
+			  "RoadMap":"roadmap.html",
+			  "Help":"help_beta.html",
+			 };
+			 			 		
+			 // Populate selection channels		 
+			 PopulateSelectionChannels(select1, channels);
+			 PopulateSelectionChannels(select2, channels);
+			 PopulateSelectionChannels(select3, channels);
+			 PopulateSelectionChannels(select4, channels);
+			 PopulateSelectionChannels(select5, channelsVertical);
+
+			 // Timers
+			 const timeLOCAL = document.getElementById("timeLOCAL");
+			 const timeUTC = document.getElementById("timeUTC");
+			 const timeTIME = document.getElementById("timeTIME");
+			 
+			 // Update Time
+			 var intervalId = window.setInterval(function(){
+				updateDateTime();
+			 }, 1000);
+			 updateDateTime();
+		}	  
+	  </script>
+	  <!-- Firebase Database -->
+	  <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>
+	  <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-analytics.js"></script>
+	  <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-database.js"></script>
+	  <script src="js/firebaseFunctions_beta.js"></script>
+	  <!-- OnLoad and Actions -->
       <script>
-         function showAppScreen()
-         {
-         	const appScreen = document.getElementById( 'app-screen' );
-         	appScreen.style.visibility = "visible";
-         }		
-         function closeLoadingScreen()
-         {
+         function closeLoadingScreen() {
          	const loadingScreen = document.getElementById( 'loading-screen' );
          	loadingScreen.remove();
          }
-         
+	  
+         function showAppScreen() {
+			const horizontalViewLayout = document.getElementById( 'horizontalViewLayout' );			
+			const verticalViewLayout = document.getElementById( 'verticalViewLayout' );			
+			if (isMobile()) {
+				console.log("App Mode Mobile");
+				if (isLandscape())
+				{					
+					console.log("App Screen Mode HORIZONTAL");
+					horizontalViewLayout.style.display = "block";
+					verticalViewLayout.remove();
+				} else {
+					console.log("App Screen Mode VERTICAL");
+					verticalViewLayout.style.display = "block";
+					horizontalViewLayout.remove();
+				}
+			} else {
+				console.log("App Screen Mode HORIZONTAL");
+				horizontalViewLayout.style.display = "block";
+				verticalViewLayout.remove();
+			}
+         }		         
+		 
          window.onload = function() {
+			showAppScreen();
+			
+			mainInit();
+			
          	document.getElementById('contact-form').addEventListener('submit', function(event) {
          		event.preventDefault();
 				
 				const contactScreen = document.getElementById('contact');
 				if (contactScreen.style.visibility == "visible") {				
-         		// generate a five digit number for the contact_number variable
+					// generate a five digit number for the contact_number variable
 					var contact_number = document.getElementById( 'contact_number' );
 					contact_number.value = Math.random() * 100000 | 0;
-         		// these IDs from the previous steps
+					// these IDs from the previous steps
 					emailjs.sendForm('service_d2xivgp', 'template_0m1o4oi', "#contact-form", "user_BjUMLZEqKE9VdA5391rv8")
-         			.then(function() {
-         				console.log('SUCCESS!');
-         				toggleContact();
-         			}, function(error) {
-         				console.log('FAILED...', error);
-         				document.getElementById('lblContactError').innerHTML = 'FAILED(' + error.status +')...' + error.text;
-         			});
+						.then(function() {
+							console.log('SUCCESS!');
+							toggleContact();
+						}, function(error) {
+							console.log('FAILED...', error);
+							document.getElementById('lblContactError').innerHTML = 'FAILED(' + error.status +')...' + error.text;
+						});
 				}
          	});
          
@@ -235,26 +662,105 @@
          	document.getElementById("buttonLoadClose").addEventListener ("click", toggleLoad, false);
          	document.getElementById("buttonLoad").addEventListener ("click", configurationLoad, false);
          	document.getElementById("iconFullScreen").addEventListener ("click", function() { toggleIconGroups(); toggleFullScreen(); updateRSSTextScrollWidth(); }, false);
+			document.getElementById("iconSelects").addEventListener ("click", function() { toggleIconGroups(); toggleSelects(); }, false);			
          	document.getElementById("iconRSS").addEventListener ("click", toggleRSSScroll, false);
          	document.getElementById("icon5thColumn").addEventListener ("click", function() { toggleIconGroups(); toggle5thColumn(); }, false);
          	document.getElementById("iconChat").addEventListener ("click", openChat, false);
 			document.getElementById("iconQuiz").addEventListener ("click", function() { toggleIconGroups(); openQuiz(); }, false);
          	document.getElementById("iconHelp").addEventListener ("click", function() { toggleIconGroups(); openHelp(); }, false);
-         	document.getElementById("iconRefreshApp").addEventListener ("click", function() { toggleIconGroups(); refreshApp(); }, false);
-         	
+         	document.getElementById("iconRefreshApp").addEventListener ("click", function() { toggleIconGroups(); refreshApp(); }, false);		
+			document.getElementById("iconEndRSS").addEventListener ("click", function() { launchGoToMars(); }, false); 
+			document.getElementById("iconOwnDonation").addEventListener ("click", function() { toggleIconGroups(); toggleOwnDonation(); }, false); 
+			document.getElementById("iconCastToTV").addEventListener ("click", function() { toggleIconGroups(); toggleCastToTV(); }, false); 
+			
+			document.getElementById("buttonSupportUs").addEventListener ("click", function() { toggleAboutUs(); toggleOwnDonation(); }, false);
+			document.getElementById("buttonDonateGO").addEventListener ("click", function() { toggleDonation(); goToDonation(); }, false);
+			document.getElementById("buttonDonateAboutUs").addEventListener ("click", function() { toggleDonation(); toggleAboutUs(); }, false);
+			document.getElementById("buttonDonateClose").addEventListener ("click", toggleDonation, false);
+			document.getElementById("buttonOwnDonate").addEventListener ("click", function() { toggleOwnDonation(); goToOwnDonation(); }, false);
+			document.getElementById("buttonOwnDonateClose").addEventListener ("click", toggleOwnDonation, false);
+			document.getElementById("buttonCastToTVClose").addEventListener ("click", toggleCastToTV, false);
+
          	document.getElementById("iconRefreshCH1").addEventListener ("click", refreshCH1, false);
          	document.getElementById("iconRefreshCH2").addEventListener ("click", refreshCH2, false);
          	document.getElementById("iconRefreshCH3").addEventListener ("click", refreshCH3, false);
          	document.getElementById("iconRefreshCH4").addEventListener ("click", refreshCH4, false);
          	document.getElementById("iconRefreshCH5").addEventListener ("click", refreshCH5, false);
-         
+
+         	document.getElementById("liveChatCH1").addEventListener ("click", function() { gotToLiveChat(1); }, false);
+         	document.getElementById("liveChatCH2").addEventListener ("click", function() { gotToLiveChat(2); }, false);
+         	document.getElementById("liveChatCH3").addEventListener ("click", function() { gotToLiveChat(3); }, false);
+         	document.getElementById("liveChatCH4").addEventListener ("click", function() { gotToLiveChat(4); }, false);         	
+			
+			document.getElementById("liveDonationCH1").addEventListener ("click", function() { openDonation(1); }, false);
+			document.getElementById("liveDonationCH2").addEventListener ("click", function() { openDonation(2); }, false);
+			document.getElementById("liveDonationCH3").addEventListener ("click", function() { openDonation(3); }, false);
+			document.getElementById("liveDonationCH4").addEventListener ("click", function() { openDonation(4); }, false);
+			document.getElementById("liveDonationCH5").addEventListener ("click", function() { openDonation(5); }, false);
+         			
+			if (isMobile()) {
+				var options = {
+				  theme:"flat",
+				  width: 'resolve', 
+				  minimumResultsForSearch:-1, 
+				  dropdownAutoWidth:'true',
+				  escapeMarkup: function(markup) {
+					return markup;
+				  },
+				  templateResult: function(data) {
+					if (data.element==null) return "";
+					if (isSourceLiveNow(data.element.value)) {
+						const icon = " <img src='Icons/isLive-mini.png'/>";
+						return data.title + icon;
+					} else {
+						return data.text;
+					}
+				  },
+				};			
+				$("#selectCH1").select2(options).maximizeSelect2Height();
+				$("#selectCH2").select2(options).maximizeSelect2Height();
+				$("#selectCH3").select2(options).maximizeSelect2Height();
+				$("#selectCH4").select2(options).maximizeSelect2Height();
+				$("#selectCH5").select2(options).maximizeSelect2Height();
+			} else {				
+				var options = {
+				  theme:"flat",
+				  width: 'resolve', 
+				  dropdownAutoWidth:'true',
+				  escapeMarkup: function(markup) {					
+					return markup;
+				  },
+				  templateResult: function(data) {
+					if (data.element==null) return "";
+					if (isSourceLiveNow(data.element.value)) {
+						const icon = " <img src='Icons/isLive.png'/>";
+						return data.title + icon;
+					} else {
+						return data.text;
+					}
+				  },
+				};
+				$("#selectCH1").select2(options).maximizeSelect2Height();
+				$("#selectCH2").select2(options).maximizeSelect2Height();
+				$("#selectCH3").select2(options).maximizeSelect2Height();
+				$("#selectCH4").select2(options).maximizeSelect2Height();
+				$("#selectCH5").select2(options).maximizeSelect2Height();
+			}
+			$("body").on('click', '.select2-results__group', function() { $(this).siblings().toggle(); })			
+
+			console.log("Subscribing to select events");
          	const select1 = document.getElementById("selectCH1");
          	const select2 = document.getElementById("selectCH2");
          	const select3 = document.getElementById("selectCH3");
          	const select4 = document.getElementById("selectCH4");
-         	const select5 = document.getElementById("selectCH5");
+         	const select5 = document.getElementById("selectCH5");		
+			$('#selectCH1').change(function(){ setSourceToElementiFrame('iframeCH1', select1.options, select1.selectedIndex) });
+			$('#selectCH2').change(function(){ setSourceToElementiFrame('iframeCH2', select2.options, select2.selectedIndex) });
+			$('#selectCH3').change(function(){ setSourceToElementiFrame('iframeCH3', select3.options, select3.selectedIndex) });
+			$('#selectCH4').change(function(){ setSourceToElementiFrame('iframeCH4', select4.options, select4.selectedIndex) });
+			$('#selectCH5').change(function(){ setSourceToElementiFrame('iframeCH5', select5.options, select5.selectedIndex) });		
          	var event = new Event('change');
-         	select1.selectedIndex = indexMatchingText(select1, "SpaceFlight");
+         	select1.selectedIndex = indexMatchingText(select1, "NASASpaceflight");
          	select2.selectedIndex = indexMatchingText(select2, "LabPadre - Nerdle Cam 4K");
          	select3.selectedIndex = indexMatchingText(select3, "SpaceXStorm (Castellano)");
          	select4.selectedIndex = indexMatchingText(select4, "Everyday Astronaut");
@@ -264,7 +770,7 @@
          	select3.dispatchEvent(event);
          	select4.dispatchEvent(event);
          	select5.dispatchEvent(event);
-         
+			
          	const resizeRSSObserver = new ResizeObserver(entries => {
          		updateRSSTextScrollWidth();
          	});
@@ -293,11 +799,46 @@
 				select4.style.fontSize = "11px";
 				select5.style.fontSize = "11px";
 				
-         		setVisitors(true);
+				document.getElementById("aboutus").style.fontSize = "12px";
+				document.getElementById("donation").style.fontSize = "12px";
+				document.getElementById("ownDonation").style.fontSize = "12px";
+				document.getElementById("contact").style.fontSize = "12px";
+				document.getElementById("castToTV").style.fontSize = "12px";
+				document.getElementById("load").style.fontSize = "12px";
+				
+				var cols = document.getElementsByClassName('myButton');
+				for(i = 0; i < cols.length; i++) {
+					cols[i].style.fontSize = "14px";
+				}				
+				var cols = document.getElementsByClassName('myButton2');
+				for(i = 0; i < cols.length; i++) {
+					cols[i].style.fontSize = "14px";
+				}				
+				
 				setLaunchState(true);
          		toggleTimeGroups();			
-         		last5thColumnSplitSizes = "70, 30";
-         		set5thColumn(false, last5thColumnSplitSizes);
+								
+				if (isLandscape()) {
+					setVisitors(true);
+					last5thColumnSplitSizes = "70, 30";
+					set5thColumn(false, last5thColumnSplitSizes);
+				} else {
+					setVisitors(false);
+					set5thColumn(false, null);
+				}
+				
+				lastOrientationMode = isLandscape();
+				const resizeMobileObserver = new ResizeObserver(entries => {
+					if (lastOrientationMode != isLandscape())
+					{
+						const orientationScreen = document.getElementById('orientation-screen');						
+						orientationScreen.style.display = "block";
+						console.log("RELOAD WEB DUE ORIENTATION CHANGES");
+						location.reload();
+					}
+				});
+				const allViews = document.getElementById("allViews");				
+				resizeMobileObserver.observe(allViews);				
          	} else {
          		setVisitors(true);
 				setLaunchState(true);
@@ -305,44 +846,60 @@
          		set5thColumn(true, last5thColumnSplitSizes);
          	}
          
-         	const resize5thObserver = new ResizeObserver(entries => {		
-         		const column5thView = document.getElementById('column5thView');
-         		var column5thViewBounds = column5thView.getBoundingClientRect();
-         		console.log("Observing 5th column: " + column5thViewBounds.width);
-         		if (column5thViewBounds.width>28) {
-         			if (column5thView.style.visibility == "hidden") {
-         				console.log("Auto Show 5th column");
-         				toggle5thColumn();
-         	}
-         		}
-         		else {				
-         			if (column5thViewBounds.width==0) {
-         				if (column5thView.style.visibility == "visible") {
-         					console.log("Auto Hide 5th column");
-         					toggle5thColumn();
-         				}
-         			}
-         		}
-         	});
-         	const column5thView = document.getElementById("column5thView");
-         	resize5thObserver.observe(column5thView);		
-         	
+			if (isLandscape()) {
+				const resize5thObserver = new ResizeObserver(entries => {		
+					const column5thView = document.getElementById('column5thView');
+					var column5thViewBounds = column5thView.getBoundingClientRect();
+					console.log("Observing 5th column: " + column5thViewBounds.width);
+					if (column5thViewBounds.width>28) {
+						if (column5thView.style.visibility == "hidden") {
+							console.log("Auto Show 5th column");
+							toggle5thColumn();
+				}
+					}
+					else {				
+						if (column5thViewBounds.width==0) {
+							if (column5thView.style.visibility == "visible") {
+								console.log("Auto Hide 5th column");
+								toggle5thColumn();
+							}
+						}
+					}
+				});
+				const column5thView = document.getElementById("column5thView");
+				resize5thObserver.observe(column5thView);		
+			}
+			
          	const lastUpdate = document.getElementById("lastUpdate");
          	var lastModifiedDateString = fetchHeader(location.href,'Last-Modified');
          	var lastModifiedDate = new Date();
          	lastModifiedDate.setTime(Date.parse(lastModifiedDateString));
          	lastUpdate.innerHTML = lastModifiedDate.toLocaleString();
-         	console.log("LastUpdate: "+lastUpdate.innerHTML);
+         	console.log("LastUpdate of sourcecode: "+lastUpdate.innerHTML);
          	
+			// Add one view more
+			addView();
+			// Get number of views from database
+			getRealtimeNumViews(document.getElementById("visitors"));
+			// Get visitors in the last 20min
+			getRealTimeVisitors(document.getElementById("visitorsNow"));
+			// Get RSS from firebase database
+			getRealtimeRss(document.getElementById("rssTextScrollContent"));
+			// Get state of launch from database
+			getLaunchState(document.getElementById("launchState"));
+			// Get feeds from DB database
+			getFeedsFromDB();
+			
          	var intervalLoadingScreen = window.setInterval(function(){
          		console.log("Closing Loading screen");
-         		closeLoadingScreen();
-         		showAppScreen();
+         		closeLoadingScreen();         		
          		clearInterval(intervalLoadingScreen);
-         	}, 2000);		
+         	}, 1500);
          };
          
          function refreshApp() {
+			const orientationScreen = document.getElementById('orientation-screen');						
+			orientationScreen.style.display = "block";
          	location.reload();
          }
          function refreshCH1() {
@@ -364,7 +921,40 @@
          	var iframe = document.getElementById(id);
          	iframe.src = iframe.src;
          }
-         
+		 
+		 function gotToLiveChat(id) {
+         	const select = document.getElementById("selectCH5");	
+		    const selectOrigin = document.getElementById("selectCH"+id);		
+			const title = selectOrigin.options[selectOrigin.selectedIndex].text;
+         	const selectedIndex = indexMatchingText(select, title);
+			var event = new Event('change');
+			select.selectedIndex = selectedIndex;
+			select.dispatchEvent(event);
+			set5thColumn(true, last5thColumnSplitSizes);
+		 }
+		 
+		 function goToDonation() {
+			const url = "https://www.youtube.com/watch?v=" + lastSelectedDonationVideoId;
+			window.open(url, '_blank');
+		 }
+
+		 function goToOwnDonation() {
+			const url = "https://www.paypal.com/donate?business=XDTVHXDJZLWR6&item_name=Improve+SpaceXBoard+app&currency_code=EUR";
+			window.open(url, '_blank');
+		 }
+		 
+		 function openDonation(id) {
+			const selectOrigin = document.getElementById("selectCH"+id);		
+			var src = selectOrigin.options[selectOrigin.selectedIndex].value;
+			src = src.replace("https://www.youtube.com/embed/", "");
+			src = src.replace("?autoplay=1&ref=0&mute=0", "");
+			src = src.replace("?autoplay=1&ref=0&mute=1", "");
+			src = src.replace("https://www.youtube.com/live_chat?is_popout=1&v=", "");
+			console.log("Source of donation: " + src);
+			lastSelectedDonationVideoId = src;
+			toggleDonation();
+		 }
+                  
          function openHelp() {
          	const select3 = document.getElementById("selectCH3");
          	var event = new Event('change');
@@ -408,6 +998,18 @@
          	}
          };
          
+		 function toggleCastToTV() {
+         	const castToTVScreen = document.getElementById('castToTV');
+         	if (castToTVScreen.style.visibility == "hidden") {
+         		castToTVScreen.style.visibility = "visible";
+         		castToTVScreen.style.height = "fit-content";
+         		analytics.logEvent('option_click', { name: 'CastToTV'});
+         	} else {
+         		castToTVScreen.style.visibility = "hidden";
+         		castToTVScreen.style.height = "0px";
+         	}
+		 }
+		 
          function toggleAboutUs() {
          	const aboutUsScreen = document.getElementById('aboutus');
          	if (aboutUsScreen.style.visibility == "hidden") {
@@ -419,10 +1021,34 @@
          		aboutUsScreen.style.height = "0px";
          	}
          };
+
+         function toggleOwnDonation() {
+         	const donationScreen = document.getElementById('ownDonation');
+         	if (donationScreen.style.visibility == "hidden") {
+         		donationScreen.style.visibility = "visible";
+         		donationScreen.style.height = "fit-content";
+         		analytics.logEvent('option_click', { name: 'OwnDonation'});
+         	} else {
+         		donationScreen.style.visibility = "hidden";
+         		donationScreen.style.height = "0px";
+         	}
+         };
+
+         function toggleDonation() {
+         	const donationScreen = document.getElementById('donation');
+         	if (donationScreen.style.visibility == "hidden") {
+         		donationScreen.style.visibility = "visible";
+         		donationScreen.style.height = "fit-content";
+         		analytics.logEvent('option_click', { name: 'Donation'});
+         	} else {
+         		donationScreen.style.visibility = "hidden";
+         		donationScreen.style.height = "0px";
+         	}
+         };
          
 		 function updateRSSTextScrollWidth() {
          	const rssTextScroll = document.getElementById('rssTextScroll');
-         	var fw = 1;
+         	var fw = 0;
 			fw+=document.getElementById('rowTopBarB').getBoundingClientRect().width;
 			fw+=document.getElementById('rowTopBarC').getBoundingClientRect().width;
 			fw+=document.getElementById('rowTopBarD').getBoundingClientRect().width;
@@ -460,7 +1086,7 @@
          	const lastUpdateLabel = document.getElementById('groupLastUpdate');
          	setLastUpdate(lastUpdateLabel.style.display == "none");
          };
-         
+         		 
          function setLaunchState(visible) {
          	const launchStateLabel = document.getElementById('groupLaunchState');
          	if (visible) {
@@ -513,38 +1139,58 @@
          }
          
          function preserve5thColumn() {
-         	// Preserve current SplitSizes
-         	const mainView = document.getElementById("mainView");
-         	const column5thView = document.getElementById('column5thView');
-         	var mainViewBounds = mainView.getBoundingClientRect();
-         	var column5thViewBounds = column5thView.getBoundingClientRect();
-         	splitter1SplitSizes = calcSplitSizes(mainViewBounds.width, column5thViewBounds.width);
-         	last5thColumnSplitSizes = splitter1SplitSizes;
+			if (isLandscape()) {		 
+				// Preserve current SplitSizes
+				const mainView = document.getElementById("mainView");
+				const column5thView = document.getElementById('column5thView');
+				var mainViewBounds = mainView.getBoundingClientRect();
+				var column5thViewBounds = column5thView.getBoundingClientRect();
+				splitter1SplitSizes = calcSplitSizes(mainViewBounds.width, column5thViewBounds.width);
+				last5thColumnSplitSizes = splitter1SplitSizes;
+			}
          }
          
          function set5thColumn(visible, splitSizes) {
-         	const rootView = document.getElementById('rootView');
-         	const column5thView = document.getElementById('column5thView');
-         	if (visible) {
-         		column5thView.style.visibility = "visible";
-         		rootView.dataset.splitSizes = splitSizes;
-         	} else {
-         		column5thView.style.visibility = "hidden";
-         		rootView.dataset.splitSizes = "100, 0";
-         	}
-         	last5thColumnSplitSizes = splitSizes;
+			if (isLandscape()) {
+				const rootView = document.getElementById('rootView');
+				const column5thView = document.getElementById('column5thView');
+				if (visible) {
+					column5thView.style.visibility = "visible";
+					rootView.dataset.splitSizes = splitSizes;
+				} else {
+					column5thView.style.visibility = "hidden";
+					rootView.dataset.splitSizes = "100, 0";
+				}
+				last5thColumnSplitSizes = splitSizes;
+			} else {
+				const column5thView = document.getElementById('column5thView');
+				if (visible) {
+					column5thView.style.display = "block";
+				} else {
+					column5thView.style.display = "none";
+				}
+			}
          }
          function toggle5thColumn() {
-         	const rootView = document.getElementById('rootView');
-         	const column5thView = document.getElementById('column5thView');
-         	if (column5thView.style.visibility == "hidden") {
-         		column5thView.style.visibility = "visible";
-         		rootView.dataset.splitSizes = last5thColumnSplitSizes;
-         	} else {
-         		column5thView.style.visibility = "hidden";
-         		preserve5thColumn();
-         		rootView.dataset.splitSizes = "100, 0";
-         	}
+			if (isLandscape()) {
+				const rootView = document.getElementById('rootView');
+				const column5thView = document.getElementById('column5thView');
+				if (column5thView.style.visibility == "hidden") {
+					column5thView.style.visibility = "visible";
+					rootView.dataset.splitSizes = last5thColumnSplitSizes;
+				} else {
+					column5thView.style.visibility = "hidden";
+					preserve5thColumn();
+					rootView.dataset.splitSizes = "100, 0";
+				}
+			} else {
+				const column5thView = document.getElementById('column5thView');
+				if (column5thView.style.display == "none") {
+					column5thView.style.display = "block";
+				} else {
+					column5thView.style.display = "none";
+				}
+			}			
          }
          
          function toggleLoad() {
@@ -607,7 +1253,7 @@
          		var data = JSON.parse(text);
          		console.log("Configuration loaded");
          		console.log(data);
-         		internalConfigurationLoad(data);
+         		internalConfigurationLoad(data);				
          	} else {
          		toggleLoad();				
          	}
@@ -655,19 +1301,25 @@
 			setLaunchState(launchStateLabelVisible);
          	setTimeGroups(timersIconLabelsVisible);
          
-         	const splitter1 = document.getElementById("rootView");
-         	const splitter2 = document.getElementById("mainView");
-         	const splitter3 = document.getElementById("mainView12");
-         	const splitter4 = document.getElementById("mainView34");
-         
-         	splitter1.dataset.splitSizes = data["splitter1Sizes"];
-         	splitter2.dataset.splitSizes = data["splitter2Sizes"];
-         	splitter3.dataset.splitSizes = data["splitter3Sizes"];
-         	splitter4.dataset.splitSizes = data["splitter4Sizes"];
-         
-         	var column5thViewVisible = data["column5thViewVisible"];
-         	set5thColumn(column5thViewVisible, splitter1.dataset.splitSizes);
-         
+			if (isLandscape()) {
+				const splitter1 = document.getElementById("rootView");
+				const splitter2 = document.getElementById("mainView");
+				const splitter3 = document.getElementById("mainView12");
+				const splitter4 = document.getElementById("mainView34");
+			 
+				splitter1.dataset.splitSizes = data["splitter1Sizes"];
+				splitter2.dataset.splitSizes = data["splitter2Sizes"];
+				splitter3.dataset.splitSizes = data["splitter3Sizes"];
+				splitter4.dataset.splitSizes = data["splitter4Sizes"];
+			
+         		var column5thViewVisible = data["column5thViewVisible"];
+				set5thColumn(column5thViewVisible, splitter1.dataset.splitSizes);
+			} else {
+				var column5thViewVisible = data["column5thViewVisible"];
+				set5thColumn(column5thViewVisible, null);
+			}
+			
+			updateRSSTextScrollWidth();
 			
          	console.log("Loaded OK");
          }
@@ -708,36 +1360,41 @@
          	const timersIconLabels = document.getElementById('timersIconLabels');
          	const timersIconLabelsVisible = (timersIconLabels.style.visibility == "visible");
          
-         	const splitter1 = document.getElementById("rootView");
-         	const splitter3 = document.getElementById("mainView12");
-         	const splitter4 = document.getElementById("mainView34");
-         
-         	const mainView = document.getElementById("mainView");
-         	const column5thView = document.getElementById("column5thView");
-         	const rowOfTopLeft = document.getElementById("rowOfTopLeft");
-         	const rowOfTopRight = document.getElementById("rowOfTopRight");
-         	const rowOfBottomLeft = document.getElementById("rowOfBottomLeft");
-         	const rowOfBottomRight = document.getElementById("rowOfBottomRight");
-         
-         	var mainViewBounds = mainView.getBoundingClientRect();
-         	var column5thViewBounds = column5thView.getBoundingClientRect();
-         	var rowOfTopLeftBounds = rowOfTopLeft.getBoundingClientRect();
-         	var rowOfTopRightBounds = rowOfTopRight.getBoundingClientRect();
-         	var rowOfBottomLeftBounds = rowOfBottomLeft.getBoundingClientRect();
-         	var rowOfBottomRightBounds = rowOfBottomRight.getBoundingClientRect();
-         
-         	// Compute relations between layers
-         	if (column5thView.style.visibility == "hidden") {
-         		splitter1SplitSizes = last5thColumnSplitSizes;
-         	} else {
-         		splitter1SplitSizes = calcSplitSizes(mainViewBounds.width, column5thViewBounds.width);
-         	}
-         	splitter2SplitSizes = calcSplitSizes(rowOfTopLeftBounds.height, rowOfBottomLeftBounds.height);
-         	splitter3SplitSizes = calcSplitSizes(rowOfTopLeftBounds.width, rowOfTopRightBounds.width);
-         	splitter4SplitSizes = calcSplitSizes(rowOfBottomLeftBounds.width, rowOfBottomRightBounds.width);
-         
-         	const column5thViewVisible = (column5thView.style.visibility == "visible");
-         
+			var column5thViewVisible = false;
+			if (isLandscape()) {
+				const splitter1 = document.getElementById("rootView");
+				const splitter3 = document.getElementById("mainView12");
+				const splitter4 = document.getElementById("mainView34");
+			 
+				const mainView = document.getElementById("mainView");
+				const column5thView = document.getElementById("column5thView");
+				const rowOfTopLeft = document.getElementById("rowOfTopLeft");
+				const rowOfTopRight = document.getElementById("rowOfTopRight");
+				const rowOfBottomLeft = document.getElementById("rowOfBottomLeft");
+				const rowOfBottomRight = document.getElementById("rowOfBottomRight");
+			 
+				var mainViewBounds = mainView.getBoundingClientRect();
+				var column5thViewBounds = column5thView.getBoundingClientRect();
+				var rowOfTopLeftBounds = rowOfTopLeft.getBoundingClientRect();
+				var rowOfTopRightBounds = rowOfTopRight.getBoundingClientRect();
+				var rowOfBottomLeftBounds = rowOfBottomLeft.getBoundingClientRect();
+				var rowOfBottomRightBounds = rowOfBottomRight.getBoundingClientRect();
+			 
+				// Compute relations between layers
+				if (column5thView.style.visibility == "hidden") {
+					splitter1SplitSizes = last5thColumnSplitSizes;
+				} else {
+					splitter1SplitSizes = calcSplitSizes(mainViewBounds.width, column5thViewBounds.width);
+				}
+				splitter2SplitSizes = calcSplitSizes(rowOfTopLeftBounds.height, rowOfBottomLeftBounds.height);
+				splitter3SplitSizes = calcSplitSizes(rowOfTopLeftBounds.width, rowOfTopRightBounds.width);
+				splitter4SplitSizes = calcSplitSizes(rowOfBottomLeftBounds.width, rowOfBottomRightBounds.width);
+			
+				column5thViewVisible = (column5thView.style.visibility == "visible");
+			} else {
+				column5thViewVisible = (column5thView.style.display == "none");
+			}
+			
          	var data = {
          		"ch1":select1.options[select1.selectedIndex].text,
          		"ch2":select2.options[select2.selectedIndex].text,
@@ -764,13 +1421,10 @@
          		console.log("Saved OK");
          	} else {		
          		download(text, "configuration", "text/plain;charset=utf-8");
-         	}		
+         	}					
          };
          
-         function toggleFullScreen() {
-			var doc = window.document;
-			var docEl = doc.documentElement;
-			
+         function toggleSelects() {
          	const select1 = document.getElementById("rowCH1");
          	const select2 = document.getElementById("rowCH2");
          	const select3 = document.getElementById("rowCH3");
@@ -781,37 +1435,59 @@
 				select2.style.display = 
 				select3.style.display = 
 				select4.style.display = 'block';
-				} else {
+			} else {
 				select1.style.display = 
 				select2.style.display = 
 				select3.style.display = 
 				select4.style.display = "none";
-				}
-         
-         	var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
-         	var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+			}
+		 }
+		 
+         function toggleFullScreen() {
+			var doc = window.document;
+			var docEl = doc.documentElement;					
+			var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+			var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;							
 			if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
-         		requestFullScreen.call(docEl);
-         	} else {
-         		cancelFullScreen.call(doc);
-         	}
+				requestFullScreen.call(docEl);
+			} else {
+				cancelFullScreen.call(doc);
+			}
          };
-      </script>
-      <div class="allViews" id="app-screen" style="visibility:hidden;">
+		 
+		function launchGoToMars() {
+			const iframeCH1 = document.getElementById("iframeCH1");
+			const iframeCH2 = document.getElementById("iframeCH2");
+			const iframeCH3 = document.getElementById("iframeCH3");
+			const iframeCH4 = document.getElementById("iframeCH4");
+			iframeCH1.src="https://www.youtube.com/embed/0qo78R_yYFA?autoplay=1&ref=0&mute=0"
+			iframeCH2.src="https://www.youtube.com/embed/AhpvTJQBkrg?autoplay=1&ref=0&mute=1"
+			iframeCH3.src="https://www.youtube.com/embed/bvim4rsNHkQ?autoplay=1&ref=0&mute=1"
+			iframeCH4.src="https://www.youtube.com/embed/C8JyvzU0CXU?autoplay=1&ref=0&mute=1"
+		}
+		 
+      </script>  
+
+    <div class="allViews" id="allViews">
+	
+	<section id="horizontalViewLayout" style="display:none;"/>
 
          <div class="rowTopBar" id="rowTopBar" style="height:28px; min-height:28px; max-height:28px; padding:0px; margin:0px; width:100%;">
-
+						
 			  <div class="rowTopBar1" id="rssTextScroll">
 				 <div class="rssTextScroll">
-                                    <div id="rssTextScrollContent"></div>
-                                 </div>
-                              </div>
-					
+					<div id="rssTextScrollContent"></div>
+				 </div>
+			  </div>
+						 
+			  <div title="SpaceXBoard logo" id="iconEndRSS" style="cursor:pointer; position:absolute; left:0px; top:0px; width:56px; height:28px;z-index:20000"><img src="Icons/endRSS.png"/></div>			
+			
 			  <div class="rowTopBar2" id="rowTopBarB">
 				 <div title="Options" class="icon" id="iconOptions"><img src="Icons/options.png"/></div>
 				 
 				  <div id="optionsIcons">
 					<div title="Go to FullScreen" class="icon" id="iconFullScreen"><img src="Icons/fullscreen.png"/></div>					
+					<div title="Show/Hide Selection Boxes" class="icon" id="iconSelects"><img src="Icons/selects.png"/></div>					
 					<div title="Reload application" class="icon" id="iconRefreshApp"><img src="Icons/refresh.png"/></div>
 					<div title="Show/Hide 5th column" class="icon" id="icon5thColumn"><img src="Icons/column5th.png"/></div>
 					<div title="Open Quiz in View" class="icon" id="iconQuiz"><img src="Icons/quiz.png"/></div>
@@ -824,47 +1500,49 @@
 					<div title="Show/Hide last update information" class="icon" id="iconLastUpdate"><img src="Icons/lastUpdate.png"/></div>
 					<div title="Show/Hide visitors information" class="icon" id="iconVisitors"><img src="Icons/visitors.png"/></div>
 					<div title="Show/Hide launch state information" class="icon" id="iconLaunchState"><img src="Icons/launchState.png"/></div>
+					<div title="Show application donations information" class="icon" id="iconOwnDonation"><img src="Icons/donation.png"/></div>
+					<div title="Open CastToTV options" class="icon" id="iconCastToTV"><img src="Icons/castToTV.png"/></div>
 				  </div>
-
-                              </div>
+				 
+			  </div>				   
 			 
 			  <div class="rowTopBar2" id="rowTopBarC">
 				<div title="Open Chat in View" class="icon" id="iconChat"><img src="Icons/chat.png"/></div>
-                           </div>
+			  </div>
 			 
 			  <div class="rowTopBar2" id="rowTopBarD">
 				 <div title="Last update date & time" class="iconLabel3" id="groupLastUpdate">
-                                    Last Update
-                                    <div id="lastUpdate"></div>
-                                 </div>
-                              </div>
+					Last Update
+					<div id="lastUpdate"></div>
+				 </div>
+			  </div>
 			  
 			  <div class="rowTopBar2" id="rowTopBarE">
-                                 <div title="Views counter of this website (Active Users • Views)" class="iconLabel" id="groupVisitors">
-                                    Active • Views
-                                    <div><label id="visitorsNow">0</label> • <label id="visitors">0</label></div>
-                                 </div>
-                              </div>
+				 <div title="Views counter of this website (Active Users • Views)" class="iconLabel" id="groupVisitors">
+					Active • Views
+					<div><label id="visitorsNow">0</label> • <label id="visitors">0</label></div>
+				 </div>
+			  </div>
 			  			  
 			  <div class="rowTopBar2" id="rowTopBarF">
 				 <div class="iconGroup" id="timersIconLabels">
 					<div title="YOUR CURRENT LOCAL TIME" class="iconLabel" id="groupTIME">
 					   TIME
 					   <div id="timeTIME">00:00:00</div>
-                                 </div>
+					</div>
 					<div title="UTC TIME" class="iconLabel" id="groupUTC">
 					   UTC
 					   <div id="timeUTC">00:00:00</div>
-                              </div>
-                                    <div title="LOCAL TIME AT BOCA CHICA" class="iconLabel" id="groupLOCAL">
-                                       LOCAL
-                                       <div id="timeLOCAL">00:00:00</div>
-                                    </div>
-                                    </div>
-                                    </div>
+					</div>
+					<div title="LOCAL TIME AT BOCA CHICA" class="iconLabel" id="groupLOCAL">
+					   LOCAL
+					   <div id="timeLOCAL">00:00:00</div>
+					</div>
+				 </div>
+			  </div>
 			 
 			  <div class="rowTopBar2" id="rowTopBarG">
-				 <div title="Views launch current state" class="iconLabel2" id="groupLaunchState">
+				 <div title="Views launch current state" class="iconLabel2 blinking" id="groupLaunchState">
 					Launch State
 					<div><label id="launchState">...</label></div>
 				 </div>
@@ -886,20 +1564,22 @@
                         <div class="grid">
                            <div class="row no-gap">
                               <div class="stub">
-                                 <select id="selectCH1" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH1', this.options, this.selectedIndex)" value="">
+                                 <select id="selectCH1" class="channelSelect" value="">
                                  </select>
+								 <div title="Donate to this live" class="icon" id="liveDonationCH1" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/donation.png"/></div>
+								 <div title="Live Chat" class="icon" id="liveChatCH1" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/chat.png"/></div>
 								 <div title="Is Live" class="icon2" id="isLiveCH1" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                                  <div title="Refresh View 1" class="icon" id="iconRefreshCH1"><img src="Icons/refresh.png"/></div>
-                                 </div>
                               </div>
-                              </div>
-							  </div>
+                           </div>
+                        </div>
+                     </div>
 					 
                      <div class="container" id="containerCH1" style="height:100%; padding:0px; margin: 0px; position: absolute; left:0; top:0; width:100%;">
                         <iframe id="iframeCH1" class="channels" style="position: relative; height:100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                 </div>
+                     </div>
 					 
-                              </div>
+                  </div>
                   <!-- Top-Right -->
                   <div class="d-flex flex-column flex-justify-left" id="rowOfTopRight">
 				  
@@ -907,8 +1587,10 @@
                         <div class="grid">
                            <div class="row no-gap">
                               <div class="stub">
-                                 <select id="selectCH2" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH2', this.options, this.selectedIndex)" value="">
+                                 <select id="selectCH2" class="channelSelect" value="">
                                  </select>
+								 <div title="Donate to this live" class="icon" id="liveDonationCH2" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/donation.png"/></div>
+								 <div title="Live Chat" class="icon" id="liveChatCH2" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/chat.png"/></div>
 								 <div title="Is Live" class="icon2" id="isLiveCH2" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                                  <div title="Refresh View 2" class="icon" id="iconRefreshCH2"><img src="Icons/refresh.png"/></div>
                               </div>
@@ -930,8 +1612,10 @@
                         <div class="grid">
                            <div class="row no-gap">
                               <div class="stub">
-                                 <select id="selectCH3" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH3', this.options, this.selectedIndex)" value="">
+                                 <select id="selectCH3" class="channelSelect" value="">
                                  </select>
+								 <div title="Donate to this live" class="icon" id="liveDonationCH3" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/donation.png"/></div>
+								 <div title="Live Chat" class="icon" id="liveChatCH3" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/chat.png"/></div>
 								 <div title="Is Live" class="icon2" id="isLiveCH3" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                                  <div title="Refresh View 3" class="icon" id="iconRefreshCH3"><img src="Icons/refresh.png"/></div>
                               </div>
@@ -951,8 +1635,10 @@
                         <div class="grid">
                            <div class="row no-gap">
                               <div class="stub">
-                                 <select id="selectCH4" class="channelSelect" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH4', this.options, this.selectedIndex)" value="">
+                                 <select id="selectCH4" class="channelSelect" value="">
                                  </select>
+								 <div title="Donate to this live" class="icon" id="liveDonationCH4" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/donation.png"/></div>
+								 <div title="Live Chat" class="icon" id="liveChatCH4" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/chat.png"/></div>
 								 <div title="Is Live" class="icon2" id="isLiveCH4" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                                  <div title="Refresh View 4" class="icon" id="iconRefreshCH4"><img src="Icons/refresh.png"/></div>
                               </div>
@@ -973,8 +1659,10 @@
                   <div class="grid">
                      <div class="row no-gap">
                         <div class="stub">
-                           <select id="selectCH5" class="channelSelect5th" onclick="this.setAttribute('value', this.value);" onchange="setSourceToElementiFrame('iframeCH5', this.options, this.selectedIndex)" value="">
+                           <select id="selectCH5" class="channelSelect5th" value="">
                            </select>
+				           <div title="Donate to this live" class="icon" id="liveDonationCH5" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/donation.png"/></div>
+						   <div title="Is Live" class="icon2" id="isLiveCH5" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                            <div title="Refresh" class="icon" id="iconRefreshCH5"><img src="Icons/refresh.png"/></div>
                         </div>
                      </div>
@@ -987,270 +1675,219 @@
 			   
             </div>
          </div>
-      </div>
-      <!-- Main Entry Point -->
-      <script>
-		var sourcesLive = null;
-		
-		function updateSourceLiveNow(id, source) {         				
-			// Still iFrame not loaded
-			if (source.includes("SpaceX-MultiYoutube/view.html")) return;
-			
-			console.log("Update Source Live Icon at "+id+" with source: " + source);
-			var liveSymbol = document.getElementById("isLiveCH" + id);
-			if (liveSymbol!=null) {
-				if (isSourceLiveNow(source)) {
-					console.log("Is Live");					
-					liveSymbol.style.visibility = "visible";
-					liveSymbol.style.width = "28px";
-					liveSymbol.style.minWidth = "28px";				
-				} else {
-					console.log("Is NOT Live");
-					liveSymbol.style.visibility = "hidden";
-					liveSymbol.style.width = "0px";
-					liveSymbol.style.minWidth = "0px";
-				}
-			}
-		}
-		function loadSourcesLiveNow() {	
-			console.log("Loading Sources Live NOW...");
-			var request = new XMLHttpRequest();
-			request.open('GET', "https://elricdog.homedns.org/SpaceXBoard/sourcesLiveNow.txt", true);			
-			request.send(null);
-			request.onreadystatechange = function () {
-				if (request.readyState === 4 && request.status === 200) {
-					var type = request.getResponseHeader('Content-Type');
-					if (type.indexOf("text") !== 1) {
-						sourcesLive = request.responseText.split("\r\n");
-						console.log("Sources Live NOW:");
-						console.log(sourcesLive);
+		 
+	</section>
+	
+	<section id="verticalViewLayout" style="display:none;"/>
+	
+         <div class="rowTopBar" id="rowTopBar" style="height:28px; min-height:28px; max-height:28px; padding:0px; margin:0px; width:100%;">
 						
-						const iframeCH1 = document.getElementById("iframeCH1");
-						updateSourceLiveNow(1, iframeCH1.src);					
-						const iframeCH2 = document.getElementById("iframeCH2");
-						updateSourceLiveNow(2, iframeCH2.src);					
-						const iframeCH3 = document.getElementById("iframeCH3");
-						updateSourceLiveNow(3, iframeCH3.src);					
-						const iframeCH4 = document.getElementById("iframeCH4");
-						updateSourceLiveNow(4, iframeCH4.src);					
-					}					
-				}
-			}
-		}		
-		function isBlank(str) {
-			return (!str || /^\s*$/.test(str));
-		}
-		function isSourceLiveNow(source) {	
-			var result = false;
-			if (sourcesLive != null) {		
-				sourcesLive.forEach(item => {									
-					var videoId = item.split(" | ")[0].trim();
-					if (isBlank(videoId)==false) {
-						if (source.includes(videoId)) {
-							console.log("Source is in LiveNow sources: "+source);
-							result = true;
-							return;
-						}
-					}
-				});
-			}
-			return result;
-		}
-		
-        var intervalLoadSourcesLiveNow = window.setInterval(function(){
-         	loadSourcesLiveNow();
-        }, 5*60*1000);		
-		loadSourcesLiveNow();
-				
-         function setSourceToElementiFrame(iFrameId, options, index) {
-         	var source = options[index].value;
-         	var title = options[index].textContent;
+			  <div class="rowTopBar1" id="rssTextScroll">
+				 <div class="rssTextScroll">
+					<div id="rssTextScrollContent"></div>
+				 </div>
+			  </div>
+						 
+			  <div title="SpaceXBoard logo" id="iconEndRSS" style="cursor:pointer; position:absolute; left:0px; top:0px; width:56px; height:28px;z-index:20000"><img src="Icons/endRSS.png"/></div>			
 			
-			console.log("Setting source at " + iFrameId + "("+title+") - " + source);
+			  <div class="rowTopBar2" id="rowTopBarB">
+				 <div title="Options" class="icon" id="iconOptions"><img src="Icons/options.png"/></div>
+				 
+				  <div id="optionsIcons">
+					<div title="Go to FullScreen" class="icon" id="iconFullScreen"><img src="Icons/fullscreen.png"/></div>					
+					<div title="Show/Hide Selection Boxes" class="icon" id="iconSelects"><img src="Icons/selects.png"/></div>					
+					<div title="Reload application" class="icon" id="iconRefreshApp"><img src="Icons/refresh.png"/></div>
+					<div title="Show/Hide 5th column" class="icon" id="icon5thColumn"><img src="Icons/column5th.png"/></div>
+					<div title="Open Quiz in View" class="icon" id="iconQuiz"><img src="Icons/quiz.png"/></div>
+					<div title="Open Help in View" class="icon" id="iconHelp"><img src="Icons/help.png"/></div>                                    
+					<div title="Information about Us and this web site" class="icon" id="iconAboutUs"><img src="Icons/aboutus.png"/></div>
+					<div title="You have any comment or idea?" class="icon" id="iconContact"><img src="Icons/contact.png"/></div>
+					<div title="Save current configuration" class="icon" id="iconSave"><img src="Icons/save.png"/></div>
+					<div title="Load saved configuration" class="icon" id="iconLoad"><img src="Icons/load.png"/></div>
+					<div title="Show/Hide the clocks (LOCAL/UTC/YOUR CURRENT TIME)" class="icon" id="iconTime"><img src="Icons/time.png"/></div>
+					<div title="Show/Hide last update information" class="icon" id="iconLastUpdate"><img src="Icons/lastUpdate.png"/></div>
+					<div title="Show/Hide visitors information" class="icon" id="iconVisitors"><img src="Icons/visitors.png"/></div>
+					<div title="Show/Hide launch state information" class="icon" id="iconLaunchState"><img src="Icons/launchState.png"/></div>
+					<div title="Show application donations information" class="icon" id="iconOwnDonation"><img src="Icons/donation.png"/></div>
+					<div title="Open CastToTV options" class="icon" id="iconCastToTV"><img src="Icons/castToTV.png"/></div>					
+				  </div>
+				 
+			  </div>				   
+			 
+			  <div class="rowTopBar2" id="rowTopBarC">
+				<div title="Open Chat in View" class="icon" id="iconChat"><img src="Icons/chat.png"/></div>
+			  </div>
+			 
+			  <div class="rowTopBar2" id="rowTopBarD">
+				 <div title="Last update date & time" class="iconLabel3" id="groupLastUpdate">
+					Last Update
+					<div id="lastUpdate"></div>
+				 </div>
+			  </div>
+			  
+			  <div class="rowTopBar2" id="rowTopBarE">
+				 <div title="Views counter of this website (Active Users • Views)" class="iconLabel" id="groupVisitors">
+					Active • Views
+					<div><label id="visitorsNow">0</label> • <label id="visitors">0</label></div>
+				 </div>
+			  </div>
+			  			  
+			  <div class="rowTopBar2" id="rowTopBarF">
+				 <div class="iconGroup" id="timersIconLabels">
+					<div title="YOUR CURRENT LOCAL TIME" class="iconLabel" id="groupTIME">
+					   TIME
+					   <div id="timeTIME">00:00:00</div>
+					</div>
+					<div title="UTC TIME" class="iconLabel" id="groupUTC">
+					   UTC
+					   <div id="timeUTC">00:00:00</div>
+					</div>
+					<div title="LOCAL TIME AT BOCA CHICA" class="iconLabel" id="groupLOCAL">
+					   LOCAL
+					   <div id="timeLOCAL">00:00:00</div>
+					</div>
+				 </div>
+			  </div>
+			 
+			  <div class="rowTopBar2" id="rowTopBarG">
+				 <div title="Views launch current state" class="iconLabel2 blinking" id="groupLaunchState">
+					Launch State
+					<div><label id="launchState">...</label></div>
+				 </div>
+			  </div>
+			 
+			 <div class="rowTopBar2" id="rowTopBarH">
+				<div title="Show/Hide the RSS scroll" class="icon" id="iconRSS"><img src="Icons/rss.png"/></div>
+			 </div>
+		 </div>
+	  
+         <!-- 4 views -->
+         <div id="rootView" style="width: 100%; height: calc(100% - 28px); left: 0; top: 0; background-color: gray;">		 		
+            <div data-role="splitter" data-split-mode="vertical" data-gutter-size="5" data-split-sizes="25,25,25,25" data-min-sizes="50, 50, 50, 50" id="mainView" style="width: 100%; height: 100%; left: 0; top: 0; background-color: gray;">		
 			
-         	document.getElementById(iFrameId).src = source;
-         	analytics.logEvent('source', { name: title});
-         	
-         	var id = iFrameId.replace("iframeCH","");
-         	document.getElementById("selectCH" + id).title = "View " + id + " - " + title + " (" + source + ")";
+                  <!-- V1 -->
+                  <div class="d-flex flex-column flex-justify-left" id="rowOfTopLeft">
+				  
+                     <div class="container" id="rowCH1" style="height:28px; min-height:28px; max-height:28px; padding:0px; margin: 0px; position: absolute; left:0; top:0; width:100%; z-index:10; opacity:0.75; background-color: transparent;">
+                        <div class="grid">
+                           <div class="row no-gap">
+                              <div class="stub">
+                                 <select id="selectCH1" class="channelSelect" value="">
+                                 </select>
+								 <div title="Donate to this live" class="icon" id="liveDonationCH1" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/donation.png"/></div>
+								 <div title="Live Chat" class="icon" id="liveChatCH1" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/chat.png"/></div>
+								 <div title="Is Live" class="icon2" id="isLiveCH1" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
+                                 <div title="Refresh View 1" class="icon" id="iconRefreshCH1"><img src="Icons/refresh.png"/></div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+					 
+                     <div class="container" id="containerCH1" style="height:100%; padding:0px; margin: 0px; position: absolute; left:0; top:0; width:100%;">
+                        <iframe id="iframeCH1" class="channels" style="position: relative; height:100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                     </div>
+					 
+                  </div>
+				  
+                  <!-- V2 -->
+                  <div class="d-flex flex-column flex-justify-left" id="rowOfTopRight">
+				  
+                     <div class="container" id="rowCH2" style="height:28px; min-height:28px; max-height:28px; padding:0px; margin: 0px; position: absolute; left:0; top:0; width:100%; z-index:10; opacity:0.75; background-color: transparent;">
+                        <div class="grid">
+                           <div class="row no-gap">
+                              <div class="stub">
+                                 <select id="selectCH2" class="channelSelect" value="">
+                                 </select>
+								 <div title="Donate to this live" class="icon" id="liveDonationCH2" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/donation.png"/></div>
+								 <div title="Live Chat" class="icon" id="liveChatCH2" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/chat.png"/></div>
+								 <div title="Is Live" class="icon2" id="isLiveCH2" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
+                                 <div title="Refresh View 2" class="icon" id="iconRefreshCH2"><img src="Icons/refresh.png"/></div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+					 
+                     <div class="container" id="containerCH2" style="height:100%; padding:0px; margin: 0px; position: absolute; left:0; top:0; width:100%;">
+                        <iframe id="iframeCH2" class="channels" style="position: relative; height:100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                     </div>
+					 
+                  </div>
+				  
+                  <!-- V3 -->
+                  <div class="d-flex flex-column flex-justify-left" id="rowOfBottomLeft">
+				  
+                     <div class="container" id="rowCH3" style="height:28px; min-height:28px; max-height:28px; padding:0px; margin: 0px; position: absolute; left:0; top:0; width:100%; z-index:10; opacity:0.75; background-color: transparent;">
+                        <div class="grid">
+                           <div class="row no-gap">
+                              <div class="stub">
+                                 <select id="selectCH3" class="channelSelect" value="">
+                                 </select>
+								 <div title="Donate to this live" class="icon" id="liveDonationCH3" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/donation.png"/></div>
+								 <div title="Live Chat" class="icon" id="liveChatCH3" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/chat.png"/></div>
+								 <div title="Is Live" class="icon2" id="isLiveCH3" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
+                                 <div title="Refresh View 3" class="icon" id="iconRefreshCH3"><img src="Icons/refresh.png"/></div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+					 
+                     <div class="container" id="containerCH3" style="height:100%; padding:0px; margin: 0px; position: absolute; left:0; top:0; width:100%;">
+                        <iframe id="iframeCH3" class="channels" style="position: relative; height:100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                     </div>
+					 
+                  </div>
+				  
+                  <!-- V4 -->
+                  <div class="d-flex flex-column flex-justify-left" id="rowOfBottomRight">
+				  
+                     <div class="container" id="rowCH4" style="height:28px; min-height:28px; max-height:28px; padding:0px; margin: 0px; position: absolute; left:0; top:0; width:100%; z-index:10; opacity:0.75; background-color: transparent;">
+                        <div class="grid">
+                           <div class="row no-gap">
+                              <div class="stub">
+                                 <select id="selectCH4" class="channelSelect" value="">
+                                 </select>
+								 <div title="Donate to this live" class="icon" id="liveDonationCH4" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/donation.png"/></div>
+								 <div title="Live Chat" class="icon" id="liveChatCH4" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/chat.png"/></div>
+								 <div title="Is Live" class="icon2" id="isLiveCH4" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
+                                 <div title="Refresh View 4" class="icon" id="iconRefreshCH4"><img src="Icons/refresh.png"/></div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+					 
+                     <div class="container" id="containerCH4" style="height:100%; padding:0px; margin: 0px; position: absolute; left:0; top:0; width:100%;">
+                        <iframe id="iframeCH4" class="channels" style="position: relative; height:100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                     </div>
+					 
+                  </div>
+            </div>
 			
-			updateSourceLiveNow(id, source);
-         }
-         
-         const select1 = document.getElementById("selectCH1");
-         const select2 = document.getElementById("selectCH2");
-         const select3 = document.getElementById("selectCH3");
-         const select4 = document.getElementById("selectCH4");
-         const select5 = document.getElementById("selectCH5");
-         
-         function composeYouTubeLiveStreamURL(videoId, muteDefault) {
-         	return "https://www.youtube.com/embed/"+videoId+"?autoplay=1&ref=0&mute="+muteDefault;
-         }
-         
-         const channels = {
-          "Select one channel":"",
-         
-          // Live Streams
-          "SPACEX":composeYouTubeLiveStreamURL("_qwLHlVjRyw", 0),
-          
-          "SpaceFlight":composeYouTubeLiveStreamURL("FpQwQx4Q_Dc", 0),
-          "NSF Fleet Cam":composeYouTubeLiveStreamURL("gnt2wZBg89g", 1),
-          
-          "LabPadre - Nerdle Cam 4K":composeYouTubeLiveStreamURL("Ky5l9ZxsG9M", 0),
-          "LabPadre - Sapphire Cam":composeYouTubeLiveStreamURL("dROdPn9Tpxg", 1),
-          "LabPadre - South Padre Island Pearl Beach Cam":composeYouTubeLiveStreamURL("agmFDeP5u_w", 1),
-          "LabPadre - Predator Cam":composeYouTubeLiveStreamURL("lTJ9OgcIMSs", 1),
-          "LabPadre - Lab Cam":composeYouTubeLiveStreamURL("hpqoqJxbNpw", 1),
-          "LabPadre - Launch Pad Cam":composeYouTubeLiveStreamURL("Z72Au8Px7mM", 1),
-          "LabPadre - Sentinel Cam":composeYouTubeLiveStreamURL("n5ozYnVQahE", 1),
-          
-          "Everyday Astronaut":composeYouTubeLiveStreamURL("QJ6YN5upGH0", 0),
-          "SpaceXStorm (Castellano)":composeYouTubeLiveStreamURL("39T-NWgFtME", 0),
-		  "Frontera Espacial (Castellano)":composeYouTubeLiveStreamURL("uVMXkl-i7l8", 0),
-          "Marcus House":composeYouTubeLiveStreamURL("MkLpg5Rs8mI", 0),
-          "What about it!?":composeYouTubeLiveStreamURL("QRRSvq5s0oE", 0),
-          "NASA Live":composeYouTubeLiveStreamURL("21X5lGlDOfg", 0),
-          "NASA Media Channel":composeYouTubeLiveStreamURL("nA9UZF-SZoQ", 0),
-         
-		  "INFORMATION - Space OK (Castellano)":"https://spaceokk.weebly.com/bocachica.html",
-          "INFORMATION - LabPadre Boca Chica Weather":"weather2.html",
-          "INFORMATION - Boca Chica, TX Weather":"weather.html",
-          "INFORMATION - Flight Radar 24":"https://www.flightradar24.com/simple_index.php?lat=25.99&lon=-97.16&z=11&airports=1&label1=callsign&label2=altspeed&label3=tofrom&size=auto",
-          "INFORMATION - Road Closures":"https://tfr.faa.gov/tfr2/list.jsp",
-          "INFORMATION - TFR (notams.faa.gov)":"notamTFR.html",
-          "INFORMATION - Flight Restrictions Zone":"https://tfr.faa.gov/tfr_map_ims/html/ew/scale7/tile_33_61.html",
-          "INFORMATION - Google Maps":"map.html",
-		  "INFORMATION - Bing Maps":"map2.html",
-          "*INFORMATION - Cameron County":"https://www.cameroncounty.us/SpaceX",
-          "*INFORMATION - Boca Chica":"https://www.bocachica.com",
-         
-          "TWITCH - NASA":"https://www.twitch.tv/nasa", 
-          "TWITCH - Alex Riveiro (Castellano)":"https://www.twitch.tv/alex_riveiro",
-          "TWITCH - SpaceXStorm (Castellano)":"https://www.twitch.tv/spacexstorm",
-         
-          "SPACEX Web":"https://www.spacex.com",
-          "SPACEX - NEXT LAUNCHES":"https://whenisthenextspacexlaunch.com/", 
-		  "SPACEX - MISSION PATCHES":"https://www.elonx.net/spacex-mission-patches/",
-		  "SPACEX - PHOTOS":"https://www.gettyimages.es/fotos/spacex?phrase=spacex&sort=mostpopular",
-		  "SPACEX - WIKI HISTORY":"https://en.wikipedia.org/wiki/List_of_Falcon_9_and_Falcon_Heavy_launches",
-		 
-          "*TWITTER":"https://twitter.com",
-          "*REDDIT":"https://reddit.com",
-          "*DISCORD":"https://discord.com", 
-          "*YOUTUBE CHANNELS":"https://youtube.com",
-           
-          "NEXT LAUNCHES - Source 1":"https://whenisthenextspacexlaunch.com/", 
-		  "NEXT LAUNCHES - Source 2":"https://www.rocketlaunch.live/?filter=spacex", 		  
-		  "NEXT LAUNCHES - Source 3":"https://spaceflightnow.com/launch-schedule/", 		  		 
-          "SEARCH - Google":"https://www.google.com/search?igu=1&q=SpaceX",
-          "SEARCH - Bing":"https://www.bing.com/search?q=SpaceX",
-         
-          "CHAT - SpaceXBoard":"chat.html",		  
-         
-          "GAMES - SpaceX ISS Docking Simulator":"https://iss-sim.spacex.com",
-          "GAMES - Quiz SpaceX Game":"gameQuiz.html",
-         
-          "360 View BocaChica SpaceX":composeYouTubeLiveStreamURL("nVo5AsMz0TI", 1), 
-          "3D / VR Model of StarShip":"https://elricdog.github.io/SpaceX-StarShip/VRStarShip/",
-          
-          "ChangeLog":"changelog.html",
-          "RoadMap":"roadmap.html",
-          "Help":"help_beta.html",
-         };
-         
-         const channelsVertical = {
-          "Select one channel":"",
-         
-          // Twitter lists
-          "My TWITTER SpaceX List":"twitter.html?list=elricdog",
-          "My TWITTER SpaceX List (Català-Castellano)":"twitter.html?list=elricdog-cat-cas",
-          
-          // Twitter timelines
-          "TWITTER - SpaceX":"twitter.html?people=spacex",
-          "TWITTER - Elon Musk":"twitter.html?people=elonmusk",
-          "TWITTER - Jessie Anderson":"twitter.html?people=whoisheartbreak",
-          "TWITTER - Mary":"twitter.html?people=BocaChicaGal",
-          "TWITTER - Spaceflight Now":"twitter.html?people=SpaceflightNow",
-          "TWITTER - Everyday Astronaut":"twitter.html?people=Erdayastronaut",
-		  "TWITTER - What about it!?":"twitter.html?people=FelixSchlang",
-		  "TWITTER - Marcus House":"twitter.html?people=MarcusHouseGame",
-          "TWITTER - Austin Barnard":"twitter.html?people=austinbarnard45",
-          "TWITTER - Chris B - NSF":"twitter.html?people=NASASpaceflight",
-          "TWITTER - Jack Beyer":"twitter.html?people=thejackbeyer",
-          "TWITTER - John Kraus":"twitter.html?people=johnkrausphotos",
-          "TWITTER - Brendan (Diagram Creator)":"twitter.html?people=brendan2908",
-          "TWITTER - SPadre":"twitter.html?people=SpacePadreIsle",
-          "TWITTER - RGVAerialPhotography":"twitter.html?people=RGVaerialphotos",
-          "TWITTER - SpaceX (Català)":"twitter.html?people=spacexcatala",
-          "TWITTER - Ag. Romanov (Català)":"twitter.html?people=ivanvihe",
-          "TWITTER - Ismael Flores [SpaceXStorm] (Castellano)":"twitter.html?people=ifcampoy",
-		  "TWITTER - Frontera Espacial (Castellano)":"twitter.html?people=FronteraSpacial",
-          
-          "SPACEX Web":"https://www.spacex.com",
-          
-          "*TWITTER":"https://twitter.com",
-          "*REDDIT":"https://reddit.com",
-          "*DISCORD":"https://discord.com", 
-          "*YOUTUBE CHANNELS":"https://youtube.com",
-         
-          "NEXT LAUNCHES - Source 1":"https://whenisthenextspacexlaunch.com/", 
-		  "NEXT LAUNCHES - Source 2":"https://www.rocketlaunch.live/?filter=spacex", 		  
-		  "NEXT LAUNCHES - Source 3":"https://spaceflightnow.com/launch-schedule/", 		  
-          "SEARCH - Google":"https://www.google.com/search?igu=1&q=SpaceX",
-          "SEARCH - Bing":"https://www.bing.com/search?q=SpaceX",
-          
-          "ChangeLog":"changelog.html",
-          "RoadMap":"roadmap.html",
-          "Help":"help_beta.html",
-         };
-         
-         
-         // Populate selection channels
-         for (var key in channels) {
-             var el = document.createElement("option");
-         	el.title = channels[key];
-             el.textContent = key;
-             el.value = channels[key];
-             if (select1!=null) select1.appendChild(el);
-         	if (select2!=null) select2.appendChild(el.cloneNode(true));
-         	if (select3!=null) select3.appendChild(el.cloneNode(true));
-         	if (select4!=null) select4.appendChild(el.cloneNode(true));
-         }
-         for (var key in channelsVertical) {
-             var el = document.createElement("option");
-         	el.title = channels[key];
-             el.textContent = key;
-             el.value = channelsVertical[key];
-             if (select5!=null) select5.appendChild(el);
-         }
-         
-		 // Timers
-         const timeLOCAL = document.getElementById("timeLOCAL");
-         const timeUTC = document.getElementById("timeUTC");
-         const timeTIME = document.getElementById("timeTIME");
-		 
-         // Update Time
-         function updateDateTime() {
-         	let d = new Date();
-         	let currentTimeZoneOffsetInHours = d.getTimezoneOffset() / 60;
-         
-         	let utc = new Date();
-         	utc.setHours( utc.getHours() + currentTimeZoneOffsetInHours );
-         	let local = new Date();
-         	local.setHours( local.getHours() + currentTimeZoneOffsetInHours - 6 );
-         	if (timeLOCAL!=null) timeLOCAL.innerHTML = local.toLocaleTimeString();
-         	if (timeUTC!=null) timeUTC.innerHTML = utc.toLocaleTimeString();
-         	if (timeTIME!=null) timeTIME.innerHTML = d.toLocaleTimeString();
-         }
-         var intervalId = window.setInterval(function(){
-         	updateDateTime();
-         }, 1000);
-         updateDateTime();
-         
-      </script>
-      <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-analytics.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-database.js"></script>
-      <script src="js/firebaseFunctions_beta.js"></script>
+            <div id="column5thView" style="position:absolute; left:calc(100% - 240px); top:0px; width: 240px; height: 100%; background-color: gray; display:none; z-index:10000; opacity:0.92;">
+			
+               <div class="container" id="rowCH5" style="height:28px; min-height:28px; max-height:28px; padding:0px; margin: 0px;">
+                  <div class="grid">
+                     <div class="row no-gap">
+                        <div class="stub">
+                           <select id="selectCH5" class="channelSelect5th" value="">
+                           </select>
+						   <div title="Donate to this live" class="icon" id="liveDonationCH5" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/donation.png"/></div>
+						   <div title="Is Live" class="icon2" id="isLiveCH5" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
+                           <div title="Refresh" class="icon" id="iconRefreshCH5"><img src="Icons/refresh.png"/></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+			   
+               <div class="container" id="containerCH5" style="height:100%; padding:0px; margin: 0px;">
+                  <iframe id="iframeCH5" class="channels" style="position: relative; height:100%; width: 100%;" src="" scrolling="yes" frameborder="0" allow="clipboard-write; encrypted-media;" allowfullscreen></iframe>
+               </div>
+			   
+            </div>
+         </div>
+	
+	</section>
+	
+	</div>
+	
    </body>
 </html>

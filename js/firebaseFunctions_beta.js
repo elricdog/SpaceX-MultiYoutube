@@ -34,9 +34,6 @@ firebase.initializeApp(firebaseConfig);
 // Get a reference to the analytics service
 var analytics = firebase.analytics();
 
-// Get a reference to the database service
-var database = firebase.database();
-
 let counterCleanOldVisitors = 0;
 
 function addView(){
@@ -136,7 +133,7 @@ function getRealTimeVisitors(view){
 }
 
 function getRealtimeRss(view){
-	console.log("RSS Fetch");
+	console.log(">>> RSS Fetch");
     firebase.database().ref('rss')
     .on('value', (snapshot)=>{
       console.log("RSS Updated");
@@ -168,12 +165,23 @@ function clearIntervalUpdateLaunchState() {
 	}
 }
 
+function restartLaunchStateAnimation() {
+	console.log("Restart Launch State Animation");
+	var groupLaunchState = document.getElementById("groupLaunchState");
+	groupLaunchState.classList.remove("blinking");
+	void groupLaunchState.offsetWidth;
+	groupLaunchState.classList.add("blinking");
+}
+
 function getLaunchState(view){
+	console.log(">>> LaunchState Fetch");
     firebase.database().ref('state/text')
     .on('value', (snapshot)=>{
 		clearIntervalUpdateLaunchState();
 		lastUpdateLaunchState = snapshot.val();
 		view.innerHTML = lastUpdateLaunchState;
+		restartLaunchStateAnimation();
+		updateRSSTextScrollWidth();
     });
     firebase.database().ref('state/minutes')
     .on('value', (snapshot)=>{
@@ -189,28 +197,33 @@ function getLaunchState(view){
 					minutesUpdateLaunchState = minutesUpdateLaunchState-1;
 					view.innerHTML = "T - "+minutesUpdateLaunchState;
 				}
+				updateRSSTextScrollWidth();
 				console.log("Updated Launch State to: " + view.innerHTML);
 			}, 60000);			  
 			view.innerHTML = "T - "+minutesUpdateLaunchState;
+			restartLaunchStateAnimation();
+			updateRSSTextScrollWidth();
 		} else {
 			if (minutesUpdateLaunchState==0) {
 				view.innerHTML = lastUpdateLaunchState;
+				updateRSSTextScrollWidth();		
 			}
 		}
-		updateRSSTextScrollWidth();
 		console.log("Updated Launch State due DB change to: " + view.innerHTML);
     });
 }
 
 function getFeedsFromDB() {
+	console.log(">>> Feeds Fetch");
 	firebase.database().ref('feeds')
 	.on('value', (snapshot)=>{
 		snapshot.forEach((child)=>{
 			var title = child.key;
 			var value = child.val();
-			console.log("Feed [" + title + "] updated to: " + value);
+			console.log("Feed [" + title + "] must be updated to: " + value);
 			var newURL = composeYouTubeLiveStreamURL(value, 0);
-			console.log("- New URL: " + newURL);
+			var newURLChat = composeYouTubeChatURL(value, 0);
+			console.log("- Newest URL: " + newURL);
 
 			// Update options
 			const select1 = document.getElementById("selectCH1");
@@ -221,6 +234,8 @@ function getFeedsFromDB() {
 			updateOptionsWithNewFeed(select2, title, newURL);
 			updateOptionsWithNewFeed(select3, title, newURL);
 			updateOptionsWithNewFeed(select4, title, newURL);
+			const select5 = document.getElementById("selectCH5");						
+			updateOptionsWithNewFeed(select5, title, newURLChat);
 		});
 	});
 }
@@ -228,41 +243,32 @@ function getFeedsFromDB() {
 function updateOptionsWithNewFeed(optionSelect, title, newURL) {
 	for (var id in optionSelect.options) {
 		var el = optionSelect.options[id];
-		if (el.textContent==title) {				
-			console.log("- Replaced URL on option position " + id);
-			var changed = el.title != newURL;		
+		if (el.title==title) {				
+			var changed = el.value != newURL;		
 			if (changed) {
-			el.title = newURL;
+				console.log("- Replaced ["+title+"] with New URL on option position " + id + " on select " + optionSelect.id);				
 			el.value = newURL;
 			var index = optionSelect.selectedIndex;
 			var sel = optionSelect.options[index];
-			console.log("- Currently selected " + sel.textContent);
-			if (sel.textContent==title) {
-					console.log("- Reload currently selected");
+				console.log("- Currently selected on "+optionSelect.id+": " + sel.title);
+				if (sel.title==title) {
+					console.log("- !!! RELOADING !!!");
 				var event = new Event('change');
 				optionSelect.selectedIndex = sel.index;
 				optionSelect.dispatchEvent(event);
+					console.log("- Reload selected done");
+					
+					// Update last set and blinking
+					const lastUpdate = document.getElementById("lastUpdate");
+					var lastModifiedDate = new Date();
+					lastUpdate.innerHTML = lastModifiedDate.toLocaleString();
+					const lastUpdateLabel = document.getElementById('groupLastUpdate');
+					lastUpdateLabel.classList.remove("blinking");
+					void lastUpdateLabel.offsetWidth;
+					lastUpdateLabel.classList.add("blinking");
 				}
 			}
 			return;
 		}
 	}			
 }
-
-// Add one view more
-addView();
-
-// Get number of views from database
-getRealtimeNumViews(document.getElementById("visitors"));
-
-// Get visitors in the last 20min
-getRealTimeVisitors(document.getElementById("visitorsNow"));
-
-// Get RSS from firebase database
-getRealtimeRss(document.getElementById("rssTextScrollContent"));
-
-// Get state of launch from database
-getLaunchState(document.getElementById("launchState"));
-
-// Get feeds from DB database
-getFeedsFromDB();
