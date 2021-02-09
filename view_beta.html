@@ -27,34 +27,41 @@
 		  if (isAvailable) {
 			console.log("Cast is available");			
 			castIsAvailable = true;
+			if (castIsAvailable) {
+				if (isMobile()) {
+					document.createElement("google-cast-launcher");
+					castIsAvailable = false;
+				}
+			}
 		  }
-		};
-		
+		};		
 		initializeCastApi = function() {		
+			if (isMobile()) {
+			  cast.framework.CastContext.getInstance().setOptions({
+				receiverApplicationId: "urn:x-cast:elricdog.github.io.spacexboard",
+				autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
+			  });			
+			} else {
 			  var sessionRequest = new chrome.cast.SessionRequest("urn:x-cast:elricdog.github.io.spacexboard");
 			  var apiConfig = new chrome.cast.ApiConfig(sessionRequest, castSessionListener, castReceiverListener);
 			  chrome.cast.initialize(apiConfig, onCastInitSuccess, onCastError);		
-		};		
-		
+			}
+		};				
 		function castSessionListener(e) {
 			console.log('castSessionListener', e);
 		}
-
 		function castReceiverListener(availability) {
 			console.log('castReceiverListener', availability);
 			if (availability) {
 				chrome.cast.requestSession(onCastSessionRequestSuccess, onCastError);
 			}
-		}		
-		
+		}				
 		function onCastInitSuccess() {
 		  console.log('onCastInitSuccess');
 		}
-
 		function onCastSessionRequestSuccess(session) {
 			console.log('onCastSessionRequestSuccess', session);
-		}
-		
+		}		
 		function onCastError(e) {
 		  console.log('onCastError', e);
 		}
