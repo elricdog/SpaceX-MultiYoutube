@@ -262,6 +262,20 @@ body {
 	overflow: auto;
 }
 
+#share {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 5px;
+	z-index: 300000;
+	visibility: hidden;
+	border: 1px solid #003268;
+	background-color: #005288;
+	color: white;
+	overflow: auto;
+}
+
 #donation, #ownDonation {
 	position: fixed;
 	top: 50%;
@@ -465,3 +479,5 @@ body {
     69%{  color: red; text-shadow: 1px 1px #000; }
     100%{ color: white; }
 }
+
+#share-buttons img { width: 35px; padding: 5px; border: 0; box-shadow: 0; display: inline; }

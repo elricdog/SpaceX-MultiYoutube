@@ -145,7 +145,8 @@
                Elric and Sworied and Berrgurt
             </p>
             <br>
-            <button id="buttonSupportUs" class="myButton2">Support Us</button>
+            <button id="buttonAboutUsSupportUs" class="myButton2">Support Us</button>
+            <button id="buttonAboutUsShare" class="myButton">Share Us</button>
             <button id="buttonAboutUsClose" class="myButton">Close</button>
 			<div id="linksToWeb"> 
 				<br>
@@ -156,6 +157,35 @@
 				<br>Source Code at GitHub:<br>
 				<a href="https://github.com/elricdog/SpaceX-MultiYoutube">https://github.com/elricdog/SpaceX-MultiYoutube</a>
 			</div>
+         </center>
+      </div>
+
+      <!-- Share -->
+      <div id="share" style="visibility:hidden; width: fit-content; height: fit-content;">
+         <center>
+            <h3>Share SpaceXBoard</h3>
+			<div id="share-buttons"> 
+				<!-- Whatsapp -->
+				<a href="whatsapp://send?text=https://spacex.elric.ws SpaceXBoard,%20the%20new%20way%20to%20follow%20Starship%20live%20streams" target="_blank"><img src="./ShareIcons/whatsapp.png" alt="WhatsApp"/></a>
+				<!-- Facebook -->
+				<a href="https://www.facebook.com/sharer.php?u=https://spacex.elric.ws" target="_blank"><img src="./ShareIcons/facebook.png" alt="Facebook" /></a> 
+				<!-- Twitter --> 
+				<a href="https://twitter.com/share?url=https://spacex.elric.ws&text=SpaceXBoard,%20the%20new%20way%20to%20follow%20Starship%20live%20streams" target="_blank"><img src="./ShareIcons/twitter.png" alt="Twitter" /></a> 
+				<!-- Google+ -->
+				<a href="https://plus.google.com/share?url=https://spacex.elric.ws" target="_blank"><img src="./ShareIcons/google.png" alt="Google" /></a>
+				<!-- Digg --> 
+				<a href="https://www.digg.com/submit?url=https://spacex.elric.ws" target="_blank"><img src="./ShareIcons/diggit.png" alt="Digg" /></a>
+				<!-- Reddit --> 
+				<a href="http://reddit.com/submit?url=https://spacex.elric.ws&title=SpaceXBoard,%20the%20new%20way%20to%20follow%20Starship%20live%20streams" target="_blank"><img src="./ShareIcons/reddit.png" alt="Reddit" /></a> 
+				<!-- LinkedIn --> 
+				<a href="https://www.linkedin.com/shareArticle?mini=true&url=https://spacex.elric.ws" target="_blank"><img src="./ShareIcons/linkedin.png" alt="LinkedIn" /></a> 
+				<!-- StumbleUpon--> 
+				<a href="http://www.stumbleupon.com/submit?url=https://spacex.elric.ws&title=SpaceXBoard,%20the%20new%20way%20to%20follow%20Starship%20live%20streams" target="_blank"><img src="./ShareIcons/stumbleupon.png" alt="StumbleUpon" /></a>
+				<!-- Email --> 
+				<a href="mailto:?Subject=SpaceXBoard&Body=I%20saw%20this%20and%20thought%20of%20you!%20: SpaceXBoard,%20the%20new%20way%20to%20follow%20Starship%20live%20streams https://spacex.elric.ws"><img src="./ShareIcons/email.png" alt="Email" /></a>
+			</div>			
+			<br>
+			<button id="buttonShareClose" class="myButton">Close</button>
          </center>
       </div>
 	  
@@ -699,6 +729,7 @@
          	document.getElementById("buttonContactClose").addEventListener ("click", toggleContact, false);
          	document.getElementById("iconAboutUs").addEventListener ("click", function() { toggleIconGroups(); toggleAboutUs(); }, false);
          	document.getElementById("buttonAboutUsClose").addEventListener ("click", toggleAboutUs, false);
+			document.getElementById("buttonAboutUsShare").addEventListener ("click", function() { toggleAboutUs(); toggleShareUs(); }, false);
          	document.getElementById("iconSave").addEventListener ("click", function() { toggleIconGroups(); configurationSave(); }, false);
          	document.getElementById("iconLoad").addEventListener ("click", function() { toggleIconGroups(); checkTheWayToLoad(); }, false);
          	document.getElementById("buttonLoadClose").addEventListener ("click", toggleLoad, false);
@@ -712,7 +743,9 @@
          	document.getElementById("iconHelp").addEventListener ("click", function() { toggleIconGroups(); openHelp(); }, false);
          	document.getElementById("iconRefreshApp").addEventListener ("click", function() { toggleIconGroups(); refreshApp(); }, false);		
 			document.getElementById("iconEndRSS").addEventListener ("click", function() { launchGoToMars(); }, false); 
-			document.getElementById("iconOwnDonation").addEventListener ("click", function() { toggleIconGroups(); toggleOwnDonation(); }, false); 
+			document.getElementById("iconOwnDonation").addEventListener ("click", function() { toggleIconGroups(); toggleOwnDonation(); }, false); 			
+			document.getElementById("iconShare").addEventListener ("click", function() { toggleIconGroups(); toggleShareUs(); }, false); 			
+			document.getElementById("buttonShareClose").addEventListener ("click", toggleShareUs, false);
 			
 			const iconCastToTV = document.getElementById("iconCastToTV");
 			if (castIsAvailable) {
@@ -721,7 +754,7 @@
 				iconCastToTV.remove();
 			}
 			
-			document.getElementById("buttonSupportUs").addEventListener ("click", function() { toggleAboutUs(); toggleOwnDonation(); }, false);
+			document.getElementById("buttonAboutUsSupportUs").addEventListener ("click", function() { toggleAboutUs(); toggleOwnDonation(); }, false);
 			document.getElementById("buttonDonateGO").addEventListener ("click", function() { toggleDonation(); goToDonation(); }, false);
 			document.getElementById("buttonDonateAboutUs").addEventListener ("click", function() { toggleDonation(); toggleAboutUs(); }, false);
 			document.getElementById("buttonDonateClose").addEventListener ("click", toggleDonation, false);
@@ -1063,6 +1096,18 @@
          		castToTVScreen.style.height = "0px";
          	}
 		 }
+		 
+         function toggleShareUs() {
+         	const shareUsScreen = document.getElementById('share');
+         	if (shareUsScreen.style.visibility == "hidden") {
+         		shareUsScreen.style.visibility = "visible";
+         		shareUsScreen.style.height = "fit-content";
+         		analytics.logEvent('option_click', { name: 'ShareUs'});
+         	} else {
+         		shareUsScreen.style.visibility = "hidden";
+         		shareUsScreen.style.height = "0px";
+         	}
+         };
 		 
          function toggleAboutUs() {
          	const aboutUsScreen = document.getElementById('aboutus');
@@ -1556,6 +1601,7 @@
 					<div title="Show/Hide launch state information" class="icon" id="iconLaunchState"><img src="Icons/launchState.png"/></div>
 					<div title="Show application donations information" class="icon" id="iconOwnDonation"><img src="Icons/donation.png"/></div>
 					<div title="Open CastToTV options" class="icon" id="iconCastToTV"><img src="Icons/castToTV.png"/></div>
+					<div title="Share Us" class="icon" id="iconShare"><img src="Icons/share.png"/></div>
 				  </div>
 				 
 			  </div>				   
@@ -1764,6 +1810,7 @@
 					<div title="Show/Hide launch state information" class="icon" id="iconLaunchState"><img src="Icons/launchState.png"/></div>
 					<div title="Show application donations information" class="icon" id="iconOwnDonation"><img src="Icons/donation.png"/></div>
 					<div title="Open CastToTV options" class="icon" id="iconCastToTV"><img src="Icons/castToTV.png"/></div>					
+					<div title="Share Us" class="icon" id="iconShare"><img src="Icons/share.png"/></div>
 				  </div>
 				 
 			  </div>				   
