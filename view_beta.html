@@ -17,10 +17,49 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" />
 		<script src="./js/maximize-select2-height.js"></script>
 		<link type="text/css" rel="stylesheet" href="select2_redefines.css">
-		
 		<link type="text/css" rel="stylesheet" href="main_beta.css">	 
    </head>     
    <body>
+		<!-- Cast -->
+		<script>
+		window['__onGCastApiAvailable'] = function(isAvailable) {
+		  if (isAvailable) {
+			console.log("Cast is available");			
+		  }
+		};
+		
+		initializeCastApi = function() {		
+			  var sessionRequest = new chrome.cast.SessionRequest("urn:x-cast:elricdog.github.io.spacexboard");
+			  var apiConfig = new chrome.cast.ApiConfig(sessionRequest, castSessionListener, castReceiverListener);
+			  chrome.cast.initialize(apiConfig, onCastInitSuccess, onCastError);		
+		};		
+		
+		function castSessionListener(e) {
+			console.log('castSessionListener', e);
+		}
+
+		function castReceiverListener(availability) {
+			console.log('castReceiverListener', availability);
+			if (availability) {
+				chrome.cast.requestSession(onCastSessionRequestSuccess, onCastError);
+			}
+		}		
+		
+		function onCastInitSuccess() {
+		  console.log('onCastInitSuccess');
+		}
+
+		function onCastSessionRequestSuccess(session) {
+			console.log('onCastSessionRequestSuccess', session);
+		}
+		
+		function onCastError(e) {
+		  console.log('onCastError', e);
+		}
+		
+		</script>
+		<script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
+		
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js"></script>
 		<script>
@@ -158,7 +197,7 @@
          <center>
             <h3>Cast to TV</h3>
             <p>
-			   UNDER CONSTRUCTION
+			   Press button below and select the TV do you want to cast streams.
             </p>
             <br>
             <button id="buttonCastToTV" class="myButton"><img src="./Icons/castToTV.png"/> Cast</button>
@@ -358,7 +397,7 @@
 		}		
 				
 		 function composeYouTubeLiveStreamURL(videoId, muteDefault) {
-			return "https://www.youtube.com/embed/"+videoId+"?autoplay=1&ref=0&mute="+muteDefault;
+			return "https://www.youtube.com/embed/"+videoId+"?autoplay=1&showinfo=0&modestbranding=0&ref=0&mute="+muteDefault;
 		 }
 		 function composeYouTubeChatURL(videoId) {
 			return "https://www.youtube.com/live_chat?is_popout=1&v="+videoId;
@@ -679,6 +718,7 @@
 			document.getElementById("buttonDonateClose").addEventListener ("click", toggleDonation, false);
 			document.getElementById("buttonOwnDonate").addEventListener ("click", function() { toggleOwnDonation(); goToOwnDonation(); }, false);
 			document.getElementById("buttonOwnDonateClose").addEventListener ("click", toggleOwnDonation, false);
+			document.getElementById("buttonCastToTV").addEventListener ("click", function() { toggleCastToTV(); startCastToTV(); }, false);			
 			document.getElementById("buttonCastToTVClose").addEventListener ("click", toggleCastToTV, false);
 
          	document.getElementById("iconRefreshCH1").addEventListener ("click", refreshCH1, false);
@@ -947,8 +987,8 @@
 			const selectOrigin = document.getElementById("selectCH"+id);		
 			var src = selectOrigin.options[selectOrigin.selectedIndex].value;
 			src = src.replace("https://www.youtube.com/embed/", "");
-			src = src.replace("?autoplay=1&ref=0&mute=0", "");
-			src = src.replace("?autoplay=1&ref=0&mute=1", "");
+			src = src.replace("?autoplay=1&showinfo=0&modestbranding=0&ref=0&mute=0", "");
+			src = src.replace("?autoplay=1&showinfo=0&modestbranding=0&ref=0&mute=1", "");
 			src = src.replace("https://www.youtube.com/live_chat?is_popout=1&v=", "");
 			console.log("Source of donation: " + src);
 			lastSelectedDonationVideoId = src;
@@ -998,6 +1038,11 @@
          	}
          };
          
+		 function startCastToTV() {
+			console.log("Initialize Cast Api");			
+			initializeCastApi();
+		}
+		 
 		 function toggleCastToTV() {
          	const castToTVScreen = document.getElementById('castToTV');
          	if (castToTVScreen.style.visibility == "hidden") {
