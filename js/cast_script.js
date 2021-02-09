@@ -4,8 +4,8 @@ var castReceiverContext = cast.framework.CastReceiverContext.getInstance();
 //castReceiverContext.setLoggerLevel(cast.framework.LoggerLevel.DEBUG);
 castReceiverContext.addCustomMessageListener(LOG_NAMESPACE, function (customEvent) {
 logElement.innerText += LOG_NAMESPACE + " - " + customEvent.data.message + "\n";
-logElement.innerText += LOG DATA+ " - " + customEvent.data + "\n";
-logElement.innerText += LOG EVENT+ " - " + customEvent + "\n";
+logElement.innerText += LOG_NAMESPACE+ " DATA - " + customEvent.data + "\n";
+logElement.innerText += LOG_NAMESPACE+ " EVENT - " + customEvent + "\n";
 console.log(LOG_NAMESPACE + " - " + customEvent.data.message);
 });
 var logElement = document.querySelector("#logger");
