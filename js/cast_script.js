@@ -33,7 +33,7 @@ function onYouTubeIframeAPIReady() {
        new YT.Player(item, {
            events: {
                'onReady': (event) => {
-                  event.target.playVideo();
+                  //event.target.playVideo();
                   event.target.mute();
                }
            }
