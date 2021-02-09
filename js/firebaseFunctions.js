@@ -272,3 +272,18 @@ function updateOptionsWithNewFeed(optionSelect, title, newURL) {
 		}
 	}			
 }
+
+function SpaceXBoard_getAllSources() {
+	var result = "[";
+	const optionSelect = document.getElementById("selectCH1");
+	for (var id in optionSelect.options) {
+		var el = optionSelect.options[id];
+		var title = el.title;
+		var value = el.value;
+		if ((title!=null) && (value!=null)) {
+			result += "{ title:'"+title+"', value:'"+value+"'},";
+		}
+	}			
+	result += "]";
+	return result;
+}
