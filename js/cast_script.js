@@ -3,8 +3,11 @@ var LOG_NAMESPACE = "urn:x-cast:elricdog.github.io.spacexboard.Log"
 var castReceiverContext = cast.framework.CastReceiverContext.getInstance();
 //castReceiverContext.setLoggerLevel(cast.framework.LoggerLevel.DEBUG);
 castReceiverContext.addCustomMessageListener(LOG_NAMESPACE, function (customEvent) {
-logElement.innerText += LOG_NAMESPACE + " - " + customEvent.data.message + "\n";
-console.log(LOG_NAMESPACE + " - " + customEvent.data.message);
+  logElement.innerText += LOG_NAMESPACE + " - " + customEvent.data.position + "\n";
+  logElement.innerText += LOG_NAMESPACE+ " DATA - " + customEvent.data.videoId + "\n";
+  logElement.innerText += LOG_NAMESPACE+ " EVENT - " + customEvent + "\n";
+  console.log(LOG_NAMESPACE + " - " + customEvent.data.message);
+  changeVideo(customEvent.data.position, customEvent.data.videoId, customEvent.data.mute);
 });
 var logElement = document.querySelector("#logger");
 logElement.innerText = "Logging Events\n\n";
@@ -25,15 +28,19 @@ var tag = document.createElement('script');
     var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
- function onYouTubeIframeAPIReady() {
-     document.querySelectorAll('.ytplayer').forEach((item) => {
-         new YT.Player(item, {
-             events: {
-                 'onReady': (event) => {
-                     event.target.playVideo();
-                     event.target.mute();
-                 }
-             }
-         })
-     })
- }
+function onYouTubeIframeAPIReady() {
+   document.querySelectorAll('.ytplayer').forEach((item) => {
+       new YT.Player(item, {
+           events: {
+               'onReady': (event) => {
+                  //event.target.playVideo();
+                  event.target.mute();
+               }
+           }
+       })
+   })
+}
+
+function changeVideo(position, videoId, isMute){
+  document.getElementById('ytplayer'+position).src = "https://www.youtube.com/embed/"+videoId+"?mute="+isMute+"&autoplay=1&enablejsapi=1&controls=0&loop=1&showinfo=0&rel=0"
+}
