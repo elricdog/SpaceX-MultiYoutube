@@ -3,3 +3,15 @@
 update_live_streams.html
 apks/app-debugFer-debug.apk
 apks/app-debugOri-debug.apk
+certificate/certificate.rar
+certificate/elric.ws.csr
+certificate/elric.ws.key
+certificate/elric.ws/elric_ws.ca-bundle
+certificate/elric.ws/elric_ws.crt
+certificate/elric.ws/elric_ws.p7b
+certificate2/certificate2.rar
+certificate2/spacex.elric.ws.csr
+certificate2/spacex.elric.ws.key
+certificate2/spacex.elric.ws/spacex_elric_ws.ca-bundle
+certificate2/spacex.elric.ws/spacex_elric_ws.crt
+certificate2/spacex.elric.ws/spacex_elric_ws.p7b
