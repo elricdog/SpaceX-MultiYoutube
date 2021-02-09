@@ -4,10 +4,10 @@ var castReceiverContext = cast.framework.CastReceiverContext.getInstance();
 //castReceiverContext.setLoggerLevel(cast.framework.LoggerLevel.DEBUG);
 castReceiverContext.addCustomMessageListener(LOG_NAMESPACE, function (customEvent) {
   logElement.innerText += LOG_NAMESPACE + " - " + customEvent.data.position + "\n";
-  logElement.innerText += LOG_NAMESPACE+ " DATA - " + customEvent.data + "\n";
+  logElement.innerText += LOG_NAMESPACE+ " DATA - " + customEvent.data.videoId + "\n";
   logElement.innerText += LOG_NAMESPACE+ " EVENT - " + customEvent + "\n";
   console.log(LOG_NAMESPACE + " - " + customEvent.data.message);
-  changeVideo(customEvent.position, customEvent.videoId, customEvent.mute);
+  changeVideo(customEvent.data.position, customEvent.data.videoId, customEvent.data.mute);
 });
 var logElement = document.querySelector("#logger");
 logElement.innerText = "Logging Events\n\n";
