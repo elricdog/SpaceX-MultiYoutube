@@ -273,7 +273,7 @@ function updateOptionsWithNewFeed(optionSelect, title, newURL) {
 	}			
 }
 
-function SpaceXBoard_getAllSources() {
+function SpaceXBoard_getAllSources(onlyVideoFeeds) {
 	var result = "[";
 	const optionSelect = document.getElementById("selectCH1");
 	for (var id in optionSelect.options) {
@@ -281,7 +281,14 @@ function SpaceXBoard_getAllSources() {
 		var title = el.title;
 		var value = el.value;
 		if ((title!=null) && (value!=null)) {
-			result += "{ title:'"+title+"', value:'"+value+"'},";
+			var id = "";
+			if (value.startsWith("https://www.youtube.com/embed/")) {
+				id = value;
+				id = id.replace("https://www.youtube.com/embed/", "");
+				id = id.replace("?autoplay=1&ref=0&mute=0", "");
+				id = id.replace("?autoplay=1&ref=0&mute=1", "");				
+			} else if (onlyVideoFeeds) continue;
+			result += "{ title:'"+title+"', value:'"+value+"', id:'"+id+"'},";
 		}
 	}			
 	result += "]";
