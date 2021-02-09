@@ -103,6 +103,7 @@
                Elric and Sworied and Berrgurt
             </p>
             <br>
+            <button id="buttonSupportUs" class="myButton2">Support Us</button>
             <button id="buttonAboutUsClose" class="myButton">Close</button>
 			<div id="linksToWeb"> 
 				<br>
@@ -115,6 +116,56 @@
 			</div>
          </center>
       </div>
+	  
+      <!-- Donation -->
+      <div id="donation" style="visibility:hidden; width: fit-content; height: fit-content;">
+         <center>
+            <h3>Donation Instructions</h3>
+            <p>
+			   This option is to donate to the Live Stream you have currently selected.<br>
+               Pressing GO button will redirect you to normal youtube web page of selected Live Stream.<br>
+			   Then, go to chat panel, subscribe, join and donate using the same icon <img src="./Icons/donation.png"/> you will find there.<br>
+			   <b>Please, support those guys that are making this great live videos that all comunity enjoy.</b><br>
+			   If after that you want to help us to improve SpaceXBoard, go to ABOUT US button and support us too.<br>
+            </p>
+            <br>			
+            <button id="buttonDonateGO" class="myButton2">GO to YOUTUBE</button>
+			<button id="buttonDonateAboutUs" class="myButton">About Us</button>
+			<button id="buttonDonateClose" class="myButton">Close</button>
+         </center>
+      </div>
+
+      <!-- OwnDonation -->
+      <div id="ownDonation" style="visibility:hidden; width: fit-content; height: fit-content;">
+         <center>
+            <h3>Support SpaceXBoard</h3>
+            <p>
+				We start this project to help follow live streams.<br>
+				We dedicate our free time and we enjoy doing it.<br>
+				We don't want money, we want that SpaceXBoard success and help the comunity with this tool.<br>
+				<b>Talk about SpaceXBoard and tell your friends to use it</b>.<br>
+				After all this, if you still want to support our development, use the button below.<br>
+				We will invest all in SpaceXBoard to make it better every day.<br>
+            </p>
+            <br>
+			<button id="buttonOwnDonate" class="myButton2">Donate</button>
+			<button id="buttonOwnDonateClose" class="myButton">Close</button>
+         </center>
+      </div>
+
+      <!-- CastToTV -->
+      <div id="castToTV" style="visibility:hidden; width: fit-content; height: fit-content;">
+         <center>
+            <h3>Cast to TV</h3>
+            <p>
+			   UNDER CONSTRUCTION
+            </p>
+            <br>
+            <button id="buttonCastToTV" class="myButton"><img src="./Icons/castToTV.png"/> Cast</button>
+			<button id="buttonCastToTVClose" class="myButton">Close</button>
+         </center>
+      </div>
+	  
       <!-- To read local disk files -->
       <div id="load" style="visibility:hidden; width: fit-content; height: fit-content;">
          <center>
@@ -133,6 +184,7 @@
          let last5thColumnSplitSizes = "83, 17";	
          let isMobileFlag = null;
 		 let lastOrientationMode;
+		 let lastSelectedDonationVideoId = null;
          
 		function isBlank(str) {
 			return (!str || /^\s*$/.test(str));
@@ -240,17 +292,39 @@
 			
 			console.log("Update Source Live Icon at "+id+" with source: " + source);
 			var liveSymbol = document.getElementById("isLiveCH" + id);
+			var chatSymbol = document.getElementById("liveChatCH" + id);
+			var donationSymbol = document.getElementById("liveDonationCH" + id);				
 			if (liveSymbol!=null) {
 				if (isSourceLiveNow(source)) {
 					console.log("Is Live");					
 					liveSymbol.style.visibility = "visible";
 					liveSymbol.style.width = "28px";
 					liveSymbol.style.minWidth = "28px";				
+					if (chatSymbol!=null) {
+						chatSymbol.style.visibility = "visible";
+						chatSymbol.style.width = "28px";
+						chatSymbol.style.minWidth = "28px";				
+					}
+					if (donationSymbol!=null) {
+						donationSymbol.style.visibility = "visible";
+						donationSymbol.style.width = "28px";
+						donationSymbol.style.minWidth = "28px";
+					}
 				} else {
 					console.log("Is NOT Live");
 					liveSymbol.style.visibility = "hidden";
 					liveSymbol.style.width = "0px";
 					liveSymbol.style.minWidth = "0px";
+					if (chatSymbol!=null) {
+						chatSymbol.style.visibility = "hidden";
+						chatSymbol.style.width = "0px";
+						chatSymbol.style.minWidth = "0px";				
+					}
+					if (donationSymbol!=null) {
+						donationSymbol.style.visibility = "hidden";
+						donationSymbol.style.width = "0px";
+						donationSymbol.style.minWidth = "0px";
+					}
 				}
 			}
 		}
@@ -276,6 +350,8 @@
 						updateSourceLiveNow(3, iframeCH3.src);					
 						const iframeCH4 = document.getElementById("iframeCH4");
 						updateSourceLiveNow(4, iframeCH4.src);
+						const iframeCH5 = document.getElementById("iframeCH5");
+						updateSourceLiveNow(5, iframeCH5.src);
 					}					
 				}
 			}
@@ -285,7 +361,7 @@
 			return "https://www.youtube.com/embed/"+videoId+"?autoplay=1&ref=0&mute="+muteDefault;
 		 }
 		 function composeYouTubeChatURL(videoId) {
-			return "https://www.youtube.com/live_chat?is_popout=1&v="+videoId+"&embed_domain=elricdog.github.io";
+			return "https://www.youtube.com/live_chat?is_popout=1&v="+videoId;
 		 }
 		
 			function setSourceToElementiFrame(iFrameId, options, index) {
@@ -301,9 +377,7 @@
 				var select = document.getElementById("selectCH" + id);
 				select.title = title;
 				
-				if (iFrameId!="iframeCH5") {				
-					updateSourceLiveNow(id, source);
-				}
+				updateSourceLiveNow(id, source);
 			}
 		
 			function PopulateSelectionChannels(select, channels) {
@@ -464,7 +538,7 @@
 			  // Chats
 			  "CHAT":"GROUP",
 			  "NASASpaceflight":composeYouTubeChatURL("Ty5l9ZxsG9M"),
-			  "LabPadre":composeYouTubeChatURL("Ky5l9ZxsG9M"),
+			  "LabPadre - Nerdle Cam 4K":composeYouTubeChatURL("Ky5l9ZxsG9M"),
 			  "Everyday Astronaut":composeYouTubeChatURL("QJ6YN5upGH0"),
 			  "SpaceXStorm (Castellano)":composeYouTubeChatURL("39T-NWgFtME"),
 			  "Frontera Espacial (Castellano)":composeYouTubeChatURL("uVMXkl-i7l8"),
@@ -596,12 +670,33 @@
          	document.getElementById("iconHelp").addEventListener ("click", function() { toggleIconGroups(); openHelp(); }, false);
          	document.getElementById("iconRefreshApp").addEventListener ("click", function() { toggleIconGroups(); refreshApp(); }, false);		
 			document.getElementById("iconEndRSS").addEventListener ("click", function() { launchGoToMars(); }, false); 
+			document.getElementById("iconOwnDonation").addEventListener ("click", function() { toggleIconGroups(); toggleOwnDonation(); }, false); 
+			document.getElementById("iconCastToTV").addEventListener ("click", function() { toggleIconGroups(); toggleCastToTV(); }, false); 
+			
+			document.getElementById("buttonSupportUs").addEventListener ("click", function() { toggleAboutUs(); toggleOwnDonation(); }, false);
+			document.getElementById("buttonDonateGO").addEventListener ("click", function() { toggleDonation(); goToDonation(); }, false);
+			document.getElementById("buttonDonateAboutUs").addEventListener ("click", function() { toggleDonation(); toggleAboutUs(); }, false);
+			document.getElementById("buttonDonateClose").addEventListener ("click", toggleDonation, false);
+			document.getElementById("buttonOwnDonate").addEventListener ("click", function() { toggleOwnDonation(); goToOwnDonation(); }, false);
+			document.getElementById("buttonOwnDonateClose").addEventListener ("click", toggleOwnDonation, false);
+			document.getElementById("buttonCastToTVClose").addEventListener ("click", toggleCastToTV, false);
 
          	document.getElementById("iconRefreshCH1").addEventListener ("click", refreshCH1, false);
          	document.getElementById("iconRefreshCH2").addEventListener ("click", refreshCH2, false);
          	document.getElementById("iconRefreshCH3").addEventListener ("click", refreshCH3, false);
          	document.getElementById("iconRefreshCH4").addEventListener ("click", refreshCH4, false);
          	document.getElementById("iconRefreshCH5").addEventListener ("click", refreshCH5, false);
+
+         	document.getElementById("liveChatCH1").addEventListener ("click", function() { gotToLiveChat(1); }, false);
+         	document.getElementById("liveChatCH2").addEventListener ("click", function() { gotToLiveChat(2); }, false);
+         	document.getElementById("liveChatCH3").addEventListener ("click", function() { gotToLiveChat(3); }, false);
+         	document.getElementById("liveChatCH4").addEventListener ("click", function() { gotToLiveChat(4); }, false);         	
+			
+			document.getElementById("liveDonationCH1").addEventListener ("click", function() { openDonation(1); }, false);
+			document.getElementById("liveDonationCH2").addEventListener ("click", function() { openDonation(2); }, false);
+			document.getElementById("liveDonationCH3").addEventListener ("click", function() { openDonation(3); }, false);
+			document.getElementById("liveDonationCH4").addEventListener ("click", function() { openDonation(4); }, false);
+			document.getElementById("liveDonationCH5").addEventListener ("click", function() { openDonation(5); }, false);
          			
 			if (isMobile()) {
 				var options = {
@@ -703,6 +798,22 @@
 				select3.style.fontSize = "11px";
 				select4.style.fontSize = "11px";
 				select5.style.fontSize = "11px";
+				
+				document.getElementById("aboutus").style.fontSize = "12px";
+				document.getElementById("donation").style.fontSize = "12px";
+				document.getElementById("ownDonation").style.fontSize = "12px";
+				document.getElementById("contact").style.fontSize = "12px";
+				document.getElementById("castToTV").style.fontSize = "12px";
+				document.getElementById("load").style.fontSize = "12px";
+				
+				var cols = document.getElementsByClassName('myButton');
+				for(i = 0; i < cols.length; i++) {
+					cols[i].style.fontSize = "14px";
+				}				
+				var cols = document.getElementsByClassName('myButton2');
+				for(i = 0; i < cols.length; i++) {
+					cols[i].style.fontSize = "14px";
+				}				
 				
 				setLaunchState(true);
          		toggleTimeGroups();			
@@ -810,6 +921,39 @@
          	var iframe = document.getElementById(id);
          	iframe.src = iframe.src;
          }
+		 
+		 function gotToLiveChat(id) {
+         	const select = document.getElementById("selectCH5");	
+		    const selectOrigin = document.getElementById("selectCH"+id);		
+			const title = selectOrigin.options[selectOrigin.selectedIndex].text;
+         	const selectedIndex = indexMatchingText(select, title);
+			var event = new Event('change');
+			select.selectedIndex = selectedIndex;
+			select.dispatchEvent(event);
+			set5thColumn(true, last5thColumnSplitSizes);
+		 }
+		 
+		 function goToDonation() {
+			const url = "https://www.youtube.com/watch?v=" + lastSelectedDonationVideoId;
+			window.open(url, '_blank');
+		 }
+
+		 function goToOwnDonation() {
+			const url = "https://www.paypal.com/donate?business=XDTVHXDJZLWR6&item_name=Improve+SpaceXBoard+app&currency_code=EUR";
+			window.open(url, '_blank');
+		 }
+		 
+		 function openDonation(id) {
+			const selectOrigin = document.getElementById("selectCH"+id);		
+			var src = selectOrigin.options[selectOrigin.selectedIndex].value;
+			src = src.replace("https://www.youtube.com/embed/", "");
+			src = src.replace("?autoplay=1&ref=0&mute=0", "");
+			src = src.replace("?autoplay=1&ref=0&mute=1", "");
+			src = src.replace("https://www.youtube.com/live_chat?is_popout=1&v=", "");
+			console.log("Source of donation: " + src);
+			lastSelectedDonationVideoId = src;
+			toggleDonation();
+		 }
                   
          function openHelp() {
          	const select3 = document.getElementById("selectCH3");
@@ -854,6 +998,18 @@
          	}
          };
          
+		 function toggleCastToTV() {
+         	const castToTVScreen = document.getElementById('castToTV');
+         	if (castToTVScreen.style.visibility == "hidden") {
+         		castToTVScreen.style.visibility = "visible";
+         		castToTVScreen.style.height = "fit-content";
+         		analytics.logEvent('option_click', { name: 'CastToTV'});
+         	} else {
+         		castToTVScreen.style.visibility = "hidden";
+         		castToTVScreen.style.height = "0px";
+         	}
+		 }
+		 
          function toggleAboutUs() {
          	const aboutUsScreen = document.getElementById('aboutus');
          	if (aboutUsScreen.style.visibility == "hidden") {
@@ -863,6 +1019,30 @@
          	} else {
          		aboutUsScreen.style.visibility = "hidden";
          		aboutUsScreen.style.height = "0px";
+         	}
+         };
+
+         function toggleOwnDonation() {
+         	const donationScreen = document.getElementById('ownDonation');
+         	if (donationScreen.style.visibility == "hidden") {
+         		donationScreen.style.visibility = "visible";
+         		donationScreen.style.height = "fit-content";
+         		analytics.logEvent('option_click', { name: 'OwnDonation'});
+         	} else {
+         		donationScreen.style.visibility = "hidden";
+         		donationScreen.style.height = "0px";
+         	}
+         };
+
+         function toggleDonation() {
+         	const donationScreen = document.getElementById('donation');
+         	if (donationScreen.style.visibility == "hidden") {
+         		donationScreen.style.visibility = "visible";
+         		donationScreen.style.height = "fit-content";
+         		analytics.logEvent('option_click', { name: 'Donation'});
+         	} else {
+         		donationScreen.style.visibility = "hidden";
+         		donationScreen.style.height = "0px";
          	}
          };
          
@@ -1320,6 +1500,8 @@
 					<div title="Show/Hide last update information" class="icon" id="iconLastUpdate"><img src="Icons/lastUpdate.png"/></div>
 					<div title="Show/Hide visitors information" class="icon" id="iconVisitors"><img src="Icons/visitors.png"/></div>
 					<div title="Show/Hide launch state information" class="icon" id="iconLaunchState"><img src="Icons/launchState.png"/></div>
+					<div title="Show application donations information" class="icon" id="iconOwnDonation"><img src="Icons/donation.png"/></div>
+					<div title="Open CastToTV options" class="icon" id="iconCastToTV"><img src="Icons/castToTV.png"/></div>
 				  </div>
 				 
 			  </div>				   
@@ -1384,6 +1566,8 @@
                               <div class="stub">
                                  <select id="selectCH1" class="channelSelect" value="">
                                  </select>
+								 <div title="Donate to this live" class="icon" id="liveDonationCH1" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/donation.png"/></div>
+								 <div title="Live Chat" class="icon" id="liveChatCH1" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/chat.png"/></div>
 								 <div title="Is Live" class="icon2" id="isLiveCH1" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                                  <div title="Refresh View 1" class="icon" id="iconRefreshCH1"><img src="Icons/refresh.png"/></div>
                               </div>
@@ -1405,6 +1589,8 @@
                               <div class="stub">
                                  <select id="selectCH2" class="channelSelect" value="">
                                  </select>
+								 <div title="Donate to this live" class="icon" id="liveDonationCH2" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/donation.png"/></div>
+								 <div title="Live Chat" class="icon" id="liveChatCH2" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/chat.png"/></div>
 								 <div title="Is Live" class="icon2" id="isLiveCH2" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                                  <div title="Refresh View 2" class="icon" id="iconRefreshCH2"><img src="Icons/refresh.png"/></div>
                               </div>
@@ -1428,6 +1614,8 @@
                               <div class="stub">
                                  <select id="selectCH3" class="channelSelect" value="">
                                  </select>
+								 <div title="Donate to this live" class="icon" id="liveDonationCH3" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/donation.png"/></div>
+								 <div title="Live Chat" class="icon" id="liveChatCH3" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/chat.png"/></div>
 								 <div title="Is Live" class="icon2" id="isLiveCH3" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                                  <div title="Refresh View 3" class="icon" id="iconRefreshCH3"><img src="Icons/refresh.png"/></div>
                               </div>
@@ -1449,6 +1637,8 @@
                               <div class="stub">
                                  <select id="selectCH4" class="channelSelect" value="">
                                  </select>
+								 <div title="Donate to this live" class="icon" id="liveDonationCH4" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/donation.png"/></div>
+								 <div title="Live Chat" class="icon" id="liveChatCH4" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/chat.png"/></div>
 								 <div title="Is Live" class="icon2" id="isLiveCH4" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                                  <div title="Refresh View 4" class="icon" id="iconRefreshCH4"><img src="Icons/refresh.png"/></div>
                               </div>
@@ -1471,6 +1661,8 @@
                         <div class="stub">
                            <select id="selectCH5" class="channelSelect5th" value="">
                            </select>
+				           <div title="Donate to this live" class="icon" id="liveDonationCH5" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/donation.png"/></div>
+						   <div title="Is Live" class="icon2" id="isLiveCH5" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                            <div title="Refresh" class="icon" id="iconRefreshCH5"><img src="Icons/refresh.png"/></div>
                         </div>
                      </div>
@@ -1516,6 +1708,8 @@
 					<div title="Show/Hide last update information" class="icon" id="iconLastUpdate"><img src="Icons/lastUpdate.png"/></div>
 					<div title="Show/Hide visitors information" class="icon" id="iconVisitors"><img src="Icons/visitors.png"/></div>
 					<div title="Show/Hide launch state information" class="icon" id="iconLaunchState"><img src="Icons/launchState.png"/></div>
+					<div title="Show application donations information" class="icon" id="iconOwnDonation"><img src="Icons/donation.png"/></div>
+					<div title="Open CastToTV options" class="icon" id="iconCastToTV"><img src="Icons/castToTV.png"/></div>					
 				  </div>
 				 
 			  </div>				   
@@ -1580,6 +1774,8 @@
                               <div class="stub">
                                  <select id="selectCH1" class="channelSelect" value="">
                                  </select>
+								 <div title="Donate to this live" class="icon" id="liveDonationCH1" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/donation.png"/></div>
+								 <div title="Live Chat" class="icon" id="liveChatCH1" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/chat.png"/></div>
 								 <div title="Is Live" class="icon2" id="isLiveCH1" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                                  <div title="Refresh View 1" class="icon" id="iconRefreshCH1"><img src="Icons/refresh.png"/></div>
                               </div>
@@ -1602,6 +1798,8 @@
                               <div class="stub">
                                  <select id="selectCH2" class="channelSelect" value="">
                                  </select>
+								 <div title="Donate to this live" class="icon" id="liveDonationCH2" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/donation.png"/></div>
+								 <div title="Live Chat" class="icon" id="liveChatCH2" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/chat.png"/></div>
 								 <div title="Is Live" class="icon2" id="isLiveCH2" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                                  <div title="Refresh View 2" class="icon" id="iconRefreshCH2"><img src="Icons/refresh.png"/></div>
                               </div>
@@ -1624,6 +1822,8 @@
                               <div class="stub">
                                  <select id="selectCH3" class="channelSelect" value="">
                                  </select>
+								 <div title="Donate to this live" class="icon" id="liveDonationCH3" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/donation.png"/></div>
+								 <div title="Live Chat" class="icon" id="liveChatCH3" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/chat.png"/></div>
 								 <div title="Is Live" class="icon2" id="isLiveCH3" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                                  <div title="Refresh View 3" class="icon" id="iconRefreshCH3"><img src="Icons/refresh.png"/></div>
                               </div>
@@ -1646,6 +1846,8 @@
                               <div class="stub">
                                  <select id="selectCH4" class="channelSelect" value="">
                                  </select>
+								 <div title="Donate to this live" class="icon" id="liveDonationCH4" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/donation.png"/></div>
+								 <div title="Live Chat" class="icon" id="liveChatCH4" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/chat.png"/></div>
 								 <div title="Is Live" class="icon2" id="isLiveCH4" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                                  <div title="Refresh View 4" class="icon" id="iconRefreshCH4"><img src="Icons/refresh.png"/></div>
                               </div>
@@ -1668,6 +1870,8 @@
                         <div class="stub">
                            <select id="selectCH5" class="channelSelect5th" value="">
                            </select>
+						   <div title="Donate to this live" class="icon" id="liveDonationCH5" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/donation.png"/></div>
+						   <div title="Is Live" class="icon2" id="isLiveCH5" style="visibility:hidden; width:0px; min-width:0px"><img src="Icons/isLive.png"/></div>
                            <div title="Refresh" class="icon" id="iconRefreshCH5"><img src="Icons/refresh.png"/></div>
                         </div>
                      </div>

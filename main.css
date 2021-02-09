@@ -86,56 +86,6 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-/*
-select:focus > option:hover { background: #2072A8 !important; opacity: 1.0;}
-select:focus > option:checked { background: #003268 !important; opacity: 1.0;}
-
-select:hover {
-	border: 1px solid #A7A9AC;
-}
-
-.channelSelect {
-	cursor: pointer;
-	border-spacing: 0px;
-	padding: 0px;
-	margin: 0px;
-	background-color: #005288;
-	color: white;
-	outline: none;
-	left: 0px;
-	top: 0px;
-	width: 165px;
-	height: 28px;
-	border: 0px;
-	font-size: 12px;
-}
-
-.channelSelect5th {
-	cursor: pointer;
-	border-spacing: 0px;
-	padding: 0px;
-	margin: 0px;
-	background-color: #005288;
-	color: white;
-	outline: none;
-	left: 0px;
-	top: 0px;
-	width: calc(100% - 28px);
-	height: 28px;
-	border: 0px;
-	font-size: 12px;
-}
-
-.channelSelect:focus {
-	background-color: #005288;
-}
-
-.channelSelect5th:focus {
-	background-color: #005288;
-	
-}
-*/
-
 #optionsIcons {
 	left:calc(100% - 56px);
 	top:28px;
@@ -169,6 +119,10 @@ select:hover {
 
 .icon:hover {
 	border: 1px solid #A7A9AC;
+}
+
+.icon2 {	
+	cursor: auto;
 }
 
 .iconLabel {
@@ -308,6 +262,34 @@ select:hover {
 	overflow: auto;
 }
 
+#donation, #ownDonation {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 5px;
+	z-index: 300000;
+	visibility: hidden;
+	border: 1px solid #003268;
+	background-color: #005288;
+	color: white;
+	overflow: auto;
+}
+
+#castToTV {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 5px;
+	z-index: 300000;
+	visibility: hidden;
+	border: 1px solid #003268;
+	background-color: #005288;
+	color: white;
+	overflow: auto;
+}
+
 #load {
 	position: fixed;
 	top: 50%;
@@ -339,6 +321,27 @@ select:hover {
 }
 
 .myButton:active {
+	position: relative;
+	top: 1px;
+}
+
+.myButton2 {
+	background-color: #DAA520;
+	border: 0px;
+	display: inline-block;
+	cursor: pointer;
+	color: black;
+	font-family: Arial;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 8px 14px;
+}
+
+.myButton2:hover {
+	background-color: #FFD700;
+}
+
+.myButton2:active {
 	position: relative;
 	top: 1px;
 }
