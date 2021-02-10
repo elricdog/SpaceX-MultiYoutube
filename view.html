@@ -806,9 +806,9 @@
 			document.getElementById("buttonLogsClose").addEventListener ("click", toggleLogs, false);
 			
 			const iconCastToTV = document.getElementById("iconCastToTV");					
-			console.log(JSON.stringify(chrome));
+			//console.log(JSON.stringify(chrome));
 			castIsAvailable = chrome.cast.isAvailable;
-			castIsAvailable = true; // force for testing
+			//castIsAvailable = true; // force for testing
 			if (castIsAvailable) {
 				console.log("Cast is available");			
 				iconCastToTV.addEventListener ("click", function() { toggleIconGroups(); toggleCastToTV(); }, false); 
