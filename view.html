@@ -147,11 +147,12 @@
                <br>
                <br>
                Elric and Sworied and Berrgurt
-            </p>
+            </p>			
             <br>
             <button id="buttonAboutUsSupportUs" class="myButton2">Support Us</button>
             <button id="buttonAboutUsShare" class="myButton">Share Us</button>
             <button id="buttonAboutUsClose" class="myButton">Close</button>
+			<div id="lastUpdateAboutUs"></div>
 			<div id="linksToWeb"> 
 				<br>
 				<br>Link to this web:<br>
@@ -1105,10 +1106,13 @@
 			}
 			
          	const lastUpdate = document.getElementById("lastUpdate");
+			const lastUpdateAboutUs = document.getElementById("lastUpdateAboutUs");
          	var lastModifiedDateString = fetchHeader(location.href,'Last-Modified');
          	var lastModifiedDate = new Date();
          	lastModifiedDate.setTime(Date.parse(lastModifiedDateString));
          	lastUpdate.innerHTML = lastModifiedDate.toLocaleString();
+			var ver = lastModifiedDate.getFullYear().toString()+(lastModifiedDate.getMonth()+1).toString().padStart(2, "0")+lastModifiedDate.getDate().toString().padStart(2, "0") + " " +lastModifiedDate.getHours().toString().padStart(2, "0")+lastModifiedDate.getMinutes().toString().padStart(2, "0")+lastModifiedDate.getSeconds().toString().padStart(2, "0");
+			lastUpdateAboutUs.innerHTML = "version: " + ver;
          	console.log("LastUpdate of sourcecode: "+lastUpdate.innerHTML);
          	
 			// Add one view more
