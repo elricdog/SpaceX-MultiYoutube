@@ -32,16 +32,21 @@
    </head>     
    <body>
 		<!-- Cast -->
-		<script>
+		<script>		
 		let castIsAvailable = false;
-		window['__onGCastApiAvailable'] = function(isAvailable) {
-		  if (isAvailable) {
+		if (isMobile()) {		
 			console.log("Cast is available");			
 			castIsAvailable = true;
-		  } else {
-			console.log("Cast is not available");
-		  }
-		};		
+		} else {
+			window['__onGCastApiAvailable'] = function(isAvailable) {
+			  if (isAvailable) {
+				console.log("Cast is available");			
+				castIsAvailable = true;
+			  } else {
+				console.log("Cast is not available");
+			  }
+			};		
+		}
 		initializeCastApi = function() {		
 			if (isMobile()) {
 				var options = {};
