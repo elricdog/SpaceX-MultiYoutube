@@ -238,6 +238,7 @@
             </p>
             <br>
             <button id="buttonCastToTV" class="myButton"><img src="./Icons/castToTV.png"/> Cast</button>
+			<button id="buttonMirrorToTV" class="myButton2"><img src="./Icons/mirrorToTV.png"/> Mirror</button>
 			<button id="buttonCastToTVClose" class="myButton">Close</button>
          </center>
       </div>
@@ -339,20 +340,27 @@
       	 
 		<!-- Cast -->
 		<script>		
-		let castIsAvailable = false;
+		let castIsAvailable = false;		
 		let castSession = null;
 				
-		initializeCastApi = function() {		
+		initializeCastApi = function(mirror) {		
 			if (isMobile()) {				
 				var sessionRequest = new chrome.cast.SessionRequest("BF724EE3");
 				var apiConfig = new chrome.cast.ApiConfig(sessionRequest, castSessionListener, castReceiverListener);
 				chrome.cast.initialize(apiConfig, onCastInitSuccess, onCastError);						
 				console.log("Cast on mobile");
 			} else {
-				var sessionRequest = new chrome.cast.SessionRequest("urn:x-cast:elricdog.github.io.spacexboard");
-				var apiConfig = new chrome.cast.ApiConfig(sessionRequest, castSessionListener, castReceiverListener);
-				chrome.cast.initialize(apiConfig, onCastInitSuccess, onCastError);		
-				console.log("Cast mirror on chrome browser");
+				if (mirror) {				
+					var sessionRequest = new chrome.cast.SessionRequest("urn:x-cast:elricdog.github.io.spacexboard");
+					var apiConfig = new chrome.cast.ApiConfig(sessionRequest, castSessionListener, castReceiverListener);
+					chrome.cast.initialize(apiConfig, onCastInitSuccess, onCastError);		
+					console.log("Cast mirror on chrome browser");
+				} else {
+					var sessionRequest = new chrome.cast.SessionRequest("BF724EE3");
+					var apiConfig = new chrome.cast.ApiConfig(sessionRequest, castSessionListener, castReceiverListener);
+					chrome.cast.initialize(apiConfig, onCastInitSuccess, onCastError);						
+					console.log("Cast from chrome browser");
+				}
 			}
 		};				
 		function castSessionListener(e) {
@@ -801,28 +809,27 @@
 			document.getElementById("iconOwnDonation").addEventListener ("click", function() { toggleIconGroups(); toggleOwnDonation(); }, false); 			
 			document.getElementById("iconShare").addEventListener ("click", function() { toggleIconGroups(); toggleShareUs(); }, false); 			
 			document.getElementById("buttonShareClose").addEventListener ("click", toggleShareUs, false);
-
 			document.getElementById("iconLogs").addEventListener ("click", function() { toggleIconGroups(); toggleLogs(); }, false); 			
 			document.getElementById("buttonLogsClose").addEventListener ("click", toggleLogs, false);
+			document.getElementById("buttonCastToTV").addEventListener ("click", function() { startCastToTV(false); }, false);				
+			document.getElementById("buttonMirrorToTV").addEventListener ("click", function() { startCastToTV(true); }, false);				
+			document.getElementById("buttonCastToTVClose").addEventListener ("click", toggleCastToTV, false);				
+			iconCastToTV.addEventListener ("click", function() { toggleIconGroups(); toggleCastToTV(); }, false); 
 			
-			const iconCastToTV = document.getElementById("iconCastToTV");					
-			//console.log(JSON.stringify(chrome));
-			castIsAvailable = chrome.cast.isAvailable;
-			//castIsAvailable = true; // force for testing
-			if (castIsAvailable) {
-				console.log("Cast is available");			
-				iconCastToTV.addEventListener ("click", function() { toggleIconGroups(); toggleCastToTV(); }, false); 
-				document.getElementById("buttonCastToTV").addEventListener ("click", function() { toggleCastToTV(); startCastToTV(); }, false);			
-				document.getElementById("buttonCastToTVClose").addEventListener ("click", toggleCastToTV, false);				
-				if (isMobile()) {
-					document.getElementById("castToTV").style.fontSize = "12px";				
+			var intervalCheckCastToTVAvailable = window.setInterval(function() {
+				const iconCastToTV = document.getElementById("iconCastToTV");								
+				const newAvailableStatus = chrome.cast.isAvailable;
+				if (castIsAvailable != newAvailableStatus) {
+					castIsAvailable = newAvailableStatus;				
+					if (castIsAvailable) {
+						console.log("Cast is available");
+						iconCastToTV.style.display="block";												
+					} else {				
+						console.log("Cast is not available");
+						iconCastToTV.style.display="none";
+					}
 				}
-			} else {				
-				console.log("Cast is not available");
-				iconCastToTV.remove();
-				const cast = document.getElementById("castToTV");
-				cast.remove();
-			}
+			}, 5000);
 			
 			document.getElementById("buttonAboutUsSupportUs").addEventListener ("click", function() { toggleAboutUs(); toggleOwnDonation(); }, false);
 			document.getElementById("buttonDonateGO").addEventListener ("click", function() { toggleDonation(); goToDonation(); }, false);
@@ -937,6 +944,8 @@
 				const extendedContactMessage = document.getElementById("extendedContactMessage");				
 				extendedContactMessage.remove();
 				
+				document.getElementById("buttonMirrorToTV").remove();
+				
 				select1.style.width = "100px";				
 				select2.style.width = "100px";
 				select3.style.width = "100px";
@@ -954,6 +963,9 @@
 				document.getElementById("ownDonation").style.fontSize = "12px";
 				document.getElementById("contact").style.fontSize = "12px";				
 				document.getElementById("load").style.fontSize = "12px";
+				document.getElementById("share").style.fontSize = "12px";
+				document.getElementById("castToTV").style.fontSize = "12px";				
+				document.getElementById("logs").style.fontSize = "12px";
 				
 				var cols = document.getElementsByClassName('myButton');
 				for(i = 0; i < cols.length; i++) {
@@ -1147,9 +1159,11 @@
          	}
          };
          
-		 function startCastToTV() {
-			console.log("Initialize Cast Api");			
-			initializeCastApi();
+		 function startCastToTV(mirror) {
+			if (castIsAvailable) {
+				console.log("Initialize Cast Api");			
+				initializeCastApi(mirror);
+			}
 		}
 		 
 		 function toggleCastToTV() {
@@ -1679,7 +1693,7 @@
 					<div title="Show/Hide visitors information" class="icon" id="iconVisitors"><img src="Icons/visitors.png"/></div>
 					<div title="Show/Hide launch state information" class="icon" id="iconLaunchState"><img src="Icons/launchState.png"/></div>
 					<div title="Show application donations information" class="icon" id="iconOwnDonation"><img src="Icons/donation.png"/></div>
-					<div title="Open CastToTV options" class="icon" id="iconCastToTV"><img src="Icons/castToTV.png"/></div>
+					<div title="Open CastToTV options" class="icon" id="iconCastToTV" style="display:none;"><img src="Icons/castToTV.png"/></div>
 					<div title="Share Us" class="icon" id="iconShare"><img src="Icons/share.png"/></div>
 					<div title="Logs" class="icon" id="iconLogs"><img src="Icons/logs.png"/></div>
 				  </div>
@@ -1889,7 +1903,7 @@
 					<div title="Show/Hide visitors information" class="icon" id="iconVisitors"><img src="Icons/visitors.png"/></div>
 					<div title="Show/Hide launch state information" class="icon" id="iconLaunchState"><img src="Icons/launchState.png"/></div>
 					<div title="Show application donations information" class="icon" id="iconOwnDonation"><img src="Icons/donation.png"/></div>
-					<div title="Open CastToTV options" class="icon" id="iconCastToTV"><img src="Icons/castToTV.png"/></div>					
+					<div title="Open CastToTV options" class="icon" id="iconCastToTV" style="display:none;"><img src="Icons/castToTV.png"/></div>					
 					<div title="Share Us" class="icon" id="iconShare"><img src="Icons/share.png"/></div>
 					<div title="Logs" class="icon" id="iconLogs"><img src="Icons/logs.png"/></div>
 				  </div>
