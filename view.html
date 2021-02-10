@@ -511,7 +511,7 @@
 		}		
 
 		let tokenYoutubeStarts = "https://www.youtube-nocookie.com/embed/";
-		const tokenYoutubeExtras = "&autohide=1&cc_load_policy=1&modestbranding=1&fs=0&showinfo=0&rel=0&iv_load_policy=3&ref=0&controls=1&enablejsapi";
+		const tokenYoutubeExtras = "&autohide=1&cc_load_policy=1&modestbranding=1&fs=0&showinfo=0&rel=0&iv_load_policy=3&ref=0&controls=1&enablejsapi=1";
 					
 		function getVideoIdFromSource(source) {
 			var id = source;
@@ -956,6 +956,7 @@
 			$('#selectCH3').change(function(){ setSourceToElementiFrame('iframeCH3', select3.options, select3.selectedIndex) });
 			$('#selectCH4').change(function(){ setSourceToElementiFrame('iframeCH4', select4.options, select4.selectedIndex) });
 			$('#selectCH5').change(function(){ setSourceToElementiFrame('iframeCH5', select5.options, select5.selectedIndex) });		
+						
          	var event = new Event('change');
          	select1.selectedIndex = indexMatchingText(select1, "NASASpaceflight");
          	select2.selectedIndex = indexMatchingText(select2, "LabPadre - Nerdle Cam 4K");
