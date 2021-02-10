@@ -355,16 +355,18 @@
 			};		
 		}
 		initializeCastApi = function() {		
-			if (isMobile()) {
+			if (isMobile()) {				
 				var options = {};
 			    options.receiverApplicationId = 'BF724EE3';
 			    options.autoJoinPolicy = chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED;
 			    options.androidReceiverCompatible = true;
 				cast.framework.CastContext.getInstance().setOptions(options);			
+				console.log("Cast on mobile");
 			} else {
 				var sessionRequest = new chrome.cast.SessionRequest("urn:x-cast:elricdog.github.io.spacexboard");
 				var apiConfig = new chrome.cast.ApiConfig(sessionRequest, castSessionListener, castReceiverListener);
 				chrome.cast.initialize(apiConfig, onCastInitSuccess, onCastError);		
+				console.log("Cast mirror on chrome browser");
 			}
 		};				
 		function castSessionListener(e) {
