@@ -509,18 +509,22 @@
 				}
 			}
 		}		
-				
+
+		let tokenYoutubeStarts = "https://www.youtube-nocookie.com/embed/";
+		const tokenYoutubeExtras = "&autohide=1&cc_load_policy=1&modestbranding=1&fs=0&showinfo=0&rel=0&iv_load_policy=3&ref=0&controls=1&enablejsapi";
+					
 		function getVideoIdFromSource(source) {
 			var id = source;
-			id = id.replace("https://www.youtube.com/embed/", "");
-			id = id.replace("?autoplay=1&ref=0&mute=0", "");
-			id = id.replace("?autoplay=1&ref=0&mute=1", "");				
+			id = id.replace(tokenYoutubeStarts, "");
+			id = id.replace(tokenYoutubeExtras, "");
+			id = id.replace("?autoplay=1&mute=0", "");
+			id = id.replace("?autoplay=1&mute=1", "");				
 			id = id.replace("https://www.youtube.com/live_chat?is_popout=1&v=", "");
 			return id;
 		}
 				
 		 function composeYouTubeLiveStreamURL(videoId, muteDefault) {
-			return "https://www.youtube.com/embed/"+videoId+"?autoplay=1&ref=0&mute="+muteDefault;
+			return tokenYoutubeStarts+videoId+"?autoplay=1&mute="+muteDefault+tokenYoutubeExtras;
 		 }
 		 function composeYouTubeChatURL(videoId) {
 			return "https://www.youtube.com/live_chat?is_popout=1&v="+videoId;
@@ -542,9 +546,9 @@
 					select.title = title;
 					
 					updateSourceLiveNow(id, source);
-					
+										
 					// Try to send to cast
-					if (source.startsWith("https://www.youtube.com/embed/")) {
+					if (source.startsWith(tokenYoutubeStarts)) {
 						videoId = getVideoIdFromSource(source);
 						castSendMessage(id, videoId, 1);
 					}
@@ -1685,10 +1689,10 @@
 			const iframeCH2 = document.getElementById("iframeCH2");
 			const iframeCH3 = document.getElementById("iframeCH3");
 			const iframeCH4 = document.getElementById("iframeCH4");
-			iframeCH1.src="https://www.youtube.com/embed/0qo78R_yYFA?autoplay=1&ref=0&mute=0"
-			iframeCH2.src="https://www.youtube.com/embed/AhpvTJQBkrg?autoplay=1&ref=0&mute=1"
-			iframeCH3.src="https://www.youtube.com/embed/bvim4rsNHkQ?autoplay=1&ref=0&mute=1"
-			iframeCH4.src="https://www.youtube.com/embed/C8JyvzU0CXU?autoplay=1&ref=0&mute=1"
+			iframeCH1.src="https://www.youtube.com/embed/0qo78R_yYFA?autoplay=1&mute=0"
+			iframeCH2.src="https://www.youtube.com/embed/AhpvTJQBkrg?autoplay=1&mute=1"
+			iframeCH3.src="https://www.youtube.com/embed/bvim4rsNHkQ?autoplay=1&mute=1"
+			iframeCH4.src="https://www.youtube.com/embed/C8JyvzU0CXU?autoplay=1&mute=1"
 		}
 		 
       </script>  

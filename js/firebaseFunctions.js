@@ -282,7 +282,7 @@ function SpaceXBoard_getAllSources(onlyVideoFeeds) {
 		var value = el.value;
 		if ((title!=null) && (value!=null)) {
 			var id = "";
-			if (value.startsWith("https://www.youtube.com/embed/")) {
+			if (value.startsWith(tokenYoutubeStarts)) {
 				id = getVideoIdFromSource(value);
 			} else if (onlyVideoFeeds) continue;
 			result += "{ title:'"+title+"', value:'"+value+"', id:'"+id+"'},";
