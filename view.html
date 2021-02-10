@@ -66,7 +66,7 @@
 			<button id="buttonLogsClose" class="myButton">Close</button>
          </center>
       </div>
-   
+	
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js"></script>
 		<script>
@@ -491,19 +491,33 @@
 						console.log(sourcesLive);
 						
 						const iframeCH1 = document.getElementById("iframeCH1");
-						updateSourceLiveNow(1, iframeCH1.src);					
+						if (iframeCH1!= null)
+							updateSourceLiveNow(1, iframeCH1.src);												
 						const iframeCH2 = document.getElementById("iframeCH2");
-						updateSourceLiveNow(2, iframeCH2.src);					
+						if (iframeCH2!= null)
+							updateSourceLiveNow(2, iframeCH2.src);					
 						const iframeCH3 = document.getElementById("iframeCH3");
-						updateSourceLiveNow(3, iframeCH3.src);					
+						if (iframeCH3!= null)
+							updateSourceLiveNow(3, iframeCH3.src);					
 						const iframeCH4 = document.getElementById("iframeCH4");
-						updateSourceLiveNow(4, iframeCH4.src);
+						if (iframeCH4!= null)
+							updateSourceLiveNow(4, iframeCH4.src);
 						const iframeCH5 = document.getElementById("iframeCH5");
-						updateSourceLiveNow(5, iframeCH5.src);
+						if (iframeCH5!= null)
+							updateSourceLiveNow(5, iframeCH5.src);
 					}					
 				}
 			}
 		}		
+				
+		function getVideoIdFromSource(source) {
+			var id = source;
+			id = id.replace("https://www.youtube.com/embed/", "");
+			id = id.replace("?autoplay=1&ref=0&mute=0", "");
+			id = id.replace("?autoplay=1&ref=0&mute=1", "");				
+			id = id.replace("https://www.youtube.com/live_chat?is_popout=1&v=", "");
+			return id;
+		}
 				
 		 function composeYouTubeLiveStreamURL(videoId, muteDefault) {
 			return "https://www.youtube.com/embed/"+videoId+"?autoplay=1&ref=0&mute="+muteDefault;
@@ -518,22 +532,22 @@
 				
 				console.log("Setting source at " + iFrameId + "("+title+") - " + source);
 				
-				document.getElementById(iFrameId).src = source;
-				analytics.logEvent('source', { name: title});
-				
-				var id = iFrameId.replace("iframeCH","");
-				var select = document.getElementById("selectCH" + id);
-				select.title = title;
-				
-				updateSourceLiveNow(id, source);
-				
-				// Try to send to cast
-				var videoId = source;
-				if (videoId.startsWith("https://www.youtube.com/embed/")) {
-					videoId = videoId.replace("https://www.youtube.com/embed/", "");
-					videoId = videoId.replace("?autoplay=1&ref=0&mute=0", "");
-					videoId = videoId.replace("?autoplay=1&ref=0&mute=1", "");
-					castSendMessage(id, videoId, 1);
+				var iFrame = document.getElementById(iFrameId);
+				if (iFrame!=null) {
+					iFrame.src = source;
+					analytics.logEvent('source', { name: title});
+					
+					var id = iFrameId.replace("iframeCH","");
+					var select = document.getElementById("selectCH" + id);
+					select.title = title;
+					
+					updateSourceLiveNow(id, source);
+					
+					// Try to send to cast
+					if (source.startsWith("https://www.youtube.com/embed/")) {
+						videoId = getVideoIdFromSource(source);
+						castSendMessage(id, videoId, 1);
+					}
 				}
 			}
 		
@@ -779,12 +793,12 @@
 				verticalViewLayout.remove();
 			}
          }		         
-		 
-         window.onload = function() {
+		 		
+        window.onload = function() {
 			showAppScreen();
 			
 			mainInit();
-			
+						
          	document.getElementById('contact-form').addEventListener('submit', function(event) {
          		event.preventDefault();
 				
@@ -1129,10 +1143,7 @@
 		 function openDonation(id) {
 			const selectOrigin = document.getElementById("selectCH"+id);		
 			var src = selectOrigin.options[selectOrigin.selectedIndex].value;
-			src = src.replace("https://www.youtube.com/embed/", "");
-			src = src.replace("?autoplay=1&ref=0&mute=0", "");
-			src = src.replace("?autoplay=1&ref=0&mute=1", "");
-			src = src.replace("https://www.youtube.com/live_chat?is_popout=1&v=", "");
+			scr = getVideoIdFromSource(src);
 			console.log("Source of donation: " + src);
 			lastSelectedDonationVideoId = src;
 			toggleDonation();

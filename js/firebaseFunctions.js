@@ -283,10 +283,7 @@ function SpaceXBoard_getAllSources(onlyVideoFeeds) {
 		if ((title!=null) && (value!=null)) {
 			var id = "";
 			if (value.startsWith("https://www.youtube.com/embed/")) {
-				id = value;
-				id = id.replace("https://www.youtube.com/embed/", "");
-				id = id.replace("?autoplay=1&ref=0&mute=0", "");
-				id = id.replace("?autoplay=1&ref=0&mute=1", "");				
+				id = getVideoIdFromSource(value);
 			} else if (onlyVideoFeeds) continue;
 			result += "{ title:'"+title+"', value:'"+value+"', id:'"+id+"'},";
 		}
