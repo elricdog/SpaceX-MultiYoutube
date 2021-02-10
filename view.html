@@ -358,7 +358,7 @@
 		};				
 		function castSessionListener(e) {
 			console.log('castSessionListener');
-			console.log(e);
+			console.log(JSON.stringify(e));
 			castSession = e;
 			castSession.addUpdateListener(sessionUpdateListener); 			
 		}
@@ -379,11 +379,11 @@
 		}
 		function onCastSessionRequestSuccess(session) {
 			console.log('onCastSessionRequestSuccess');
-			console.log(session);
+			console.log(JSON.stringify(session));
 		}		
 		function onCastError(e) {
 		  console.log('onCastError');
-		  console.log(e);
+		  console.log(JSON.stringify(e));
 		}
 		
 		</script>
@@ -812,7 +812,10 @@
 				console.log("Cast is available");			
 				iconCastToTV.addEventListener ("click", function() { toggleIconGroups(); toggleCastToTV(); }, false); 
 				document.getElementById("buttonCastToTV").addEventListener ("click", function() { toggleCastToTV(); startCastToTV(); }, false);			
-				document.getElementById("buttonCastToTVClose").addEventListener ("click", toggleCastToTV, false);
+				document.getElementById("buttonCastToTVClose").addEventListener ("click", toggleCastToTV, false);				
+				if (isMobile() {
+					document.getElementById("castToTV").style.fontSize = "12px";				
+				}
 			} else {				
 				console.log("Cast is not available");
 				iconCastToTV.remove();
@@ -948,8 +951,7 @@
 				document.getElementById("aboutus").style.fontSize = "12px";
 				document.getElementById("donation").style.fontSize = "12px";
 				document.getElementById("ownDonation").style.fontSize = "12px";
-				document.getElementById("contact").style.fontSize = "12px";
-				document.getElementById("castToTV").style.fontSize = "12px";
+				document.getElementById("contact").style.fontSize = "12px";				
 				document.getElementById("load").style.fontSize = "12px";
 				
 				var cols = document.getElementsByClassName('myButton');
