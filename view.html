@@ -811,10 +811,10 @@
 			document.getElementById("buttonShareClose").addEventListener ("click", toggleShareUs, false);
 			document.getElementById("iconLogs").addEventListener ("click", function() { toggleIconGroups(); toggleLogs(); }, false); 			
 			document.getElementById("buttonLogsClose").addEventListener ("click", toggleLogs, false);
-			document.getElementById("buttonCastToTV").addEventListener ("click", function() { startCastToTV(false); }, false);				
-			document.getElementById("buttonMirrorToTV").addEventListener ("click", function() { startCastToTV(true); }, false);				
+			document.getElementById("buttonCastToTV").addEventListener ("click", function() { toggleCastToTV(); startCastToTV(false); }, false);				
+			document.getElementById("buttonMirrorToTV").addEventListener ("click", function() { toggleCastToTV(); startCastToTV(true); }, false);				
 			document.getElementById("buttonCastToTVClose").addEventListener ("click", toggleCastToTV, false);				
-			iconCastToTV.addEventListener ("click", function() { toggleIconGroups(); toggleCastToTV(); }, false); 
+			document.getElementById("iconCastToTV").addEventListener ("click", function() { toggleIconGroups(); toggleCastToTV(); }, false); 
 			
 			var intervalCheckCastToTVAvailable = window.setInterval(function() {
 				const iconCastToTV = document.getElementById("iconCastToTV");								
