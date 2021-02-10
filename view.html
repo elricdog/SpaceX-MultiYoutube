@@ -28,18 +28,17 @@
 		  if (isAvailable) {
 			console.log("Cast is available");			
 			castIsAvailable = true;
-			<!-- if (isMobile()) { -->
-				<!-- castIsAvailable = false; -->
-				<!-- console.log("Cast disabled on mobile"); -->
-			<!-- } -->
 		  } else {
 			console.log("Cast is not available");
 		  }
 		};		
 		initializeCastApi = function() {		
-			var sessionRequest = new chrome.cast.SessionRequest("urn:x-cast:elricdog.github.io.spacexboard");
-			var apiConfig = new chrome.cast.ApiConfig(sessionRequest, castSessionListener, castReceiverListener);
-			chrome.cast.initialize(apiConfig, onCastInitSuccess, onCastError);		
+			if (isMobile()) {
+			} else {
+				var sessionRequest = new chrome.cast.SessionRequest("urn:x-cast:elricdog.github.io.spacexboard");
+				var apiConfig = new chrome.cast.ApiConfig(sessionRequest, castSessionListener, castReceiverListener);
+				chrome.cast.initialize(apiConfig, onCastInitSuccess, onCastError);		
+			}
 		};				
 		function castSessionListener(e) {
 			console.log('castSessionListener', e);
@@ -61,7 +60,7 @@
 		}
 		
 		</script>
-		<script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
+		<script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>				
 		
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js"></script>
