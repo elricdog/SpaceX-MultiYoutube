@@ -341,26 +341,10 @@
 		<!-- Cast -->
 		<script>		
 		let castIsAvailable = false;
-		if (isMobile()) {		
-			console.log("Cast is available");			
-			castIsAvailable = true;
-		} else {
-			window['__onGCastApiAvailable'] = function(isAvailable) {
-			  if (isAvailable) {
-				console.log("Cast is available");			
-				castIsAvailable = true;
-			  } else {
-				console.log("Cast is not available");
-			  }
-			};		
-		}
+		let castSession = null;
+				
 		initializeCastApi = function() {		
 			if (isMobile()) {				
-				<!-- var options = {}; -->
-			    <!-- options.receiverApplicationId = 'BF724EE3'; -->
-			    <!-- options.autoJoinPolicy = chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED; -->
-			    <!-- options.androidReceiverCompatible = true; -->
-				<!-- cast.framework.CastContext.getInstance().setOptions(options);			 -->				
 				var sessionRequest = new chrome.cast.SessionRequest("BF724EE3");
 				var apiConfig = new chrome.cast.ApiConfig(sessionRequest, castSessionListener, castReceiverListener);
 				chrome.cast.initialize(apiConfig, onCastInitSuccess, onCastError);						
@@ -374,7 +358,15 @@
 		};				
 		function castSessionListener(e) {
 			console.log('castSessionListener', e);
+			castSession = e;
+			castSession.addUpdateListener(sessionUpdateListener); 			
 		}
+		function sessionUpdateListener(isAlive) {
+			if (!isAlive) {
+				castSession = null;
+			}	  
+		}
+		
 		function castReceiverListener(availability) {
 			console.log('castReceiverListener', availability);
 			if (availability) {
@@ -811,11 +803,18 @@
 			document.getElementById("iconLogs").addEventListener ("click", function() { toggleIconGroups(); toggleLogs(); }, false); 			
 			document.getElementById("buttonLogsClose").addEventListener ("click", toggleLogs, false);
 			
-			const iconCastToTV = document.getElementById("iconCastToTV");
+			const iconCastToTV = document.getElementById("iconCastToTV");					
+			castIsAvailable = chrome.cast.isAvailable || castIsAvailable;
 			if (castIsAvailable) {
+				console.log("Cast is available");			
 				iconCastToTV.addEventListener ("click", function() { toggleIconGroups(); toggleCastToTV(); }, false); 
+				document.getElementById("buttonCastToTV").addEventListener ("click", function() { toggleCastToTV(); startCastToTV(); }, false);			
+				document.getElementById("buttonCastToTVClose").addEventListener ("click", toggleCastToTV, false);
 			} else {				
+				console.log("Cast is not available");
 				iconCastToTV.remove();
+				const cast = document.getElementById("castToTV");
+				cast.remove();
 			}
 			
 			document.getElementById("buttonAboutUsSupportUs").addEventListener ("click", function() { toggleAboutUs(); toggleOwnDonation(); }, false);
@@ -824,8 +823,6 @@
 			document.getElementById("buttonDonateClose").addEventListener ("click", toggleDonation, false);
 			document.getElementById("buttonOwnDonate").addEventListener ("click", function() { toggleOwnDonation(); goToOwnDonation(); }, false);
 			document.getElementById("buttonOwnDonateClose").addEventListener ("click", toggleOwnDonation, false);
-			document.getElementById("buttonCastToTV").addEventListener ("click", function() { toggleCastToTV(); startCastToTV(); }, false);			
-			document.getElementById("buttonCastToTVClose").addEventListener ("click", toggleCastToTV, false);
 
          	document.getElementById("iconRefreshCH1").addEventListener ("click", refreshCH1, false);
          	document.getElementById("iconRefreshCH2").addEventListener ("click", refreshCH2, false);
