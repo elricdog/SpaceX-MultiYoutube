@@ -357,7 +357,8 @@
 			}
 		};				
 		function castSessionListener(e) {
-			console.log('castSessionListener', e);
+			console.log('castSessionListener');
+			console.log(e);
 			castSession = e;
 			castSession.addUpdateListener(sessionUpdateListener); 			
 		}
@@ -368,7 +369,7 @@
 		}
 		
 		function castReceiverListener(availability) {
-			console.log('castReceiverListener', availability);
+			console.log('castReceiverListener ' + availability);
 			if (availability) {
 				chrome.cast.requestSession(onCastSessionRequestSuccess, onCastError);
 			}
@@ -377,10 +378,12 @@
 		  console.log('onCastInitSuccess');
 		}
 		function onCastSessionRequestSuccess(session) {
-			console.log('onCastSessionRequestSuccess', session);
+			console.log('onCastSessionRequestSuccess');
+			console.log(session);
 		}		
 		function onCastError(e) {
-		  console.log('onCastError', e);
+		  console.log('onCastError');
+		  console.log(e);
 		}
 		
 		</script>
