@@ -262,6 +262,31 @@ body {
 	overflow: auto;
 }
 
+#logs {
+	position: fixed;
+	top: 25%;
+	left: 25%;
+	transform: translate(-25%, -25%);
+	padding: 5px;
+	z-index: 300000;
+	visibility: hidden;
+	border: 1px solid #003268;
+	background-color: #005288;
+	color: white;
+	overflow: auto;
+}
+#debugDiv {
+	position: relative;
+	border: 1px solid #003268;
+	width:auto;
+	height:500px;
+	overflow: scroll;
+	text-align:left;
+	background-color: #87898C;
+	font-family:Courier;
+	font-size:12px;
+}
+
 #share {
 	position: fixed;
 	top: 50%;

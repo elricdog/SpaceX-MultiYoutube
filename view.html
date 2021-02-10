@@ -31,6 +31,43 @@
 		<link type="text/css" rel="stylesheet" href="main.css">	 
    </head>     
    <body>		
+	  <!-- Logs -->
+	  <script>
+		if (typeof console  != "undefined") 
+			if (typeof console.log != 'undefined')
+				console.olog = console.log;
+			else
+				console.olog = function() {};
+		let consoleLines = 0;
+		console.log = function(message) {
+			console.olog(message);
+			var d = new Date();
+			var datestring = "["+d.getHours().toString().padStart(2, "0") + ":" + d.getMinutes().toString().padStart(2, "0") + ":" + d.getSeconds().toString().padStart(2, "0") + ":<i>" + d.getMilliseconds().toString().padStart(3, "0")+"</i>]";
+			const debugDiv = document.getElementById("debugDiv");
+			debugDiv.innerHTML = '<br>' + datestring + " " + message + debugDiv.innerHTML;
+			consoleLines++;			
+			if (consoleLines>1000) {
+				consoleLines--;
+				var list = debugDiv.innerHTML;
+				if (list!=null) {
+					var j = list.lastIndexOf("<br>");
+					if (j>0) debugDiv.innerHTML = list.substring(0, j);
+				}
+			}			
+		};
+		console.error = console.debug = console.info =  console.log;	  
+	  </script>
+
+      <!-- Logs Window -->
+      <div id="logs" style="visibility:hidden; width: fit-content; height: fit-content;">
+         <center>
+            <h3>Logs</h3>
+			<div id="debugDiv"></div>
+			<br>
+			<button id="buttonLogsClose" class="myButton">Close</button>
+         </center>
+      </div>
+   
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js"></script>
 		<script>
@@ -765,6 +802,9 @@
 			document.getElementById("iconOwnDonation").addEventListener ("click", function() { toggleIconGroups(); toggleOwnDonation(); }, false); 			
 			document.getElementById("iconShare").addEventListener ("click", function() { toggleIconGroups(); toggleShareUs(); }, false); 			
 			document.getElementById("buttonShareClose").addEventListener ("click", toggleShareUs, false);
+
+			document.getElementById("iconLogs").addEventListener ("click", function() { toggleIconGroups(); toggleLogs(); }, false); 			
+			document.getElementById("buttonLogsClose").addEventListener ("click", toggleLogs, false);
 			
 			const iconCastToTV = document.getElementById("iconCastToTV");
 			if (castIsAvailable) {
@@ -1116,6 +1156,18 @@
          	}
 		 }
 		 
+         function toggleLogs() {
+         	const logsScreen = document.getElementById('logs');
+         	if (logsScreen.style.visibility == "hidden") {
+         		logsScreen.style.visibility = "visible";
+         		logsScreen.style.height = "fit-content";
+         		analytics.logEvent('option_click', { name: 'Logs'});
+         	} else {
+         		logsScreen.style.visibility = "hidden";
+         		logsScreen.style.height = "0px";
+         	}
+         };
+
          function toggleShareUs() {
          	const shareUsScreen = document.getElementById('share');
          	if (shareUsScreen.style.visibility == "hidden") {
@@ -1621,6 +1673,7 @@
 					<div title="Show application donations information" class="icon" id="iconOwnDonation"><img src="Icons/donation.png"/></div>
 					<div title="Open CastToTV options" class="icon" id="iconCastToTV"><img src="Icons/castToTV.png"/></div>
 					<div title="Share Us" class="icon" id="iconShare"><img src="Icons/share.png"/></div>
+					<div title="Logs" class="icon" id="iconLogs"><img src="Icons/logs.png"/></div>
 				  </div>
 				 
 			  </div>				   
@@ -1830,6 +1883,7 @@
 					<div title="Show application donations information" class="icon" id="iconOwnDonation"><img src="Icons/donation.png"/></div>
 					<div title="Open CastToTV options" class="icon" id="iconCastToTV"><img src="Icons/castToTV.png"/></div>					
 					<div title="Share Us" class="icon" id="iconShare"><img src="Icons/share.png"/></div>
+					<div title="Logs" class="icon" id="iconLogs"><img src="Icons/logs.png"/></div>
 				  </div>
 				 
 			  </div>				   
