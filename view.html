@@ -370,12 +370,13 @@
 			castSession.addUpdateListener(castSessionUpdateListener);
 		}
 		function castSessionUpdateListener(isAlive) {
+			console.log('castSessionUpdateListener - isAlive: ' + isAlive);
 			if (!isAlive) {
 				castSession = null;
 			}	  
 		}		
 		function castReceiverListener(availability) {
-			console.log('castReceiverListener ' + availability);
+			console.log('castReceiverListener - availability: ' + availability);
 			if (availability) {
 				chrome.cast.requestSession(onCastSessionRequestSuccess, onCastError);
 			}
