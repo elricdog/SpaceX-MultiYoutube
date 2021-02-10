@@ -173,7 +173,7 @@ function restartLaunchStateAnimation() {
 	groupLaunchState.classList.add("blinking");
 }
 
-function getLaunchState(view){
+function getLaunchState(view, view2){
 	console.log(">>> LaunchState Fetch");
     firebase.database().ref('state/text')
     .on('value', (snapshot)=>{
@@ -181,6 +181,12 @@ function getLaunchState(view){
 		lastUpdateLaunchState = snapshot.val();
 		view.innerHTML = lastUpdateLaunchState;
 		restartLaunchStateAnimation();
+		updateRSSTextScrollWidth();
+    });
+    firebase.database().ref('state/title')
+    .on('value', (snapshot)=>{
+		var titleLaunchState = snapshot.val();
+		view2.innerHTML = titleLaunchState;
 		updateRSSTextScrollWidth();
     });
     firebase.database().ref('state/minutes')

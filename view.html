@@ -1120,7 +1120,7 @@
 			// Get RSS from firebase database
 			getRealtimeRss(document.getElementById("rssTextScrollContent"));
 			// Get state of launch from database
-			getLaunchState(document.getElementById("launchState"));
+			getLaunchState(document.getElementById("launchState"), document.getElementById("launchStateTitle"));
 			// Get feeds from DB database
 			getFeedsFromDB();
 			
@@ -1806,8 +1806,8 @@
 			  </div>
 			 
 			  <div class="rowTopBar2" id="rowTopBarG">
-				 <div title="Views launch current state" class="iconLabel2 blinking" id="groupLaunchState">
-					Launch State
+				 <div title="Views launch current state" class="iconLabel2 blinking" id="groupLaunchState">					
+					<div><label id="launchStateTitle">Launch State</label></div>
 					<div><label id="launchState">...</label></div>
 				 </div>
 			  </div>
@@ -2017,7 +2017,7 @@
 			 
 			  <div class="rowTopBar2" id="rowTopBarG">
 				 <div title="Views launch current state" class="iconLabel2 blinking" id="groupLaunchState">
-					Launch State
+					<div><label id="launchStateTitle">Launch State</label></div>
 					<div><label id="launchState">...</label></div>
 				 </div>
 			  </div>
