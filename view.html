@@ -523,12 +523,34 @@
 			return id;
 		}
 				
-		 function composeYouTubeLiveStreamURL(videoId, muteDefault) {
+		function composeYouTubeLiveStreamURL(videoId, muteDefault) {
 			return tokenYoutubeStarts+videoId+"?autoplay=1&mute="+muteDefault+tokenYoutubeExtras;
-		 }
-		 function composeYouTubeChatURL(videoId) {
+		}
+		function composeYouTubeChatURL(videoId) {
 			return "https://www.youtube.com/live_chat?is_popout=1&v="+videoId;
-		 }
+		}
+		
+		function eventFire(el, etype){
+		  if (el.fireEvent) {
+			el.fireEvent('on' + etype);
+		  } else {
+			var evObj = document.createEvent('Events');
+			evObj.initEvent(etype, true, false);
+			el.dispatchEvent(evObj);
+		  }
+		}		
+		
+		function tryForceAutoPlay(iFrameId) {
+			console.log("Forcing autoplay on " + iFrameId);
+			var iFrame = document.getElementById(iFrameId);
+			iFrame.click();
+			//var elems = iFrame.contentWindow.document.getElementsByClassName("ytp-cued-thumbnail-overlay-image");				
+			//for(i = 0; i < elems.length; i++) {						
+			//	var btn = elems[i];
+			//	console.log("Pressing button "+ btn);
+			//	eventFire(btn, 'click');
+			//}
+		}
 		
 			function setSourceToElementiFrame(iFrameId, options, index) {
 				var source = options[index].value;
@@ -540,7 +562,7 @@
 				if (iFrame!=null) {
 					iFrame.src = source;
 					analytics.logEvent('source', { name: title});
-					
+										
 					var id = iFrameId.replace("iframeCH","");
 					var select = document.getElementById("selectCH" + id);
 					select.title = title;
@@ -955,8 +977,7 @@
 			$('#selectCH2').change(function(){ setSourceToElementiFrame('iframeCH2', select2.options, select2.selectedIndex) });
 			$('#selectCH3').change(function(){ setSourceToElementiFrame('iframeCH3', select3.options, select3.selectedIndex) });
 			$('#selectCH4').change(function(){ setSourceToElementiFrame('iframeCH4', select4.options, select4.selectedIndex) });
-			$('#selectCH5').change(function(){ setSourceToElementiFrame('iframeCH5', select5.options, select5.selectedIndex) });		
-						
+			$('#selectCH5').change(function(){ setSourceToElementiFrame('iframeCH5', select5.options, select5.selectedIndex) });													
          	var event = new Event('change');
          	select1.selectedIndex = indexMatchingText(select1, "NASASpaceflight");
          	select2.selectedIndex = indexMatchingText(select2, "LabPadre - Nerdle Cam 4K");
@@ -968,6 +989,17 @@
          	select3.dispatchEvent(event);
          	select4.dispatchEvent(event);
          	select5.dispatchEvent(event);
+			
+			/*
+			var intervalAutoPlay = window.setInterval(function() {
+				window.clearInterval(intervalAutoPlay);
+				console.log("Try force AutoPlay");
+				tryForceAutoPlay("iframeCH1");
+				tryForceAutoPlay("iframeCH2");
+				tryForceAutoPlay("iframeCH3");
+				tryForceAutoPlay("iframeCH4");
+			}, 5000);
+			*/
 			
          	const resizeRSSObserver = new ResizeObserver(entries => {
          		updateRSSTextScrollWidth();
