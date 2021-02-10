@@ -20,8 +20,3 @@ castReceiverContext.start(options);
 function changeVideo(position, videoId, isMute){
   document.getElementById('ytplayer'+position).src = "https://www.youtube.com/embed/"+videoId+"?mute="+isMute+"&autoplay=1&enablejsapi=1&controls=0&loop=1&showinfo=0&rel=0"
 }
-
-changeVideo(1, _qwLHlVjRyw, 1);
-changeVideo(2, _qwLHlVjRyw, 1);
-changeVideo(3, _qwLHlVjRyw, 1);
-changeVideo(4, _qwLHlVjRyw, 1);

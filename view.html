@@ -365,16 +365,15 @@
 		};				
 		function castSessionListener(e) {
 			console.log('castSessionListener');
-			console.log(JSON.stringify(e));
+			//console.log(JSON.stringify(e));
 			castSession = e;
-			castSession.addUpdateListener(sessionUpdateListener); 			
+			castSession.addUpdateListener(castSessionUpdateListener);
 		}
-		function sessionUpdateListener(isAlive) {
+		function castSessionUpdateListener(isAlive) {
 			if (!isAlive) {
 				castSession = null;
 			}	  
-		}
-		
+		}		
 		function castReceiverListener(availability) {
 			console.log('castReceiverListener ' + availability);
 			if (availability) {
@@ -386,11 +385,23 @@
 		}
 		function onCastSessionRequestSuccess(session) {
 			console.log('onCastSessionRequestSuccess');
-			console.log(JSON.stringify(session));
+			//console.log(JSON.stringify(session));
 		}		
 		function onCastError(e) {
 		  console.log('onCastError');
-		  console.log(JSON.stringify(e));
+		  //console.log(JSON.stringify(e));
+		}
+		
+		function castSendMessage(_position, _videoId, _mute) {
+			if (castSession!=null) {
+				console.log('Sending message to Cast - position: '+_position +" videoId: "+ _videoId + " mute: " +  _mute);
+				castSession.sendMessage('urn:x-cast:elricdog.github.io.spacexboard.Log', {
+					message: "Set new channel parameters",
+					position: _position,
+					videoId: _videoId,
+					mute: _mute,
+				});
+			}
 		}
 		
 		</script>
@@ -513,6 +524,15 @@
 				select.title = title;
 				
 				updateSourceLiveNow(id, source);
+				
+				// Try to send to cast
+				var videoId = source;
+				if (videoId.startsWith("https://www.youtube.com/embed/")) {
+					videoId = videoId.replace("https://www.youtube.com/embed/", "");
+					videoId = videoId.replace("?autoplay=1&ref=0&mute=0", "");
+					videoId = videoId.replace("?autoplay=1&ref=0&mute=1", "");
+					castSendMessage(id, videoId, 1);
+				}
 			}
 		
 			function PopulateSelectionChannels(select, channels) {
