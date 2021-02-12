@@ -6,7 +6,7 @@ castReceiverContext.addCustomMessageListener(LOG_NAMESPACE, function (customEven
   logElement.innerText += LOG_NAMESPACE + " - " + customEvent.data + "\n";
   console.log(LOG_NAMESPACE + " - " + customEvent.data.message);
   //changeVideo(customEvent.data.position, customEvent.data.videoId, customEvent.data.mute);
-  updateAndPlayVideo(customEvent.data.position, customEvent.data.videoId):
+  updateAndPlayVideo(customEvent.data.position, customEvent.data.videoId);
 });
 var logElement = document.querySelector("#logger");
 logElement.innerText = "Logging Events\n\n";
