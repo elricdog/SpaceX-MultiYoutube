@@ -59,7 +59,17 @@
         players[1] = new YT.Player('player', {
           height: '100%',
           width: '100%',
-          videoId: 'Ky5l9ZxsG9M'
+          videoId: 'Ky5l9ZxsG9M',
+          playerVars: {
+                videoId: vid,
+                'enablejsapi': 1,
+                'autoplay': 1,
+                'rel': 0,
+                'showinfo': 0,
+                'controls': 0,
+                'egm': 0,
+                'showsearch': 0
+            },
         });
         players[2] = new YT.Player('player2', {
           height: '100%',
