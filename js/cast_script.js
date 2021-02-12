@@ -12,7 +12,7 @@ castReceiverContext.addCustomMessageListener(LOG_NAMESPACE, function (customEven
 
 });
 var logElement = document.querySelector("#logger");
-logElement.innerText = "Logging Events\n\n";
+//logElement.innerText = "Logging Events\n\n";
 
 // JSON is the default type, but you can be sure anyway
 const options = new cast.framework.CastReceiverOptions();
