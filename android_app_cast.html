@@ -59,38 +59,22 @@
         players[1] = new YT.Player('player', {
           height: '100%',
           width: '100%',
-          videoId: 'Ky5l9ZxsG9M',
-          events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-          }
+          videoId: 'Ky5l9ZxsG9M'
         });
         players[2] = new YT.Player('player2', {
           height: '100%',
           width: '100%',
-          videoId: 'gnt2wZBg89g',
-          events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-          }
+          videoId: 'gnt2wZBg89g'
         });
         players[3] = new YT.Player('player3', {
           height: '100%',
           width: '100%',
-          videoId: 'gnt2wZBg89g',
-          events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-          }
+          videoId: 'gnt2wZBg89g'
         });
         players[4] = new YT.Player('player4', {
           height: '100%',
           width: '100%',
-          videoId: 'gnt2wZBg89g',
-          events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-          }
+          videoId: 'gnt2wZBg89g'
         });
       }
 
@@ -106,21 +90,6 @@
         }
       }
 
-      // 4. The API will call this function when the video player is ready.
-      function onPlayerReady(event) {
-        //event.target.playVideo();
-      }
-
-      // 5. The API calls this function when the player's state changes.
-      //    The function indicates that when playing a video (state=1),
-      //    the player should play for six seconds and then stop.
-      var done = false;
-      function onPlayerStateChange(event) {
-        if (event.data == YT.PlayerState.PLAYING && !done) {
-          setTimeout(stopVideo, 6000);
-          done = true;
-        }
-      }
       function stopVideo() {
         player.stopVideo();
       }
