@@ -5,7 +5,8 @@ var castReceiverContext = cast.framework.CastReceiverContext.getInstance();
 castReceiverContext.addCustomMessageListener(LOG_NAMESPACE, function (customEvent) {
   logElement.innerText += LOG_NAMESPACE + " - " + customEvent.data + "\n";
   console.log(LOG_NAMESPACE + " - " + customEvent.data.message);
-  changeVideo(customEvent.data.position, customEvent.data.videoId, customEvent.data.mute);
+  //changeVideo(customEvent.data.position, customEvent.data.videoId, customEvent.data.mute);
+  updateAndPlayVideo(customEvent.data.position, customEvent.data.videoId):
 });
 var logElement = document.querySelector("#logger");
 logElement.innerText = "Logging Events\n\n";
@@ -15,8 +16,3 @@ const options = new cast.framework.CastReceiverOptions();
 options.customNamespaces = Object.assign({});
 options.customNamespaces[LOG_NAMESPACE] = cast.framework.system.MessageType.JSON;
 castReceiverContext.start(options);
-
-
-function changeVideo(position, videoId, isMute){
-  document.getElementById('ytplayer'+position).src = "https://www.youtube.com/embed/"+videoId+"?mute="+isMute+"&autoplay=1&enablejsapi=1&controls=0&loop=1&showinfo=0&rel=0"
-}
