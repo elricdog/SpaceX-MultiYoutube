@@ -62,28 +62,59 @@
           videoId: 'Ky5l9ZxsG9M',
           playerVars: {
                 'enablejsapi': 1,
-                'autoplay': 1,
+                'autoplay': 0,
                 'rel': 0,
+                'mute':0,
                 'showinfo': 0,
                 'controls': 0,
                 'egm': 0,
                 'showsearch': 0
-            },
+            }
         });
         players[2] = new YT.Player('player2', {
           height: '100%',
           width: '100%',
-          videoId: 'gnt2wZBg89g'
+          videoId: 'gnt2wZBg89g',
+          playerVars: {
+                'enablejsapi': 1,
+                'autoplay': 0,
+                'rel': 0,
+                'mute':0,
+                'showinfo': 0,
+                'controls': 0,
+                'egm': 0,
+                'showsearch': 0
+            }
         });
         players[3] = new YT.Player('player3', {
           height: '100%',
           width: '100%',
-          videoId: 'gnt2wZBg89g'
+          videoId: 'gnt2wZBg89g',
+          playerVars: {
+                'enablejsapi': 1,
+                'autoplay': 0,
+                'rel': 0,
+                'mute':0,
+                'showinfo': 0,
+                'controls': 0,
+                'egm': 0,
+                'showsearch': 0
+            }
         });
         players[4] = new YT.Player('player4', {
           height: '100%',
           width: '100%',
-          videoId: 'gnt2wZBg89g'
+          videoId: 'gnt2wZBg89g',
+          playerVars: {
+                'enablejsapi': 1,
+                'autoplay': 0,
+                'rel': 0,
+                'mute':0,
+                'showinfo': 0,
+                'controls': 0,
+                'egm': 0,
+                'showsearch': 0
+            }
         });
       }
 
@@ -93,7 +124,7 @@
 
       function changeVolume(position){
         if(players[position].isMuted()){
-          players[position].unMuted();
+          players[position].unMute();
         } else {
           players[position].mute();
         }
