@@ -256,16 +256,16 @@ function calculateUpdateLaunchState(UTCDateOfNextLaunch) {
 	var hh = parseInt(items[3]);
 	const mm = parseInt(items[4]);
 
-	console.log("UTCDateOfNextLaunch = " + UTCDateOfNextLaunch);
+	//console.log("UTCDateOfNextLaunch = " + UTCDateOfNextLaunch);
 	if (UTCDateOfNextLaunch.includes("PM"))
 	{
 		hh+=12;		
 	}
-	console.log("- year = "+year);
-	console.log("- month = "+month);
-	console.log("- day = "+day);
-	console.log("- hh = "+hh);
-	console.log("- mm = "+mm);
+	//console.log("- year = "+year);
+	//console.log("- month = "+month);
+	//console.log("- day = "+day);
+	//console.log("- hh = "+hh);
+	//console.log("- mm = "+mm);
 	
 	
 	let d = new Date();
