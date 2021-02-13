@@ -155,9 +155,21 @@ function getRealtimeRss(view){
     });
 }
 
+function formatAMPM(date) {
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? '0'+minutes : minutes;
+  var strTime = hours + ':' + minutes + ' ' + ampm;
+  return strTime;
+}
+
 let lastUpdateLaunchState = "...";
-let minutesUpdateLaunchState = 0;
 let intervalUpdateLaunchState = null;
+let lastUTCDateOfNextLaunch = null;
+let formatUpdateLaunchState = "UTC";
 function clearIntervalUpdateLaunchState() {
 	if (intervalUpdateLaunchState!==null) {
 		window.clearInterval(intervalUpdateLaunchState);
@@ -189,34 +201,152 @@ function getLaunchState(view, view2){
 		view2.innerHTML = titleLaunchState;
 		updateRSSTextScrollWidth();
     });
-    firebase.database().ref('state/minutes')
+    firebase.database().ref('state/UTCDateOfNextLaunch')
     .on('value', (snapshot)=>{
 		clearIntervalUpdateLaunchState();
-		minutesUpdateLaunchState = snapshot.val();
-		if ((minutesUpdateLaunchState!=null) && (minutesUpdateLaunchState!="") && (minutesUpdateLaunchState!=0) && (minutesUpdateLaunchState!="0")) {
-			intervalUpdateLaunchState = window.setInterval(function(){
-				if (minutesUpdateLaunchState<=0)
-				{
-					clearIntervalUpdateLaunchState();					
-					view.innerHTML = "GO FOR LAUNCH";
-				} else {
-					minutesUpdateLaunchState = minutesUpdateLaunchState-1;
-					view.innerHTML = "T - "+minutesUpdateLaunchState;
-				}
+		UTCDateOfNextLaunch = snapshot.val();		
+		lastUTCDateOfNextLaunch = UTCDateOfNextLaunch;
+		if ((UTCDateOfNextLaunch!=null) && (UTCDateOfNextLaunch!="") && (UTCDateOfNextLaunch!=0) && (UTCDateOfNextLaunch!="0")) {
+			intervalUpdateLaunchState = window.setInterval(function(){		
+				view.innerHTML = calculateUpdateLaunchState(lastUTCDateOfNextLaunch);
 				updateRSSTextScrollWidth();
-				console.log("Updated Launch State to: " + view.innerHTML);
 			}, 60000);			  
-			view.innerHTML = "T - "+minutesUpdateLaunchState;
+			view.innerHTML = calculateUpdateLaunchState(lastUTCDateOfNextLaunch);
 			restartLaunchStateAnimation();
 			updateRSSTextScrollWidth();
 		} else {
-			if (minutesUpdateLaunchState==0) {
-				view.innerHTML = lastUpdateLaunchState;
-				updateRSSTextScrollWidth();		
-			}
+			view.innerHTML = lastUpdateLaunchState;
+			updateRSSTextScrollWidth();		
 		}		
 		console.log("Updated Launch State due DB change to: " + view.innerHTML);
     });
+}
+
+function clickOnUpdateLaunchState(view) {
+	switch (formatUpdateLaunchState)
+	{
+		case null:
+		case "":
+		case "UTC":
+			formatUpdateLaunchState = "EST";
+			break;
+		case "EST":
+			formatUpdateLaunchState = "BOCACHICA";
+			break;
+		case "BOCACHICA":
+			formatUpdateLaunchState = "PST";
+			break;
+		case "PST":
+			formatUpdateLaunchState = "TIME";
+			break;
+		case "TIME":
+			formatUpdateLaunchState = "UTC";
+			break;
+	}
+	console.log("Change LaunchState date and time to "+formatUpdateLaunchState);
+	view.innerHTML = calculateUpdateLaunchState(lastUTCDateOfNextLaunch);
+	updateRSSTextScrollWidth();
+}
+
+function calculateUpdateLaunchState(UTCDateOfNextLaunch) {
+	var items = UTCDateOfNextLaunch.match(/\d+/g);
+	const year = parseInt(items[2]);
+	const month = parseInt(items[1]);
+	const day = parseInt(items[0]);
+	var hh = parseInt(items[3]);
+	const mm = parseInt(items[4]);
+
+	console.log("UTCDateOfNextLaunch = " + UTCDateOfNextLaunch);
+	if (UTCDateOfNextLaunch.includes("PM"))
+	{
+		hh+=12;		
+	}
+	console.log("- year = "+year);
+	console.log("- month = "+month);
+	console.log("- day = "+day);
+	console.log("- hh = "+hh);
+	console.log("- mm = "+mm);
+	
+	
+	let d = new Date();
+	let currentTimeZoneOffsetInHours = d.getTimezoneOffset() / 60;		 
+	let dbUTC;
+	
+	var deltaMinutes = null;
+	if (UTCDateOfNextLaunch.endsWith("EST")) // Florida - East Time Zone
+	{
+		let dbEST = new Date(year, month-1, day, hh - currentTimeZoneOffsetInHours + 5, mm, 0);
+		var diffMs = dbEST-d;
+		deltaMinutes = Math.round(diffMs / 60000); // minutes
+		dbUTC = dbEST;		
+	} 
+	else if (UTCDateOfNextLaunch.endsWith("BOCACHICA") || UTCDateOfNextLaunch.endsWith("LOCAL") || UTCDateOfNextLaunch.endsWith("CST")) // Bocachica - Central Time Zone
+	{
+		let dbLOCAL = new Date(year, month-1, day, hh - currentTimeZoneOffsetInHours + 6, mm, 0);
+		var diffMs = dbLOCAL-d;
+		deltaMinutes = Math.round(diffMs / 60000); // minutes
+		dbUTC = dbLOCAL;		
+	} 
+	else if (UTCDateOfNextLaunch.endsWith("PST")) // Vanderberg - Pacific Time Zone
+	{
+		let dbPST = new Date(year, month-1, day, hh - currentTimeZoneOffsetInHours + 8, mm, 0);
+		var diffMs = dbPST-d;
+		deltaMinutes = Math.round(diffMs / 60000); // minutes
+		dbUTC = dbPST;		
+	} 	
+	else if (UTCDateOfNextLaunch.endsWith("CAT")) // Catalunya
+	{
+		let dbCAT = new Date(year, month-1, day, hh - currentTimeZoneOffsetInHours - 1, mm, 0);
+		var diffMs = dbCAT-d;
+		deltaMinutes = Math.round(diffMs / 60000); // minutes
+		dbUTC = dbCAT;		
+	} 	
+	else 
+	{
+		dbUTC = new Date(year, month-1, day, hh - currentTimeZoneOffsetInHours, mm);
+		var diffMs = dbUTC-d;
+		deltaMinutes = Math.round(diffMs / 60000); // minutes		
+	}
+	dbUTC.setHours( dbUTC.getHours() + currentTimeZoneOffsetInHours);
+		
+	if (deltaMinutes==null)
+	{
+		clearIntervalUpdateLaunchState();					
+		return "UNKNOWN";
+	}
+	else if (deltaMinutes<=2)
+	{
+		clearIntervalUpdateLaunchState();					
+		return "GO FOR LAUNCH";
+	} 
+	else if (deltaMinutes<=120)
+	{
+		return "T - "+deltaMinutes;
+	}
+	else 
+	{
+		const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+		switch (formatUpdateLaunchState)
+		{
+			case null:
+			case "":
+			case "UTC":
+				return monthNames[dbUTC.getMonth()] + "-" + dbUTC.getDate() + " " + formatAMPM(dbUTC) + " UTC";
+			case "EST":
+				dbUTC.setHours( dbUTC.getHours() - 5);
+				return monthNames[dbUTC.getMonth()] + "-" + dbUTC.getDate() + " " + formatAMPM(dbUTC) + " EST";
+			case "LOCAL":
+			case "BOCACHICA":
+				dbUTC.setHours( dbUTC.getHours() - 6);
+				return monthNames[dbUTC.getMonth()] + "-" + dbUTC.getDate() + " " + formatAMPM(dbUTC) + " BOCACHICA";
+			case "PST":
+				dbUTC.setHours( dbUTC.getHours() - 8);
+				return monthNames[dbUTC.getMonth()] + "-" + dbUTC.getDate() + " " + formatAMPM(dbUTC) + " PST";
+			case "TIME":
+				dbUTC.setHours( dbUTC.getHours() - currentTimeZoneOffsetInHours);
+				return monthNames[dbUTC.getMonth()] + "-" + dbUTC.getDate() + " " + formatAMPM(dbUTC);
+		}
+	}
 }
 
 function getFeedsFromDB() {	

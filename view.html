@@ -849,6 +849,7 @@
          	document.getElementById("iconOptions").addEventListener ("click", toggleIconGroups, false);
          	document.getElementById("iconLastUpdate").addEventListener ("click", function() { toggleLastUpdate(); updateRSSTextScrollWidth(); }, false);
 			document.getElementById("iconLaunchState").addEventListener ("click", function() { toggleLaunchState(); updateRSSTextScrollWidth(); }, false);
+			document.getElementById("groupLaunchState").addEventListener ("click", function() { clickOnUpdateLaunchState(document.getElementById("launchState")); }, false);
          	document.getElementById("iconVisitors").addEventListener ("click", function() { toggleVisitors(); updateRSSTextScrollWidth(); }, false);
          	document.getElementById("iconTime").addEventListener ("click", function() { toggleTimeGroups(); updateRSSTextScrollWidth(); }, false);
          	document.getElementById("iconContact").addEventListener ("click", function() { toggleIconGroups(); toggleContact(); }, false);
@@ -1762,7 +1763,7 @@
 					<div title="You have any comment or idea?" class="icon" id="iconContact"><img src="Icons/contact.png"/></div>
 					<div title="Save current configuration" class="icon" id="iconSave"><img src="Icons/save.png"/></div>
 					<div title="Load saved configuration" class="icon" id="iconLoad"><img src="Icons/load.png"/></div>
-					<div title="Show/Hide the clocks (LOCAL/UTC/YOUR CURRENT TIME)" class="icon" id="iconTime"><img src="Icons/time.png"/></div>
+					<div title="Show/Hide the clocks (BOCACHICA/UTC/YOUR CURRENT TIME)" class="icon" id="iconTime"><img src="Icons/time.png"/></div>
 					<div title="Show/Hide last update information" class="icon" id="iconLastUpdate"><img src="Icons/lastUpdate.png"/></div>
 					<div title="Show/Hide visitors information" class="icon" id="iconVisitors"><img src="Icons/visitors.png"/></div>
 					<div title="Show/Hide launch state information" class="icon" id="iconLaunchState"><img src="Icons/launchState.png"/></div>
@@ -1803,7 +1804,7 @@
 					   <div id="timeUTC">00:00:00</div>
 					</div>
 					<div title="LOCAL TIME AT BOCA CHICA" class="iconLabel" id="groupLOCAL">
-					   LOCAL
+					   BOCACHICA
 					   <div id="timeLOCAL">00:00:00</div>
 					</div>
 				 </div>

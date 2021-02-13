@@ -144,6 +144,7 @@ body {
 }
 
 .iconLabel2 {
+	cursor: pointer;
 	white-space: nowrap;
 	border-spacing: 0px;
 	padding: 0px 2px 0px 2px;	
