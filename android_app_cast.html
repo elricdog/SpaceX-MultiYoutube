@@ -26,31 +26,113 @@
   <div class="row">
      <!-- Top-Left -->
      <div class="column">
-       <iframe class="video ytplayer" id="ytplayer1" type="text/html" width="100%" height="100%"
-         src="https://www.youtube.com/embed/_qwLHlVjRyw?mute=1&enablejsapi=1&controls=0&loop=1&showinfo=0&rel=0"
-         frameborder="0"></iframe>
+       <div id="player"></div>
      </div>
      <!-- Top-Right -->
      <div class="column">
-       <iframe class="video ytplayer" id="ytplayer2" type="text/html" width="100%" height="100%"
-         src="https://www.youtube.com/embed/FpQwQx4Q_Dc?mute=1&enablejsapi=1&controls=0&loop=1&showinfo=0&rel=0"
-         frameborder="0"></iframe>
+       <div id="player2"></div>
      </div>
   </div>
   <div class="row">
      <!-- Top-Left -->
      <div class="column">
-       <iframe class="video ytplayer" id="ytplayer3" type="text/html" width="100%" height="100%"
-         src="https://www.youtube.com/embed/gnt2wZBg89g?mute=1&enablejsapi=1&controls=0&loop=1&showinfo=0&rel=0"
-         frameborder="0"></iframe>
+       <div id="player3"></div>
      </div>
      <!-- Top-Right -->
      <div class="column">
-       <iframe class="video ytplayer" id="ytplayer4" type="text/html" width="100%"height="100%"
-         src="https://www.youtube.com/embed/Ky5l9ZxsG9M?mute=1&enablejsapi=1&controls=0&loop=1&showinfo=0&rel=0"
-         frameborder="0"></iframe>
+       <div id="player4"></div>
      </div>
   </div>
   <script src="js/cast_script.js"></script>
+  <script>
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var players = [];
+      function onYouTubeIframeAPIReady() {
+        players[1] = new YT.Player('player', {
+          height: '100%',
+          width: '100%',
+          videoId: 'Ky5l9ZxsG9M',
+          playerVars: {
+                'enablejsapi': 1,
+                'autoplay': 0,
+                'rel': 0,
+                'mute':0,
+                'showinfo': 0,
+                'controls': 0,
+                'egm': 0,
+                'showsearch': 0
+            }
+        });
+        players[2] = new YT.Player('player2', {
+          height: '100%',
+          width: '100%',
+          videoId: 'gnt2wZBg89g',
+          playerVars: {
+                'enablejsapi': 1,
+                'autoplay': 0,
+                'rel': 0,
+                'mute':0,
+                'showinfo': 0,
+                'controls': 0,
+                'egm': 0,
+                'showsearch': 0
+            }
+        });
+        players[3] = new YT.Player('player3', {
+          height: '100%',
+          width: '100%',
+          videoId: 'gnt2wZBg89g',
+          playerVars: {
+                'enablejsapi': 1,
+                'autoplay': 0,
+                'rel': 0,
+                'mute':0,
+                'showinfo': 0,
+                'controls': 0,
+                'egm': 0,
+                'showsearch': 0
+            }
+        });
+        players[4] = new YT.Player('player4', {
+          height: '100%',
+          width: '100%',
+          videoId: 'gnt2wZBg89g',
+          playerVars: {
+                'enablejsapi': 1,
+                'autoplay': 0,
+                'rel': 0,
+                'mute':0,
+                'showinfo': 0,
+                'controls': 0,
+                'egm': 0,
+                'showsearch': 0
+            }
+        });
+      }
+
+      function updateAndPlayVideo(position, videoId){
+        players[position].loadVideoById(videoId);
+      }
+
+      function changeVolume(position){
+        if(players[position].isMuted()){
+          players[position].unMute();
+        } else {
+          players[position].mute();
+        }
+      }
+
+      function stopVideo() {
+        player.stopVideo();
+      }
+    </script>
 </body>
 </html>
