@@ -314,12 +314,22 @@ function calculateUpdateLaunchState(UTCDateOfNextLaunch) {
 		clearIntervalUpdateLaunchState();					
 		return "UNKNOWN";
 	}
+	else if (deltaMinutes<0)
+	{
+		clearIntervalUpdateLaunchState();					
+		return "---";
+	} 
+	else if (deltaMinutes==0)
+	{
+		clearIntervalUpdateLaunchState();					
+		return "LAUNCH";
+	} 
 	else if (deltaMinutes<=2)
 	{
 		clearIntervalUpdateLaunchState();					
 		return "GO FOR LAUNCH";
 	} 
-	else if (deltaMinutes<=120)
+	else if (deltaMinutes<=180)
 	{
 		return "T - "+deltaMinutes;
 	}
