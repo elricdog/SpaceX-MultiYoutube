@@ -635,7 +635,7 @@
 			  "NASASpaceflight":composeYouTubeLiveStreamURL("mQGJVFRPxVE", 0),
 			  "NSF Fleet Cam":composeYouTubeLiveStreamURL("gnt2wZBg89g", 1),          		  
 			  "LabPadre - Nerdle Cam 4K":composeYouTubeLiveStreamURL("sTA0GTgFn5E", 0),
-			  "LabPadre - Launch Pad Cam":composeYouTubeLiveStreamURL("qCbgoqMcirI", 1),
+			  "LabPadre - Launch Pad Cam":composeYouTubeLiveStreamURL("c", 1),
 			  "LabPadre - Sentinel Cam":composeYouTubeLiveStreamURL("richjW1jj20", 1),          
 			  "LabPadre - Lab Cam":composeYouTubeLiveStreamURL("tYZaaz8UbRE", 1),
 			  "LabPadre - Sapphire Cam":composeYouTubeLiveStreamURL("eVDUmtGyBd4", 1),
@@ -892,8 +892,8 @@
          	document.getElementById("iconFullScreen").addEventListener ("click", function() { toggleIconGroups(); toggleFullScreen(); updateRSSTextScrollWidth(); }, false);
 			document.getElementById("iconSelects").addEventListener ("click", function() { toggleIconGroups(); toggleSelects(); }, false);			
          	document.getElementById("iconRSS").addEventListener ("click", toggleRSSScroll, false);
-         	document.getElementById("icon5thColumn").addEventListener ("click", function() { toggleIconGroups(); toggle5thColumn(); }, false);
-         	document.getElementById("iconChat").addEventListener ("click", openChat, false);
+         	document.getElementById("icon5thColumn").addEventListener ("click", function() { toggle5thColumn(); }, false);
+         	document.getElementById("iconChat").addEventListener ("click", function() { toggleIconGroups(); openChat(); }, false);
 			document.getElementById("iconQuiz").addEventListener ("click", function() { toggleIconGroups(); openQuiz(); }, false);
          	document.getElementById("iconHelp").addEventListener ("click", function() { toggleIconGroups(); openHelp(); }, false);
          	document.getElementById("iconRefreshApp").addEventListener ("click", function() { toggleIconGroups(); refreshApp(); }, false);		
@@ -1784,7 +1784,7 @@
 					<div title="Go to FullScreen" class="icon" id="iconFullScreen"><img src="Icons/fullscreen.png"/></div>					
 					<div title="Show/Hide Selection Boxes" class="icon" id="iconSelects"><img src="Icons/selects.png"/></div>					
 					<div title="Reload application" class="icon" id="iconRefreshApp"><img src="Icons/refresh.png"/></div>
-					<div title="Show/Hide 5th column" class="icon" id="icon5thColumn"><img src="Icons/column5th.png"/></div>
+					<div title="Open Chat in View" class="icon" id="iconChat"><img src="Icons/chat.png"/></div>
 					<div title="Open Quiz in View" class="icon" id="iconQuiz"><img src="Icons/quiz.png"/></div>
 					<div title="Open Help in View" class="icon" id="iconHelp"><img src="Icons/help.png"/></div>                                    
 					<div title="Information about Us and this web site" class="icon" id="iconAboutUs"><img src="Icons/aboutus.png"/></div>
@@ -1804,7 +1804,7 @@
 			  </div>				   
 			 
 			  <div class="rowTopBar2" id="rowTopBarC">
-				<div title="Open Chat in View" class="icon" id="iconChat"><img src="Icons/chat.png"/></div>
+				<div title="Show/Hide 5th column" class="icon" id="icon5thColumn"><img src="Icons/column5th.png"/></div>				
 			  </div>
 			 
 			  <div class="rowTopBar2" id="rowTopBarD">
@@ -1994,7 +1994,7 @@
 					<div title="Go to FullScreen" class="icon" id="iconFullScreen"><img src="Icons/fullscreen.png"/></div>					
 					<div title="Show/Hide Selection Boxes" class="icon" id="iconSelects"><img src="Icons/selects.png"/></div>					
 					<div title="Reload application" class="icon" id="iconRefreshApp"><img src="Icons/refresh.png"/></div>
-					<div title="Show/Hide 5th column" class="icon" id="icon5thColumn"><img src="Icons/column5th.png"/></div>
+					<div title="Open Chat in View" class="icon" id="iconChat"><img src="Icons/chat.png"/></div>
 					<div title="Open Quiz in View" class="icon" id="iconQuiz"><img src="Icons/quiz.png"/></div>
 					<div title="Open Help in View" class="icon" id="iconHelp"><img src="Icons/help.png"/></div>                                    
 					<div title="Information about Us and this web site" class="icon" id="iconAboutUs"><img src="Icons/aboutus.png"/></div>
@@ -2014,7 +2014,7 @@
 			  </div>				   
 			 
 			  <div class="rowTopBar2" id="rowTopBarC">
-				<div title="Open Chat in View" class="icon" id="iconChat"><img src="Icons/chat.png"/></div>
+				<div title="Show/Hide 5th column" class="icon" id="icon5thColumn"><img src="Icons/column5th.png"/></div>				
 			  </div>
 			 
 			  <div class="rowTopBar2" id="rowTopBarD">
