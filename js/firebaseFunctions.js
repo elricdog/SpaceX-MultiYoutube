@@ -152,6 +152,8 @@ function getRealtimeRss(view){
       });
 	  console.log("RSS Text: " + result);
 	  view.innerHTML = result.trim() + '\xa0' + ' • ' + '\xa0';
+	  
+	  updateRSSTextScrollWidth();
     });
 }
 
@@ -412,6 +414,8 @@ function updateOptionsWithNewFeed(optionSelect, title, newURL) {
 					lastUpdateLabel.classList.remove("blinking");
 					void lastUpdateLabel.offsetWidth;
 					lastUpdateLabel.classList.add("blinking");
+					
+					updateRSSTextScrollWidth();
 				}
 			}
 			return;
