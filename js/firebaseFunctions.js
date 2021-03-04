@@ -179,12 +179,18 @@ function clearIntervalUpdateLaunchState() {
 	}
 }
 
+let intervalLaunchStateAnimation = null;
 function restartLaunchStateAnimation() {
 	console.log("Restart Launch State Animation");
 	var groupLaunchState = document.getElementById("groupLaunchState");
 	groupLaunchState.classList.remove("blinking");
 	void groupLaunchState.offsetWidth;
-	groupLaunchState.classList.add("blinking");
+	groupLaunchState.classList.add("blinking");			
+	
+	intervalLaunchStateAnimation = window.setInterval(function() {
+		window.clearInterval(intervalLaunchStateAnimation);
+		updateRSSTextScrollWidth();
+	}, 8000);
 }
 
 function getLaunchState(view, view2){
@@ -209,7 +215,7 @@ function getLaunchState(view, view2){
 		UTCDateOfNextLaunch = snapshot.val();		
 		lastUTCDateOfNextLaunch = UTCDateOfNextLaunch;
 		if ((UTCDateOfNextLaunch!=null) && (UTCDateOfNextLaunch!="") && (UTCDateOfNextLaunch!=0) && (UTCDateOfNextLaunch!="0")) {
-			intervalUpdateLaunchState = window.setInterval(function(){		
+			intervalUpdateLaunchState = window.setInterval(function(){
 				view.innerHTML = calculateUpdateLaunchState(lastUTCDateOfNextLaunch);
 				updateRSSTextScrollWidth();
 			}, 60000);			  

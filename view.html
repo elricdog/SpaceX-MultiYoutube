@@ -1353,7 +1353,12 @@
 			fw+=document.getElementById('rowTopBarF').getBoundingClientRect().width;
 			fw+=document.getElementById('rowTopBarG').getBoundingClientRect().width;
 			fw+=document.getElementById('rowTopBarH').getBoundingClientRect().width;
-         	rssTextScroll.style.width = "calc(100% - "+fw+"px)";
+			var fw2=fw+20;					
+         	rssTextScroll.style.width = "calc(100% - "+fw2+"px)";
+						
+			fw+=56;
+			const iconStartRSS = document.getElementById('iconStartRSS');
+			iconStartRSS.style.left = "calc(100% - "+fw+"px)";			
 		 }
 		 
          function setRSSScroll(visible) {
@@ -1778,6 +1783,7 @@
 			  </div>
 						 
 			  <div title="SpaceXBoard logo" id="iconEndRSS" style="cursor:pointer; position:absolute; left:0px; top:0px; width:56px; height:28px;z-index:20000"><img src="Icons/endRSS.png"/></div>			
+			  <div title="SpaceXBoard logo" id="iconStartRSS" style="cursor:pointer; position:absolute; left:100px; top:0px; width:56px; height:28px;z-index:20000"><img src="Icons/startRSS.png"/></div>			
 			
 			  <div class="rowTopBar2" id="rowTopBarB">
 				 <div title="Options" class="icon" id="iconOptions"><img src="Icons/options.png"/></div>
