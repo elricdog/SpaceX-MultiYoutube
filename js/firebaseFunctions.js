@@ -373,7 +373,7 @@ function calculateUpdateLaunchState(UTCDateOfNextLaunch) {
 				dbUTC.setHours( dbUTC.getHours() - currentTimeZoneOffsetInHours);
 				return monthNames[dbUTC.getMonth()] + "-" + dbUTC.getDate() + " " + formatAMPM(dbUTC);
 			case "REMAIN":
-				return "T - " + deltaMinutes;
+				return "T - " + (deltaMinutes / 60) + " HOURS";
 		}
 	}
 }
