@@ -248,6 +248,9 @@ function clickOnUpdateLaunchState(view) {
 			formatUpdateLaunchState = "TIME";
 			break;
 		case "TIME":
+			formatUpdateLaunchState = "REMAIN";
+			break;
+		case "REMAIN":
 			formatUpdateLaunchState = "UTC";
 			break;
 	}
@@ -309,6 +312,12 @@ function calculateUpdateLaunchState(UTCDateOfNextLaunch) {
 		deltaMinutes = Math.round(diffMs / 60000); // minutes
 		dbUTC = dbCAT;		
 	} 	
+	else if (UTCDateOfNextLaunch.endsWith("REMAIN")) // Remaining time
+	{
+		dbUTC = new Date(year, month-1, day, hh - currentTimeZoneOffsetInHours, mm);
+		var diffMs = dbUTC-d;
+		deltaMinutes = Math.round(diffMs / 60000); // minutes
+	} 	
 	else 
 	{
 		dbUTC = new Date(year, month-1, day, hh - currentTimeZoneOffsetInHours, mm);
@@ -363,6 +372,8 @@ function calculateUpdateLaunchState(UTCDateOfNextLaunch) {
 			case "TIME":
 				dbUTC.setHours( dbUTC.getHours() - currentTimeZoneOffsetInHours);
 				return monthNames[dbUTC.getMonth()] + "-" + dbUTC.getDate() + " " + formatAMPM(dbUTC);
+			case "REMAIN":
+				return "T - " + deltaMinutes;
 		}
 	}
 }
