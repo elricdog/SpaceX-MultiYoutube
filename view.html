@@ -269,7 +269,7 @@
 		}
 		 
          function useCookiesForConfiguration() {
-         	return isMobile();
+         	return true; //isMobile();
          }
          
          function isLandscape() {
@@ -604,12 +604,11 @@
 		
 			 function updateDateTime() {
 				let d = new Date();
-				let currentTimeZoneOffsetInHours = d.getTimezoneOffset() / 60;
-			 
+				let currentTimeZoneOffsetInHours = d.getTimezoneOffset() / 60;		 
 				let utc = new Date();
-				utc.setHours( utc.getHours() + currentTimeZoneOffsetInHours );
+				utc.setHours( utc.getHours() + currentTimeZoneOffsetInHours );				
 				let local = new Date();
-				local.setHours( local.getHours() + currentTimeZoneOffsetInHours - 6 );
+				local.setHours( utc.getHours() - 5 );								
 				if (timeLOCAL!=null) timeLOCAL.innerHTML = local.toLocaleTimeString();
 				if (timeUTC!=null) timeUTC.innerHTML = utc.toLocaleTimeString();
 				if (timeTIME!=null) timeTIME.innerHTML = d.toLocaleTimeString();
@@ -634,13 +633,15 @@
 			  "LIVE STREAMS":"GROUP",		  
 			  "SPACEX":composeYouTubeLiveStreamURL("_qwLHlVjRyw", 0),          		  
 			  "NASASpaceflight":composeYouTubeLiveStreamURL("mQGJVFRPxVE", 0),
+			  "NSF Starbase 24/7":composeYouTubeLiveStreamURL("mhJRzQsLZGg", 1),			  
 			  "NSF Fleet Cam":composeYouTubeLiveStreamURL("gnt2wZBg89g", 1),          		  
 			  "LabPadre - Nerdle Cam 4K":composeYouTubeLiveStreamURL("sTA0GTgFn5E", 0),
 			  "LabPadre - Launch Pad Cam":composeYouTubeLiveStreamURL("c", 1),
-			  "LabPadre - Sentinel Cam":composeYouTubeLiveStreamURL("richjW1jj20", 1),          
 			  "LabPadre - Lab Cam":composeYouTubeLiveStreamURL("tYZaaz8UbRE", 1),
+			  "LabPadre - Sentinel Cam":composeYouTubeLiveStreamURL("richjW1jj20", 1),          
 			  "LabPadre - Sapphire Cam":composeYouTubeLiveStreamURL("eVDUmtGyBd4", 1),
 			  "LabPadre - South Padre Island Pearl Beach Cam":composeYouTubeLiveStreamURL("ZBXCYLlaGJY", 1),
+			  "LabPadre - Gator Cam":composeYouTubeLiveStreamURL("BELcufzEOZ0", 1),
 			  "LabPadre - Predator Cam":composeYouTubeLiveStreamURL("QC31zwimnNc", 1),
 			  "Everyday Astronaut":composeYouTubeLiveStreamURL("QJ6YN5upGH0", 0),
 			  "SpaceXStorm (Castellano)":composeYouTubeLiveStreamURL("eCGN_Knanhg", 0),
@@ -1165,6 +1166,11 @@
 			getLaunchState(document.getElementById("launchState"), document.getElementById("launchStateTitle"));
 			// Get feeds from DB database
 			getFeedsFromDB();
+
+         	if (useCookiesForConfiguration())
+         	{
+				checkTheWayToLoad();
+			}
 			
          	var intervalLoadingScreen = window.setInterval(function(){
          		console.log("Closing Loading screen");
@@ -1659,15 +1665,15 @@
          	const select5 = document.getElementById("selectCH5");
          
          	const rssTextScroll = document.getElementById('rssTextScroll');
-         	const rssTextScrollVisible = (rssTextScroll.style.visibility == "visible");
+         	const rssTextScrollVisible = (rssTextScroll.style.display == "block");
          	const lastUpdateLabel = document.getElementById('groupLastUpdate');
-         	const lastUpdateLabelVisible = (lastUpdateLabel.style.visibility == "visible");
+         	const lastUpdateLabelVisible = (lastUpdateLabel.style.display == "block");
          	const visitorsLabel = document.getElementById('groupVisitors');
-         	const visitorsLabelVisible = (visitorsLabel.style.visibility == "visible");		
+         	const visitorsLabelVisible = (visitorsLabel.style.display == "block");		
          	const launchStateLabel = document.getElementById('groupLaunchState');
-         	const launchStateLabelVisible = (launchStateLabel.style.visibility == "visible");					
+         	const launchStateLabelVisible = (launchStateLabel.style.display == "block");					
          	const timersIconLabels = document.getElementById('timersIconLabels');
-         	const timersIconLabelsVisible = (timersIconLabels.style.visibility == "visible");
+         	const timersIconLabelsVisible = (timersIconLabels.style.display == "block");
          
 			var column5thViewVisible = false;
 			if (isLandscape()) {
